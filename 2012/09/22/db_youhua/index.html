@@ -3,27 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>yolynn</title>
+  <title>数据库优化之我见 | yolynn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="date: 2013-04-24title: 数据库优化之我见tags: 数据库
-##数据库优化之我见（完善中…）
-1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 
-2、调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Cl">
+  <meta name="description" content="1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 
+2、调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Client/Server两层体系结构，还是使用Browser/Web/Database的三层体系结构。不同的应用程序体">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yolynn">
-<meta property="og:url" content="http://yolynn.com/2015/11/06/db_youhua/index.html">
+<meta property="og:title" content="数据库优化之我见">
+<meta property="og:url" content="http://yolynn.com/2012/09/22/db_youhua/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="date: 2013-04-24title: 数据库优化之我见tags: 数据库
-##数据库优化之我见（完善中…）
-1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 
-2、调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Cl">
-<meta property="og:updated_time" content="2015-11-06T15:15:53.000Z">
+<meta property="og:description" content="1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 
+2、调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Client/Server两层体系结构，还是使用Browser/Web/Database的三层体系结构。不同的应用程序体">
+<meta property="og:updated_time" content="2015-11-06T15:50:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yolynn">
-<meta name="twitter:description" content="date: 2013-04-24title: 数据库优化之我见tags: 数据库
-##数据库优化之我见（完善中…）
-1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 
-2、调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Cl">
+<meta name="twitter:title" content="数据库优化之我见">
+<meta name="twitter:description" content="1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 
+2、调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Client/Server两层体系结构，还是使用Browser/Web/Database的三层体系结构。不同的应用程序体">
   
     <link rel="alternative" href="/atom.xml" title="yolynn" type="application/atom+xml">
   
@@ -124,7 +118,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/web/" style="font-size: 10px;">web</a>
 					</div>
 				</section>
 				
@@ -207,8 +201,8 @@
       <div class="body-wrap"><article id="post-db_youhua" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/06/db_youhua/" class="article-date">
-  	<time datetime="2015-11-06T15:15:53.000Z" itemprop="datePublished">2015-11-06</time>
+      <a href="/2012/09/22/db_youhua/" class="article-date">
+  	<time datetime="2012-09-22T15:14:02.000Z" itemprop="datePublished">2012-09-22</time>
 </a>
     </div>
   
@@ -217,11 +211,27 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据库优化之我见
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>date: 2013-04-24<br>title: 数据库优化之我见<br>tags: 数据库</p>
-<p>##数据库优化之我见（完善中…）</p>
-<p>1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 </p>
+        <p>1、调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 </p>
 <p>2、调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Client/Server两层体系结构，还是使用Browser/Web/Database的三层体系结构。不同的应用程序体系结构要求的数据库资源是不同的。 </p>
 <p>3、调整数据库SQL语句。应用程序的执行最终将归结为数据库中的SQL语句执行，因此SQL语句的执行效率最终决定了ORACLE数据库的性能。ORACLE公司推荐使用ORACLE语句优化器（Oracle Optimizer）和行锁管理器（row-level manager）来调整优化SQL语句。 </p>
 <p>4、调整服务器内存分配。内存分配是在信息系统运行过程中优化配置的，数据库管理员可以根据数据库运行状况调整数据库系统全局区（SGA区）的数据缓冲区、日志缓冲区和共享池的大小；还可以调整程序全局区（PGA区）的大小。需要注意的是，SGA区不是越大越好，SGA区过大会占用操作系统使用的内存而引起虚拟内存的页面交换，这样反而会降低系统。 </p>
@@ -310,11 +320,15 @@
     
 <nav id="article-nav">
   
-  
-    <a href="/2015/11/06/web_first/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
-      <strong class="article-nav-caption">></strong>
+    <a href="/2013/04/12/web_first/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          浅析web程序性能优化
+        
+      </div>
     </a>
+  
   
 </nav>
 
@@ -341,7 +355,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="db_youhua" data-title="" data-url="http://yolynn.com/2015/11/06/db_youhua/"></div>
+	<div class="ds-thread" data-thread-key="db_youhua" data-title="数据库优化之我见" data-url="http://yolynn.com/2012/09/22/db_youhua/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
