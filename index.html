@@ -222,11 +222,11 @@
 <li>JVM: java编译器只需面向JVM，生成JVM能理解的代码或字节码文件。Java源文件经编译器，编译成字节码程序，通过JVM将每一条指令翻译成不同平台机器码，通过特定平台运行。</li>
 <li>LLVM(clang):LLVM是构架编译器(compiler)的框架系统，以C++编写而成，用于优化以任意程序语言编写的程序的编译时间(compile-time)、链接时间(link-time)、运行时间(run-time)以及空闲时间(idle-time)，对开发者保持开放，并兼容已有脚本;Clang 对源程序进行词法分析和语义分析，并将分析结果转换为 Abstract Syntax Tree ( 抽象语法树 ) ，最后使用 LLVM 作为后端代码的生成器。</li>
 <li>GNU(gcc):通常所说的GCC是GUN Compiler Collection的简称，除了编译程序之外，它还含其他相关工具，所以它能把易于人类使用的高级语言编写的源代码构建成计算机能够直接执行的二进制代码。</li>
-<li>V8引擎:采用C++编写,V8在执行之前将JavaScript编译成了机器码，而非位元组码或是直译它，以此提升效能。更进一步，使用了如内联缓存（inline caching）等方法来提高性能。V8性能的3个关键方面：<ol>
+<li>V8引擎:采用C++编写,V8在执行之前将JavaScript编译成了机器码，而非位元组码或是直译它，以此提升效能。更进一步，使用了如内联缓存（inline caching）等方法来提高性能。V8性能的3个关键方面：<ul>
 <li>快速属性访问</li>
 <li>动态生成机器码 </li>
 <li>高效的垃圾回收</li>
-</ol>
+</ul>
 </li>
 </ul>
 </blockquote>
