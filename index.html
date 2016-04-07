@@ -177,6 +177,93 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-paradigm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/08/paradigm/" class="article-date">
+  	<time datetime="2016-04-08T10:15:02.000Z" itemprop="datePublished">2016-04-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/08/paradigm/">多编程范式杂感</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="background">background</h2><blockquote>
+<p>现有语言的编程范式有：过程式，面向对象，函数式，逻辑式。随着软件工业化程度的普及，以及软件的复杂度越来越高，编程语言的发展历程也是从最初的过程式（命令式）语言c，发展到以java语言为代表的面向对象编程语言。而逻辑编程语言(以prolog为代表）和函数式语言(lisp系列）还多用在学术和人工智能领域中。近几年，随着多核，云计算时代的到来。函数式编程语言逐渐浮出水面，最经典的语言以scheme,common-lisp,ml,clojure,go为代表.而且最近的jdk8也逐步加入了functional,closure,lambda等语法，而且scala的作者也越来越推崇编码者以函数式语言的思维来coding。可见编程语言的发展也是满足时代的变化不断变化着。从其中的发展历程中我们可以看到：技术的发展都是在围绕着解决“软件的复杂度”这个基本的需求而发展的。</p>
+</blockquote>
+<h3 id="一、_编程语言概述">一、 编程语言概述</h3><ul>
+<li>编程语言是计算机的符号，是人和计算机的通信符号和协议。我们学习一门新的编程语言时，应该观察这门语言的那些特性呢？《SICP》一书的作者列举了一下三点：<pre><code>* <span class="keyword">primitive</span><span class="title"> elements</span><span class="pragma">. （基本元素）
+* means</span> of combination. （组合手段）
+* means of abstraction. (抽象手段）
+</code></pre></li>
+<li>以上3个特性，基本上涵盖了所有编程语言的特性，并且也是一个语言设计者从开始就要考虑的。我对这三点的理解：primitive elements表示语言的基本符号（基本数据类型，关键字等）也就是词法部分。means of combination利用基本元素通过组合的过程构建大型程序的手段，不同的语言提供的组合手段是不同的，下边我会详细描述。means of abstraction表示抽象，抽象是解决软件复杂度的重要手段，让软件的可读性，可扩展，可重复利用等得到提升。一下会从组合元素和抽象手段来对比更重语言特性。</li>
+</ul>
+<h3 id="二、_组合手段">二、 组合手段</h3><ul>
+<li>汇编语言：算是最简单的词法和语法形式了。汇编器通过直译的过程将汇编代码翻译为二进制代码。 提供的primitive elements有：数字，字符，-，+，*，/ ， case,if, break, go，指令等基本元素；</li>
+<li>c语言相比汇编语言更高级，让程序员脱离和寄存器，内存直接打交道的工作，提供了更多的组合手段：比如数组，结构体等数据结构。</li>
+<li>java语言自称是面向对象语言，所以比c语言更进一步，通过强大的类型系统手段来组合属性和方法。</li>
+<li>lisp方言以s-expression（著名的S表达式）来组合数据和函数。在lisp中不区分数据和函数，一切皆为数据。</li>
+</ul>
+<h3 id="三、_抽象手段">三、 抽象手段</h3><ul>
+<li>从c语言开始，以函数为单元提供了对程序的抽象。这样大大的提高了程序的可复用，模块化等。让团队合作编码也成为可能。</li>
+<li>面向对象编程：基本上隐藏了计算机的细节，开发者通过对象来抽象具体业务。但严格意义上来说java也属于imperative-lang的范畴而且都是传值调用。相比来说,python,ruby更面向对象一些，python融合了面向对象和函数式编程范式，更接近自然语言些。</li>
+<li>以lisp为代表的函数式语言：以函数和模块为抽象手段；common-lisp基于宏开发了一套object-oriented的编程方式。 我比较倾向于函数式编程理念：函数的无副作用（不用考虑线程安全，特别是对于变态的Haskell），高阶函数，闭包,lambda等。</li>
+</ul>
+<h3 id="四、_类型系统">四、 类型系统</h3><ul>
+<li>大家平时经常会说：javascript是一个弱类型的语言，java语言是强类型的语言。将编程语言从类型系统的角度区分语言也很有趣。一般来说弱类型语言更偏向自然语言一些，语法也很自由活泼些。而现今语言的走势也趋向与弱类型方向.</li>
+<li>实现：我们知道计算机是结构化很强的，堆栈上一个二进制位的错误就会导致溢出，bus等错误。所以语言层面的自由得益于编译器或者解释器的功劳。比如java,c等语言有很强的编译时类型检测机制，强类型的好处驱使编码人员写出很少有语法，语义错误的代码，对IDE的支持也很棒，是大型技术团队的基石。</li>
+<li>弱类型语言让我们获取了自由（不需要类型信息），让程序员少敲了许多键盘。自由是有代价的，编译器或解释器中内含类型推理(infer type); 类型推理是利用归一方法，基于上下文中的变量显式类型，操作符，返回值等信息，利用栈和逐渐替换的过程来推到出类型。 弱类型虽然可以轻松编译通过（或者不需要编译而是解释执行），但都是有类型检查过程的，只是将此过程延迟到运行时了。所以弱类型语言结构化不强，编码时很难确保类型无误，IDE，大型团队开发也不友好。 但是通过一些分析器可以不断的检测语法，语义错误，相当于达到了强类型语言的IDE效果。</li>
+</ul>
+<h3 id="五、编译/解释">五、编译/解释</h3><ul>
+<li>java语言是解释型还是编译型的呢？ 这个很难说，从java source code -&gt; class byte code 的过程式javac编译器的过程。但是byte code 在jvm上执行的过程可能是解释执行也可能是编译执行的。解释型和编译型的内部都遵从编译原理的过程：词法分析-&gt; 语法分析-&gt;语义解析 -&gt; 编译器后端-&gt; native code . 的过程。 但有各自的优点：</li>
+<li>解释器：加载code速度快；解释器需要维护运行时上下文等信息。所以加载必要的代码，片段解释执行。但是对于相同的代码都经过编译过程就很多余，造成时间浪费。</li>
+<li>编译器：执行速度快。而且编译器后端也更容易优化中间代码，因为优化过程式一个结构化过程：往往需要遍历整个中间代码，整体优化代码，提高运行效率。</li>
+<li>runtime：一般来说解释型语言需要在内存维护运行时上下文信息，服务于运行过程中变量的查找，绑定，scope等。 而编译语言基于堆栈模型执行代码，相对来说运行时简单，运行速度也快；</li>
+<li>hotspot-jvm结合了解释和编译的各自优点；最先解释执行过程，如果方法被频繁执行，而且达到热点(hotspot),jvm会启动编译过程，将次代码编译为native-code，然后缓存起来，下一次的调研直接执行即可。 hotspot-jvm执行基于堆栈的指令byte code, 这一点也是基于跨平台byte-code运行的考虑，而牺牲了寄存器指令； （基于android操作系统上的dalvik虚拟机是基于寄存器指令的）；</li>
+<li>所以说，设计一个语言往往是一个权衡过程；获取的“自由”越多，”牺牲“也更大。</li>
+</ul>
+<h3 id="六、_总结:">六、 总结:</h3><ul>
+<li>最初从图灵为了解决莱布尼茨提出的：是否存在一个通用模型来解决一切计算任务这个命题，提出了图灵机。到冯洛伊曼仿真人脑神经元思考过程产生第一台基于存储器，运算器的计算机ENIAC，至今，计算机硬件技术并没有实质性的变化，只是随着摩尔定律的破灭，人们发展了多级高级缓存，多核，多cpu技术来支撑越来越大的计算任务。 在这个过程中，随着人们对逻辑学，符号学,算法的不断研究，用来和计算机交互的语言也越来越抽象和丰富。我们通过这个形象的符号来抽象时间和空间，通过这个形象的符号来解决软件的复杂性问题，通过这个符号来表达指令的计算过程。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-common_soft" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1108,65 +1195,10 @@
 
 
   
-    <article id="post-hello_world" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2010/01/01/hello_world/" class="article-date">
-  	<time datetime="2009-12-31T16:00:00.000Z" itemprop="datePublished">2010-01-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/01/01/hello_world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
