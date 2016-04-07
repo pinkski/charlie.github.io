@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="yolynn">
 <meta property="og:description" content="background
 现有语言的编程范式有：过程式，面向对象，函数式，逻辑式。随着软件工业化程度的普及，以及软件的复杂度越来越高，编程语言的发展历程也是从最初的过程式（命令式）语言c，发展到以java语言为代表的面向对象编程语言。而逻辑编程语言(以prolog为代表）和函数式语言(lisp系列）还多用在学术和人工智能领域中。近几年，随着多核，云计算时代的到来。函数式编程语言逐渐浮出水面，最经典的语">
-<meta property="og:updated_time" content="2016-04-07T06:39:19.000Z">
+<meta property="og:updated_time" content="2016-04-07T06:41:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多编程范式杂感">
 <meta name="twitter:description" content="background
@@ -216,10 +216,12 @@
 <p>现有语言的编程范式有：过程式，面向对象，函数式，逻辑式。随着软件工业化程度的普及，以及软件的复杂度越来越高，编程语言的发展历程也是从最初的过程式（命令式）语言c，发展到以java语言为代表的面向对象编程语言。而逻辑编程语言(以prolog为代表）和函数式语言(lisp系列）还多用在学术和人工智能领域中。近几年，随着多核，云计算时代的到来。函数式编程语言逐渐浮出水面，最经典的语言以scheme,common-lisp,ml,clojure,go为代表.而且最近的jdk8也逐步加入了functional,closure,lambda等语法，而且scala的作者也越来越推崇编码者以函数式语言的思维来coding。可见编程语言的发展也是满足时代的变化不断变化着。从其中的发展历程中我们可以看到：技术的发展都是在围绕着解决“软件的复杂度”这个基本的需求而发展的。</p>
 </blockquote>
 <h3 id="一、_编程语言概述">一、 编程语言概述</h3><ul>
-<li>编程语言是计算机的符号，是人和计算机的通信符号和协议。我们学习一门新的编程语言时，应该观察这门语言的那些特性呢？《SICP》一书的作者列举了一下三点：<pre><code>* <span class="keyword">primitive</span><span class="title"> elements</span><span class="pragma">. （基本元素）
-* means</span> of combination. （组合手段）
-* means of abstraction. (抽象手段）
-</code></pre></li>
+<li>编程语言是计算机的符号，是人和计算机的通信符号和协议。我们学习一门新的编程语言时，应该观察这门语言的那些特性呢？《SICP》一书的作者列举了一下三点：<ul>
+<li>primitive elements. （基本元素）</li>
+<li>means of combination. （组合手段）</li>
+<li>means of abstraction. (抽象手段）</li>
+</ul>
+</li>
 <li>以上3个特性，基本上涵盖了所有编程语言的特性，并且也是一个语言设计者从开始就要考虑的。我对这三点的理解：primitive elements表示语言的基本符号（基本数据类型，关键字等）也就是词法部分。means of combination利用基本元素通过组合的过程构建大型程序的手段，不同的语言提供的组合手段是不同的，下边我会详细描述。means of abstraction表示抽象，抽象是解决软件复杂度的重要手段，让软件的可读性，可扩展，可重复利用等得到提升。一下会从组合元素和抽象手段来对比更重语言特性。</li>
 </ul>
 <h3 id="二、_组合手段">二、 组合手段</h3><ul>
