@@ -177,6 +177,127 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-computer" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/19/computer/" class="article-date">
+  	<time datetime="2016-04-19T10:15:02.000Z" itemprop="datePublished">2016-04-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/19/computer/">计算机课程串联</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="background">background</h2><blockquote>
+<p>不说废话，开门见山</p>
+</blockquote>
+<h4 id="一,_计算机组成原理">一, 计算机组成原理</h4><ul>
+<li>这门学科告诉你什么是计算机。</li>
+<li>首先，我们可以把计算机分解成最原始的部件——晶体管。晶体管是一种半导体材料，其最重要的作用就是半导：可以通过电流的变化，实现电路的切换。比如计算机最基础的与或非运算，都可以通过晶体管组成的电子元件实现。而通过晶体管的电位差不同，就可以体现”二进制数据”，即0和1。再加上电容和电阻，就能把这种二进制数据临时保存起来。</li>
+<li>综合这些特性，大牛们发现把晶体管用作精密的数学计算，可以极大的提高运算的效率。比如我有2个电容，分别是充满电和没有电，对他们同时释放电信号，电容就会把其中的电子放出来，经过特定的逻辑电路，如与门，得到了0的结果。要计算1+1，实际上也是类似的原理。我先设计一个加法电路，把若干电容组合成的”数字”流过这个电路，把结果存入目标电容，就得到了结果。大规模的复杂运算以此类推。</li>
+<li>最早期的计算机真的就是用许多结晶体管实现的复杂电路结构，通过控制输入电流得到希望的输出结果。后来人们发现，这种计算可以用某些形式抽象成多种指令，不用针对每次计算设计复杂的电路，只要调用指令就可以实现任何一种计算组合，于是诞生了cpu。只有cpu，每次都要自己配置输入信号，实在太痛苦，就做了纸带输入给计算机。后来又发现纸带还是很麻烦，于是发明了输入终端和对应的存储设备。后来又发现很多数据要临时保存起来，供连续计算使用，于是发明了内存。再后来pc的发展经历了无数次的变革，让计算机一步步到了今天的地步，也就是你现在看到的这样。</li>
+<li>其中的历程非常曲折，也许有机构能够把他们全部组织成一本漫长的历史，但个人肯定是无能为力的。</li>
+</ul>
+<h4 id="二，操作系统">二，操作系统</h4><ul>
+<li>综上所述，计算机发展到一定程度，什么东西都靠人工也未免太累了。</li>
+<li>比如通过输入设备组织指令给cpu去计算，你希望能够找一个快速的输入设备(比如键盘)，在能看到结果的地方输入(比如屏幕)，然后再用很方便的方式提交给cpu(比如按键或者指令)，让cpu去算好了，再把结果展示出来(比如屏幕)。</li>
+<li><p>理想很美好，但是这么复杂的流程，人工管理起来不还是很麻烦吗？除非我构造一个设备，把这些所有设备都管理起来，于是主板就诞生了。</p>
+</li>
+<li><p>现在主板解决了我们大量的问题，但是我发觉我的需求还远远不够！</p>
+</li>
+<li>我希望我写过的程序能在任何一台机上运行。</li>
+<li>我希望我能边听音乐边干活——即同一时间可以运行多个程序。</li>
+<li>我希望别人写的傻×东西不要影响到我的工作——即多任务控制。</li>
+<li>我希望计算机里面的各种资源都能得到良好的组织，更快的访问。</li>
+<li>我希望我的用户界面更好看，使用更方便，功能更强大！</li>
+<li>我是个小白用户，啥都不懂，别跟我扯这些有的没的，我就像随便操作两下就能达到我想要的！</li>
+<li>如果这些需求全部都做在主板bios里面，那将是一场灾难！除非bios经过极大的调整和改动，划分出一大块区域存放操作系统，并且完成复杂的体系结构改革。</li>
+<li><p>计算机发展到这种程度，早就已经有很多的机构和厂商介入其中，试图从中渔利。他们当然不会求着计算机标准委员会和主板生产厂商去做所谓的主板改革，而是编写自己的程序——操作系统，来解决这些所有的问题。</p>
+</li>
+<li><p>而操作系统问世之后，一方面接管了主板对于系统资源的管理，加入了自己的中间层——驱动程序，另一方面又充分发挥了人机交互的接口——gui界面，成为了计算机必不可少的组成部分。</p>
+</li>
+<li>操作系统通过bios引导，即作为应用程序开始运行。我们知道程序的本质上就是在cpu上运行种种指令，比如操作系统需要把硬盘上的模块放入内存，实际上就是运行了一系列复杂的cpu指令，cpu指令通过主板bus（实际上就是传递指令的电路）发送指令给硬盘（比如从哪个扇区偏移多少读多少数据），硬盘再通过芯片组转动磁头，把数据读到缓存中，完成后给cpu发送一个信号（即中断），cpu收到这个信号，就在寄存器中寻址该信号对应的地址（即我们说的中断向量表），运行该地址中的指令，发现该指令是发送拷贝指令给主板芯片组，主板就会在cpu的指导下不断的发送信号，告诉硬盘缓存放电，再把接收的电信号存到指定的内存位置去，如此反复，直到完成cpu的一系列指令为止。</li>
+<li><p>操作系统说白了，就是这样通过种种cpu指令，实现自身的所有功能。<br>当然这些指令也不是一条条写进去的，而是通过编程语言完成人类较容易识别的逻辑，然后再通过编译器把这些逻辑翻译成cpu指令，这就涉及编译原理的东西了。</p>
+</li>
+<li><p>既然操作系统对硬件的访问都是通过cpu指令来完成的，那为什么大家都感觉是操作掌管了硬件呢？这就涉及操作系统最本质的功能之一：对系统资源的管控了。</p>
+</li>
+<li><p>我们运行的所有程序，实际上都是操作系统帮我们运行的。操作系统背后进行了很多的工作，如虚拟地址空间的分配，cpu分时调度，硬件中断信号的响应等。这样对于硬件资源的访问，也是通过操作系统安排的。比如操作系统会通过把短时间内硬盘读写合并成顺序的方式，以提高磁头的利用率，降低磁头转向的时间。再比如对内存地址的访问也是由操作系统管控的，某个程序中的内存地址具体落到内存条的哪个位置，还是硬盘中的虚拟内存，就看操作系统的心情了。</p>
+</li>
+<li><p>至此，操作系统和硬件的交互也介绍的差不多了，更详细的东西建议参考操作系统相关的书籍吧，比如《深入理解计算机系统》，《linux内核设计与实现》，《unix环境高级编程》之类的。</p>
+</li>
+</ul>
+<h4 id="三，数据结构">三，数据结构</h4><ul>
+<li>数据结构的作用，就是为了提高硬件利用率。</li>
+<li><p>比如操作系统需要查找用户应用程序”office”在硬盘的哪个位置，盲目的搜索一遍硬盘肯定是低效的，这时候搞个b+树作为索引，搜索office这个单词就很快，然后就能很快的定位office这个应用程序的文件信息，再找到文件信息中对应的磁盘位置了。</p>
+</li>
+<li><p>数据结构的东西找本《算法导论》，《数据结构与算法分析》之类的看吧。</p>
+</li>
+</ul>
+<h4 id="四，计算机网络">四，计算机网络</h4><ul>
+<li><p>计算机网络分为3块：</p>
+<ol>
+<li>硬件<ul>
+<li>网卡，网线，交换机这些，用来处理数据的。</li>
+</ul>
+</li>
+<li><p>协议</p>
+<ul>
+<li>数据在网络中通信如何组织？如何识别？如何保证数据的正确性？<br>这2块我就不多说了。</li>
+</ul>
+</li>
+<li><p>操作系统</p>
+</li>
+</ol>
+</li>
+<li>这就是如何把计算机网络和操作系统结合起来的问题了。</li>
+<li>对于操作系统来说，网卡也是一种硬件资源。但是网络不单只是一种硬件，而是一种媒体入口。比如操作系统管理硬盘，当然不是简单的记一下硬盘有多大，然后一切操作都交给硬盘芯片去做，更多的需要组织硬盘的扇区，分区，记录文件和扇区/偏移的关系等等。</li>
+<li>操作系统对于网络来说也是如此，要记录自身在网络的标识（ip），可被他人访问的入口（port），以及对方的信息（remote ip/port）。连接，断开，数据确认等操作也是由协议控制。</li>
+<li><p>传递自身消息给对方，类似访问硬盘一样把内存中的数据传递给网卡缓存，再发消息给网卡让网卡去传数据，而是否发送成功这些保证不再由硬件中断信号反馈，而是通过网络协议完成。接收对方消息，也是接收到网卡中断，再把数据从网卡缓存移动到内存中，再通过协议给予对方反馈。</p>
+</li>
+<li><p>简单来说就是这样，如果以后有时间，我再把osi七层协议中的内容和操作系统的交互再详述一遍吧。</p>
+</li>
+<li><p>网络方面的就推荐《tcp/ip详解》，《uinx网络高级编程》吧。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-paradigm" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1005,174 +1126,6 @@
 </ul>
 </li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-db_profile" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2012/09/22/db_profile/" class="article-date">
-  	<time datetime="2012-09-22T15:14:02.000Z" itemprop="datePublished">2012-09-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2012/09/22/db_profile/">数据库优化之我见</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 </p>
-</li>
-<li><p>调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Client/Server两层体系结构，还是使用Browser/Web/Database的三层体系结构。不同的应用程序体系结构要求的数据库资源是不同的。 </p>
-</li>
-<li><p>调整数据库SQL语句。应用程序的执行最终将归结为数据库中的SQL语句执行，因此SQL语句的执行效率最终决定了ORACLE数据库的性能。ORACLE公司推荐使用ORACLE语句优化器（Oracle Optimizer）和行锁管理器（row-level manager）来调整优化SQL语句。 </p>
-</li>
-<li><p>调整服务器内存分配。内存分配是在信息系统运行过程中优化配置的，数据库管理员可以根据数据库运行状况调整数据库系统全局区（SGA区）的数据缓冲区、日志缓冲区和共享池的大小；还可以调整程序全局区（PGA区）的大小。需要注意的是，SGA区不是越大越好，SGA区过大会占用操作系统使用的内存而引起虚拟内存的页面交换，这样反而会降低系统。 </p>
-</li>
-<li><p>调整硬盘I/O，这一步是在信息系统开发之前完成的。数据库管理员可以将组成同一个表空间的数据文件放在不同的硬盘上，做到硬盘之间I/O负载均衡。 </p>
-</li>
-<li><p>调整操作系统参数，例如：运行在UNIX操作系统上的ORACLE数据库，可以调整UNIX数据缓冲池的大小，每个进程所能使用的内存大小等参数。 </p>
-</li>
-</ol>
-<p>实际上，上述数据库优化措施之间是相互联系的。ORACLE数据库性能恶化表现基本上都是用户响应时间比较长，需要用户长时间的等待。但性能恶化的原因却是多种多样的，有时是多个因素共同造成了性能恶化的结果，这就需要数据库管理员有比较全面的计算机知识，能够敏感地察觉到影响数据库性能的主要原因所在。另外，良好的数据库管理工具对于优化数据库性能也是很重要的。 </p>
-<p>ORACLE数据库性能优化工具 </p>
-<blockquote>
-<p>常用的数据库性能优化工具有： </p>
-</blockquote>
-<ol>
-<li><p>ORACLE数据库在线数据字典，ORACLE在线数据字典能够反映出ORACLE动态运行情况，对于调整数据库性能是很有帮助的。 </p>
-</li>
-<li><p>操作系统工具，例如UNIX操作系统的vmstat，iostat等命令可以查看到系统系统级内存和硬盘I/O的使用情况，这些工具对于管理员弄清出系统瓶颈出现在什么地方有时候很有用。 </p>
-</li>
-<li><p>SQL语言跟踪工具（SQL TRACE FACILITY），SQL语言跟踪工具可以记录SQL语句的执行情况，管理员可以使用虚拟表来调整实例，使用SQL语句跟踪文件调整应用程序性能。SQL语言跟踪工具将结果输出成一个操作系统的文件，管理员可以使用TKPROF工具查看这些文件。 </p>
-</li>
-<li><p>ORACLE Enterprise Manager（OEM），这是一个图形的用户管理界面，用户可以使用它方便地进行数据库管理而不必记住复杂的ORACLE数据库管理的命令。 </p>
-</li>
-<li><p>EXPLAIN PLAN——SQL语言优化命令，使用这个命令可以帮助程序员写出高效的SQL语言。 </p>
-</li>
-</ol>
-<blockquote>
-<p>ORACLE数据库的系统性能评估 </p>
-</blockquote>
-<p>信息系统的类型不同，需要关注的数据库参数也是不同的。数据库管理员需要根据自己的信息系统的类型着重考虑不同的数据库参数。 </p>
-<ol>
-<li>在线事务处理信息系统（OLTP），这种类型的信息系统一般需要有大量的Insert、Update操作，典型的系统包括民航机票发售系统、银行储蓄系统等。OLTP系统需要保证数据库的并发性、可靠性和最终用户的速度，这类系统使用的ORACLE数据库需要主要考虑下述参数： </li>
-</ol>
-<p>l     l     数据库回滚段是否足够？ </p>
-<p>l     l     是否需要建立ORACLE数据库索引、聚集、散列？ </p>
-<p>l     l     系统全局区（SGA）大小是否足够？ </p>
-<p>l     l     SQL语句是否高效？ </p>
-<p>2、数据仓库系统（Data Warehousing），这种信息系统的主要任务是从ORACLE的海量数据中进行查询，得到数据之间的某些规律。数据库管理员需要为这种类型的ORACLE数据库着重考虑下述参数： </p>
-<p>l     l     是否采用B*-索引或者bitmap索引？ </p>
-<p>l     l     是否采用并行SQL查询以提高查询效率？ </p>
-<p>l     l     是否采用PL/SQL函数编写存储过程？ </p>
-<p>l     l     有必要的话，需要建立并行数据库提高数据库的查询效率 </p>
-<p>SQL语句的调整原则 </p>
-<p>SQL语言是一种灵活的语言，相同的功能可以使用不同的语句来实现，但是语句的执行效率是很不相同的。程序员可以使用EXPLAIN PLAN语句来比较各种实现方案，并选出最优的实现方案。总得来讲，程序员写SQL语句需要满足考虑如下规则： </p>
-<ol>
-<li>尽量使用索引。试比较下面两条SQL语句： </li>
-</ol>
-<p>语句A：SELECT dname, deptno FROM dept WHERE deptno NOT IN  </p>
-<p>(SELECT deptno FROM emp); </p>
-<p>语句B：SELECT dname, deptno FROM dept WHERE NOT EXISTS </p>
-<p>(SELECT deptno FROM emp WHERE dept.deptno = emp.deptno); </p>
-<p>这两条查询语句实现的结果是相同的，但是执行语句A的时候，ORACLE会对整个emp表进行扫描，没有使用建立在emp表上的deptno索引，执行语句B的时候，由于在子查询中使用了联合查询，ORACLE只是对emp表进行的部分数据扫描，并利用了deptno列的索引，所以语句B的效率要比语句A的效率高一些。 </p>
-<ol>
-<li>选择联合查询的联合次序。考虑下面的例子： </li>
-</ol>
-<p>SELECT stuff FROM taba a, tabb b, tabc c<br>WHERE a.acol between :alow and :ahigh<br>AND b.bcol between :blow and :bhigh<br>AND c.ccol between :clow and :chigh<br>AND a.key1 = b.key1<br>AMD a.key2 = c.key2; </p>
-<p>这个SQL例子中，程序员首先需要选择要查询的主表，因为主表要进行整个表数据的扫描，所以主表应该数据量最小，所以例子中表A的acol列的范围应该比表B和表C相应列的范围小。 </p>
-<ol>
-<li><p>在子查询中慎重使用IN或者NOT IN语句，使用where (NOT) exists的效果要好的多。 </p>
-</li>
-<li><p>慎重使用视图的联合查询，尤其是比较复杂的视图之间的联合查询。一般对视图的查询最好都分解为对数据表的直接查询效果要好一些。 </p>
-</li>
-<li><p>可以在参数文件中设置SHARED_POOL_RESERVED_SIZE参数，这个参数在SGA共享池中保留一个连续的内存空间，连续的内存空间有益于存放大的SQL程序包。 </p>
-</li>
-<li><p>ORACLE公司提供的DBMS_SHARED_POOL程序可以帮助程序员将某些经常使用的存储过程“钉”在SQL区中而不被换出内存，程序员对于经常使用并且占用内存很多的存储过程“钉”到内存中有利于提高最终用户的响应时间。 </p>
-</li>
-</ol>
-<p>CPU参数的调整 </p>
-<p>CPU是服务器的一项重要资源，服务器良好的工作状态是在工作高峰时CPU的使用率在90％以上。如果空闲时间CPU使用率就在90％以上，说明服务器缺乏CPU资源，如果工作高峰时CPU使用率仍然很低，说明服务器CPU资源还比较富余。 </p>
-<p>使用操作相同命令可以看到CPU的使用情况，一般UNIX操作系统的服务器，可以使用sar –u命令查看CPU的使用率，NT操作系统的服务器，可以使用NT的性能管理器来查看CPU的使用率。 </p>
-<p>数据库管理员可以通过查看v$sysstat数据字典中“CPU used by this session”统计项得知ORACLE数据库使用的CPU时间，查看“OS User level CPU time”统计项得知操作系统用户态下的CPU时间，查看“OS System call CPU time”统计项得知操作系统系统态下的CPU时间，操作系统总的CPU时间就是用户态和系统态时间之和，如果ORACLE数据库使用的CPU时间占操作系统总的CPU时间90％以上，说明服务器CPU基本上被ORACLE数据库使用着，这是合理，反之，说明服务器CPU被其它程序占用过多，ORACLE数据库无法得到更多的CPU时间。 </p>
-<p>数据库管理员还可以通过查看v$sesstat数据字典来获得当前连接ORACLE数据库各个会话占用的CPU时间，从而得知什么会话耗用服务器CPU比较多。 </p>
-<p>出现CPU资源不足的情况是很多的：SQL语句的重解析、低效率的SQL语句、锁冲突都会引起CPU资源不足。 </p>
-<ol>
-<li>数据库管理员可以执行下述语句来查看SQL语句的解析情况： </li>
-</ol>
-<p>SELECT * FROM V$SYSSTAT </p>
-<p>WHERE NAME IN </p>
-<p>(‘parse time cpu’, ‘parse time elapsed’, ‘parse count (hard)’); </p>
-<p>这里parse time cpu是系统服务时间，parse time elapsed是响应时间，用户等待时间 </p>
-<p>waite time = parse time elapsed – parse time cpu </p>
-<p>由此可以得到用户SQL语句平均解析等待时间＝waite time / parse count。这个平均等待时间应该接近于0，如果平均解析等待时间过长，数据库管理员可以通过下述语句 </p>
-<p>SELECT SQL_TEXT, PARSE_CALLS, EXECUTIONS FROM V$SQLAREA </p>
-<p>ORDER BY PARSE_CALLS; </p>
-<p>来发现是什么SQL语句解析效率比较低。程序员可以优化这些语句，或者增加ORACLE参数SESSION_CACHED_CURSORS的值。 </p>
-<ol>
-<li>数据库管理员还可以通过下述语句： </li>
-</ol>
-<p>SELECT BUFFER_GETS, EXECUTIONS, SQL_TEXT FROM V$SQLAREA; </p>
-<p>查看低效率的SQL语句，优化这些语句也有助于提高CPU的利用率。 </p>
-<ol>
-<li>数据库管理员可以通过v$system_event数据字典中的“latch free”统计项查看ORACLE数据库的冲突情况，如果没有冲突的话，latch free查询出来没有结果。如果冲突太大的话，数据库管理员可以降低spin_count参数值，来消除高的CPU使用率。 </li>
-</ol>
-<p>内存参数的调整 </p>
-<p>内存参数的调整主要是指ORACLE数据库的系统全局区（SGA）的调整。SGA主要由三部分构成：共享池、数据缓冲区、日志缓冲区。 </p>
-<ol>
-<li>共享池由两部分构成：共享SQL区和数据字典缓冲区，共享SQL区是存放用户SQL命令的区域，数据字典缓冲区存放数据库运行的动态信息。数据库管理员通过执行下述语句： </li>
-</ol>
-<p>select (sum(pins - reloads)) / sum(pins) “Lib Cache”  from v$librarycache; </p>
-<p>来查看共享SQL区的使用率。这个使用率应该在90％以上，否则需要增加共享池的大小。数据库管理员还可以执行下述语句： </p>
-<p>select (sum(gets - getmisses - usage - fixed)) / sum(gets) “Row Cache” from v$rowcache; </p>
-<p>查看数据字典缓冲区的使用率，这个使用率也应该在90％以上，否则需要增加共享池的大小。 </p>
-<ol>
-<li>数据缓冲区。数据库管理员可以通过下述语句： </li>
-</ol>
-<p>SELECT name, value  FROM v$sysstat  WHERE name IN (‘db block gets’, ‘consistent gets’,’physical reads’); </p>
-<p>来查看数据库数据缓冲区的使用情况。查询出来的结果可以计算出来数据缓冲区的使用命中率＝1 - ( physical reads / (db block gets + consistent gets) )。 </p>
-<p>这个命中率应该在90％以上，否则需要增加数据缓冲区的大小。 </p>
-<ol>
-<li>日志缓冲区。数据库管理员可以通过执行下述语句： </li>
-</ol>
-<p>select name,value from v$sysstat where name in (‘redo entries’,’redo log space requests’);查看日志缓冲区的使用情况。查询出的结果可以计算出日志缓冲区的申请失败率： </p>
-<p>申请失败率＝requests/entries，申请失败率应该接近于0，否则说明日志缓冲区开设太小，需要增加ORACLE数据库的日志缓冲区。</p>
 
       
     </div>
