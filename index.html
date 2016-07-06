@@ -250,7 +250,7 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/07/06/jspatch常见问题/">
+                        <a class="link-unstyled" href="/2016/07/06/jspatch_commonQ/">
                             jspatch常见问题
                         </a>
                     
@@ -275,9 +275,9 @@
 </ul>
 <p>当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: </p>
 <p>OC代码</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)uploadWithBlock:(FinishBlock)block force:(<span class="built_in">BOOL</span>)force &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (block) &#123;</span><br><span class="line">        block(<span class="string">@"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)uploadWithBlock:(FinishBlock)block force:(<span class="built_in">BOOL</span>)force &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (block) &#123;</span><br><span class="line">    </span><br><span class="line">        block(<span class="string">@"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>js代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uploadWithBlock_force: <span class="function"><span class="keyword">function</span>(<span class="params">tmpBlock, force</span>) </span>&#123;</span><br><span class="line">	tmpBlock = block(<span class="string">"NSString *"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">//dosomething</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	self.ORIGuploadWithBlock_force(tmpBlock, force);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uploadWithBlock_force: <span class="function"><span class="keyword">function</span>(<span class="params">tmpBlock, force</span>) </span>&#123;</span><br><span class="line">	tmpBlock = block(<span class="string">"NSString *"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">		<span class="comment">//use str to do something</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	self.ORIGuploadWithBlock_force(tmpBlock, force);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>总结：JS 没有 block 类型的变量，OC 的 block 对象传到 JS 会变成 JS function，所有要从 JS 传 block 给 OC 都需要用 block() 接口包装。</p>
 </blockquote>
@@ -303,7 +303,7 @@
                     
                     
                         <p>
-                            <a href="/2016/07/06/jspatch常见问题/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2016/07/06/jspatch_commonQ/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

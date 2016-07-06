@@ -21,10 +21,10 @@ block传递
 
 当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: 
 OC代码
-123456- (void)">
+1234567- (void">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="jspatch常见问题">
-<meta property="og:url" content="http://yolynn.com/2016/07/06/jspatch常见问题/index.html">
+<meta property="og:url" content="http://yolynn.com/2016/07/06/jspatch_commonQ/index.html">
 <meta property="og:site_name" content="yolynn">
 <meta property="og:description" content="background
 jspatch虽然好用、易用，能快速帮助解决线上问题，但同时也是一把双刃剑，用的时候需要小心翼翼，从调试、测试到上线需要时刻保持警惕，以下针对项目中遇到的实际问题及解决办法做个总结。
@@ -34,8 +34,8 @@ block传递
 
 当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: 
 OC代码
-123456- (void)">
-<meta property="og:updated_time" content="2016-07-06T05:29:37.000Z">
+1234567- (void">
+<meta property="og:updated_time" content="2016-07-06T05:47:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jspatch常见问题">
 <meta name="twitter:description" content="background
@@ -46,7 +46,7 @@ block传递
 
 当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: 
 OC代码
-123456- (void)">
+1234567- (void">
     
     
         
@@ -295,9 +295,9 @@ OC代码
 </ul>
 <p>当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: </p>
 <p>OC代码</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)uploadWithBlock:(FinishBlock)block force:(<span class="built_in">BOOL</span>)force &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (block) &#123;</span><br><span class="line">        block(<span class="string">@"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)uploadWithBlock:(FinishBlock)block force:(<span class="built_in">BOOL</span>)force &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (block) &#123;</span><br><span class="line">    </span><br><span class="line">        block(<span class="string">@"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>js代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uploadWithBlock_force: <span class="function"><span class="keyword">function</span>(<span class="params">tmpBlock, force</span>) </span>&#123;</span><br><span class="line">	tmpBlock = block(<span class="string">"NSString *"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">//dosomething</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	self.ORIGuploadWithBlock_force(tmpBlock, force);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uploadWithBlock_force: <span class="function"><span class="keyword">function</span>(<span class="params">tmpBlock, force</span>) </span>&#123;</span><br><span class="line">	tmpBlock = block(<span class="string">"NSString *"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">		<span class="comment">//use str to do something</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	self.ORIGuploadWithBlock_force(tmpBlock, force);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>总结：JS 没有 block 类型的变量，OC 的 block 对象传到 JS 会变成 JS function，所有要从 JS 传 block 给 OC 都需要用 block() 接口包装。</p>
 </blockquote>
@@ -351,17 +351,17 @@ OC代码
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -422,17 +422,17 @@ OC代码
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -452,17 +452,17 @@ OC代码
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch常见问题/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch_commonQ/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
