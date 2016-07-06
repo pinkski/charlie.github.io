@@ -251,6 +251,77 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/07/06/jspatch常见问题/">
+                            jspatch常见问题
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-07-06T12:50:02+08:00">
+	
+		    Jul 06, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="background">background</h2><blockquote>
+<p>jspatch虽然好用、易用，能快速帮助解决线上问题，但同时也是一把双刃剑，用的时候需要小心翼翼，从调试、测试到上线需要时刻保持警惕，以下针对项目中遇到的实际问题及解决办法做个总结。</p>
+</blockquote>
+<ul>
+<li>block传递</li>
+</ul>
+<p>当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: </p>
+<p>OC代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)uploadWithBlock:(FinishBlock)block force:(<span class="built_in">BOOL</span>)force &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (block) &#123;</span><br><span class="line">        block(<span class="string">@"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>js代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uploadWithBlock_force: <span class="function"><span class="keyword">function</span>(<span class="params">tmpBlock, force</span>) </span>&#123;</span><br><span class="line">	tmpBlock = block(<span class="string">"NSString *"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">//dosomething</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	self.ORIGuploadWithBlock_force(tmpBlock, force);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>总结：JS 没有 block 类型的变量，OC 的 block 对象传到 JS 会变成 JS function，所有要从 JS 传 block 给 OC 都需要用 block() 接口包装。</p>
+</blockquote>
+<ul>
+<li>block 里使用 self 变量</li>
+</ul>
+<p>js代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">handleUserLogin: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            </span><br><span class="line">	<span class="keyword">var</span> tmpSelf = self;</span><br><span class="line">    </span><br><span class="line">	dispatch_after(<span class="number">15</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                   </span><br><span class="line">		tmpSelf.uploadWithBlock(<span class="literal">null</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">	self.ORIGhandleUserLogin();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>总结：在 block 里无法使用 self 变量，需要在进入 block 之前使用临时变量保存它</p>
+</blockquote>
+<ul>
+<li>block 使用限制</li>
+</ul>
+<p>从 JS 传 block 到 OC，有两个限制：</p>
+<ol>
+<li>block 参数个数最多支持6个。（若需要支持更多，可以修改源码）</li>
+<li>block 参数类型不能是 double。</li>
+</ol>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/07/06/jspatch常见问题/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/05/04/design_pattern/">
                             设计模式总览
                         </a>
@@ -1049,101 +1120,6 @@
                     
                         <p>
                             <a href="/2016/01/16/read_2015/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/09/22/mvvm_profile/">
-                            从Web看Native的MVVM
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2015-09-22T23:14:02+08:00">
-	
-		    Sep 22, 2015
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="背景">背景</h2><blockquote>
-<p>  随着前端技术的在开发工作中的角色越来越重要，需求量也越来越大，那么高效率的框架也应运而生，过去script方式已进化为MVC，现在我们是否应该顺应潮流推动MVC进化到MVVM呢？（MVP）</p>
-</blockquote>
-<h2 id="介绍">介绍</h2><ol>
-<li>web与native的组成对比<ul>
-<li>web : html + css + js</li>
-<li>android : 四大组件(activity、service、broadcase receiver、content provider)和五大布局(LinearLayout、FrameLayout、RelativeLayout、AbsoluteLayout、TableLayout) 还有 java (data binding library)</li>
-<li>iOS : xib/storyboard + oc/swift   </li>
-<li>react(react.js、react canvas、react native)  </li>
-</ul>
-</li>
-<li>web前端常用的MVVM主流框架<ul>
-<li>handlebars.js、knockout.js、ember.js、avalon.js、angular.js </li>
-<li>backbone.js?, react.js?</li>
-</ul>
-</li>
-<li>angularJS的核心功能<ul>
-<li>自动化双向数据绑定、模块化/组件化、依赖注入、语义化标签等</li>
-</ul>
-</li>
-<li>angularJS的原理<ul>
-<li>首先，浏览器会一直处于监听状态，一旦有事件被触发，就会被加到一个event queue中，event queue中的事件会一个一个的执行。</li>
-<li>event queue中的事件如果是被$apply()包起来的话，就会进入到AngularJS的context中，假设的fn()是我们希望在AngularJS的context中执行的函数。</li>
-<li>AngularJS将执行fn()函数，通常情况下，这个函数会改变应用的某些状态。</li>
-<li>然后AngularJS会进入到由两个小循环组成的digest循环中，一个循环是用来处理evalAsync队列（用来schedule一些需要在渲染视图之前处理的操作，通常通过setTimeout(0)实现，速度会比较慢，可能会出现视图抖动的问题）的，一个循环是处理watch列表（是一些表达式的集合，一旦有改变发生，那么watch函数就会被调用）的。digest循环会一直迭代知道evalAsync队列为空并且$watch列表也为空的时候，即model不再有任何变化。</li>
-<li>一旦AngularJS的$digest循环结束，整个执行就会离开AngularJS和Javascript的context，紧接着浏览器就会把数据改变后的视图重新渲染出来。</li>
-</ul>
-</li>
-<li>iOS常用的MVVM框架<ul>
-<li>KVO  reactiveCocoa</li>
-</ul>
-</li>
-<li>reactiveCocoa的核心功能<ul>
-<li>自动化双向数据绑定、模块化/组件化(?)、依赖注入(无)、语义化标签(?)等</li>
-<li>像KVO,但它用blocks代替了重写-observeValueForKeyPath:ofObject:change:context:</li>
-<li>提供了一个单一的，统一的方法去处理异步的行为,包括delegate方法,blocks回调,target-action机制,notifications和KVO.</li>
-</ul>
-</li>
-<li>reactiveCocoa的原理<ul>
-<li>RACSignal发送事件流给它的subscriber。目前总共有三种类型的事件：next、error、completed。</li>
-<li>RACSignal有很多方法可以来订阅不同的事件类型。每个方法都需要至少一个block，当事件发生时就会执行block中的逻辑。</li>
-<li>使用category来为很多基本UIKit控件添加signal。这样你就能给控件添加订阅了，text field的rac_textSignal就是这么来的。</li>
-</ul>
-</li>
-<li>angularJS与reactiveCocoa的对比<ul>
-<li>核心功能对比</li>
-<li>实现原理对比</li>
-<li>实际运用对比</li>
-</ul>
-</li>
-</ol>
-<h2 id="总结">总结</h2><blockquote>
-<p>MVVM是未来</p>
-</blockquote>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/09/22/mvvm_profile/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

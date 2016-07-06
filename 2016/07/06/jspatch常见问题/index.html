@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>设计模式总览 - yolynn</title>
+    <title>jspatch常见问题 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
@@ -14,24 +14,39 @@
     
     
     <meta name="description" content="background
-设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。
-设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代">
+jspatch虽然好用、易用，能快速帮助解决线上问题，但同时也是一把双刃剑，用的时候需要小心翼翼，从调试、测试到上线需要时刻保持警惕，以下针对项目中遇到的实际问题及解决办法做个总结。
+
+
+block传递
+
+当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: 
+OC代码
+123456- (void)">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="设计模式总览">
-<meta property="og:url" content="http://yolynn.com/2016/05/04/design_pattern/index.html">
+<meta property="og:title" content="jspatch常见问题">
+<meta property="og:url" content="http://yolynn.com/2016/07/06/jspatch常见问题/index.html">
 <meta property="og:site_name" content="yolynn">
 <meta property="og:description" content="background
-设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。
-设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代">
-<meta property="og:image" content="http://7d9j3g.com1.z0.glb.clouddn.com/ebe2f25f298e311e8b958950ff9203a8">
-<meta property="og:image" content="http://7d9j3g.com1.z0.glb.clouddn.com/be049062fe8d53a7d29dce88ce8e9861">
-<meta property="og:image" content="http://7d9j3g.com1.z0.glb.clouddn.com/559da82a979cc01be72070447ca10b68">
-<meta property="og:updated_time" content="2016-05-04T09:07:13.000Z">
+jspatch虽然好用、易用，能快速帮助解决线上问题，但同时也是一把双刃剑，用的时候需要小心翼翼，从调试、测试到上线需要时刻保持警惕，以下针对项目中遇到的实际问题及解决办法做个总结。
+
+
+block传递
+
+当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: 
+OC代码
+123456- (void)">
+<meta property="og:updated_time" content="2016-07-06T05:29:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式总览">
+<meta name="twitter:title" content="jspatch常见问题">
 <meta name="twitter:description" content="background
-设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。
-设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代">
+jspatch虽然好用、易用，能快速帮助解决线上问题，但同时也是一把双刃剑，用的时候需要小心翼翼，从调试、测试到上线需要时刻保持警惕，以下针对项目中遇到的实际问题及解决办法做个总结。
+
+
+block传递
+
+当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: 
+OC代码
+123456- (void)">
     
     
         
@@ -256,13 +271,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            设计模式总览
+            jspatch常见问题
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-05-04T18:15:02+08:00">
+    <time itemprop="datePublished" datetime="2016-07-06T12:50:02+08:00">
 	
-		    May 04, 2016
+		    Jul 06, 2016
     	
     </time>
     
@@ -273,48 +288,35 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <h2 id="background">background</h2><blockquote>
-<p>设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。</p>
-<p>设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。项目中合理地运用设计模式可以完美地解决很多问题，每种模式在现实中都有相应的原理来与之对应，每种模式都描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案，这也是设计模式能被广泛应用的原因。</p>
+<p>jspatch虽然好用、易用，能快速帮助解决线上问题，但同时也是一把双刃剑，用的时候需要小心翼翼，从调试、测试到上线需要时刻保持警惕，以下针对项目中遇到的实际问题及解决办法做个总结。</p>
 </blockquote>
-<h2 id="设计模式的六大原则">设计模式的六大原则</h2><p><img src="http://7d9j3g.com1.z0.glb.clouddn.com/ebe2f25f298e311e8b958950ff9203a8" alt=""></p>
-<ol>
-<li>开闭原则（Open Close Principle）</li>
-</ol>
+<ul>
+<li>block传递</li>
+</ul>
+<p>当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: </p>
+<p>OC代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)uploadWithBlock:(FinishBlock)block force:(<span class="built_in">BOOL</span>)force &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (block) &#123;</span><br><span class="line">        block(<span class="string">@"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>js代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uploadWithBlock_force: <span class="function"><span class="keyword">function</span>(<span class="params">tmpBlock, force</span>) </span>&#123;</span><br><span class="line">	tmpBlock = block(<span class="string">"NSString *"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">//dosomething</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	self.ORIGuploadWithBlock_force(tmpBlock, force);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>开闭原则的意思是：对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。简言之，是为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。</p>
+<p>总结：JS 没有 block 类型的变量，OC 的 block 对象传到 JS 会变成 JS function，所有要从 JS 传 block 给 OC 都需要用 block() 接口包装。</p>
 </blockquote>
-<ol>
-<li>里氏代换原则（Liskov Substitution Principle）</li>
-</ol>
+<ul>
+<li>block 里使用 self 变量</li>
+</ul>
+<p>js代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">handleUserLogin: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            </span><br><span class="line">	<span class="keyword">var</span> tmpSelf = self;</span><br><span class="line">    </span><br><span class="line">	dispatch_after(<span class="number">15</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                   </span><br><span class="line">		tmpSelf.uploadWithBlock(<span class="literal">null</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">	self.ORIGhandleUserLogin();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>里氏代换原则是面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。LSP 是继承复用的基石，只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为。里氏代换原则是对开闭原则的补充。实现开闭原则的关键步骤就是抽象化，而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。</p>
+<p>总结：在 block 里无法使用 self 变量，需要在进入 block 之前使用临时变量保存它</p>
 </blockquote>
+<ul>
+<li>block 使用限制</li>
+</ul>
+<p>从 JS 传 block 到 OC，有两个限制：</p>
 <ol>
-<li>依赖倒转原则（Dependence Inversion Principle）</li>
+<li>block 参数个数最多支持6个。（若需要支持更多，可以修改源码）</li>
+<li>block 参数类型不能是 double。</li>
 </ol>
-<blockquote>
-<p>这个原则是开闭原则的基础，具体内容：针对对接口编程，依赖于抽象而不依赖于具体。</p>
-</blockquote>
-<ol>
-<li>接口隔离原则（Interface Segregation Principle）</li>
-</ol>
-<blockquote>
-<p>这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。它还有另外一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。</p>
-</blockquote>
-<ol>
-<li>迪米特法则，又称最少知道原则（Demeter Principle）</li>
-</ol>
-<blockquote>
-<p>最少知道原则是指：一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立。</p>
-</blockquote>
-<ol>
-<li>合成复用原则（Composite Reuse Principle）</li>
-</ol>
-<blockquote>
-<p>合成复用原则是指：尽量使用合成/聚合的方式，而不是使用继承。</p>
-</blockquote>
-<h2 id="设计模式">设计模式</h2><p><img src="http://7d9j3g.com1.z0.glb.clouddn.com/be049062fe8d53a7d29dce88ce8e9861" alt=""></p>
-<p><img src="http://7d9j3g.com1.z0.glb.clouddn.com/559da82a979cc01be72070447ca10b68" alt=""></p>
 
             
         </div>
@@ -326,7 +328,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/06/jspatch常见问题/"  data-tooltip="jspatch常见问题">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -334,7 +336,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/19/computer/" data-tooltip="计算机课程串联">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/04/design_pattern/" data-tooltip="设计模式总览">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -349,17 +351,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -397,7 +399,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/06/jspatch常见问题/"  data-tooltip="jspatch常见问题">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -405,7 +407,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/19/computer/" data-tooltip="计算机课程串联">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/04/design_pattern/" data-tooltip="设计模式总览">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -420,17 +422,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -450,17 +452,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/05/04/design_pattern/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/07/06/jspatch常见问题/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
