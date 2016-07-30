@@ -35,7 +35,7 @@ block传递
 当要把 JS 函数作为 block 参数给 OC时，需要先使用 block(paramTypes, function) 接口包装: 
 OC代码
 1234567- (void">
-<meta property="og:updated_time" content="2016-07-06T05:47:22.000Z">
+<meta property="og:updated_time" content="2016-07-30T07:34:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jspatch常见问题">
 <meta name="twitter:description" content="background
@@ -305,6 +305,23 @@ OC代码
 <li>block 参数个数最多支持6个。（若需要支持更多，可以修改源码）</li>
 <li>block 参数类型不能是 double。</li>
 </ol>
+<h6 id="JSPatch_Aspect兼容问题">JSPatch Aspect兼容问题</h6><ul>
+<li><p>原因</p>
+<p>  我们的项目中引入了 JSPatch 作为我们的 hot fix方案。 JSPatch 也会 hook 住对象的 forwradInvocation 方法，并且 swizzling 相应的 method ，使其指向转发 IMP ,由于 aspects 也是基于这两者实现的，那么会不会导致问题呢(其实类似的问题也会发生在对象提前被 kvo 了，会不会有影响)？</p>
+<p>   回过头去看3.2.1 我们先是 hook了 类的 forwardInvocation 使其指向了 <strong>ASPECTS_ARE_BEING_CALLED</strong>，然后在 swizzling method 那里，aspect 有做一个判断，如果传入的 selector 指向了转发 IMP ,那么我们什么也不做。因此可想而知，如果传入的 selector 先被 JSPatch hook ,那么，这里我们将不会再处理,也就不会生成 aliasSelector 。</p>
+<p>  这会导致什么问题了？设想一下，当 selector 被触发的时候，由于 selector 指向了转发 IMP ，因此会进入消息转发过程，同时由于 forwardInvocation 被 aspects 所 hook ,最终会进入到 aspects 的处理逻辑 <strong>ASPECTS_ARE_BEING_CALLED</strong> 中来。让我们回过头去看看3.2.2中的分析，由于找不到 aliasSelector 的 IMP 实现，因此会在此进行消息转发。而在 3.2.2.1 的分析中我们知道，子类并没有实现 NSSelectorFromString(AspectsForwardInvocationSelectorName) ，所以这里的流程就会进入 doesNotRecognizeSelector，从而抛出异常。</p>
+</li>
+<li><p>解决方案</p>
+<p>  出现上诉问题的原因在于，当 aliasSelector 没有被找到的时候，我们没能将消息正常的转发，也就是没有实现一个 NSSelectorFromString(AspectsForwardInvocationSelectorName) ， 使得消息有机会重新转发回去的方法。因此解决方案也就呼之欲出了，我的做法是在对子类的 forwardInvocation 方法进行交换而不仅仅是替换，实现逻辑如下，强制生成一个 NSSelectorFromString(AspectsForwardInvocationSelectorName) 指向原对象的 forwardInvocation 的实现。</p>
+</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> Class aspect_hookClass(<span class="built_in">NSObject</span> *<span class="keyword">self</span>, <span class="built_in">NSError</span> **error) &#123;</span><br><span class="line">    ...</span><br><span class="line">   subclass = objc_allocateClassPair(baseClass, subclassName, <span class="number">0</span>);</span><br><span class="line">   ...</span><br><span class="line">   IMP originalImplementation = class_replaceMethod(subclass, <span class="keyword">@selector</span>(forwardInvocation:), (IMP)__ASPECTS_ARE_BEING_<span class="built_in">CALLED__</span>, <span class="string">"v@:@"</span>);</span><br><span class="line">   <span class="keyword">if</span> (originalImplementation) &#123;</span><br><span class="line">        class_addMethod(subclass, <span class="built_in">NSSelectorFromString</span>(AspectsForwardInvocationSelectorName),   originalImplementation, <span class="string">"v@:@"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Method baseTargetMethod = class_getInstanceMethod(baseClass, <span class="keyword">@selector</span>(forwardInvocation:));</span><br><span class="line">        IMP baseTargetMethodIMP = method_getImplementation(baseTargetMethod);</span><br><span class="line">       <span class="keyword">if</span> (baseTargetMethodIMP) &#123;</span><br><span class="line">               class_addMethod(subclass, <span class="built_in">NSSelectorFromString</span>(AspectsForwardInvocationSelectorName), baseTargetMethodIMP, <span class="string">"v@:@"</span>);</span><br><span class="line">         &#125;</span><br><span class="line">  &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意如果 originalImplementation 为空，那么生成的 NSSelectorFromString(AspectsForwardInvocationSelectorName) 将指向 baseClass 也就是真正的这个对象的 forwradInvocation ,这个其实也就是 JSPatch hook 的方法。同时为了保证 block 的执行顺序（也就是前面介绍的 before hooks / instead hooks / after hooks ），这里需要将这段代码提前到 after hooks 执行之前进行。这样就解决了 forwardInvocation 在外面已经被 hook 之后的冲突问题。</p>
+</blockquote>
+<h6 id="super()调用问题">super()调用问题</h6><blockquote>
+<p>可能是super call loop不完善导致， 1.0版本， 还没测试1.1版本</p>
+</blockquote>
 
             
         </div>
