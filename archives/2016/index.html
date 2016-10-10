@@ -239,6 +239,78 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/10/10/five_year_OS/">
+                            工作5年了，为什么还要看操作系统？
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-10-10T18:15:02+08:00">
+	
+		    Oct 10, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="background">background</h2><blockquote>
+<p>一眨眼，工作已经5个年头，5年说长不长，但多少为企业级系统繁荣搬了点砖，也见证了塞班的枯竭，同时被移动互联网浪潮推到风口浪尖，自我危机意识被拉到最高点，于是每天疯狂的学习新技术，一点也不敢懈怠，比如多编程语言的学习、多编译器的探究，还有每年看过的技术书籍，之前都有文章来总结。</p>
+<p>学过来学过去，有一点总达不到自己的预期，学之前想的是学了就能用，可往往事与愿违，学过不就之后就能忘记，之后想要用的时候，又得掏出之前的笔记，我想这中间的学习是不是少了什么环节？</p>
+<p>最近，突发奇想的我做了个试验来验证自己的想法，那就是从零开始，从最基础做起，于是我开始阅读一本《深入理解计算机系统》，虽然翻来覆去还是那些熟悉的字眼，但是接二连三的读，发现每一遍都有不一样的感受，而且当你真的能和自己常用的编程语言联系起来的时候，妙不可言。</p>
+<p>那么，以下我来说说看它的意义好吗？</p>
+</blockquote>
+<ul>
+<li><p>并发</p>
+<p>编写并发代码并不容易，特别是使用线程共享内存和线程锁。然而，现在很多学习计算机科学的学生都会在他们以后的职业生涯的某些时候使用到（并发）。在OS课程以外的课程里学习并发问题已经成为了一种增长的趋势，但即便如此，操作系统是学生首次了解线程，竞争，死锁等等重要概念的传统课程。教材很难（实际上很简单的，但运用起来很难），在毕业前多看几次是很有帮助的。一个可靠的并发编程介绍对学习操作系统课程是有很大好处的。</p>
+</li>
+<li><p>资源管理</p>
+<p>硬件层次上的资源通常是专用的。操作系统提供了这些资源的种类，它们可以是虚拟的（每个用户都有种错觉，自己拥有资源的一份备份）或者是仲裁的（一次只能有一个用户占有资源，但由操作系统来安排访问顺序）。允许多用户访问专用物理资源是一个很基本的策略并被运用到很多用户级别的程序中。通过详细地学习这些内容，学生学会了能够在许多其他场合重用的模式。</p>
+</li>
+<li><p>性能分析和冲突解决</p>
+<p>正如“为什么#*$是我的机器分页?”。当资源被分享时，冲突通常也会随之而来。冲突问题可以使用多种方式来解决，比如使用队列，合理共享，或者使用优先级。在某些情况下，比如CPU调度，没有单一技术解决方案并且最后的解决方案是一些古怪的混合技术。有时，最令人感兴趣的是找出导致问题出现的主要原因是哪一类冲突。我花费了夏天的一大部分时间去找出所有Windows NT导致MP3跳过的原因。操作系统课是学习这些理论的完美课程，它的适用性比计算机科学更广泛。</p>
+</li>
+<li><p>隐藏复杂性的接口</p>
+<p>一个具有良好设计的接口是一个美妙的东西。它更美妙的地方体现在把一个讨厌的低层次接口（调制解调器或者NE2000卡）转换为一个实用高效的高层次抽象接口（套接字流）。学生应该已经在教材里关于抽象数据类型那部分接触过这些想法了，给定的例子一般都是比较普通的，并且抽象化和隐藏复杂性的作用在那个层次里不够明显。我认为把像套接字（socket），文件系统和地址空间这些集合合到一个单一便利的包里可能是计算机科学10大贡献之一了。这是司空见惯的事，以至于很容易让人忽视它的迷人之处。</p>
+</li>
+<li><p>没什么神奇的</p>
+<p>从用户模式（user mode）看，很容易发现OS是一个神奇的东西–它提供了流畅的多任务处理，高效擦储存管理等。–不好的–它会出现蓝屏，系统颠簸，安全问题和调度异常。对于一般用户来说，这个模式是好的。但在另一方面，如果你想去证明你是一个计算机科学家，你需要知道这些问题的幕后细节。你将会从那里发现什么？很多时候，这看起来都是一些令人忧愁的集合，比如单调的链表，狡猾的启发式资源和维护不当的设备驱动程序。好的OS课程应该教会学生这些：</p>
+<p>在内核的代码很优秀，你只需要知道到哪里找到它们。当你第一次看到它们时，你不一定会理解它们。但你理解了它们，你就会学得更多。<br>通常，内核代码都是很普通的代码。任何人都可以编写它，对比于用户模式代码（user-mode code），内核代码（kernel code）仅需要多一点对细节的关心和注意，因为内核代码中的bug造成的结果更严重。<br>处理大型软件</p>
+<p>这是毫无疑问的，陷入别人的几百万行代码库中去是一个噩梦。错误零散的文档，残旧和广泛的接口，糟糕的交互，和费解的错误信息。不过，欢迎回到现实世界，我们不能因为这些糟糕的问题就经常重新开始。作为一个学生，如果你能够开始制定一个系统的方法去学习你需要用代码修复的大软件的相关部分，那么你以后的生活就会轻松很多。你可以讨厌Linux内核但它比你以后的职业生涯会遇到的软件好多了。</p>
+</li>
+<li><p>计算机系统设计</p>
+<p>设计任何的工程系统，包括软件系统，都是一个权衡的过程。是要侧重于可靠性？性能？消耗还是维护性?因为操作系统是很庞大的，性能至关重要的程序，它一般都要维护几十年，所以它们是学生学习这类权衡的很好的地方。拥有一双发现合适设计点的锐利眼睛的学生在工业上是很需要的。这些人更像一个艺术家而不是一个科学家，你需要看大量的代码，理解这些问题，和学会自己独立考虑这些问题。</p>
+</li>
+<li><p>总结</p>
+<p>我已经尝试去说清楚，一门OS课程不仅仅是关于操作系统和给UNIX/Windows/MacOS的使用者提供知识。优秀的OS课程教会你对广泛使用的操作系统的思考技巧和方式，即使你从没接触过一行的内核代码。实际上，在我的大学里获取学位的CS学生不要求一定要上OS课程，但我觉得，所有真正的计算机科学家要么是已经学这么课，要么已经用其他方式学会了这方面的技巧和直接   </p>
+</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/10/10/five_year_OS/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/07/06/jspatch_commonQ/">
                             jspatch常见问题
                         </a>
@@ -989,157 +1061,18 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/01/16/read_2015/">
-                            2015我的读书清单
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-01-16T16:14:02+08:00">
-	
-		    Jan 16, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="backgroud">backgroud</h2><blockquote>
-<p>2015年对于我来说是技术转型的重要一年，这一年收获颇多，当然读过很多很好很有用的书籍，这里想记录下来，好了废话少说，上清单：</p>
-</blockquote>
-<h2 id="book_list">book list</h2><ol>
-<li><p>算法系</p>
-<blockquote>
-<p>算法和数据结构本身就是编程的灵魂，所以基础还需稳扎稳打</p>
-<ul>
-<li>《算法导论》<em>：相信大家都很熟悉这本书，大学开设过这门课</em></li>
-<li>《数据结构(C语言版)》<em>：严蔚敏_吴伟民著，同样在大学开设过</em></li>
-<li>《算法 第4版》<em>：谢路云 译(Java描述)，强烈推荐这本，从前看算法都是C描述，这本Java描述更加生动具体</em></li>
-<li>《数据结构与算法分析-C语言描述》<em>：相对算法导论这本更好理解，歪果仁著</em></li>
-</ul>
-</blockquote>
-</li>
-<li><p>重构系</p>
-<blockquote>
-<p>当手上的代码积累到一定程度，某一天回过头再去看的时候抑或会骂一句“shit”，需要好好思考重构</p>
-<ul>
-<li>《编程之美》 <em>：看的不是很仔细，但是看后觉得重构也是一件非常重量级的事情</em></li>
-<li>《代码之美》 <em>：比较上本更好理解和实用</em></li>
-<li>《重构_改善既有代码的设计》</li>
-</ul>
-</blockquote>
-</li>
-<li><p>语言系</p>
-<blockquote>
-<p>切记切记语言只是工具，个人觉得大部分语言书籍就当语法说明书看看好了，要想精通某门工具，靠的是实践</p>
-<ul>
-<li>《C程序设计(第四版)》 <em>：谭浩强，又见教材系</em></li>
-<li>《C专家编程》 <em>：C的补充书籍</em></li>
-<li>《The C programming language》 <em>：看C语言的书从来不嫌多</em></li>
-<li>《Objective-C程序设计（第4版）》 <em>：OC语法说明书</em></li>
-<li>《The Swift Programming Language》 <em>：Swift语法说明书</em></li>
-<li>《node入门》<em>：nodejs入门说明书，很简短只有28页</em></li>
-<li>《让你不再害怕指针》<em>：同样很简短只有29页</em></li>
-<li>《linux命令手册》</li>
-</ul>
-</blockquote>
-</li>
-<li><p>设计模式系</p>
-<blockquote>
-<p>掌握了各种语言怎么用，还得知道怎么设计语言最好的使用方式</p>
-<ul>
-<li>《设计模式之禅完整版》 <em>：秦晓波，其实还没怎么看</em></li>
-<li>《HeadFirst_设计模式》 <em>：这本书没什么好解释的，看多少遍也不嫌多</em></li>
-</ul>
-</blockquote>
-</li>
-<li><p>面试系</p>
-<blockquote>
-<p>追其面试根本，一个高质量的面试往往是考研算法和经验，二者缺一不可</p>
-<ul>
-<li>《JAVA面试汇总》</li>
-<li>《Iterview _Points》</li>
-<li>《100题系列by_July》</li>
-<li>《程序员面试宝典》</li>
-<li>《剑指offer》</li>
-<li>《十五个经典算法研究与总结、目录+索引》</li>
-</ul>
-</blockquote>
-</li>
-<li><p>游戏系</p>
-<blockquote>
-<p>有一段时间在cocos2dx里玩耍</p>
-<ul>
-<li>《制作自己的《捕鱼达人》》 <em>：看这本书大概可以做一个属于自己的demo了</em></li>
-<li>《Cocos2d-x高级开发教程》</li>
-<li>《Cocos2d-x手机游戏开发》</li>
-<li>《Cocos2d-x游戏开发之旅》</li>
-<li>《Lua程序设计中文第二版》</li>
-<li>《Lua编程(programming in lua)》</li>
-</ul>
-</blockquote>
-</li>
-<li>产品系<blockquote>
-<p>其实这里面有部分并没有看过，但是都是很高质量的书籍，先列出来</p>
-<ul>
-<li>《结网》</li>
-<li>《人人都是产品经理》</li>
-<li>《乔布斯》</li>
-<li>《写给大家看的设计书》</li>
-</ul>
-</blockquote>
-</li>
-<li>编译系<blockquote>
-<p>当学习了多门语言之后，回头猛然的发现万变不离其中的是编译，虽然没有机会写编译器，但是很想搞懂这么多语言，是怎么一层一层指示着硬件呢，这个系列也是我正在看的</p>
-<ul>
-<li>《编译原理》<em>：业内又名龙书</em></li>
-<li>《编译器工程》<em>：建议先看这本书，再自己决定看龙书系列</em></li>
-</ul>
-</blockquote>
-</li>
-<li>is reading<blockquote>
-<p>除了编译原理，手上正在看的书籍还有一些整理在下面</p>
-<ul>
-<li>《JavaScript DOM编程艺术》</li>
-<li>《JavaScript 高级程序设计》</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<h2 id="summary">summary</h2><blockquote>
-<p>大概数了一下2015年累计看了35本书，事实上2015还有大概四个月时间是被耽搁掉了,所以计划下2016年阅读书籍数为60本，再一点观察了下book list发现技术书籍以外的书看太少，这一点是要改善的。</p>
-</blockquote>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/01/16/read_2015/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
         
-        <li class="pagination-number">page 1 of 1</li>
+        <li class="pagination-next">
+            <a class="btn btn--default btn--small" href="/archives/2016/page/2/">
+                    <span>OLDER POSTS</span>
+                <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+        </li>
+        
+        <li class="pagination-number">page 1 of 2</li>
     </ul>
 </div>
 
