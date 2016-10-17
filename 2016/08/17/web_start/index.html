@@ -6,29 +6,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>工作5年了，为什么还要看操作系统？ - yolynn</title>
+    <title>Web 应用的构建过程 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
         <link rel="icon" href="http://yolynn.com/assets/images/head.png">
     
     
-    <meta name="description" content="background
-一眨眼，工作已经5个年头，5年说长不长，但多少为企业级系统繁荣搬了点砖，也见证了塞班的枯竭，同时被移动互联网浪潮推到风口浪尖，自我危机意识被拉到最高点，于是每天疯狂的学习新技术，一点也不敢懈怠，比如多编程语言的学习、多编译器的探究，还有每年看过的技术书籍，之前都有文章来总结。
-学过来学过去，有一点总达不到自己的预期，学之前想的是学了就能用，可往往事与愿违，学过不就之后就能忘记">
+    <meta name="description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
+
+Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
+
+Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="工作5年了，为什么还要看操作系统？">
-<meta property="og:url" content="http://yolynn.com/2016/10/10/five_year_OS/index.html">
+<meta property="og:title" content="Web 应用的构建过程">
+<meta property="og:url" content="http://yolynn.com/2016/08/17/web_start/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="background
-一眨眼，工作已经5个年头，5年说长不长，但多少为企业级系统繁荣搬了点砖，也见证了塞班的枯竭，同时被移动互联网浪潮推到风口浪尖，自我危机意识被拉到最高点，于是每天疯狂的学习新技术，一点也不敢懈怠，比如多编程语言的学习、多编译器的探究，还有每年看过的技术书籍，之前都有文章来总结。
-学过来学过去，有一点总达不到自己的预期，学之前想的是学了就能用，可往往事与愿违，学过不就之后就能忘记">
-<meta property="og:updated_time" content="2016-10-10T07:39:47.000Z">
+<meta property="og:description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
+
+Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
+
+Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
+<meta property="og:updated_time" content="2016-10-17T10:08:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="工作5年了，为什么还要看操作系统？">
-<meta name="twitter:description" content="background
-一眨眼，工作已经5个年头，5年说长不长，但多少为企业级系统繁荣搬了点砖，也见证了塞班的枯竭，同时被移动互联网浪潮推到风口浪尖，自我危机意识被拉到最高点，于是每天疯狂的学习新技术，一点也不敢懈怠，比如多编程语言的学习、多编译器的探究，还有每年看过的技术书籍，之前都有文章来总结。
-学过来学过去，有一点总达不到自己的预期，学之前想的是学了就能用，可往往事与愿违，学过不就之后就能忘记">
+<meta name="twitter:title" content="Web 应用的构建过程">
+<meta name="twitter:description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
+
+Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
+
+Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
     
     
         
@@ -241,13 +247,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            工作5年了，为什么还要看操作系统？
+            Web 应用的构建过程
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-10-10T18:15:02+08:00">
+    <time itemprop="datePublished" datetime="2016-08-17T18:15:02+08:00">
 	
-		    Oct 10, 2016
+		    Aug 17, 2016
     	
     </time>
     
@@ -257,35 +263,104 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h2 id="background">background</h2><blockquote>
-<p>一眨眼，工作已经5个年头，5年说长不长，但多少为企业级系统繁荣搬了点砖，也见证了塞班的枯竭，同时被移动互联网浪潮推到风口浪尖，自我危机意识被拉到最高点，于是每天疯狂的学习新技术，一点也不敢懈怠，比如多编程语言的学习、多编译器的探究，还有每年看过的技术书籍，之前都有文章来总结。</p>
-<p>学过来学过去，有一点总达不到自己的预期，学之前想的是学了就能用，可往往事与愿违，学过不就之后就能忘记，之后想要用的时候，又得掏出之前的笔记，我想这中间的学习是不是少了什么环节？</p>
-<p>最近，突发奇想的我做了个试验来验证自己的想法，那就是从零开始，从最基础做起，于是我开始阅读一本《深入理解计算机系统》，虽然翻来覆去还是那些熟悉的字眼，但是接二连三的读，发现每一遍都有不一样的感受，而且当你真的能和自己常用的编程语言联系起来的时候，妙不可言。</p>
-<p>那么，以下我来说说看它的意义好吗？</p>
-</blockquote>
-<ul>
-<li><p>并发</p>
-<p>编写并发代码并不容易，特别是使用线程共享内存和线程锁。然而，现在很多学习计算机科学的学生都会在他们以后的职业生涯的某些时候使用到（并发）。在OS课程以外的课程里学习并发问题已经成为了一种增长的趋势，但即便如此，操作系统是学生首次了解线程，竞争，死锁等等重要概念的传统课程。教材很难（实际上很简单的，但运用起来很难），在毕业前多看几次是很有帮助的。一个可靠的并发编程介绍对学习操作系统课程是有很大好处的。</p>
+            <h6 id="Web_应用的构建过程">Web 应用的构建过程</h6><pre><code>在刚创建项目的时候，我们都会有一个完整的构建思路。
+
+Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
+
+<span class="operator"><span class="keyword">Check</span> <span class="keyword">Style</span>。通常我们会在我们的项目里定义一些代码规范，如 JavaScript 中的使用两个空格的缩进，<span class="keyword">Java</span> 的 Checkstyle 中一个函数不能超过<span class="number">30</span>行的限制。
+
+单元测试。作为测试中最基础也是最快的测试，这个测试将集中于测试单个函数的是不是正确的。
+
+功能测试。功能测试的意义在于，保证一个功能依赖的几个函数组合在一起也是可以工作的。
+
+Mock <span class="keyword">Server</span>。当我们的代码依赖于第三方服务的时候，我们就需要一个 Mock <span class="keyword">Server</span> 来保证我们的功能代码可以独立地测试。
+
+集成测试。这一步将集成前台、后台，并且运行起最后将上线的应用。接着依据于用户所需要的功能来编写相应的测试，来保证一个个的功能是可以工作的。
+
+打包。对于部署来说，直接安装一个 RPM 包，或者 DEB 包是最方便的事。在这个包里会包含应用程序所需的所有二进制文件、数据和配置文件等等。
+
+上传包。在完成打包后，我们就可以上传这个软件包了。
+
+部署。最后，我们就可以在我们的线上环境中安装这个软件包。</span>
+</code></pre><p>######Web 应用的构建实战</p>
+<pre><code>下面就让我们来构建一个简单的 Web 应用，来实践一下这个过程。在这里，我们要使用到的一个工具是 Gulp，当然对于 Grunt 也是类似的。
+
+Gulp 入门指南
+
+Gulp.js 是一个自动化构建工具，开发者可以使用它在项目开发过程中自动执行常见任务。Gulp.js 是基于 Node.js 构建的，利用 Node.js 流的威力，你可以快速构建项目并减少频繁的 IO 操作。Gulp.js 源文件和你用来定义任务的 Gulp 文件都是通过 JavaScript（或者 CoffeeScript ）源码来实现的。
+全局安装 gulp：
+$ npm install --<span class="keyword">global</span> gulp
+作为项目的开发依赖（devDependencies）安装：
+$ npm install --save-dev gulp
+在项目根目录下创建一个名为 gulpfile.js 的文件：
+<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
+
+gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+  <span class="comment">// 将你的默认的任务代码放在这</span>
+});
+运行 gulp：
+$ gulp
+默认的名为 <span class="keyword">default</span> 的任务（task）将会被运行，在这里，这个任务并未做任何事情。接下来，我们就可以打造我们的应用的构建系统了。
+
+代码质量检测工具
+
+当 C 还是一门新型的编程语言时，还存在一些未被原始编译器捕获的常见错误，所以程序员们开发了一个被称作 lint 的配套项目用来扫描源文件，查找问题。
+
+对应于不同的语言都会有不同的 lint 工具，在 JavaScript 中就有 JSLint。JavaScript 是一门年轻、语法灵活多变且对格式要求相对松散的语言，因此这样的工具对于这门语言来说比较重要。
+
+<span class="number">2011</span>年，一个叫 Anton Kovalyov 的前端程序员借助开源社区的力量弄出来了 JSHint，其思想基本上和 JSLint 是一致的，但是其有一下几项优势：
+
+可配置规则，每个团队可以自己定义自己想要的代码规范。
+对社区非常友好，社区支持度高。
+可定制的结果报表。
+下面就让我们来安装这个软件吧：
+
+安装及使用
+
+npm install jshint gulp-jshint --save-dev
+示例代码:
+
+<span class="keyword">var</span> jshint = <span class="keyword">require</span>(<span class="string">'gulp-jshint'</span>);
+<span class="keyword">var</span> gulp   = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
+
+gulp.task(<span class="string">'lint'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+  <span class="keyword">return</span> gulp.src(<span class="string">'./lib/*.js'</span>)
+    .pipe(jshint())
+    .pipe(jshint.reporter(<span class="string">'YOUR_REPORTER_HERE'</span>));
+});
+自动化测试工具
+
+一般来说，自动测试应该从两部分考虑：
+
+单元测试
+功能测试
+Mocha 是一个可以运行在 Node.js 和浏览器环境里的测试框架，
+
+<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
+<span class="keyword">var</span> mocha = <span class="keyword">require</span>(<span class="string">'gulp-mocha'</span>);
+
+gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+    <span class="keyword">return</span> gulp.src(<span class="string">'test.js'</span>, {read: <span class="keyword">false</span>})
+        <span class="comment">// gulp-mocha needs filepaths so you can't have any plugins before it</span>
+        .pipe(mocha({reporter: <span class="string">'nyan'</span>}));
+});
+</code></pre><ul>
+<li><p>编译</p>
+<p>  对于静态型语言来说，编译是一个很重要的步骤。不过，对于动态语言来说也存在这样的工具。</p>
+<p>  动态语言的编译</p>
+<p>  可以说这类型的语言，是以我们常见的 JavaScript 为代表。</p>
+<p>  CoffeeScript 是一套 JavaScript 的转译语言，并且它增强了 JavaScript 的简洁性与可读性。</p>
+<p>  Webpack 是一款模块加载器兼打包工具，它能把各种资源，例如 JS（含JSX）、coffee、样式（含less/sass）、图片等都作为模块来使用和处理。</p>
+<p>  Babel 是一个转换编译器，它能将 ES6 转换成ES5，以便在较低版本的浏览器中正确运行。</p>
 </li>
-<li><p>资源管理</p>
-<p>硬件层次上的资源通常是专用的。操作系统提供了这些资源的种类，它们可以是虚拟的（每个用户都有种错觉，自己拥有资源的一份备份）或者是仲裁的（一次只能有一个用户占有资源，但由操作系统来安排访问顺序）。允许多用户访问专用物理资源是一个很基本的策略并被运用到很多用户级别的程序中。通过详细地学习这些内容，学生学会了能够在许多其他场合重用的模式。</p>
+<li><p>打包</p>
+<p>  在 GNU/Linux 系统的软件包里通过包含了已压缩的软件文件集以及该软件的内容信息。常见的软件包有</p>
+<p>  DEB。Debian 软件包格式，文件扩展名为 .deb<br>  RPM（原 Red Hat Package Manager，现在是一个递归缩写）。该软件包分为二进制包（Binary）、源代码包（Source）和 Delta 包三种。二进制包可以直接安装在计算机中，而源代码包将会由 RPM 自动编译、安装。源代码包经常以 src.rpm 作为后缀名。<br>  压缩文档 tar.gz。通常是该软件的源码，故而在安装的过程中需要编译、安装，并且在编译时需要自己手动安装所需要依赖的软件。在软件仓库没有最新版本的软件时，tar.gz 往往是最好的选择。<br>  由于这里的打包过程比较繁琐，就不介绍了。有兴趣的读者可以自己了解一下。</p>
 </li>
-<li><p>性能分析和冲突解决</p>
-<p>正如“为什么#*$是我的机器分页?”。当资源被分享时，冲突通常也会随之而来。冲突问题可以使用多种方式来解决，比如使用队列，合理共享，或者使用优先级。在某些情况下，比如CPU调度，没有单一技术解决方案并且最后的解决方案是一些古怪的混合技术。有时，最令人感兴趣的是找出导致问题出现的主要原因是哪一类冲突。我花费了夏天的一大部分时间去找出所有Windows NT导致MP3跳过的原因。操作系统课是学习这些理论的完美课程，它的适用性比计算机科学更广泛。</p>
-</li>
-<li><p>隐藏复杂性的接口</p>
-<p>一个具有良好设计的接口是一个美妙的东西。它更美妙的地方体现在把一个讨厌的低层次接口（调制解调器或者NE2000卡）转换为一个实用高效的高层次抽象接口（套接字流）。学生应该已经在教材里关于抽象数据类型那部分接触过这些想法了，给定的例子一般都是比较普通的，并且抽象化和隐藏复杂性的作用在那个层次里不够明显。我认为把像套接字（socket），文件系统和地址空间这些集合合到一个单一便利的包里可能是计算机科学10大贡献之一了。这是司空见惯的事，以至于很容易让人忽视它的迷人之处。</p>
-</li>
-<li><p>没什么神奇的</p>
-<p>从用户模式（user mode）看，很容易发现OS是一个神奇的东西–它提供了流畅的多任务处理，高效擦储存管理等。–不好的–它会出现蓝屏，系统颠簸，安全问题和调度异常。对于一般用户来说，这个模式是好的。但在另一方面，如果你想去证明你是一个计算机科学家，你需要知道这些问题的幕后细节。你将会从那里发现什么？很多时候，这看起来都是一些令人忧愁的集合，比如单调的链表，狡猾的启发式资源和维护不当的设备驱动程序。好的OS课程应该教会学生这些：</p>
-<p>在内核的代码很优秀，你只需要知道到哪里找到它们。当你第一次看到它们时，你不一定会理解它们。但你理解了它们，你就会学得更多。<br>通常，内核代码都是很普通的代码。任何人都可以编写它，对比于用户模式代码（user-mode code），内核代码（kernel code）仅需要多一点对细节的关心和注意，因为内核代码中的bug造成的结果更严重。<br>处理大型软件</p>
-<p>这是毫无疑问的，陷入别人的几百万行代码库中去是一个噩梦。错误零散的文档，残旧和广泛的接口，糟糕的交互，和费解的错误信息。不过，欢迎回到现实世界，我们不能因为这些糟糕的问题就经常重新开始。作为一个学生，如果你能够开始制定一个系统的方法去学习你需要用代码修复的大软件的相关部分，那么你以后的生活就会轻松很多。你可以讨厌Linux内核但它比你以后的职业生涯会遇到的软件好多了。</p>
-</li>
-<li><p>计算机系统设计</p>
-<p>设计任何的工程系统，包括软件系统，都是一个权衡的过程。是要侧重于可靠性？性能？消耗还是维护性?因为操作系统是很庞大的，性能至关重要的程序，它一般都要维护几十年，所以它们是学生学习这类权衡的很好的地方。拥有一双发现合适设计点的锐利眼睛的学生在工业上是很需要的。这些人更像一个艺术家而不是一个科学家，你需要看大量的代码，理解这些问题，和学会自己独立考虑这些问题。</p>
-</li>
-<li><p>总结</p>
-<p>我已经尝试去说清楚，一门OS课程不仅仅是关于操作系统和给UNIX/Windows/MacOS的使用者提供知识。优秀的OS课程教会你对广泛使用的操作系统的思考技巧和方式，即使你从没接触过一行的内核代码。实际上，在我的大学里获取学位的CS学生不要求一定要上OS课程，但我觉得，所有真正的计算机科学家要么是已经学这么课，要么已经用其他方式学会了这方面的技巧和直接   </p>
+<li><p>上传及发布包</p>
+<p>  上传包之前我们需要创建一个相应的文件服务器，又或者是相应的软件源。并且对于我们的产品环境的服务器来说，我们还需要指定好这个软件源才能安装这个包。</p>
+<p>  以 Ubuntu 为例，Ubuntu 里的许多应用程序软件包，是放在网络里的服务器上，这些服务器网站，就称作“源”，从源里可以很方便地获取软件包。</p>
+<p>  因而在这一步中，我们所需要做的事便是将我们打包完的软件上传到相应的服务器上。</p>
 </li>
 </ul>
 
@@ -299,7 +374,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/14/cocos2d_year/"  data-tooltip="那一年，和cocos2dx擦肩而过">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/10/five_year_OS/"  data-tooltip="工作5年了，为什么还要看操作系统？">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -307,7 +382,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/17/web_start/" data-tooltip="Web 应用的构建过程">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/06/jspatch_commonQ/" data-tooltip="jspatch常见问题">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -322,17 +397,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -370,7 +445,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/14/cocos2d_year/"  data-tooltip="那一年，和cocos2dx擦肩而过">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/10/five_year_OS/"  data-tooltip="工作5年了，为什么还要看操作系统？">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -378,7 +453,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/17/web_start/" data-tooltip="Web 应用的构建过程">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/06/jspatch_commonQ/" data-tooltip="jspatch常见问题">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -393,17 +468,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -423,17 +498,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/10/10/five_year_OS/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
