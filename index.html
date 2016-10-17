@@ -255,7 +255,7 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="background">background</h2><blockquote>
+                    <h6 id="background">background</h6><blockquote>
 <p>正是由于对工作中接受到的各种技术的好奇心，开始了我的一段全栈之旅路程，在成为或即将成为全栈的路上，有好几次在思索自己到底做了什么，为什么会选择想成为全栈？</p>
 <p>为什么？每次自我检索总结得时候我总能得出结论，从小到大我就希望变得很全能，比如喜欢上了徒步后买好了各种装备说走就走、喜欢上了游泳后逼着自己学会了四种泳姿、喜欢上了篮球后挑了最全能的小前锋位置等等，可能一直到大都被自己觉得自己无所不能的无畏驱使，就像是对自己说：小伙子，年轻的你有什么是学不会的啊？有什么问题是解决不了的啊？</p>
 <p>OK,让我言归正传，我所理解的全栈工程师</p>
@@ -292,7 +292,7 @@
 <li><p>从浏览器到服务器</p>
 <p>  我们会发现解析 DNS 的时候，我们需要先本地 DNS 服务器查询。如果没有的话，再向根域名服务器查询——这个域名由哪个服务器来解析。直至最后拿到真正的服务器IP才能获取页面。当我们拿到相应的 HTML、JS、CSS 后，我们就开始渲染这个页面了</p>
 </li>
-<li><p>HTML + CSS + JavaScript </p>
+<li><p>HTML + CSS + JavaScript  <a href="http://yolynn.com/2016/05/17/my_html/">详细见这里</a></p>
 </li>
 </ul>
 <h6 id="我的前端与后台">我的前端与后台</h6><ul>
@@ -383,10 +383,8 @@
 <p>  这是前几年（今年2016）的一个技术方向，今天似乎已经不太常见了。在这种模式下，人们使用 Backbone 来做一些路由、模型、视图、集合方面的工作，而由 jQuery 的兼容者 Zepto 来负责对 DOM 的处理，而 Mustache 在这里则充当模板系统的工作。</p>
 </li>
 </ul>
-<h6 id="我的前台与后台交互">我的前台与后台交互</h6><blockquote>
-<p>在我们把后台服务化后，前端跨平台化之前，我们还需要了解前台和后台之间怎么通讯。从现有的一些技术上来看，Ajax 和 WebSocket 是比较受欢迎的</p>
-</blockquote>
-<ul>
+<h6 id="我的前台与后台交互">我的前台与后台交互</h6><pre><code>在我们把后台服务化后，前端跨平台化之前，我们还需要了解前台和后台之间怎么通讯。从现有的一些技术上来看，Ajax 和 WebSocket 是比较受欢迎的
+</code></pre><ul>
 <li><p>Ajax</p>
 <p>  说起 Ajax，我们就需要用 JavaScript 向服务器发送一个 HTTP 请求。这个过程要从 XMLHttpRequest 开始说起，它是一个 JavaScript 对象。它最初由微软设计，随后被 Mozilla、Apple 和 Google 采纳。如今，该对象已经被 W3C 组织标准化</p>
 <p>  我们只需要简单的创建一个请求对象实例，打开一个 URL，然后发送这个请求。当传输完毕后，结果的 HTTP 状态以及返回的响应内容也可以从请求对象中获取。</p>
@@ -404,31 +402,27 @@
 </li>
 </ul>
 <h6 id="我的编码">我的编码</h6><pre><code>在我们真正开始去写代码之前，我们可能会去考虑一些事情：
-<span class="bullet">1. </span>如果一件事可以自动化，那么就尽量去自动化，毕竟你是一个程序员。
-<span class="bullet">2. </span>快捷键！快捷键！快捷键！
-<span class="bullet">3. </span>使用可以帮助你快速工作的工具——如启动器。
+<span class="number">1.</span> 如果一件事可以自动化，那么就尽量去自动化，毕竟你是一个程序员。
+<span class="number">2.</span> 快捷键！快捷键！快捷键！
+<span class="number">3.</span> 使用可以帮助你快速工作的工具——如启动器。
 
 编码过程：
-<span class="bullet">1. </span>Kick Off。在这个步骤中，我们要详细地了解我们所需要做的东西、我们的验收条件是什么、我们需要做哪些事情。
-<span class="bullet">2. </span>Tasking。简单的规则一下，我们需要怎么做。一般来说，如果是结对编程的话，还会记录下来。
-<span class="bullet">3. </span>最新的代码。对于使用 Git 来管理项目的团队来说，在一个任务刚开始的时候应该保证本地的代码是最新的。
-<span class="bullet">4. </span>Test First。测试优先是一个很不错的实践，可以保证我们写的代码的健壮，并且函数尽可能小，当然也会有测试。
-<span class="bullet">5. </span>Code。就是实现功能，一般人都知道。
-<span class="bullet">6. </span>重构。在我们实现了上面两步之后，我们还需要重构代码，使我们的代码更容易阅读、更易懂等等。
-<span class="bullet">7. </span>提交代码。这里的提交代码只是本地的提交代码，因此都提倡在本地多次提交代码。
-<span class="bullet">8. </span>运行测试。当我们完成我们的任务后，我们就可以准备 PUSH 代码了。在这时，我们需要在本地运行测试——以保证我们不破坏别人的功能。
-<span class="bullet">9. </span>PUSH 代码。
-<span class="bullet">10. </span>等 CI 测试通过。如果这时候 CI 是挂的话，那么我们就需要再修 CI。这时其他的人就没有理由 PUSH 代码，如果他们的代码也是有问题的，这只会使情况变得愈加复杂。
-
-Web 应用的构建系统
-
-<span class="blockquote">&gt; 这章内容我会在后续的文章中详述</span>
-</code></pre><p>######我的Git 与版本控制</p>
-<blockquote>
-<p>这章内容我会在后续的文章中详述</p>
+<span class="number">1.</span> Kick Off。在这个步骤中，我们要详细地了解我们所需要做的东西、我们的验收条件是什么、我们需要做哪些事情。
+<span class="number">2.</span> Tasking。简单的规则一下，我们需要怎么做。一般来说，如果是结对编程的话，还会记录下来。
+<span class="number">3.</span> 最新的代码。对于使用 Git 来管理项目的团队来说，在一个任务刚开始的时候应该保证本地的代码是最新的。
+<span class="number">4.</span> Test First。测试优先是一个很不错的实践，可以保证我们写的代码的健壮，并且函数尽可能小，当然也会有测试。
+<span class="number">5.</span> Code。就是实现功能，一般人都知道。
+<span class="number">6.</span> 重构。在我们实现了上面两步之后，我们还需要重构代码，使我们的代码更容易阅读、更易懂等等。
+<span class="number">7.</span> 提交代码。这里的提交代码只是本地的提交代码，因此都提倡在本地多次提交代码。
+<span class="number">8.</span> 运行测试。当我们完成我们的任务后，我们就可以准备 PUSH 代码了。在这时，我们需要在本地运行测试——以保证我们不破坏别人的功能。
+<span class="number">9.</span> PUSH 代码。
+<span class="number">10.</span> 等 CI 测试通过。如果这时候 CI 是挂的话，那么我们就需要再修 CI。这时其他的人就没有理由 PUSH 代码，如果他们的代码也是有问题的，这只会使情况变得愈加复杂。
+</code></pre><p>Web 应用的构建系统<br><a href="http://yolynn.com/2016/08/17/web_start/">详细见这里</a></p>
+<h6 id="我的Git_与版本控制">我的Git 与版本控制</h6><blockquote>
+<p><a href="http://yolynn.com/2016/07/17/my_git/">详细见这里</a></p>
 </blockquote>
 <h6 id="我的Tasking">我的Tasking</h6><blockquote>
-<p>这章内容我会在后续的文章中详述</p>
+<p><a href="http://yolynn.com/2016/06/17/my_tasking/">详细见这里</a></p>
 </blockquote>
 <h6 id="我的全栈之路感受">我的全栈之路感受</h6><ul>
 <li><p>写代码只是在码字</p>
@@ -679,27 +673,28 @@ Web 应用的构建系统
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h6 id="Web_应用的构建过程">Web 应用的构建过程</h6><pre><code>在刚创建项目的时候，我们都会有一个完整的构建思路。
-
-Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
-
-<span class="operator"><span class="keyword">Check</span> <span class="keyword">Style</span>。通常我们会在我们的项目里定义一些代码规范，如 JavaScript 中的使用两个空格的缩进，<span class="keyword">Java</span> 的 Checkstyle 中一个函数不能超过<span class="number">30</span>行的限制。
-
-单元测试。作为测试中最基础也是最快的测试，这个测试将集中于测试单个函数的是不是正确的。
-
-功能测试。功能测试的意义在于，保证一个功能依赖的几个函数组合在一起也是可以工作的。
-
-Mock <span class="keyword">Server</span>。当我们的代码依赖于第三方服务的时候，我们就需要一个 Mock <span class="keyword">Server</span> 来保证我们的功能代码可以独立地测试。
-
-集成测试。这一步将集成前台、后台，并且运行起最后将上线的应用。接着依据于用户所需要的功能来编写相应的测试，来保证一个个的功能是可以工作的。
-
-打包。对于部署来说，直接安装一个 RPM 包，或者 DEB 包是最方便的事。在这个包里会包含应用程序所需的所有二进制文件、数据和配置文件等等。
-
-上传包。在完成打包后，我们就可以上传这个软件包了。
-
-部署。最后，我们就可以在我们的线上环境中安装这个软件包。</span>
-</code></pre><p>######Web 应用的构建实战</p>
-<pre><code>下面就让我们来构建一个简单的 Web 应用，来实践一下这个过程。在这里，我们要使用到的一个工具是 Gulp，当然对于 Grunt 也是类似的。
+                    <h6 id="Web_应用的构建过程">Web 应用的构建过程</h6><p>在刚创建项目的时候，我们都会有一个完整的构建思路。</p>
+<ul>
+<li><p>Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。</p>
+</li>
+<li><p>Check Style。通常我们会在我们的项目里定义一些代码规范，如 JavaScript 中的使用两个空格的缩进，Java 的 Checkstyle 中一个函数不能超过30行的限制。</p>
+</li>
+<li><p>单元测试。作为测试中最基础也是最快的测试，这个测试将集中于测试单个函数的是不是正确的。</p>
+</li>
+<li><p>功能测试。功能测试的意义在于，保证一个功能依赖的几个函数组合在一起也是可以工作的。</p>
+</li>
+<li><p>Mock Server。当我们的代码依赖于第三方服务的时候，我们就需要一个 Mock Server 来保证我们的功能代码可以独立地测试。</p>
+</li>
+<li><p>集成测试。这一步将集成前台、后台，并且运行起最后将上线的应用。接着依据于用户所需要的功能来编写相应的测试，来保证一个个的功能是可以工作的。</p>
+</li>
+<li><p>打包。对于部署来说，直接安装一个 RPM 包，或者 DEB 包是最方便的事。在这个包里会包含应用程序所需的所有二进制文件、数据和配置文件等等。</p>
+</li>
+<li><p>上传包。在完成打包后，我们就可以上传这个软件包了。</p>
+</li>
+<li><p>部署。最后，我们就可以在我们的线上环境中安装这个软件包。</p>
+</li>
+</ul>
+<h6 id="Web_应用的构建实战">Web 应用的构建实战</h6><pre><code>下面就让我们来构建一个简单的 Web 应用，来实践一下这个过程。在这里，我们要使用到的一个工具是 Gulp，当然对于 Grunt 也是类似的。
 
 Gulp 入门指南
 
