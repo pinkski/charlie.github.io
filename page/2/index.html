@@ -604,6 +604,112 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/01/04/my_resource/">
+                            我的灵感之源
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-01-04T18:15:02+08:00">
+	
+		    Jan 04, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h6 id="background">background</h6><blockquote>
+<p>我的灵感之源，主要是收集了我微博中的内容，有兴趣的同学可以去我的微博翻看更多。</p>
+</blockquote>
+<ul>
+<li><p>目测微博上传图片时，每张图片各要请求一次接口，上传基本信息并获取上传路径和读取路径，之后才会开多线程上传图片的进制码，至于开几个线程应该有套算法，相比之下instagram每次限制只能传一张图片就简单了很多</p>
+</li>
+<li><p>Swift的元组和闭包的引入，使其更加方便运用函数响应式编程，在未来硬件多核更进步发展后，这种编程范式会不会取代oo呢？</p>
+</li>
+<li><p>要做一些图片处理的有趣应用，例如放大、截图、移动、水印、滤镜、制作等，首先当然需要一块画布了，html5-canvas提供的函数已经很强大了，同样在iOS平台也有很方便和成熟的API，其实最核心还是RGB色值算法</p>
+</li>
+<li><p>游戏后端需要高频次高速度的数据层，内存数据库、事务日志的redo和undo、查询数据表切片这些手段，其实开发应用也可以借鉴这些</p>
+</li>
+<li><p>图形手势一笔画的识别算法被简单切割成5步：打点resample、校准centro、移动translate、缩放scale、旋转rotate，多数复杂算法亦是如此，大数据亦是如此，切片确实简化的钥匙</p>
+</li>
+<li><p>Scrum的三大角色：Product Owner、Scrum Master、Scrum Team，强调相互之间的对等关系和自组织，并定义了四大事件：计划会议、每日站立会议、评审会议、回顾会议，最终在一个月(可变)的周期内实行Sprint，获取Scrum！</p>
+</li>
+<li><p>传统编译器GNU及其客户端gcc，苹果大力支持的LLVM及其客户端clang，再有jvm，有Google v8 .etc，这些编译器或者虚拟机或者引擎，从另一个角度映射了每门语言的特性</p>
+</li>
+<li><p>Swift相对于OC大大弱化了runtime这块的实现，而新加入的反射太弱，期待后续版本能有golang的reflect的强大表现</p>
+</li>
+<li><p>因为每种设备的二进制机器语言执行不一致，为了实现跨平台，各种编译器、虚拟机、引擎都一一出现，但是万变不离其中的是从低级到高级一层层封装，或者从高级到低级的一层层解释，比如词法分析(预编译器)-&gt;语法分析-&gt;语义分析-&gt;中间代码(汇编器)-&gt;优化-&gt;目标代码-&gt;链接(链接器)-&gt;加载器</p>
+</li>
+<li><p>编译器对中间代码（汇编四元式）的优化重心应放在循环体上，这样在时间和空间复杂度上才有质的降低</p>
+</li>
+<li><p>一直诟病html5性能差，这个框架重那个框架慢，其实它们差距并不太大，前端render过程一般也会在百毫秒级完成，而真正影响用户体验的应该是手机移动网络和基站通信时间，如果从网络这块（当然除开基站这块）下手优化，比如利用减少请求数、减小传输体积、利用缓存、缩短路径、合理安排请求顺序等等。</p>
+</li>
+<li><p>docker run image 基于container和image的docker给开发者带来无限的便捷，但其诟病的网络，和npm遇到了同样的问题。</p>
+</li>
+<li><p>GCD更底层，也更容易死锁，如在当前队列使用同步函数添加任务，该同步函数会阻塞他后面的任务，而添加的任务符合队列FIFO的原则，它也在等待后面的任务执行，这样相互等待即死锁，解决思路：1，同步转异步，解放阻塞；2，任务放进并发队列或不同队列</p>
+</li>
+<li><p>instance’s isa -&gt; class struct {ivars;methodlist;cachelist;protocollist}’s isa -&gt; meta class {class method}</p>
+</li>
+<li><p>缓存机制应让内存缓存和磁盘缓存结合使用，而且都要有总数量、总消耗、总大小上限，自我轮询检查，遵循LRU淘汰算法，内存缓存还需监听应用内存警告或者后台使用，磁盘缓存则可以根据文件大小选择数据库或者文件方式</p>
+</li>
+<li><p>对于APP启动即崩的情况，可以巧妙的在沙盒中存储一个计数器，每次启动计数器加1，正常退出或正常启动15秒后初始化为0，那么当计数器大于等于2的情况即可断定启动即崩，在这些情况下可以根据需求清空数据或者运行热不定来尝试修复（淘宝连续崩3次即清空了数据）</p>
+</li>
+<li><p>保证客户端网络请求安全的三个方案：1，后端传送秘钥加密密文和明文，前端使用密文加密匹配密文，符合则成功，这种方案易被黑掉秘钥；2，使用https，这种方案成本高；3，使用RSA非对称加密，服务端私钥加密，客户端公钥解密，匹对解密后密文，一致则成功，在保证服务端的私钥不被黑走的情况下安全</p>
+</li>
+<li><p>一个晚上的折腾，发现JSPatch1.0三个问题：1，在invocation函数中与aspect冲突，aspect官方做出解释；2，调用super的自定义函数会崩，原因可能是1.0版本过旧导致；3，二维数组在js中的翻译，待bang大神回复</p>
+</li>
+<li><p>concurrent thread执行很多个block任务时，如果给其中一个block加锁会导致系统多开线程抢占资源从而影响到主线程，这时候可以利用serial queue连续队列线程池解决，同时限制队列中线程个数范围，一般是（0，32）</p>
+</li>
+<li><p>图片异步展示的过程，其实也是利用了一次缓存机制，首先以url为key依次从内存缓存、磁盘缓存中寻找value，如果未找到，则启动下载线程，成功后展示并将图片以value值存入内存缓存或磁盘缓存，以供下次快速加载</p>
+</li>
+<li><p>想要彻底精通某个知识点，仅仅看博客了解是不够的，一定要在看博客的基础上动手实践，深究源码，这样你才能领悟到这篇博客的精髓，也就消化了这个知识点，而且这个道理在所有的事情中都是通用的，纸上谈兵终究还是虚</p>
+</li>
+<li><p>MVVM将MVC的VC合二为一成View层，C中的业务逻辑、数据计算全部交给VM来完成，它只做View的展示和VM与View的双向绑定工作，因此大大解放了C的臃肿，但是涉及到大量计算而少量View操作的模块是不是也适用MVVM呢？</p>
+</li>
+<li><p>线程保活可使用RunLoop，新开子线程手动创建对应的runloop，并为其添加port，调用cf run，同时在对应的线程结束时调用cf stop，可以确保runloop的正确启动和关闭，切记启动不能使用run 函数</p>
+</li>
+<li><p>CADisplaylink作为一个timer，GPU渲染一帧，它就调用一次，结合它的timestamp属性可以巧妙计算出当前的FPS</p>
+</li>
+<li><p>将layer的绘制封装为一个个异步任务，提交到事务管理器上，当observe 到CPU的wait和exit状态时，开始异步执行渲染过程，并将结果返回给主线程</p>
+</li>
+<li><p>vuejs吸收了React插件化和Angular模板指令双向绑定的优点，通过标签template script style 区分脚本，集中到.vue文件，并结合webpack打包工具在打包时拆分为浏览器需要脚本，是一个非常值得入手的MVVM框架工具</p>
+</li>
+<li><p>SVN依赖中央服务器做集中式的版本控制管理，所有的版本交互工作以及大部分命令都必须在连接服务器的基础上执行；git采用分布式版本控制管理，并不强行依赖中央服务器（可有可无），相当于每个接入者本身就是自己的服务器，所以git大部分命令都可以在未联网情况下执行，所以速度更快，效率更高</p>
+</li>
+<li><p>iOS崩溃分为两种：基于堆栈错抛出的NSException和系统级别操作抛出的unix信号，前者调试阶段可以借助xcode控制台打印错误堆栈信息直接定位到错误代码位置，生产阶段则可通过异常捕获上传错误地址信息再结合.dSYM文件中的符号表即可定位错误位置，而后者捕获难度较大，系统只简单的提供几个信号以供订阅</p>
+</li>
+<li><p>基于传输层协议TCP实现的常用应用层协议有HTTP FTP SMTP，它们是面向连接的（三次握手，四次挥手），也是可靠的；而基于传输层UDP的应用层协议HTTP XMPP POP是非面向链接，非可靠的协议</p>
+</li>
+<li><p>HTTP 的request和response头信息在遵循w3c的基础上，通过\r\n隔离键值对，遍历解析时只需命中到流结束和\r\n</p>
+</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/01/04/my_resource/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/09/22/mvvm_profile/">
                             从Web看Native的MVVM
                         </a>
