@@ -239,6 +239,183 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/04/08/paradigm/">
+                            多编程范式杂感
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-04-08T18:15:02+08:00">
+	
+		    Apr 08, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="background">background</h2><blockquote>
+<p>现有语言的编程范式有：过程式，面向对象，函数式，逻辑式。随着软件工业化程度的普及，以及软件的复杂度越来越高，编程语言的发展历程也是从最初的过程式（命令式）语言c，发展到以java语言为代表的面向对象编程语言。而逻辑编程语言(以prolog为代表）和函数式语言(lisp系列）还多用在学术和人工智能领域中。近几年，随着多核，云计算时代的到来。函数式编程语言逐渐浮出水面，最经典的语言以scheme,common-lisp,ml,clojure,go为代表.而且最近的jdk8也逐步加入了functional,closure,lambda等语法，而且scala的作者也越来越推崇编码者以函数式语言的思维来coding。可见编程语言的发展也是满足时代的变化不断变化着。从其中的发展历程中我们可以看到：技术的发展都是在围绕着解决“软件的复杂度”这个基本的需求而发展的。</p>
+</blockquote>
+<h3 id="一、_编程语言概述">一、 编程语言概述</h3><ul>
+<li>编程语言是计算机的符号，是人和计算机的通信符号和协议。我们学习一门新的编程语言时，应该观察这门语言的那些特性呢？《SICP》一书的作者列举了一下三点：<ul>
+<li>primitive elements. （基本元素）</li>
+<li>means of combination. （组合手段）</li>
+<li>means of abstraction. (抽象手段）</li>
+</ul>
+</li>
+<li>以上3个特性，基本上涵盖了所有编程语言的特性，并且也是一个语言设计者从开始就要考虑的。我对这三点的理解：primitive elements表示语言的基本符号（基本数据类型，关键字等）也就是词法部分。means of combination利用基本元素通过组合的过程构建大型程序的手段，不同的语言提供的组合手段是不同的，下边我会详细描述。means of abstraction表示抽象，抽象是解决软件复杂度的重要手段，让软件的可读性，可扩展，可重复利用等得到提升。一下会从组合元素和抽象手段来对比更重语言特性。</li>
+</ul>
+<h3 id="二、_组合手段">二、 组合手段</h3><ul>
+<li>汇编语言：算是最简单的词法和语法形式了。汇编器通过直译的过程将汇编代码翻译为二进制代码。 提供的primitive elements有：数字，字符，-，+，*，/ ， case,if, break, go，指令等基本元素；</li>
+<li>c语言相比汇编语言更高级，让程序员脱离和寄存器，内存直接打交道的工作，提供了更多的组合手段：比如数组，结构体等数据结构。</li>
+<li>java语言自称是面向对象语言，所以比c语言更进一步，通过强大的类型系统手段来组合属性和方法。</li>
+<li>lisp方言以s-expression（著名的S表达式）来组合数据和函数。在lisp中不区分数据和函数，一切皆为数据。</li>
+</ul>
+<h3 id="三、_抽象手段">三、 抽象手段</h3><ul>
+<li>从c语言开始，以函数为单元提供了对程序的抽象。这样大大的提高了程序的可复用，模块化等。让团队合作编码也成为可能。</li>
+<li>面向对象编程：基本上隐藏了计算机的细节，开发者通过对象来抽象具体业务。但严格意义上来说java也属于imperative-lang的范畴而且都是传值调用。相比来说,python,ruby更面向对象一些，python融合了面向对象和函数式编程范式，更接近自然语言些。</li>
+<li>以lisp为代表的函数式语言：以函数和模块为抽象手段；common-lisp基于宏开发了一套object-oriented的编程方式。 我比较倾向于函数式编程理念：函数的无副作用（不用考虑线程安全，特别是对于变态的Haskell），高阶函数，闭包,lambda等。</li>
+</ul>
+<h3 id="四、_类型系统">四、 类型系统</h3><ul>
+<li>大家平时经常会说：javascript是一个弱类型的语言，java语言是强类型的语言。将编程语言从类型系统的角度区分语言也很有趣。一般来说弱类型语言更偏向自然语言一些，语法也很自由活泼些。而现今语言的走势也趋向与弱类型方向.</li>
+<li>实现：我们知道计算机是结构化很强的，堆栈上一个二进制位的错误就会导致溢出，bus等错误。所以语言层面的自由得益于编译器或者解释器的功劳。比如java,c等语言有很强的编译时类型检测机制，强类型的好处驱使编码人员写出很少有语法，语义错误的代码，对IDE的支持也很棒，是大型技术团队的基石。</li>
+<li>弱类型语言让我们获取了自由（不需要类型信息），让程序员少敲了许多键盘。自由是有代价的，编译器或解释器中内含类型推理(infer type); 类型推理是利用归一方法，基于上下文中的变量显式类型，操作符，返回值等信息，利用栈和逐渐替换的过程来推到出类型。 弱类型虽然可以轻松编译通过（或者不需要编译而是解释执行），但都是有类型检查过程的，只是将此过程延迟到运行时了。所以弱类型语言结构化不强，编码时很难确保类型无误，IDE，大型团队开发也不友好。 但是通过一些分析器可以不断的检测语法，语义错误，相当于达到了强类型语言的IDE效果。</li>
+</ul>
+<h3 id="五、编译/解释">五、编译/解释</h3><ul>
+<li>java语言是解释型还是编译型的呢？ 这个很难说，从java source code -&gt; class byte code 的过程式javac编译器的过程。但是byte code 在jvm上执行的过程可能是解释执行也可能是编译执行的。解释型和编译型的内部都遵从编译原理的过程：词法分析-&gt; 语法分析-&gt;语义解析 -&gt; 编译器后端-&gt; native code . 的过程。 但有各自的优点：</li>
+<li>解释器：加载code速度快；解释器需要维护运行时上下文等信息。所以加载必要的代码，片段解释执行。但是对于相同的代码都经过编译过程就很多余，造成时间浪费。</li>
+<li>编译器：执行速度快。而且编译器后端也更容易优化中间代码，因为优化过程式一个结构化过程：往往需要遍历整个中间代码，整体优化代码，提高运行效率。</li>
+<li>runtime：一般来说解释型语言需要在内存维护运行时上下文信息，服务于运行过程中变量的查找，绑定，scope等。 而编译语言基于堆栈模型执行代码，相对来说运行时简单，运行速度也快；</li>
+<li>hotspot-jvm结合了解释和编译的各自优点；最先解释执行过程，如果方法被频繁执行，而且达到热点(hotspot),jvm会启动编译过程，将次代码编译为native-code，然后缓存起来，下一次的调研直接执行即可。 hotspot-jvm执行基于堆栈的指令byte code, 这一点也是基于跨平台byte-code运行的考虑，而牺牲了寄存器指令； （基于android操作系统上的dalvik虚拟机是基于寄存器指令的）；</li>
+<li>所以说，设计一个语言往往是一个权衡过程；获取的“自由”越多，”牺牲“也更大。</li>
+</ul>
+<h3 id="六、_总结:">六、 总结:</h3><ul>
+<li>最初从图灵为了解决莱布尼茨提出的：是否存在一个通用模型来解决一切计算任务这个命题，提出了图灵机。到冯洛伊曼仿真人脑神经元思考过程产生第一台基于存储器，运算器的计算机ENIAC，至今，计算机硬件技术并没有实质性的变化，只是随着摩尔定律的破灭，人们发展了多级高级缓存，多核，多cpu技术来支撑越来越大的计算任务。 在这个过程中，随着人们对逻辑学，符号学,算法的不断研究，用来和计算机交互的语言也越来越抽象和丰富。我们通过这个形象的符号来抽象时间和空间，通过这个形象的符号来解决软件的复杂性问题，通过这个符号来表达指令的计算过程。</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/04/08/paradigm/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/04/07/common_soft/">
+                            常用工具汇总
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-04-07T16:15:02+08:00">
+	
+		    Apr 07, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="background">background</h2><blockquote>
+<p>工欲善其事必先利其器</p>
+</blockquote>
+<ul>
+<li><p>接口测试软件：<br>POSTMAN(chrome扩展程序)、SOAPUI</p>
+</li>
+<li><p>JSON格式化：<br>JsonView 、HiJson、VisualJson(mac)</p>
+</li>
+<li><p>文本编辑器：<br>sublime、editplus 可连ftp、uedit、atom、markdown(macdown)</p>
+</li>
+<li><p>FTP工具<br>SecureCRT、SSH Secure File Transfer Client、SSH Secure Shell Client、FlashFxp、putty</p>
+</li>
+<li><p>远程<br>TeamViewer</p>
+</li>
+<li><p>PHP<br>Zend Studio  phpStorm  apache2</p>
+</li>
+<li><p>Python<br>Pycharm</p>
+</li>
+<li><p>DB<br>pl sql  SQLyogEnterprise(mysql)   mysql workbench</p>
+</li>
+<li><p>中间件<br>tomcat  glassfish weblogic websphere(WAS)  JBoss Jetty/apache IIS</p>
+</li>
+<li><p>版本控制<br>SVN:  Versions  CornnerStone<br>git: github sourcetree gitlab</p>
+</li>
+<li><p>反编译<br>jd gui</p>
+</li>
+<li><p>JAVA android<br>eclipse  IDEA(js)  android studio</p>
+</li>
+<li><p>Lua<br>IDEA for Lua</p>
+</li>
+<li><p>cocos2d-x<br>xcode , visual studio，粒子设计ParticleDesigner  瓦片地图TieldMap    纹理打包TexturePacker</p>
+</li>
+<li><p>攻击工具<br>burpsuite fidder</p>
+</li>
+<li><p>firefox 扩展<br>firefox  json-handle rainbow</p>
+</li>
+<li><p>chrome 扩展<br>postman     红杏</p>
+</li>
+<li><p>mac os<br>Movist      cleanMyMac2      RARExtractor     MacHider     IDEA    Evernote    SQLiteManager AdwareMedic(杀毒)<br>iterm</p>
+</li>
+<li><p>xcode插件<br>VVDocumenter  XToDo KSImageNamed  XAlign</p>
+</li>
+<li><p>原型图<br>xAsure</p>
+</li>
+<li><p>github 搜索技巧<br>language:Objective-C stars:&gt;900</p>
+</li>
+<li><p>markdown editor<br>mou macdown</p>
+</li>
+</ul>
+<p>justwritting   Ghost Blog 、 hexo blog</p>
+<ul>
+<li><p>画思维导图<br>MindNode  freeMind XMind</p>
+</li>
+<li><p>mac 必备<br>oh my zsh,  iTerm, homebrew cask</p>
+</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/04/07/common_soft/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/02/23/multi_compiler/">
                             多编译器的认识
                         </a>
@@ -928,207 +1105,6 @@
                     
                         <p>
                             <a href="/2013/04/12/web_profile/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2012/09/22/db_profile/">
-                            数据库优化之我见
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2012-09-22T23:14:02+08:00">
-	
-		    Sep 22, 2012
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <ol>
-<li><p>调整数据结构的设计。这一部分在开发信息系统之前完成，程序员需要考虑是否使用ORACLE数据库的分区功能，对于经常访问的数据库表是否需要建立索引等。 </p>
-</li>
-<li><p>调整应用程序结构设计。这一部分也是在开发信息系统之前完成，程序员在这一步需要考虑应用程序使用什么样的体系结构，是使用传统的Client/Server两层体系结构，还是使用Browser/Web/Database的三层体系结构。不同的应用程序体系结构要求的数据库资源是不同的。 </p>
-</li>
-<li><p>调整数据库SQL语句。应用程序的执行最终将归结为数据库中的SQL语句执行，因此SQL语句的执行效率最终决定了ORACLE数据库的性能。ORACLE公司推荐使用ORACLE语句优化器（Oracle Optimizer）和行锁管理器（row-level manager）来调整优化SQL语句。 </p>
-</li>
-<li><p>调整服务器内存分配。内存分配是在信息系统运行过程中优化配置的，数据库管理员可以根据数据库运行状况调整数据库系统全局区（SGA区）的数据缓冲区、日志缓冲区和共享池的大小；还可以调整程序全局区（PGA区）的大小。需要注意的是，SGA区不是越大越好，SGA区过大会占用操作系统使用的内存而引起虚拟内存的页面交换，这样反而会降低系统。 </p>
-</li>
-<li><p>调整硬盘I/O，这一步是在信息系统开发之前完成的。数据库管理员可以将组成同一个表空间的数据文件放在不同的硬盘上，做到硬盘之间I/O负载均衡。 </p>
-</li>
-<li><p>调整操作系统参数，例如：运行在UNIX操作系统上的ORACLE数据库，可以调整UNIX数据缓冲池的大小，每个进程所能使用的内存大小等参数。 </p>
-</li>
-</ol>
-<p>实际上，上述数据库优化措施之间是相互联系的。ORACLE数据库性能恶化表现基本上都是用户响应时间比较长，需要用户长时间的等待。但性能恶化的原因却是多种多样的，有时是多个因素共同造成了性能恶化的结果，这就需要数据库管理员有比较全面的计算机知识，能够敏感地察觉到影响数据库性能的主要原因所在。另外，良好的数据库管理工具对于优化数据库性能也是很重要的。 </p>
-<p>ORACLE数据库性能优化工具 </p>
-<blockquote>
-<p>常用的数据库性能优化工具有： </p>
-</blockquote>
-<ol>
-<li><p>ORACLE数据库在线数据字典，ORACLE在线数据字典能够反映出ORACLE动态运行情况，对于调整数据库性能是很有帮助的。 </p>
-</li>
-<li><p>操作系统工具，例如UNIX操作系统的vmstat，iostat等命令可以查看到系统系统级内存和硬盘I/O的使用情况，这些工具对于管理员弄清出系统瓶颈出现在什么地方有时候很有用。 </p>
-</li>
-<li><p>SQL语言跟踪工具（SQL TRACE FACILITY），SQL语言跟踪工具可以记录SQL语句的执行情况，管理员可以使用虚拟表来调整实例，使用SQL语句跟踪文件调整应用程序性能。SQL语言跟踪工具将结果输出成一个操作系统的文件，管理员可以使用TKPROF工具查看这些文件。 </p>
-</li>
-<li><p>ORACLE Enterprise Manager（OEM），这是一个图形的用户管理界面，用户可以使用它方便地进行数据库管理而不必记住复杂的ORACLE数据库管理的命令。 </p>
-</li>
-<li><p>EXPLAIN PLAN——SQL语言优化命令，使用这个命令可以帮助程序员写出高效的SQL语言。 </p>
-</li>
-</ol>
-<blockquote>
-<p>ORACLE数据库的系统性能评估 </p>
-</blockquote>
-<p>信息系统的类型不同，需要关注的数据库参数也是不同的。数据库管理员需要根据自己的信息系统的类型着重考虑不同的数据库参数。 </p>
-<ol>
-<li>在线事务处理信息系统（OLTP），这种类型的信息系统一般需要有大量的Insert、Update操作，典型的系统包括民航机票发售系统、银行储蓄系统等。OLTP系统需要保证数据库的并发性、可靠性和最终用户的速度，这类系统使用的ORACLE数据库需要主要考虑下述参数： </li>
-</ol>
-<p>l     l     数据库回滚段是否足够？ </p>
-<p>l     l     是否需要建立ORACLE数据库索引、聚集、散列？ </p>
-<p>l     l     系统全局区（SGA）大小是否足够？ </p>
-<p>l     l     SQL语句是否高效？ </p>
-<p>2、数据仓库系统（Data Warehousing），这种信息系统的主要任务是从ORACLE的海量数据中进行查询，得到数据之间的某些规律。数据库管理员需要为这种类型的ORACLE数据库着重考虑下述参数： </p>
-<p>l     l     是否采用B*-索引或者bitmap索引？ </p>
-<p>l     l     是否采用并行SQL查询以提高查询效率？ </p>
-<p>l     l     是否采用PL/SQL函数编写存储过程？ </p>
-<p>l     l     有必要的话，需要建立并行数据库提高数据库的查询效率 </p>
-<p>SQL语句的调整原则 </p>
-<p>SQL语言是一种灵活的语言，相同的功能可以使用不同的语句来实现，但是语句的执行效率是很不相同的。程序员可以使用EXPLAIN PLAN语句来比较各种实现方案，并选出最优的实现方案。总得来讲，程序员写SQL语句需要满足考虑如下规则： </p>
-<ol>
-<li>尽量使用索引。试比较下面两条SQL语句： </li>
-</ol>
-<p>语句A：SELECT dname, deptno FROM dept WHERE deptno NOT IN  </p>
-<p>(SELECT deptno FROM emp); </p>
-<p>语句B：SELECT dname, deptno FROM dept WHERE NOT EXISTS </p>
-<p>(SELECT deptno FROM emp WHERE dept.deptno = emp.deptno); </p>
-<p>这两条查询语句实现的结果是相同的，但是执行语句A的时候，ORACLE会对整个emp表进行扫描，没有使用建立在emp表上的deptno索引，执行语句B的时候，由于在子查询中使用了联合查询，ORACLE只是对emp表进行的部分数据扫描，并利用了deptno列的索引，所以语句B的效率要比语句A的效率高一些。 </p>
-<ol>
-<li>选择联合查询的联合次序。考虑下面的例子： </li>
-</ol>
-<p>SELECT stuff FROM taba a, tabb b, tabc c<br>WHERE a.acol between :alow and :ahigh<br>AND b.bcol between :blow and :bhigh<br>AND c.ccol between :clow and :chigh<br>AND a.key1 = b.key1<br>AMD a.key2 = c.key2; </p>
-<p>这个SQL例子中，程序员首先需要选择要查询的主表，因为主表要进行整个表数据的扫描，所以主表应该数据量最小，所以例子中表A的acol列的范围应该比表B和表C相应列的范围小。 </p>
-<ol>
-<li><p>在子查询中慎重使用IN或者NOT IN语句，使用where (NOT) exists的效果要好的多。 </p>
-</li>
-<li><p>慎重使用视图的联合查询，尤其是比较复杂的视图之间的联合查询。一般对视图的查询最好都分解为对数据表的直接查询效果要好一些。 </p>
-</li>
-<li><p>可以在参数文件中设置SHARED_POOL_RESERVED_SIZE参数，这个参数在SGA共享池中保留一个连续的内存空间，连续的内存空间有益于存放大的SQL程序包。 </p>
-</li>
-<li><p>ORACLE公司提供的DBMS_SHARED_POOL程序可以帮助程序员将某些经常使用的存储过程“钉”在SQL区中而不被换出内存，程序员对于经常使用并且占用内存很多的存储过程“钉”到内存中有利于提高最终用户的响应时间。 </p>
-</li>
-</ol>
-<p>CPU参数的调整 </p>
-<p>CPU是服务器的一项重要资源，服务器良好的工作状态是在工作高峰时CPU的使用率在90％以上。如果空闲时间CPU使用率就在90％以上，说明服务器缺乏CPU资源，如果工作高峰时CPU使用率仍然很低，说明服务器CPU资源还比较富余。 </p>
-<p>使用操作相同命令可以看到CPU的使用情况，一般UNIX操作系统的服务器，可以使用sar –u命令查看CPU的使用率，NT操作系统的服务器，可以使用NT的性能管理器来查看CPU的使用率。 </p>
-<p>数据库管理员可以通过查看v$sysstat数据字典中“CPU used by this session”统计项得知ORACLE数据库使用的CPU时间，查看“OS User level CPU time”统计项得知操作系统用户态下的CPU时间，查看“OS System call CPU time”统计项得知操作系统系统态下的CPU时间，操作系统总的CPU时间就是用户态和系统态时间之和，如果ORACLE数据库使用的CPU时间占操作系统总的CPU时间90％以上，说明服务器CPU基本上被ORACLE数据库使用着，这是合理，反之，说明服务器CPU被其它程序占用过多，ORACLE数据库无法得到更多的CPU时间。 </p>
-<p>数据库管理员还可以通过查看v$sesstat数据字典来获得当前连接ORACLE数据库各个会话占用的CPU时间，从而得知什么会话耗用服务器CPU比较多。 </p>
-<p>出现CPU资源不足的情况是很多的：SQL语句的重解析、低效率的SQL语句、锁冲突都会引起CPU资源不足。 </p>
-<ol>
-<li>数据库管理员可以执行下述语句来查看SQL语句的解析情况： </li>
-</ol>
-<p>SELECT * FROM V$SYSSTAT </p>
-<p>WHERE NAME IN </p>
-<p>(‘parse time cpu’, ‘parse time elapsed’, ‘parse count (hard)’); </p>
-<p>这里parse time cpu是系统服务时间，parse time elapsed是响应时间，用户等待时间 </p>
-<p>waite time = parse time elapsed – parse time cpu </p>
-<p>由此可以得到用户SQL语句平均解析等待时间＝waite time / parse count。这个平均等待时间应该接近于0，如果平均解析等待时间过长，数据库管理员可以通过下述语句 </p>
-<p>SELECT SQL_TEXT, PARSE_CALLS, EXECUTIONS FROM V$SQLAREA </p>
-<p>ORDER BY PARSE_CALLS; </p>
-<p>来发现是什么SQL语句解析效率比较低。程序员可以优化这些语句，或者增加ORACLE参数SESSION_CACHED_CURSORS的值。 </p>
-<ol>
-<li>数据库管理员还可以通过下述语句： </li>
-</ol>
-<p>SELECT BUFFER_GETS, EXECUTIONS, SQL_TEXT FROM V$SQLAREA; </p>
-<p>查看低效率的SQL语句，优化这些语句也有助于提高CPU的利用率。 </p>
-<ol>
-<li>数据库管理员可以通过v$system_event数据字典中的“latch free”统计项查看ORACLE数据库的冲突情况，如果没有冲突的话，latch free查询出来没有结果。如果冲突太大的话，数据库管理员可以降低spin_count参数值，来消除高的CPU使用率。 </li>
-</ol>
-<p>内存参数的调整 </p>
-<p>内存参数的调整主要是指ORACLE数据库的系统全局区（SGA）的调整。SGA主要由三部分构成：共享池、数据缓冲区、日志缓冲区。 </p>
-<ol>
-<li>共享池由两部分构成：共享SQL区和数据字典缓冲区，共享SQL区是存放用户SQL命令的区域，数据字典缓冲区存放数据库运行的动态信息。数据库管理员通过执行下述语句： </li>
-</ol>
-<p>select (sum(pins - reloads)) / sum(pins) “Lib Cache”  from v$librarycache; </p>
-<p>来查看共享SQL区的使用率。这个使用率应该在90％以上，否则需要增加共享池的大小。数据库管理员还可以执行下述语句： </p>
-<p>select (sum(gets - getmisses - usage - fixed)) / sum(gets) “Row Cache” from v$rowcache; </p>
-<p>查看数据字典缓冲区的使用率，这个使用率也应该在90％以上，否则需要增加共享池的大小。 </p>
-<ol>
-<li>数据缓冲区。数据库管理员可以通过下述语句： </li>
-</ol>
-<p>SELECT name, value  FROM v$sysstat  WHERE name IN (‘db block gets’, ‘consistent gets’,’physical reads’); </p>
-<p>来查看数据库数据缓冲区的使用情况。查询出来的结果可以计算出来数据缓冲区的使用命中率＝1 - ( physical reads / (db block gets + consistent gets) )。 </p>
-<p>这个命中率应该在90％以上，否则需要增加数据缓冲区的大小。 </p>
-<ol>
-<li>日志缓冲区。数据库管理员可以通过执行下述语句： </li>
-</ol>
-<p>select name,value from v$sysstat where name in (‘redo entries’,’redo log space requests’);查看日志缓冲区的使用情况。查询出的结果可以计算出日志缓冲区的申请失败率： </p>
-<p>申请失败率＝requests/entries，申请失败率应该接近于0，否则说明日志缓冲区开设太小，需要增加ORACLE数据库的日志缓冲区。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2012/09/22/db_profile/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2010/04/22/weixin/">
-                            我的微信公众号
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2010-04-22T18:15:02+08:00">
-	
-		    Apr 22, 2010
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="如果你对本人感兴趣，欢迎扫描以下微信二维码，还有意想不到的惊喜哦，幽灵狗蛋等着你~">如果你对本人感兴趣，欢迎扫描以下微信二维码，还有意想不到的惊喜哦，幽灵狗蛋等着你~</h1><p><img src="http://i2.piimg.com/e085077ee8fc6dd2.jpg" alt=""></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2010/04/22/weixin/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>
