@@ -6,22 +6,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>Archives: 2015 - yolynn</title>
+    <title>C3P0的两种用法 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
         <link rel="icon" href="http://yolynn.com/assets/images/head.png">
     
     
-    <meta name="description" content="云在青天水在瓶 - 幽灵鸟">
+    <meta name="description" content="background
+这篇文章摘抄自我的新浪博客，详情链接 因为它一度为我的新浪博客积累超过7万的人气，新浪博客已经远不如曾经，所以我想把这篇文章保留下来，以下是原文
+
+方法一：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455package">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="yolynn">
-<meta property="og:url" content="http://yolynn.com/archives/2015/index.html">
+<meta property="og:title" content="C3P0的两种用法">
+<meta property="og:url" content="http://yolynn.com/2015/06/17/c3p0/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="云在青天水在瓶 - 幽灵鸟">
+<meta property="og:description" content="background
+这篇文章摘抄自我的新浪博客，详情链接 因为它一度为我的新浪博客积累超过7万的人气，新浪博客已经远不如曾经，所以我想把这篇文章保留下来，以下是原文
+
+方法一：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455package">
+<meta property="og:updated_time" content="2016-10-19T07:54:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yolynn">
-<meta name="twitter:description" content="云在青天水在瓶 - 幽灵鸟">
+<meta name="twitter:title" content="C3P0的两种用法">
+<meta name="twitter:description" content="background
+这篇文章摘抄自我的新浪博客，详情链接 因为它一度为我的新浪博客积累超过7万的人气，新浪博客已经远不如曾经，所以我想把这篇文章保留下来，以下是原文
+
+方法一：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455package">
     
     
         
@@ -47,7 +57,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">yolynn</a>
@@ -71,7 +81,7 @@
         
     
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="4">
     
         <div class="sidebar-profile">
             <a href="/#about">
@@ -223,123 +233,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    
-
-<section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/09/22/mvvm_profile/">
-                            从Web看Native的MVVM
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2015-09-22T23:14:02+08:00">
-	
-		    Sep 22, 2015
-    	
-    </time>
+        <div class="post-header main-content-wrap text-left">
     
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="背景">背景</h2><blockquote>
-<p>  随着前端技术的在开发工作中的角色越来越重要，需求量也越来越大，那么高效率的框架也应运而生，过去script方式已进化为MVC，现在我们是否应该顺应潮流推动MVC进化到MVVM呢？（MVP）</p>
-</blockquote>
-<h2 id="介绍">介绍</h2><ol>
-<li>web与native的组成对比<ul>
-<li>web : html + css + js</li>
-<li>android : 四大组件(activity、service、broadcase receiver、content provider)和五大布局(LinearLayout、FrameLayout、RelativeLayout、AbsoluteLayout、TableLayout) 还有 java (data binding library)</li>
-<li>iOS : xib/storyboard + oc/swift   </li>
-<li>react(react.js、react canvas、react native)  </li>
-</ul>
-</li>
-<li>web前端常用的MVVM主流框架<ul>
-<li>handlebars.js、knockout.js、ember.js、avalon.js、angular.js </li>
-<li>backbone.js?, react.js?</li>
-</ul>
-</li>
-<li>angularJS的核心功能<ul>
-<li>自动化双向数据绑定、模块化/组件化、依赖注入、语义化标签等</li>
-</ul>
-</li>
-<li>angularJS的原理<ul>
-<li>首先，浏览器会一直处于监听状态，一旦有事件被触发，就会被加到一个event queue中，event queue中的事件会一个一个的执行。</li>
-<li>event queue中的事件如果是被$apply()包起来的话，就会进入到AngularJS的context中，假设的fn()是我们希望在AngularJS的context中执行的函数。</li>
-<li>AngularJS将执行fn()函数，通常情况下，这个函数会改变应用的某些状态。</li>
-<li>然后AngularJS会进入到由两个小循环组成的digest循环中，一个循环是用来处理evalAsync队列（用来schedule一些需要在渲染视图之前处理的操作，通常通过setTimeout(0)实现，速度会比较慢，可能会出现视图抖动的问题）的，一个循环是处理watch列表（是一些表达式的集合，一旦有改变发生，那么watch函数就会被调用）的。digest循环会一直迭代知道evalAsync队列为空并且$watch列表也为空的时候，即model不再有任何变化。</li>
-<li>一旦AngularJS的$digest循环结束，整个执行就会离开AngularJS和Javascript的context，紧接着浏览器就会把数据改变后的视图重新渲染出来。</li>
-</ul>
-</li>
-<li>iOS常用的MVVM框架<ul>
-<li>KVO  reactiveCocoa</li>
-</ul>
-</li>
-<li>reactiveCocoa的核心功能<ul>
-<li>自动化双向数据绑定、模块化/组件化(?)、依赖注入(无)、语义化标签(?)等</li>
-<li>像KVO,但它用blocks代替了重写-observeValueForKeyPath:ofObject:change:context:</li>
-<li>提供了一个单一的，统一的方法去处理异步的行为,包括delegate方法,blocks回调,target-action机制,notifications和KVO.</li>
-</ul>
-</li>
-<li>reactiveCocoa的原理<ul>
-<li>RACSignal发送事件流给它的subscriber。目前总共有三种类型的事件：next、error、completed。</li>
-<li>RACSignal有很多方法可以来订阅不同的事件类型。每个方法都需要至少一个block，当事件发生时就会执行block中的逻辑。</li>
-<li>使用category来为很多基本UIKit控件添加signal。这样你就能给控件添加订阅了，text field的rac_textSignal就是这么来的。</li>
-</ul>
-</li>
-<li>angularJS与reactiveCocoa的对比<ul>
-<li>核心功能对比</li>
-<li>实现原理对比</li>
-<li>实际运用对比</li>
-</ul>
-</li>
-</ol>
-<h2 id="总结">总结</h2><blockquote>
-<p>MVVM是未来</p>
-</blockquote>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/09/22/mvvm_profile/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
+        <h1 class="post-title" itemprop="headline">
+            C3P0的两种用法
+        </h1>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/06/17/c3p0/">
-                            C3P0的两种用法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+    <div class="post-meta">
     <time itemprop="datePublished" datetime="2015-06-17T18:15:02+08:00">
 	
 		    Jun 17, 2015
@@ -348,10 +256,11 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h6 id="background">background</h6><blockquote>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h6 id="background">background</h6><blockquote>
 <p>这篇文章摘抄自我的新浪博客，<a href="http://blog.sina.com.cn/s/blog_6c5f4d3c01012gtq.html" target="_blank" rel="external">详情链接</a> 因为它一度为我的新浪博客积累超过7万的人气，新浪博客已经远不如曾经，所以我想把这篇文章保留下来，以下是原文</p>
 </blockquote>
 <h6 id="方法一：">方法一：</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">package   C3P0; </span><br><span class="line">import   java.sql.Connection; </span><br><span class="line">import   java.sql.SQLException; </span><br><span class="line">import   java.beans.PropertyVetoException; </span><br><span class="line">import   com.mchange.v2.c3p0.ComboPooledDataSource; </span><br><span class="line">public   class   DBPool&#123;       </span><br><span class="line">   private   static   DBPool   dbPool;       </span><br><span class="line">   private   ComboPooledDataSource   dataSource;     </span><br><span class="line">	</span><br><span class="line">   static   &#123;       </span><br><span class="line">           dbPool=new   DBPool();       </span><br><span class="line">   &#125;       </span><br><span class="line">   </span><br><span class="line">   public   DBPool()&#123;       </span><br><span class="line">           try   &#123;       </span><br><span class="line">                   dataSource=new   ComboPooledDataSource();       </span><br><span class="line">                   dataSource.setUser( "id ");       </span><br><span class="line">                   dataSource.setPassword( "pw ");       </span><br><span class="line">                   dataSource.setJdbcUrl( "jdbc:mysql://127.0.0.1:3306/test? </span><br><span class="line">	</span><br><span class="line">autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=GB2312 "); </span><br><span class="line">                   dataSource.setDriverClass( "com.mysql.jdbc.Driver "); </span><br><span class="line">                   dataSource.setInitialPoolSize(2); </span><br><span class="line">                   dataSource.setMinPoolSize(1); </span><br><span class="line">                   dataSource.setMaxPoolSize(10); </span><br><span class="line">                   dataSource.setMaxStatements(50); </span><br><span class="line">                   dataSource.setMaxIdleTime(60);       </span><br><span class="line">           &#125;   catch   (PropertyVetoException   e)   &#123;       </span><br><span class="line">               throw   new   RuntimeException(e);       </span><br><span class="line">           &#125;       </span><br><span class="line">   &#125;       </span><br><span class="line">	</span><br><span class="line">   public   final   static   DBPool   getInstance()&#123;       </span><br><span class="line">           return   dbPool;       </span><br><span class="line">   &#125;       </span><br><span class="line">	</span><br><span class="line">   public   final   Connection   getConnection()   &#123;       </span><br><span class="line">           try   &#123;       </span><br><span class="line">                   return   dataSource.getConnection();       </span><br><span class="line">           &#125;   catch   (SQLException   e)   &#123;       </span><br><span class="line">                   throw   new   RuntimeException( "无法从数据源获取连接 ",e);       </span><br><span class="line">           &#125;       </span><br><span class="line">   &#125;     </span><br><span class="line">   </span><br><span class="line">   public   static   void   main(String[]   args)   throws   SQLException   &#123; </span><br><span class="line">Connection   con   =   null; </span><br><span class="line">try   &#123; </span><br><span class="line">con   =   DBPool.getInstance().getConnection(); </span><br><span class="line">&#125;   catch   (Exception   e)&#123; </span><br><span class="line">&#125;   finally   &#123; </span><br><span class="line">if   (con   !=   null) </span><br><span class="line">con.close(); </span><br><span class="line">&#125; </span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -364,31 +273,70 @@ conn=ConnectionManager.getInstance().getConnection()<span class="comment">;</spa
 conn.close()<span class="comment">;</span>
 c3p0 的某些参数的配置以及意义见另外一篇文章http://kangzye.blog.163.com/blog/static/<span class="number">3681922320104</span><span class="number">42162576</span>/
 </code></pre>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/06/17/c3p0/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/22/mvvm_profile/"  data-tooltip="从Web看Native的MVVM">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/04/12/web_profile/" data-tooltip="浅析Web程序性能优化">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
-        
-        <li class="pagination-number">page 1 of 1</li>
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -399,6 +347,83 @@ c3p0 的某些参数的配置以及意义见另外一篇文章http://kangzye.blo
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/22/mvvm_profile/"  data-tooltip="从Web看Native的MVVM">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/04/12/web_profile/" data-tooltip="浅析Web程序性能优化">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/06/17/c3p0/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
         
@@ -448,6 +473,8 @@ c3p0 的某些参数的配置以及意义见另外一篇文章http://kangzye.blo
 <script src="/assets/js/jquery.fancybox-thumbs.js" type="text/javascript"></script>
 <script src="/assets/js/tranquilpeak.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
+
+    
 
 
 
