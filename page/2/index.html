@@ -238,6 +238,82 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/02/23/multi_compiler/">
+                            多编译器的认识
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-02-23T16:15:02+08:00">
+	
+		    Feb 23, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/基础/">基础</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="background">background</h2><blockquote>
+<p>现代世界，编程语言层出不穷，每多一门语言的出现，可能就会多一个编译器的出现，那么如此多的编译器，我需要一个一个去弄清它们的实现吗？</p>
+</blockquote>
+<p>答案是，显然不用，我将列出一些语言使用的编译器进行剖析，先来看看编译原理顺序：</p>
+<blockquote>
+<ol>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>生成中间代码</li>
+<li>优化</li>
+<li>汇编、链接</li>
+<li>生成目标代码</li>
+</ol>
+<p>常见编译器</p>
+<blockquote>
+<ul>
+<li>JVM: java编译器只需面向JVM，生成JVM能理解的代码或字节码文件。Java源文件经编译器，编译成字节码程序，通过JVM将每一条指令翻译成不同平台机器码，通过特定平台运行。</li>
+<li>LLVM(clang):LLVM是构架编译器(compiler)的框架系统，以C++编写而成，用于优化以任意程序语言编写的程序的编译时间(compile-time)、链接时间(link-time)、运行时间(run-time)以及空闲时间(idle-time)，对开发者保持开放，并兼容已有脚本;Clang 对源程序进行词法分析和语义分析，并将分析结果转换为 Abstract Syntax Tree ( 抽象语法树 ) ，最后使用 LLVM 作为后端代码的生成器。</li>
+<li>GNU(gcc):通常所说的GCC是GUN Compiler Collection的简称，除了编译程序之外，它还含其他相关工具，所以它能把易于人类使用的高级语言编写的源代码构建成计算机能够直接执行的二进制代码。</li>
+<li>V8引擎:采用C++编写,V8在执行之前将JavaScript编译成了机器码，而非位元组码或是直译它，以此提升效能。更进一步，使用了如内联缓存（inline caching）等方法来提高性能。V8性能的3个关键方面：<ul>
+<li>快速属性访问</li>
+<li>动态生成机器码 </li>
+<li>高效的垃圾回收</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>Etc.</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/02/23/multi_compiler/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/02/22/multi_lang/">
                             多编程语言学习
                         </a>
@@ -1062,56 +1138,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2010/01/01/hello_world/">
-                            Hello World
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2010-01-01T00:00:00+08:00">
-	
-		    Jan 01, 2010
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2010/01/01/hello_world/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1125,7 +1151,14 @@
         </li>
         
         
-        <li class="pagination-number">page 2 of 2</li>
+        <li class="pagination-next">
+            <a class="btn btn--default btn--small" href="/page/3/">
+                    <span>OLDER POSTS</span>
+                <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+        </li>
+        
+        <li class="pagination-number">page 2 of 3</li>
     </ul>
 </div>
 
