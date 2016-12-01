@@ -341,7 +341,7 @@
 <p>思考下这与传统的js和OC互调有什么原理上的区别？（比如Cordova、UrlProtocal、UIWebView、WKWebview等）    </p>
 <h2 id="Vue">Vue</h2><p>前端的两大杀器FB的React和google的Angular，既然他们不是作为正面对手而出现，那么有没有一款吸收了两者精华的产品出现呢？答案是肯定的，其实最擅长取其精华，去其糟粕的事情非中国人莫属，Vue框架就是中国人开发的并且在前端界有着要三分天下的雄心，目前Vue已经出到2.0：</p>
 <blockquote>
-<p>Vue.js的目标是通过尽可能简单的API实现响应的数据绑定和组合的视图组件。</p>
+<p>Vue.js的目标是通过尽可能简单的API实现<strong>响应的数据绑定</strong>和<strong>组合的视图组件</strong>。</p>
 </blockquote>
 <p><img src="http://upload-images.jianshu.io/upload_images/854231-22ac84c532a7be20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>Vue通过标签template、script、style标签区分html js css脚本，所有的内容归并到.vue文件，这样一个功能或者模块就是一个.vue组件，对于后期的组件重用和维护也变得非常敏捷</p>
@@ -377,16 +377,17 @@
 <li><p>微信的开发生态圈</p>
 <ul>
 <li>框架：组件开发形式包括视图文件WXML和WXSS，以及基于javascript的逻辑层框架</li>
-<li><p>响应的数据绑定：当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新</p>
+<li>响应的数据绑定：当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新</li>
+<li>页面管理：框架 管理了整个小程序的页面路由，可以做到页面间的无缝切换，并给以页面完整的生命周期</li>
+<li>基础组件：框架 提供了一套基础的组件，这些组件自带微信风格的样式</li>
+<li>丰富的 API：框架 提供丰富的微信原生 API，可以方便的调起微信提供的能力，如获取用户信息，本地存储，支付功能等</li>
+<li><p>eg:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- This is our View --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">view</span>&gt;</span> Hello &#123;&#123;name&#125;&#125;! <span class="tag">&lt;/<span class="title">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">bindtap</span>=<span class="value">"changeName"</span>&gt;</span> Click me! <span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line">// This is our App Service.</span><br><span class="line">// This is our data.</span><br><span class="line">var helloData = &#123;</span><br><span class="line"> 	name: 'WeChat'</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Register a Page.</span><br><span class="line">Page(&#123;</span><br><span class="line">  data: helloData,</span><br><span class="line">  changeName: function(e) &#123;</span><br><span class="line">    // sent data change to view</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      name: 'MINA'</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ol>
-<pre><code><span class="bullet">* </span>页面管理：框架 管理了整个小程序的页面路由，可以做到页面间的无缝切换，并给以页面完整的生命周期
-<span class="bullet">* </span>基础组件：框架 提供了一套基础的组件，这些组件自带微信风格的样式
-<span class="bullet">* </span>丰富的 API：框架 提供丰富的微信原生 API，可以方便的调起微信提供的能力，如获取用户信息，本地存储，支付功能等
-</code></pre><h6 id="小结-5">小结</h6><p>相比于Native APP，微信小程序的开发成本有所降低，但也有限，当然微信小程序提供的功能也有限，通过小程序可能会帮你留住一些轻度用户，比如订机票酒店等这之类</p>
+<h6 id="小结-5">小结</h6><p>相比于Native APP，微信小程序的开发成本有所降低，但也有限，当然微信小程序提供的功能也有限，通过小程序可能会帮你留住一些轻度用户，比如订机票酒店等这之类</p>
 <h2 id="总结">总结</h2><p>前端界千变万化，要如何翻越这一座又一座的大山？打好基础，打持久战，分解小目标，比如javascript的基础我把它分为：原型和原型链，上下文环境和作用域，单线程和异步三个小山头，在征服这些小山头后，想要征服大山就很容易了。</p>
 
                     
