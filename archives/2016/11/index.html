@@ -271,13 +271,13 @@
 <li><p>使用ES6 extends语法糖</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mycomponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">   render() &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">&#123;this.props.className&#125;</span>/&gt;</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
+<li><p>React 0.14引入的语法，使用属性作为参数的函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myComponent = props =&gt; (</span><br><span class="line">   <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">&#123;props.className&#125;</span>/&gt;</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 </ol>
-<pre><code>* React 0.14引入的语法，使用属性作为参数的函数 
-
-<span class="comment"><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myComponent = props =&gt; (</span><br><span class="line">   <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">&#123;props.className&#125;</span>/&gt;</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure></span>
-</code></pre><ol>
+<ol>
 <li>写无状态组件，很多项目由于状态多变得混乱而难于管理</li>
 <li>使用Redux.js，React每个组件都可以拥有自己的状态管理，但是上面说了无状态的组件更容易维护，那么这时候最好是借助第三方状态管理库Redux.js，尤其是在全局状态管理中redux的优势会让你的项目整个流程非常清晰</li>
 <li>使用JSX、ES6、Babel、Webpack、npm</li>
@@ -346,7 +346,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/854231-22ac84c532a7be20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>Vue通过标签template、script、style标签区分html js css脚本，所有的内容归并到.vue文件，这样一个功能或者模块就是一个.vue组件，对于后期的组件重用和维护也变得非常敏捷</p>
 <p>可能你会担心浏览器是如何解析.vue文件，事实上当你开发了.vue的组建后还需要通过webpack打包工具在打包时拆分为浏览器需要的脚本即可，当然也很简单，对于webpack还不够了解的同学可以:<a href="http://www.jianshu.com/p/4cc1d29309b6" target="_blank" rel="external">点这里</a></p>
-<p>######小结<br>Vue作者称其性能是好过React的，而且又与React如此的相似，同样在数据绑定上吸收了Angular的特点，并且解决了很多Angular的痛点，还提供了如此简单的API，你应该没有理由拒绝它。</p>
+<h6 id="小结-3">小结</h6><p>Vue作者称其性能是好过React的，而且又与React如此的相似，同样在数据绑定上吸收了Angular的特点，并且解决了很多Angular的痛点，还提供了如此简单的API，你应该没有理由拒绝它。</p>
 <h2 id="Weex">Weex</h2><p>听到不少用ReactNative开发的各种抱怨：“环境搭了一整天，真机调试又花去了大半天，一个错误定位了两个钟” 等等，可能真的在你尝试了两天RN开发后选择了放弃或者硬着头皮解决各种和代码无关的痛点，Weex推出来后，我想你会对RN这种模式的开发更有兴趣，它确实很好的解决了这些痛点，同样无愧于一款站在巨人肩膀上的好产品</p>
 <ol>
 <li><p>工作流<br> <img src="http://gtms02.alicdn.com/tps/i2/TB1ootBMpXXXXXrXXXXwi60UVXX-596-397.png" alt=""></p>
@@ -369,8 +369,7 @@
 </ul>
 </li>
 </ol>
-<p>######小结</p>
-<p>Weex让我们对于类RN模式的开发更加容易接受，之前有人在Weex编程大赛中一天时间做了一个APP（<a href="https://github.com/dodola/WeexOne" target="_blank" rel="external">One一个</a>），这让我很惶恐，Winter is coming! 你备好你的粮草了吗？</p>
+<h6 id="小结-4">小结</h6><p>Weex让我们对于类RN模式的开发更加容易接受，之前有人在Weex编程大赛中一天时间做了一个APP（<a href="https://github.com/dodola/WeexOne" target="_blank" rel="external">One一个</a>），这让我很惶恐，Winter is coming! 你备好你的粮草了吗？</p>
 <h2 id="微信小程序">微信小程序</h2><p>与其它框架有所不同的是，因为微信小程序并非开源的，因此有些原理上或工作流上的描述有部分带猜测的成分，如果有错误望指正</p>
 <ol>
 <li><p>工作流<br> 微信小程序应该是主动绕过了浏览器而是直接调用浏览器内核，本质上是运行在浏览器模式中的，而微信作为它的承载，可以管理它的生命周期，对于多个小程序的生命周期应该是利用了栈来管理。</p>
@@ -387,7 +386,7 @@
 <pre><code><span class="bullet">* </span>页面管理：框架 管理了整个小程序的页面路由，可以做到页面间的无缝切换，并给以页面完整的生命周期
 <span class="bullet">* </span>基础组件：框架 提供了一套基础的组件，这些组件自带微信风格的样式
 <span class="bullet">* </span>丰富的 API：框架 提供丰富的微信原生 API，可以方便的调起微信提供的能力，如获取用户信息，本地存储，支付功能等
-</code></pre><p>######小结<br>相比于Native APP，微信小程序的开发成本有所降低，但也有限，当然微信小程序提供的功能也有限，通过小程序可能会帮你留住一些轻度用户，比如订机票酒店等这之类</p>
+</code></pre><h6 id="小结-5">小结</h6><p>相比于Native APP，微信小程序的开发成本有所降低，但也有限，当然微信小程序提供的功能也有限，通过小程序可能会帮你留住一些轻度用户，比如订机票酒店等这之类</p>
 <h2 id="总结">总结</h2><p>前端界千变万化，要如何翻越这一座又一座的大山？打好基础，打持久战，分解小目标，比如javascript的基础我把它分为：原型和原型链，上下文环境和作用域，单线程和异步三个小山头，在征服这些小山头后，想要征服大山就很容易了。</p>
 
                     
