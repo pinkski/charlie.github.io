@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="yolynn">
+    <title>Runtime基础到进阶 - yolynn</title>
+    <meta name="author" content="yolynn">
+    
+    
+        <link rel="icon" href="http://yolynn.com/assets/images/head.png">
+    
+    
+    <meta name="description" content="学习runtime需要会什么？学习runtime的前提最好要有C语言的基础，通过阅读runtime中一些个重要以objc class object_开头的struct结构体，帮助理解runtime里的各个struct是如何关联的、strunct和method ivar是如何关联的，从而上升到Objective-C层，完全理解Object之间的关联关系，Selector的调用原理等。 
+runtim">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Runtime基础到进阶">
+<meta property="og:url" content="http://yolynn.com/2016/11/02/runtime/index.html">
+<meta property="og:site_name" content="yolynn">
+<meta property="og:description" content="学习runtime需要会什么？学习runtime的前提最好要有C语言的基础，通过阅读runtime中一些个重要以objc class object_开头的struct结构体，帮助理解runtime里的各个struct是如何关联的、strunct和method ivar是如何关联的，从而上升到Objective-C层，完全理解Object之间的关联关系，Selector的调用原理等。 
+runtim">
+<meta property="og:image" content="https://www.processon.com/chart_image/5847cfcae4b0d594ec4aaefd.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/5847d87ae4b005d48b553c53.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/5847db5ce4b0d594ec4c0e73.png">
+<meta property="og:updated_time" content="2016-12-08T07:43:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Runtime基础到进阶">
+<meta name="twitter:description" content="学习runtime需要会什么？学习runtime的前提最好要有C语言的基础，通过阅读runtime中一些个重要以objc class object_开头的struct结构体，帮助理解runtime里的各个struct是如何关联的、strunct和method ivar是如何关联的，从而上升到Objective-C层，完全理解Object之间的关联关系，Selector的调用原理等。 
+runtim">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://yolynn.com/assets/images/head.png"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox-thumbs.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/tranquilpeak.css" type="text/css">
+    <!--STYLES END-->
+    
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">yolynn</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon "
+                href="/#about">
+        
+        
+            <i class="fa fa-lg fa-head.png"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/head.png"/>
+            </a>
+            <span class="sidebar-profile-name">yolynn</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/yolynn-bird" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="http://weibo.com/zxl20zxl" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-weibo"></i>
+                    <span class="sidebar-button-desc">global.weibo</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://stackoverflow.com/users/2662962/yolynn" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+                    <span class="sidebar-button-desc">Stack Overflow</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/zxl20zxl" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://www.instagram.com/yolynn.zxl" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-instagram"></i>
+                    <span class="sidebar-button-desc">global.instagram</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://dribbble.com/yolynn" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-dribbble"></i>
+                    <span class="sidebar-button-desc">global.dribbble</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="http://yolynn.com/2010/04/22/weixin/"
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-weixin"></i>
+                    <span class="sidebar-button-desc">global.weixin</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://www.zhihu.com/people/yolynn" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-flickr"></i>
+                    <span class="sidebar-button-desc">global.zhihu</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto://zxl20zxl@gmail.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Runtime基础到进阶
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-11-02T18:15:02+08:00">
+	
+		    Nov 02, 2016
+    	
+    </time>
+    
+</div>
+
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h2 id="学习runtime需要会什么？">学习runtime需要会什么？</h2><p>学习runtime的前提最好要有C语言的基础，通过阅读runtime中一些个重要以objc<em> class</em> object_开头的struct结构体，帮助理解runtime里的各个struct是如何关联的、strunct和method ivar是如何关联的，从而上升到Objective-C层，完全理解Object之间的关联关系，Selector的调用原理等。 </p>
+<h2 id="runtime是什么?">runtime是什么?</h2><h4 id="原理">原理</h4><p><img src="https://www.processon.com/chart_image/5847cfcae4b0d594ec4aaefd.png" alt=""></p>
+<p>从上图可以看出instance -&gt; class -&gt; superclass -&gt; rootclass之间的关系，首先抛开instance不谈，他们遵循了由下而上的继承关系，而class的实例对象instance则通过isa指针指向了objc_class，那么可想而知，instance在做属性获取或者消息转发时都会通过isa指针查找objc_class中的属性和方法</p>
+<p>再来看一张图:<br><img src="https://www.processon.com/chart_image/5847d87ae4b005d48b553c53.png" alt=""></p>
+<p>上图更加清晰的反映了各种instance和class、metaclass之间的关系，其实记住一条线性关系：所有的instance都是通过isa指向了objc_class结构,objc_class则会指向自己的meta_class，而meta_class会最终指向root meta_class, root meta_class会指向自己, root meta_class继承于root class, 而root class的isa指向nil。</p>
+<p>额外要补充内存存储问题，在instance中声明的<em>-函数</em>和<em>普通成员</em>会存储在isa指向的objc_class中而<em>+函数</em>和<em>static成员</em>则会存储到object_class指向的meta_class中。</p>
+<h4 id="消息转发机制">消息转发机制</h4><p>消息传递，objc_msgSend()是重点函数，我们回过去看第一张图的箭头，其实runtime的消息传递也是走的箭头路径，一层一层传递</p>
+<p>消息转发，发送消息给一个不处理该消息的对象时会发生错误，而在宣布错误之前，runtime为接收消息的对象为消息处理提供了二次机会。当某个对象不能处理消息时，可以通过重写-forwardInvocation:方法提供一个默认的消息响应避免出错，看本文的第二张图，在对象无法找到消息对应的方法实现时，会按照图中的继承关系一层层往上找。</p>
+<p><img src="https://www.processon.com/chart_image/5847db5ce4b0d594ec4c0e73.png" alt=""></p>
+<p>上图是一个消息的处理工作流，在消息发给对象后，消息得不到对象处理，则会启动<strong>消息转发</strong>机制，大概有几个阶段：</p>
+<ol>
+<li>询问reciever能否动态的添加方法，以处理当前消息，也叫<em>动态方法解析</em>，runtime会通过resolveInstanceMethod:判断能否处理</li>
+<li>询问之后，如果还是无法响应则询问reciever是否有其它reciever能够处理这条消息</li>
+<li>若无备用reciever返回，runtime会把全部细节封装到NSInvocation中，再给reciever一次机会解决这条消息</li>
+</ol>
+<h2 id="为什么用runtime?">为什么用runtime?</h2><p>搞清楚了runtime的原理和消息转发机制，在为什么要用runtime的问题上，也可以通过围绕原理和消息转发分析：</p>
+<blockquote>
+<p>Objective-C的面向对象、消息派发、动态绑定和内存管理都与runtime息息相关</p>
+</blockquote>
+<h2 id="runtime的使用方式">runtime的使用方式</h2><p>Objective-C中有三种与runtime系统交互级别，由浅到深：</p>
+<ol>
+<li>通过OC的源代码，比如调用某个函数</li>
+<li>通过Foundation库中定义的NSObject提供的方法，比如performSelector:</li>
+<li>通过引进runtime头文件，直接使用runtime方法</li>
+</ol>
+<h2 id="runtime的实际应用">runtime的实际应用</h2><p>runtime的实际应用有很多：</p>
+<ol>
+<li>给category添加属性</li>
+<li>Method Sizzling hook 系统函数，在系统函数之前做一些特殊处理</li>
+<li>dic 转 model</li>
+<li>生命周期log 埋点</li>
+<li>jspatch aspect 等第三方框架</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/11/RN&Weex/"  data-tooltip="如何一网打尽React、Redux、ReactNative、Vue、Weex、微信小程序？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/17/my_fullstack/" data-tooltip="我所理解的全栈工程师">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 yolynn. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/11/RN&Weex/"  data-tooltip="如何一网打尽React、Redux、ReactNative、Vue、Weex、微信小程序？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/17/my_fullstack/" data-tooltip="我所理解的全栈工程师">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/11/02/runtime/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/head.png"/>
+        
+            <h4 id="about-card-name">yolynn</h4>
+        
+            <h5 id="about-card-bio"><p>云在青天水在瓶 - 幽灵鸟</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>vip.com</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                China
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/jquery.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox-thumbs.js" type="text/javascript"></script>
+<script src="/assets/js/tranquilpeak.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
