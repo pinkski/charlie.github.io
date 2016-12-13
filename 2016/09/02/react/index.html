@@ -6,35 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>Web 应用的构建过程 - yolynn</title>
+    <title>React基础到进阶 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
         <link rel="icon" href="http://yolynn.com/assets/images/head.png">
     
     
-    <meta name="description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
-
-Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
-
-Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
+    <meta name="description" content="学习React需要会什么？React的功能很单一，主要负责渲染的功能，跟angular还不一样，ng大而全，React专一，因此在React开发中还需要结合其它工具，比如Redux管理数据，React-router管理路由，按需加载immutable.js，ES6, Webpack等，初次之外最基本的的条件是要学习JSX语法，其实对于有JS基础的同学也难度不大。
+React是什么工作流JS操作DO">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Web 应用的构建过程">
-<meta property="og:url" content="http://yolynn.com/2016/08/17/web_start/index.html">
+<meta property="og:title" content="React基础到进阶">
+<meta property="og:url" content="http://yolynn.com/2016/09/02/react/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
-
-Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
-
-Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
-<meta property="og:updated_time" content="2016-10-17T10:16:00.000Z">
+<meta property="og:description" content="学习React需要会什么？React的功能很单一，主要负责渲染的功能，跟angular还不一样，ng大而全，React专一，因此在React开发中还需要结合其它工具，比如Redux管理数据，React-router管理路由，按需加载immutable.js，ES6, Webpack等，初次之外最基本的的条件是要学习JSX语法，其实对于有JS基础的同学也难度不大。
+React是什么工作流JS操作DO">
+<meta property="og:image" content="https://www.processon.com/chart_image/584fa0eee4b05021858eac2c.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/584fa55fe4b05021858f5add.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/584fa95ce4b0160bc4dde483.png">
+<meta property="og:updated_time" content="2016-12-13T08:04:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web 应用的构建过程">
-<meta name="twitter:description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
-
-Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
-
-Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
+<meta name="twitter:title" content="React基础到进阶">
+<meta name="twitter:description" content="学习React需要会什么？React的功能很单一，主要负责渲染的功能，跟angular还不一样，ng大而全，React专一，因此在React开发中还需要结合其它工具，比如Redux管理数据，React-router管理路由，按需加载immutable.js，ES6, Webpack等，初次之外最基本的的条件是要学习JSX语法，其实对于有JS基础的同学也难度不大。
+React是什么工作流JS操作DO">
     
     
         
@@ -247,13 +241,13 @@ Check Style。通常我们会在我们的项目里定义一些代码规范，如
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Web 应用的构建过程
+            React基础到进阶
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-08-17T18:15:02+08:00">
+    <time itemprop="datePublished" datetime="2016-09-02T18:15:02+08:00">
 	
-		    Aug 17, 2016
+		    Sep 02, 2016
     	
     </time>
     
@@ -263,107 +257,33 @@ Check Style。通常我们会在我们的项目里定义一些代码规范，如
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h6 id="Web_应用的构建过程">Web 应用的构建过程</h6><p>在刚创建项目的时候，我们都会有一个完整的构建思路。</p>
-<ul>
-<li><p>Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。</p>
-</li>
-<li><p>Check Style。通常我们会在我们的项目里定义一些代码规范，如 JavaScript 中的使用两个空格的缩进，Java 的 Checkstyle 中一个函数不能超过30行的限制。</p>
-</li>
-<li><p>单元测试。作为测试中最基础也是最快的测试，这个测试将集中于测试单个函数的是不是正确的。</p>
-</li>
-<li><p>功能测试。功能测试的意义在于，保证一个功能依赖的几个函数组合在一起也是可以工作的。</p>
-</li>
-<li><p>Mock Server。当我们的代码依赖于第三方服务的时候，我们就需要一个 Mock Server 来保证我们的功能代码可以独立地测试。</p>
-</li>
-<li><p>集成测试。这一步将集成前台、后台，并且运行起最后将上线的应用。接着依据于用户所需要的功能来编写相应的测试，来保证一个个的功能是可以工作的。</p>
-</li>
-<li><p>打包。对于部署来说，直接安装一个 RPM 包，或者 DEB 包是最方便的事。在这个包里会包含应用程序所需的所有二进制文件、数据和配置文件等等。</p>
-</li>
-<li><p>上传包。在完成打包后，我们就可以上传这个软件包了。</p>
-</li>
-<li><p>部署。最后，我们就可以在我们的线上环境中安装这个软件包。</p>
-</li>
-</ul>
-<h6 id="Web_应用的构建实战">Web 应用的构建实战</h6><pre><code>下面就让我们来构建一个简单的 Web 应用，来实践一下这个过程。在这里，我们要使用到的一个工具是 Gulp，当然对于 Grunt 也是类似的。
-
-Gulp 入门指南
-
-Gulp.js 是一个自动化构建工具，开发者可以使用它在项目开发过程中自动执行常见任务。Gulp.js 是基于 Node.js 构建的，利用 Node.js 流的威力，你可以快速构建项目并减少频繁的 IO 操作。Gulp.js 源文件和你用来定义任务的 Gulp 文件都是通过 JavaScript（或者 CoffeeScript ）源码来实现的。
-全局安装 gulp：
-$ npm install --<span class="keyword">global</span> gulp
-作为项目的开发依赖（devDependencies）安装：
-$ npm install --save-dev gulp
-在项目根目录下创建一个名为 gulpfile.js 的文件：
-<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
-
-gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-  <span class="comment">// 将你的默认的任务代码放在这</span>
-});
-运行 gulp：
-$ gulp
-默认的名为 <span class="keyword">default</span> 的任务（task）将会被运行，在这里，这个任务并未做任何事情。接下来，我们就可以打造我们的应用的构建系统了。
-
-代码质量检测工具
-
-当 C 还是一门新型的编程语言时，还存在一些未被原始编译器捕获的常见错误，所以程序员们开发了一个被称作 lint 的配套项目用来扫描源文件，查找问题。
-
-对应于不同的语言都会有不同的 lint 工具，在 JavaScript 中就有 JSLint。JavaScript 是一门年轻、语法灵活多变且对格式要求相对松散的语言，因此这样的工具对于这门语言来说比较重要。
-
-<span class="number">2011</span>年，一个叫 Anton Kovalyov 的前端程序员借助开源社区的力量弄出来了 JSHint，其思想基本上和 JSLint 是一致的，但是其有一下几项优势：
-
-可配置规则，每个团队可以自己定义自己想要的代码规范。
-对社区非常友好，社区支持度高。
-可定制的结果报表。
-下面就让我们来安装这个软件吧：
-
-安装及使用
-
-npm install jshint gulp-jshint --save-dev
-示例代码:
-
-<span class="keyword">var</span> jshint = <span class="keyword">require</span>(<span class="string">'gulp-jshint'</span>);
-<span class="keyword">var</span> gulp   = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
-
-gulp.task(<span class="string">'lint'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-  <span class="keyword">return</span> gulp.src(<span class="string">'./lib/*.js'</span>)
-    .pipe(jshint())
-    .pipe(jshint.reporter(<span class="string">'YOUR_REPORTER_HERE'</span>));
-});
-自动化测试工具
-
-一般来说，自动测试应该从两部分考虑：
-
-单元测试
-功能测试
-Mocha 是一个可以运行在 Node.js 和浏览器环境里的测试框架，
-
-<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
-<span class="keyword">var</span> mocha = <span class="keyword">require</span>(<span class="string">'gulp-mocha'</span>);
-
-gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
-    <span class="keyword">return</span> gulp.src(<span class="string">'test.js'</span>, {read: <span class="keyword">false</span>})
-        <span class="comment">// gulp-mocha needs filepaths so you can't have any plugins before it</span>
-        .pipe(mocha({reporter: <span class="string">'nyan'</span>}));
-});
-</code></pre><ul>
-<li><p>编译</p>
-<p>  对于静态型语言来说，编译是一个很重要的步骤。不过，对于动态语言来说也存在这样的工具。</p>
-<p>  动态语言的编译</p>
-<p>  可以说这类型的语言，是以我们常见的 JavaScript 为代表。</p>
-<p>  CoffeeScript 是一套 JavaScript 的转译语言，并且它增强了 JavaScript 的简洁性与可读性。</p>
-<p>  Webpack 是一款模块加载器兼打包工具，它能把各种资源，例如 JS（含JSX）、coffee、样式（含less/sass）、图片等都作为模块来使用和处理。</p>
-<p>  Babel 是一个转换编译器，它能将 ES6 转换成ES5，以便在较低版本的浏览器中正确运行。</p>
-</li>
-<li><p>打包</p>
-<p>  在 GNU/Linux 系统的软件包里通过包含了已压缩的软件文件集以及该软件的内容信息。常见的软件包有</p>
-<p>  DEB。Debian 软件包格式，文件扩展名为 .deb<br>  RPM（原 Red Hat Package Manager，现在是一个递归缩写）。该软件包分为二进制包（Binary）、源代码包（Source）和 Delta 包三种。二进制包可以直接安装在计算机中，而源代码包将会由 RPM 自动编译、安装。源代码包经常以 src.rpm 作为后缀名。<br>  压缩文档 tar.gz。通常是该软件的源码，故而在安装的过程中需要编译、安装，并且在编译时需要自己手动安装所需要依赖的软件。在软件仓库没有最新版本的软件时，tar.gz 往往是最好的选择。<br>  由于这里的打包过程比较繁琐，就不介绍了。有兴趣的读者可以自己了解一下。</p>
-</li>
-<li><p>上传及发布包</p>
-<p>  上传包之前我们需要创建一个相应的文件服务器，又或者是相应的软件源。并且对于我们的产品环境的服务器来说，我们还需要指定好这个软件源才能安装这个包。</p>
-<p>  以 Ubuntu 为例，Ubuntu 里的许多应用程序软件包，是放在网络里的服务器上，这些服务器网站，就称作“源”，从源里可以很方便地获取软件包。</p>
-<p>  因而在这一步中，我们所需要做的事便是将我们打包完的软件上传到相应的服务器上。</p>
-</li>
-</ul>
+            <h2 id="学习React需要会什么？">学习React需要会什么？</h2><p>React的功能很单一，主要负责渲染的功能，跟angular还不一样，ng大而全，React专一，因此在React开发中还需要结合其它工具，比如Redux管理数据，React-router管理路由，按需加载immutable.js，ES6, Webpack等，初次之外最基本的的条件是要学习JSX语法，其实对于有JS基础的同学也难度不大。</p>
+<h2 id="React是什么">React是什么</h2><h4 id="工作流">工作流</h4><p>JS操作DOM的代价是非常昂贵的，访问频次越高，消耗的内存的越大，用户体验越差，React并没有直接让脚本操作DOM，而是引入了Visual DOM，当状态发生变化时，创建新的Visual DOM与旧的Visual DOM比较异同(Diff算法)，只让变化的部分进行渲染，所以整个过程省去了DOM的获取和操作，而仅仅只有渲染过程。</p>
+<h4 id="Diff算法">Diff算法</h4><p><img src="https://www.processon.com/chart_image/584fa0eee4b05021858eac2c.png" alt=""><br>React提出了一种假设，相同的结点具有类似的结构，而不同的结点具有不同的结构。在这种假设基础上进行<strong>逐层</strong>比较，如果发现结点不同，则删除旧结点及其包含的子节点；如果结点相同，则进行属性修改。</p>
+<h4 id="组件化">组件化</h4><p>React的组件由DOM和state数据组成，两者泾渭分明，state决定着视图的状态。React通过setState控制视图的更新，setState会自动调用render函数，触发视图重新渲染，如果只是state数据变化没有调用setState并不会触发更新。</p>
+<h4 id="组件的创建">组件的创建</h4><ol>
+<li>React.createClass()</li>
+<li>class Main extends React.Component </li>
+</ol>
+<h4 id="组件生命周期">组件生命周期</h4><p><img src="https://www.processon.com/chart_image/584fa55fe4b05021858f5add.png" alt=""></p>
+<h4 id="组件之间的通信">组件之间的通信</h4><p>React推崇单向数据流，自上而下进行数据的传递</p>
+<ol>
+<li>如果是父子级关系，父级将一个回调函数当做属性传递给子级，子级直接调用函数和父级通信。</li>
+<li>组件层级嵌套深，可使用上下文getChildContext传递信息，这样不需要将函数一层层往下传，任何一层子级可以通过this.context直接访问</li>
+<li>兄弟关系得组件无法通信，只能利用同一层的上级作为中转站，如果兄弟组件都是最高层组件，必须在他们外层再套一层组件，用来保存数据、传递信息，这其实就是Redux所做的事情。</li>
+<li>组件之间的信息还可以通过全局事件传递。不同页面可以通过参数传递数据，下个页面可以用location.param来获取</li>
+</ol>
+<h2 id="为什么用React?">为什么用React?</h2><p>在拥有Visual DOM提高性能的基础上，组件是拥有独立功能的视图模块，许多小的组件能组成一个大的组件，整个页面就是由一个个组件组合而成，它的好处是利于重用和维护。</p>
+<h2 id="怎么用React?">怎么用React?</h2><h4 id="React-Router">React-Router</h4><p>Router也是React的一个组件，它并不会被渲染，只是一个创建内部路由规则的配置对象，根据匹配的路由地址展示相应的组件。</p>
+<ol>
+<li>Router对路由地址和组件进行了绑定，具有嵌套功能表示路由地址的包含关系。</li>
+<li>Router可以向组件传递7个属性：children, history, location, params, route, routeParams, routes，每个属性都包含路由的相关信息。</li>
+<li>Router提供Link标签，这只是对a标签的封装，点击链接跳转并不是默认的方式，Router阻止了a标签的默认行为并用pushState进行hash值的转变，切换页面的过程中会先发生url地址的转变，Router监听到地址的改变根据Router的path属性匹配到对应的组件，将state值改成对应的组件并调用setState触发render重新渲染DOM</li>
+<li>页面较多时，项目越来越大，初次渲染的速度就会很慢，这时候需要按需加载，只有切换到对应页面时才加载对应的js文件，React配合webpack进行按需加载方法简单，Route的component改为getComponent，组件用require.ensure方式获取，并在webpack中配置chunkFilename.</li>
+</ol>
+<h4 id="Redux">Redux</h4><h6 id="为什么要用Redux?">为什么要用Redux?</h6><p>Redux并非必须的，它的作用是在顶层组件上面加上一个组件，用来进行逻辑运算，存储数据，实现组件尤其是顶层组件之间的通信。如果组件之间通信不多，逻辑不复杂，这个时候用回调函数，context就行，没必要引入Redux。</p>
+<h6 id="工作流-1">工作流</h6><p><img src="https://www.processon.com/chart_image/584fa95ce4b0160bc4dde483.png" alt=""></p>
+<h2 id="React的实际应用">React的实际应用</h2><p>React的影响力让其已经成为一种开发方式，基于React的组件思想，衍生出了譬如ReactNative、Vue、Weex</p>
 
             
         </div>
@@ -375,7 +295,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/02/react/"  data-tooltip="React基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/10/five_year_OS/"  data-tooltip="工作5年了，为什么还要看操作系统？">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -383,7 +303,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/17/my_git/" data-tooltip="我的git之旅">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/17/web_start/" data-tooltip="Web 应用的构建过程">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -398,17 +318,17 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -446,7 +366,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/02/react/"  data-tooltip="React基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/10/five_year_OS/"  data-tooltip="工作5年了，为什么还要看操作系统？">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -454,7 +374,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/17/my_git/" data-tooltip="我的git之旅">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/17/web_start/" data-tooltip="Web 应用的构建过程">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -469,17 +389,17 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -499,17 +419,17 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/09/02/react/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
