@@ -238,6 +238,148 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/06/17/my_tasking/">
+                            我的任务清单是怎么安排的？
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-06-17T18:15:02+08:00">
+	
+		    Jun 17, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h6 id="background">background</h6><blockquote>
+<p>相信你的每一天都离不开任务，工作任务自然，日常生活琐事亦是任务，其实把人生比作一款游戏，为了增强玩家的粘性，设置了每日签到、主线任务、支线任务、日常任务，每当你完成一项任务就会收获金钱和经验</p>
+<p>那么作为程序猿的我们，何不摒弃文绉绉要么定个什么短期长期目标啥的，听到了就好累的感觉，从而选择模拟打游戏的方式过每一天，既可以收货金钱经验又不失掉乐趣，何乐而不为？</p>
+<p>虽然我还在摸索这个人生游戏，但我已经从中收获了很多乐趣和成就感，也不断让自己进步，我现在采取的方式大概要依赖几个重要的APP，分享给大家： wunderlist、pomotodo、evernote、pocket</p>
+</blockquote>
+<h6 id="Tasking">Tasking</h6><pre><code>举个例子，如何开始编码，这应该也是一项基础的能力。结合日常，重新演绎一下这个过程：
+
+有一个明确的实现目标。
+评估目标并将其拆解成任务<span class="comment">(TODO)</span>。
+规划任务的步骤<span class="comment">(TODO)</span>
+学习相关技能
+执行 Task，遇到难题就跳到第二步。
+</code></pre><h6 id="如何_Tasking_一本书">如何 Tasking 一本书</h6><pre><code>以本文的写作为例，细分上面的过程就是：
+
+我有了一个中心思想——在某种意义上来说就是标题。
+依据中心思想我将这篇文章分成了四小节。
+然后我开始写四小节的内容。
+直到完成。
+而如果将其划分到一个编程任务，那么也是一样的：
+
+我们想到做一个 xxx 的 idea。
+为了这个 idea 我们需要分成几步，或者几层设计。
+对于每一步，我们应该做点什么
+我们需要学习怎样的技能
+集成每一步的代码，就有了我们的系统。
+现在让我们以这本书的写作过程为例，来看看这个过程是怎么发生的。
+
+在计划写一本书的时候，我们有关于这本书主题的一些想法。正是一些想法慢慢地凝聚成一个稳定的想法，不过这不是我们所要讨论的重点。
+
+当我们已经有了一本书的相关话题的时候，我们会打算去怎么做？先来个头脑风暴，在上面写满我们的一些想法，如这本书最开始划分了这七步：
+
+<span class="number">1.</span>从零开始
+<span class="number">2.</span>编码
+<span class="number">3.</span>上线
+<span class="number">4.</span>数据分析
+<span class="number">5.</span>持续交付
+<span class="number">6.</span>遗留系统
+<span class="number">7.</span>回顾与新架构
+
+接着，依据我们的想法整理出几个章节。如本书最初的时候只有七个章节，但是我们还需要第一个章节来指引新手，因此变成了八个章节。对应于每一个章节，我们都需要想好每一章里的内容。如在第一章里，又可以分成不同的几部分。随后，我们再对每一部分的内容进行任务划分，那么我们就会得到一个又一个的小的章节。在每个小的章节里，我们都可以大概策划一下我们要写的内容。
+
+然后我们就可以开始写这样的一本书——由一节节汇聚成一章，由一章一章汇聚成一本。
+</code></pre><h6 id="Tasking_开发任务">Tasking 开发任务</h6><pre><code>现在，让我们简单地来 Tasking 如何开发一个博客。作为一个程序员，如果我们要去开始一个博客系统的话，那么我们会怎么做？
+
+先规划一下我们所需要的功能——如后台、评论、Social 等等，并且我们还应该设计我们博客的 Mockup。
+
+随后我们就可以简单地设计一下系统的架构，如传统的前后端结合。
+我们就可以进行技术选型了——使用哪个后端框架、使用哪个前端框架。
+创建我们的 hello,world，然后开始进行一个功能的编码工作。
+编码时，我们就需要不断地查看、添加测试等等。
+完成一个个功能的时候，我们就会得到一个子模块。
+依据一个个子模块，我们就可以得到我们的博客系统。
+与我们日常开发一致的是：我们需要去划分任务的优先级。换句话来说，我们需要先实现我们的核心功能。
+
+对于我们的博客系统来说，最主要的功能就是发博客、展示博客。往简单地说，一篇博客应该有这么基础的四部分：
+
+<span class="number">1.</span>标题
+<span class="number">2.</span>内容
+<span class="number">3.</span>作者
+<span class="number">4.</span>时间
+<span class="number">5.</span>Slug
+
+然后，我们就需要创建相应的 Model，根据这个 Model，我们就可以创建相应的控制器代码。再配置下路由，添加下页面。对于有些系统来说，我们就可以完成博客系统的展示了。
+</code></pre><h6 id="写代码只是在码字">写代码只是在码字</h6><pre><code>编程这件事情实际上一点儿也不难，当我们只是在使用一个工具创造一些东西的时候，比如我们拿着电烙铁、芯片、电线等去焊一个电路板的时候，我们学的是如何运用这些工具。虽然最后我们的电路板可以实现相同的功能，但是我们可以一眼看到差距所在。
+
+换个贴切一点的比喻，比如烧菜做饭，对于一个优秀的厨师和一个像我这样的门外汉而言，就算给我们相同的食材、厨具，一段时间后也许一份是诱人的美食，一份只能喂猪了——即使我模仿着厨师的步骤一步步地来，也许看上去会差不多，但是一吃便吃出差距了。
+
+我们还做不好饭，还焊不好电路，还写不好代码，很大程度上并不是因为我们比别人笨，而只是别人比我们做了更多。有时候一种机缘巧遇的学习或者 bug 的出现，对于不同的人的编程人生都会有不一样的影响<span class="comment">(ps:说的好像是蝴蝶效应)</span>。我们只是在使用工具，使用的好与坏，在某种程序上决定了我们写出来的质量。
+
+写字便是如此，给我们同样的纸和笔<span class="comment">(ps:减少无关因素)</span>，不同的人写出来的字的差距很大，写得好的相比于写得不好的 ，只是因为练习得更多。而编程难道不也是如此么，最后写代码这件事就和写字一样简单了。
+
+刚开始写字的时候，我们需要去了解一个字的笔划顺序、字体结构，而这些因素相当于语法及其结构。熟悉了之后，写代码也和写字一样是简简单单的事。
+</code></pre><h6 id="学习编程只是在学造句">学习编程只是在学造句</h6><pre><code>多么无聊的一个标题
+计算机语言同人类语言一样，有时候我们也许会感慨一些计算机语言是多么地背离我们的世界，但是他们才是真正的计算机语言。
+
+计算机语言是模仿人类的语言，从 <span class="keyword">if</span> 到其他，而这些计算机语言又比人类语言简单。故而一开始学习语言的时候我们只是在学习造句，用一句话来概括一句代码的意思，或者可以称之为函数、方法(<span class="function"><span class="keyword">method</span>)。
+
+于是我们开始组词造句，以便最后能拼凑出一整篇文章。</span>
+</code></pre><h6 id="编程是在写作">编程是在写作</h6><pre><code>编程是在写作，这是一个怎样的玩笑?这是在讽刺那些写不好代码，又写不好文章的么
+代码如诗，又或者代码如散文。总的来说，这是相对于英语而言，对于中文而言可不是如此。如果用一种所谓的中文语言写出来的代码，不能像中文诗一样，那么它就算不上是一种真正的中文语言。
+
+那些所谓的写作逻辑对编程的影响
+
+早期的代码是以行数算的，文章是以字数算的
+代码是写给人看的，文章也是写给人看的
+编程同写作一样，都由想法开始
+代码同文章一样都可以堆砌出来<span class="comment">(ps:如本文)</span>
+写出好的文章不容易，需要反复琢磨，写出好的代码不也是如此么
+构造一个类，好比是构造一个人物的性格特点，多一点不行，少一点又不全
+代码生成，和生成诗一样，没有情感，过于机械化
+。。。
+
+然而好的作家和一般的写作者，区别总是很大，对同一个问题的思考程度也是不同的。从一个作者到一个作家的过程，是一个不断写作不断积累的过程。而从一个普通的程序员到一个优秀的程序员也是如此，需要一个不断编程的过程。
+
+当我们开始真正去编程的时候，我们还会纠结于“僧推月下门”还是“僧敲月下门”的时候，当我们越来越熟练就容易决定究竟用哪一个。而这样的“推敲”，无论在写作中还是在编程中都是相似的过程。
+
+写作的过程真的就是一次探索之旅，而且它会贯穿人的一生。
+因此：
+
+编程只是在码字，难道不是么？
+真正的想法都在脑子里，而不在纸上，或者 IDE 里。
+</code></pre>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/06/17/my_tasking/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/05/17/my_html/">
                             我的HTML5之旅
                         </a>
@@ -1611,152 +1753,6 @@ para.style.color="blue";
                     
                         <p>
                             <a href="/2016/01/16/vedio_2015/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/01/16/read_2015/">
-                            2015我的读书清单
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-01-16T16:14:02+08:00">
-	
-		    Jan 16, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="backgroud">backgroud</h2><blockquote>
-<p>2015年对于我来说是技术转型的重要一年，这一年收获颇多，当然读过很多很好很有用的书籍，这里想记录下来，好了废话少说，上清单：</p>
-</blockquote>
-<h2 id="book_list">book list</h2><ol>
-<li><p>算法系</p>
-<blockquote>
-<p>算法和数据结构本身就是编程的灵魂，所以基础还需稳扎稳打</p>
-<ul>
-<li>《算法导论》<em>：相信大家都很熟悉这本书，大学开设过这门课</em></li>
-<li>《数据结构(C语言版)》<em>：严蔚敏_吴伟民著，同样在大学开设过</em></li>
-<li>《算法 第4版》<em>：谢路云 译(Java描述)，强烈推荐这本，从前看算法都是C描述，这本Java描述更加生动具体</em></li>
-<li>《数据结构与算法分析-C语言描述》<em>：相对算法导论这本更好理解，歪果仁著</em></li>
-</ul>
-</blockquote>
-</li>
-<li><p>重构系</p>
-<blockquote>
-<p>当手上的代码积累到一定程度，某一天回过头再去看的时候抑或会骂一句“shit”，需要好好思考重构</p>
-<ul>
-<li>《编程之美》 <em>：看的不是很仔细，但是看后觉得重构也是一件非常重量级的事情</em></li>
-<li>《代码之美》 <em>：比较上本更好理解和实用</em></li>
-<li>《重构_改善既有代码的设计》</li>
-</ul>
-</blockquote>
-</li>
-<li><p>语言系</p>
-<blockquote>
-<p>切记切记语言只是工具，个人觉得大部分语言书籍就当语法说明书看看好了，要想精通某门工具，靠的是实践</p>
-<ul>
-<li>《C程序设计(第四版)》 <em>：谭浩强，又见教材系</em></li>
-<li>《C专家编程》 <em>：C的补充书籍</em></li>
-<li>《The C programming language》 <em>：看C语言的书从来不嫌多</em></li>
-<li>《Objective-C程序设计（第4版）》 <em>：OC语法说明书</em></li>
-<li>《The Swift Programming Language》 <em>：Swift语法说明书</em></li>
-<li>《node入门》<em>：nodejs入门说明书，很简短只有28页</em></li>
-<li>《让你不再害怕指针》<em>：同样很简短只有29页</em></li>
-<li>《linux命令手册》</li>
-</ul>
-</blockquote>
-</li>
-<li><p>设计模式系</p>
-<blockquote>
-<p>掌握了各种语言怎么用，还得知道怎么设计语言最好的使用方式</p>
-<ul>
-<li>《设计模式之禅完整版》 <em>：秦晓波，其实还没怎么看</em></li>
-<li>《HeadFirst_设计模式》 <em>：这本书没什么好解释的，看多少遍也不嫌多</em></li>
-</ul>
-</blockquote>
-</li>
-<li><p>面试系</p>
-<blockquote>
-<p>追其面试根本，一个高质量的面试往往是考研算法和经验，二者缺一不可</p>
-<ul>
-<li>《JAVA面试汇总》</li>
-<li>《Iterview _Points》</li>
-<li>《100题系列by_July》</li>
-<li>《程序员面试宝典》</li>
-<li>《剑指offer》</li>
-<li>《十五个经典算法研究与总结、目录+索引》</li>
-</ul>
-</blockquote>
-</li>
-<li><p>游戏系</p>
-<blockquote>
-<p>有一段时间在cocos2dx里玩耍</p>
-<ul>
-<li>《制作自己的《捕鱼达人》》 <em>：看这本书大概可以做一个属于自己的demo了</em></li>
-<li>《Cocos2d-x高级开发教程》</li>
-<li>《Cocos2d-x手机游戏开发》</li>
-<li>《Cocos2d-x游戏开发之旅》</li>
-<li>《Lua程序设计中文第二版》</li>
-<li>《Lua编程(programming in lua)》</li>
-</ul>
-</blockquote>
-</li>
-<li>产品系<blockquote>
-<p>其实这里面有部分并没有看过，但是都是很高质量的书籍，先列出来</p>
-<ul>
-<li>《结网》</li>
-<li>《人人都是产品经理》</li>
-<li>《乔布斯》</li>
-<li>《写给大家看的设计书》</li>
-</ul>
-</blockquote>
-</li>
-<li>编译系<blockquote>
-<p>当学习了多门语言之后，回头猛然的发现万变不离其中的是编译，虽然没有机会写编译器，但是很想搞懂这么多语言，是怎么一层一层指示着硬件呢，这个系列也是我正在看的</p>
-<ul>
-<li>《编译原理》<em>：业内又名龙书</em></li>
-<li>《编译器工程》<em>：建议先看这本书，再自己决定看龙书系列</em></li>
-</ul>
-</blockquote>
-</li>
-<li>is reading<blockquote>
-<p>除了编译原理，手上正在看的书籍还有一些整理在下面</p>
-<ul>
-<li>《JavaScript DOM编程艺术》</li>
-<li>《JavaScript 高级程序设计》</li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<h2 id="summary">summary</h2><blockquote>
-<p>大概数了一下2015年累计看了35本书，事实上2015还有大概四个月时间是被耽搁掉了,所以计划下2016年阅读书籍数为60本，再一点观察了下book list发现技术书籍以外的书看太少，这一点是要改善的。</p>
-</blockquote>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/01/16/read_2015/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>
