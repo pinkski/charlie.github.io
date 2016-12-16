@@ -239,6 +239,135 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/08/22/css/">
+                            CSS基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-08-22T18:15:02+08:00">
+	
+		    Aug 22, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习CSS需要会什么？">学习CSS需要会什么？</h2><p>DSL作为领域特定语言，其基本思想“求专不求全”，不像通用目的语言那样覆盖目标范围涵盖一切软件问题，而是针对某一特定问题的计算机语言，其实自计算机被发明起，人们就是开始使用DSL了，常用的DSL你还需要了解它们的用途：</p>
+<ol>
+<li>SQL 关系型数据库，用于查询和变更数据</li>
+<li>CSS 样式表描述语言</li>
+<li>HTML web标记型语言</li>
+<li>Ant、Rake、Make 用于软件系统构建的语言</li>
+<li>YACC、Bison、ANTLR 用来生成语法分析器的语言</li>
+<li>RSpec、Cucumber Ruby环境下的行为驱动测试语言</li>
+</ol>
+<p>DSL是用“有限表达力”来描述DSL最重要的特征，DSL也只能给一个专门领域建模，但是表现力更强。</p>
+<h2 id="CSS是什么？">CSS是什么？</h2><p>CSS全称是“层叠样式表 Cascading Style Sheets”，它主要用于定义HTML内容在浏览器内的显示内容，比如文字、颜色、字体等</p>
+<h4 id="工作流">工作流</h4><p><img src="https://www.processon.com/chart_image/5853930ee4b097c6e69d2487.png" alt=""></p>
+<ul>
+<li>选择符：选择器，用来指明网页中要应用样式规则的元素</li>
+<li>声明：“{}”  属性 和 值用 “：”分隔</li>
+<li>CSS样式：内联、嵌入、外部三种</li>
+</ul>
+<h2 id="为什么要用CSS?">为什么要用CSS?</h2><h4 id="CSS3">CSS3</h4><p>CSS3带来了更多的新特性，使其更好用、更强大：</p>
+<ul>
+<li>圆角-半径（border-radius:8px）</li>
+<li>阴影（box-shadow:10px）</li>
+<li>文字特效（text-shadow、）</li>
+<li>线性渐变（gradient）</li>
+<li>旋转（transform）</li>
+<li>transform:rotate(9deg) scale(0.85,0.90) </li>
+<li>translate(0px,-30px) skew(-9deg,0deg);//旋转,缩放,定位,倾斜</li>
+<li>增加了更多的CSS选择器</li>
+<li>多背景 rgba</li>
+</ul>
+<h4 id="Bootstrap">Bootstrap</h4><p>github上不乏有各种类似Bootstrap提供了强大CSS功能的现成的好用的库</p>
+<p>举个🌰:<br><a href="http://www.jianshu.com/p/31118d83cb5f" target="_blank" rel="external">10个值得前端收藏的CSS3动效库（工具）</a></p>
+<h4 id="SASS_&amp;_LESS">SASS &amp; LESS</h4><p>CSS预处理技术，为CSS（DSL）增加了编程特性</p>
+<h2 id="CSS怎么用？">CSS怎么用？</h2><h4 id="元素类型">元素类型</h4><ul>
+<li>块级元素（block）: div h1 hr p table ul form</li>
+<li>行内元素（inline）: span a img span br </li>
+<li>可变元素（inline-block）: 既在行内显示，又能设置宽高</li>
+</ul>
+<h4 id="盒模型">盒模型</h4><p>页面上的每个元素（包括内联元素）都可以看成一个盒子。<br><img src="http://myblogimage.qiniudn.com/illustration%5Cthree_core_concepts_of_cssD65A4E60-A213-481C-86D6-A3929A0A8D28.png" alt=""><br>显而易见，盒模型有四部分组成：</p>
+<p><strong>content -&gt; padding -&gt; border -&gt; margin</strong></p>
+<p>所以一个元素的宽度</p>
+<ol>
+<li>content + 2 <em> padding + 2 </em> border + 2 * margin</li>
+<li>IE9以下： content + 2 * margin</li>
+</ol>
+<p>W3C为了解决差异，在CSS3中加了box-sizing属性，当设置了box-sizing:border-box;时，就和IE的标准一致。一般加上这个：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*, *<span class="pseudo">:before</span>, *<span class="pseudo">:after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="position">position</h4><p>定位有五种：<a href="http://www.w3school.com.cn/cssref/pr_class_position.asp" target="_blank" rel="external">参考实例</a></p>
+<ol>
+<li>static </li>
+<li>relative</li>
+<li>absolute</li>
+<li>fixed</li>
+<li>inherit</li>
+</ol>
+<p>注意：位置在absolute和fixed时，会发生三件事：</p>
+<ol>
+<li>元素往Z轴方向上移一层，会覆盖下层元素</li>
+<li>元素变为块级元素，可以设置宽高</li>
+<li>如果本身是块级元素，元素宽度则由100%变为auto</li>
+</ol>
+<h4 id="float">float</h4><p>元素浮动四个属性：</p>
+<ol>
+<li>left</li>
+<li>right</li>
+<li>none</li>
+<li>inherit</li>
+</ol>
+<p>前辈经验分享：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/iyangyuan/archive/2013/03/27/2983813.html" target="_blank" rel="external">经验分享：CSS浮动(float,clear)通俗讲解</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/css-float%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6%E3%80%81%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%8B%93%E5%B1%95%E4%B8%80/" target="_blank" rel="external">CSS float浮动的深入研究、详解及拓展(一)</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/css-float%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6%E3%80%81%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%8B%93%E5%B1%95%E4%BA%8C/" target="_blank" rel="external">CSS float浮动的深入研究、详解及拓展(二)</a></li>
+<li><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a></li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>只有左右浮动，没有上下浮动</li>
+<li>元素设置float后，会往Z轴上移一层（与position:absolute一致)</li>
+<li>浮动不会影响上一个兄弟元素</li>
+<li>浮动后，下一个兄弟元素会紧贴到该元素之前没有设置float的元素之后（就是下一个元素会补位）</li>
+<li>下一个兄弟元素有内联元素，则会绕该元素显示，类似文字环绕图片效果</li>
+<li>该元素变为块级元素，相当于设置了display:block;</li>
+</ol>
+<h2 id="CSS的实际应用">CSS的实际应用</h2><h4 id="Bootstrap-1">Bootstrap</h4><ul>
+<li>预处理脚本 SASS LESS</li>
+<li>一个框架 多钟设备</li>
+<li>特性齐全</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/08/22/css/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/08/17/web_start/">
                             Web 应用的构建过程
                         </a>

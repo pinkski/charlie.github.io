@@ -239,6 +239,125 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/07/17/my_git/">
+                            我的git之旅
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-07-17T18:15:02+08:00">
+	
+		    Jul 17, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h6 id="background">background</h6><blockquote>
+<p>从什么时候起，终于摆脱了SVN的梦魇，发现有了git真是太爽了，对于SVN的印象总是在解决冲突，而对于git确实顺畅的敲击的各种命令耍酷装X，确实给人的感觉太好了</p>
+</blockquote>
+<h6 id="版本控制">版本控制</h6><pre><code>版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。
+虽然基于 Git 的工作流可能并不是一个非常好的实践，但是在这里我们以这个工作流做为实践来开展我们的项目。如下图所示是一个基于 Git 的项目流：
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/801b780agw1f8xm6cf8obj20jr0oin16.jpg" alt=""></p>
+<pre><code>基于 Git 的工作流
+基于 Git 的工作流
+我们日常会工作在 “develop” 分支（那条线）上，通常来说每个迭代我们会发布一个新的版本，而这个新的版本将会直接上线到产品环境。那么上线到产品环境的这个版本就需要打一个版本号——这样不仅可以方便跟踪我们的系统，而且当出错的时候我们也可以直接回滚到上一个版本。如果在上线的时候有些 <span class="keyword">Bug </span>不得不去修复，并且由于上线的新功能很重要，我们就需要一些 Hotfix。而从整个过程来看，版本控制起了一个非常大的作用。
+
+不仅仅如此，版本控制的最大重要是在开发的过程中扮演的角色。通过版本管理系统，我们可以：
+
+将某个文件回溯到之前的状态。
+将项目回退到过去某个时间点。
+在修改 <span class="keyword">Bug </span>时，可以查看修改历史，查出修改原因
+只要版本控制系统还在，你可以任意修改项目中的文件，并且还可以轻松恢复。
+常用的版本管理系统有 Git、SVN，但是从近年来看 Git 似乎更受市场欢迎。
+</code></pre><h6 id="Git">Git</h6><pre><code>从一般开发者的角度来看，Git 有以下功能：
+
+从服务器上克隆数据库（包括代码和版本信息）到单机上。
+在自己的机器上创建分支，修改代码。
+在单机上自己创建的分支上提交代码。
+在单机上合并分支。
+新建一个分支，把服务器上最新版的代码 fetch 下来，然后跟自己的主分支合并。
+生成补丁（<span class="keyword">patch</span>），把补丁发送给主开发者。
+看主开发者的反馈，如果主开发者发现两个一般开发者之间有冲突（他们之间可以合作解决的冲突），就会要求他们先解决冲突，然后再由其中一个人提交。如果主开发者可以自己解决，或者没有冲突，就通过。
+一般开发者之间解决冲突的方法，开发者之间可以使用 pull 命令解决冲突，解决完冲突之后再向主开发者提交补丁。
+从主开发者的角度（假设主开发者不用开发代码）看，Git 有以下功能：
+
+查看邮件或者通过其它方式查看一般开发者的提交状态。
+打上补丁，解决冲突（可以自己解决，也可以要求开发者之间解决以后再重新提交，如果是开源项目，还要决定哪些补丁有用，哪些不用）。
+向公共服务器提交结果，然后通知所有开发人员。
+</code></pre><h6 id="Git_初入">Git 初入</h6><pre><code>如果是第一次使用 Git，你需要设置署名和邮箱：
+
+$ git config --global user<span class="class">.name</span> <span class="string">"用户名"</span>
+$ git config --global user<span class="class">.email</span> <span class="string">"电子邮箱"</span>
+你可以在 GitHub 新建免费的公开仓库或在 Coding<span class="class">.net</span> 新建免费的私有仓库。
+
+按照 GitHub 的文档 或 Coding<span class="class">.net</span> 的文档 配置 SSH Key，然后将代码仓库 clone 到本地，其实就是将代码复制到你的机器里，并交由 Git 来管理：
+
+$ git clone git@github<span class="class">.com</span>:username/repository<span class="class">.git</span>
+或
+$ git clone git@git<span class="class">.coding</span><span class="class">.net</span>:username/repository<span class="class">.git</span>
+或使用 HTTPS 地址进行 clone：
+
+$ git clone https:<span class="comment">//username:password@github.com/username/repository.git</span>
+或
+$ git clone https:<span class="comment">//username:password@git.coding.net/username/repository.git</span>
+你可以修改复制到本地的代码了（ symfony-docs-chs 项目里都是 rst 格式的文档）。当你觉得完成了一定的工作量，想做个阶段性的提交：
+
+向这个本地的代码仓库添加当前目录的所有改动：
+
+$ git add .
+或者只是添加某个文件：
+
+$ git add -<span class="tag">p</span>
+我们可以输入
+
+$ git status
+来看现在的状态，如下图是添加之前的：
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/801b780agw1f8xm8uen05j20u20d2ag4.jpg" alt=""></p>
+<pre><code><span class="keyword">Before </span><span class="keyword">add
+</span><span class="keyword">Before </span><span class="keyword">add
+</span>下面是添加之后 的
+</code></pre><p><img src="http://ww4.sinaimg.cn/large/801b780agw1f8xm9k6fa4j20yk0ba0xi.jpg" alt=""></p>
+<pre><code><span class="label">After</span> <span class="keyword">add
+</span><span class="label">After</span> <span class="keyword">add
+</span>可以看到状态的变化是从黄色到绿色，即 unstage 到 <span class="keyword">add。
+</span>
+在完成添加之后，我们就可以写入相应的提交信息——如这次修改添加了什么内容 、这次修改修复了什么问题等等。在我们的工作流程里，我们使用 Jira 这样的工具来管理我们的项目，也会在我们的 Commit Message 里写上作者的名字，如下：
+
+$ git commit -m <span class="string">"[GROWTH-001] Phodal: add first commit &amp; example"</span>
+在这里的GROWTH-<span class="number">001</span>就相当于是我们的任务号，Phodal 则对应于用户名，后面的提交信息也会写明这个任务是干嘛的。
+
+由于有测试的存在，在完成提交之后，我们就需要运行相应的测试来保证我们没有破坏原来的功能。因此，我们就可以<span class="keyword">PUSH我们的代码到服务器端：
+</span>
+$ git <span class="keyword">push
+</span>这样其他人就可以看到我们修改的代码。
+</code></pre>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/07/17/my_git/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/07/06/jspatch_commonQ/">
                             jspatch常见问题
                         </a>
@@ -1707,62 +1826,6 @@ para.style.color="blue";
                     
                         <p>
                             <a href="/2016/02/22/multi_lang/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/01/23/sumarry_2015/">
-                            2015我的年度总结
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-01-23T16:15:02+08:00">
-	
-		    Jan 23, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="background">background</h2><blockquote>
-<p>年前就准备着手写这个总结了，却一直拖着，想必是自己的拖延症越来越严重了，今天已经是2016年2月22日，干脆扔掉纠结，硬着头皮也要完成这篇文章。</p>
-<p>2015对我来说是非常重要的一年，工作的第三个年头，从传统软件公司转入互联网公司，让自己在风口中也能吹到一点风，从后端转入前端，熬夜加班上线已不常见，离开深圳来到广州，生活气息更加浓厚的广州成为毕业后呆的第二个城市。</p>
-<p>整个2015，可以从几个方面来概括：工作、学习、生活、规划</p>
-</blockquote>
-<ol>
-<li><p>工作，年初有幸被派到上海银联出差一周，那时候上海天气还比较寒冷，我们就边工作边从天气开始聊天，虽然只有短短一周时间，但是无论是新认识的人还是第一次去的地方，都给我很深的触动，心底里也深深的喜欢上这座城市，回深之后的工作相对之前变数更大，公司服务器经常受到不明的攻击，网站和客户端更新次数也越发频繁，熬夜的次数也越来越多，记得有一次我开发的一个秒杀活动页，由于后台上线问题一直到隔天下午才下班，让我深深觉得工作效率才是公司需要急需解决的问题，时间来到年中的时候我决定过来现在的公司，新公司给我干的活儿少了很多，只需要单纯的做好手上的事情就足够，开始还真有点不适应，因为很多系统由于权限问题无法直接访问，只能找测试帮忙，所有事情都要按流程走，渐渐的我也明白这也只是时间问题，很快我到这个公司也快有一年的时间，也并不会觉得现在的工作简单，因为现在的侧重点是在追求其深度上，而之前是一直在追求广度。</p>
-</li>
-<li><p>学习，其实前面有两篇文章已经列出了我在2015年看过的书和看过的视频，大概可以囊括我在2015年的整个学习历程，除此之外还想补充下，虽然是个失败的结果，但是还是对我自己的学习方法增加了信心，从8月份开始一直在备战考研，其实有很多课程在大学并没有怎么认真学习过，但是就这这几个月的时间里，曾经觉得考研是多么遥远的一件事情，事实上自己做过了才发现不过如此。</p>
-</li>
-<li><p>生活，安逸的生活并不是没有想过，但是来了深圳，去了上海，来了广州，却觉得再也回去不了，安逸的生活可能根本不是我想要的。</p>
-</li>
-<li><p>规划，记得2014年初年度财务计划，2015年竟然都没有实现，所以2016年很重要的一条规划是要学会理财。</p>
-</li>
-</ol>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/01/23/sumarry_2015/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

@@ -6,35 +6,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>Web 应用的构建过程 - yolynn</title>
+    <title>CSS基础到进阶 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
         <link rel="icon" href="http://yolynn.com/assets/images/head.png">
     
     
-    <meta name="description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
+    <meta name="description" content="学习CSS需要会什么？DSL作为领域特定语言，其基本思想“求专不求全”，不像通用目的语言那样覆盖目标范围涵盖一切软件问题，而是针对某一特定问题的计算机语言，其实自计算机被发明起，人们就是开始使用DSL了，常用的DSL你还需要了解它们的用途：
 
-Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
-
-Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
+SQL 关系型数据库，用于查询和变更数据
+CSS 样式表描述语言
+HTML web标记型语言
+Ant、Rake、Make 用于软件系统构建的语言
+YACC、">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Web 应用的构建过程">
-<meta property="og:url" content="http://yolynn.com/2016/08/17/web_start/index.html">
+<meta property="og:title" content="CSS基础到进阶">
+<meta property="og:url" content="http://yolynn.com/2016/08/22/css/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
+<meta property="og:description" content="学习CSS需要会什么？DSL作为领域特定语言，其基本思想“求专不求全”，不像通用目的语言那样覆盖目标范围涵盖一切软件问题，而是针对某一特定问题的计算机语言，其实自计算机被发明起，人们就是开始使用DSL了，常用的DSL你还需要了解它们的用途：
 
-Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
-
-Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
-<meta property="og:updated_time" content="2016-10-17T10:16:00.000Z">
+SQL 关系型数据库，用于查询和变更数据
+CSS 样式表描述语言
+HTML web标记型语言
+Ant、Rake、Make 用于软件系统构建的语言
+YACC、">
+<meta property="og:image" content="https://www.processon.com/chart_image/5853930ee4b097c6e69d2487.png">
+<meta property="og:image" content="http://myblogimage.qiniudn.com/illustration%5Cthree_core_concepts_of_cssD65A4E60-A213-481C-86D6-A3929A0A8D28.png">
+<meta property="og:updated_time" content="2016-12-16T08:46:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web 应用的构建过程">
-<meta name="twitter:description" content="Web 应用的构建过程在刚创建项目的时候，我们都会有一个完整的构建思路。
+<meta name="twitter:title" content="CSS基础到进阶">
+<meta name="twitter:description" content="学习CSS需要会什么？DSL作为领域特定语言，其基本思想“求专不求全”，不像通用目的语言那样覆盖目标范围涵盖一切软件问题，而是针对某一特定问题的计算机语言，其实自计算机被发明起，人们就是开始使用DSL了，常用的DSL你还需要了解它们的用途：
 
-Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。
-
-Check Style。通常我们会在我们的项目里定义一些代码规范，如 Java">
+SQL 关系型数据库，用于查询和变更数据
+CSS 样式表描述语言
+HTML web标记型语言
+Ant、Rake、Make 用于软件系统构建的语言
+YACC、">
     
     
         
@@ -247,13 +255,13 @@ Check Style。通常我们会在我们的项目里定义一些代码规范，如
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Web 应用的构建过程
+            CSS基础到进阶
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-08-17T18:15:02+08:00">
+    <time itemprop="datePublished" datetime="2016-08-22T18:15:02+08:00">
 	
-		    Aug 17, 2016
+		    Aug 22, 2016
     	
     </time>
     
@@ -263,106 +271,93 @@ Check Style。通常我们会在我们的项目里定义一些代码规范，如
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h6 id="Web_应用的构建过程">Web 应用的构建过程</h6><p>在刚创建项目的时候，我们都会有一个完整的构建思路。</p>
+            <h2 id="学习CSS需要会什么？">学习CSS需要会什么？</h2><p>DSL作为领域特定语言，其基本思想“求专不求全”，不像通用目的语言那样覆盖目标范围涵盖一切软件问题，而是针对某一特定问题的计算机语言，其实自计算机被发明起，人们就是开始使用DSL了，常用的DSL你还需要了解它们的用途：</p>
+<ol>
+<li>SQL 关系型数据库，用于查询和变更数据</li>
+<li>CSS 样式表描述语言</li>
+<li>HTML web标记型语言</li>
+<li>Ant、Rake、Make 用于软件系统构建的语言</li>
+<li>YACC、Bison、ANTLR 用来生成语法分析器的语言</li>
+<li>RSpec、Cucumber Ruby环境下的行为驱动测试语言</li>
+</ol>
+<p>DSL是用“有限表达力”来描述DSL最重要的特征，DSL也只能给一个专门领域建模，但是表现力更强。</p>
+<h2 id="CSS是什么？">CSS是什么？</h2><p>CSS全称是“层叠样式表 Cascading Style Sheets”，它主要用于定义HTML内容在浏览器内的显示内容，比如文字、颜色、字体等</p>
+<h4 id="工作流">工作流</h4><p><img src="https://www.processon.com/chart_image/5853930ee4b097c6e69d2487.png" alt=""></p>
 <ul>
-<li><p>Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。</p>
-</li>
-<li><p>Check Style。通常我们会在我们的项目里定义一些代码规范，如 JavaScript 中的使用两个空格的缩进，Java 的 Checkstyle 中一个函数不能超过30行的限制。</p>
-</li>
-<li><p>单元测试。作为测试中最基础也是最快的测试，这个测试将集中于测试单个函数的是不是正确的。</p>
-</li>
-<li><p>功能测试。功能测试的意义在于，保证一个功能依赖的几个函数组合在一起也是可以工作的。</p>
-</li>
-<li><p>Mock Server。当我们的代码依赖于第三方服务的时候，我们就需要一个 Mock Server 来保证我们的功能代码可以独立地测试。</p>
-</li>
-<li><p>集成测试。这一步将集成前台、后台，并且运行起最后将上线的应用。接着依据于用户所需要的功能来编写相应的测试，来保证一个个的功能是可以工作的。</p>
-</li>
-<li><p>打包。对于部署来说，直接安装一个 RPM 包，或者 DEB 包是最方便的事。在这个包里会包含应用程序所需的所有二进制文件、数据和配置文件等等。</p>
-</li>
-<li><p>上传包。在完成打包后，我们就可以上传这个软件包了。</p>
-</li>
-<li><p>部署。最后，我们就可以在我们的线上环境中安装这个软件包。</p>
-</li>
+<li>选择符：选择器，用来指明网页中要应用样式规则的元素</li>
+<li>声明：“{}”  属性 和 值用 “：”分隔</li>
+<li>CSS样式：内联、嵌入、外部三种</li>
 </ul>
-<h6 id="Web_应用的构建实战">Web 应用的构建实战</h6><pre><code>下面就让我们来构建一个简单的 Web 应用，来实践一下这个过程。在这里，我们要使用到的一个工具是 Gulp，当然对于 Grunt 也是类似的。
-
-Gulp 入门指南
-
-Gulp.js 是一个自动化构建工具，开发者可以使用它在项目开发过程中自动执行常见任务。Gulp.js 是基于 Node.js 构建的，利用 Node.js 流的威力，你可以快速构建项目并减少频繁的 IO 操作。Gulp.js 源文件和你用来定义任务的 Gulp 文件都是通过 JavaScript（或者 CoffeeScript ）源码来实现的。
-全局安装 gulp：
-$ npm install --<span class="keyword">global</span> gulp
-作为项目的开发依赖（devDependencies）安装：
-$ npm install --save-dev gulp
-在项目根目录下创建一个名为 gulpfile.js 的文件：
-<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
-
-gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-  <span class="comment">// 将你的默认的任务代码放在这</span>
-});
-运行 gulp：
-$ gulp
-默认的名为 <span class="keyword">default</span> 的任务（task）将会被运行，在这里，这个任务并未做任何事情。接下来，我们就可以打造我们的应用的构建系统了。
-
-代码质量检测工具
-
-当 C 还是一门新型的编程语言时，还存在一些未被原始编译器捕获的常见错误，所以程序员们开发了一个被称作 lint 的配套项目用来扫描源文件，查找问题。
-
-对应于不同的语言都会有不同的 lint 工具，在 JavaScript 中就有 JSLint。JavaScript 是一门年轻、语法灵活多变且对格式要求相对松散的语言，因此这样的工具对于这门语言来说比较重要。
-
-<span class="number">2011</span>年，一个叫 Anton Kovalyov 的前端程序员借助开源社区的力量弄出来了 JSHint，其思想基本上和 JSLint 是一致的，但是其有一下几项优势：
-
-可配置规则，每个团队可以自己定义自己想要的代码规范。
-对社区非常友好，社区支持度高。
-可定制的结果报表。
-下面就让我们来安装这个软件吧：
-
-安装及使用
-
-npm install jshint gulp-jshint --save-dev
-示例代码:
-
-<span class="keyword">var</span> jshint = <span class="keyword">require</span>(<span class="string">'gulp-jshint'</span>);
-<span class="keyword">var</span> gulp   = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
-
-gulp.task(<span class="string">'lint'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-  <span class="keyword">return</span> gulp.src(<span class="string">'./lib/*.js'</span>)
-    .pipe(jshint())
-    .pipe(jshint.reporter(<span class="string">'YOUR_REPORTER_HERE'</span>));
-});
-自动化测试工具
-
-一般来说，自动测试应该从两部分考虑：
-
-单元测试
-功能测试
-Mocha 是一个可以运行在 Node.js 和浏览器环境里的测试框架，
-
-<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
-<span class="keyword">var</span> mocha = <span class="keyword">require</span>(<span class="string">'gulp-mocha'</span>);
-
-gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
-    <span class="keyword">return</span> gulp.src(<span class="string">'test.js'</span>, {read: <span class="keyword">false</span>})
-        <span class="comment">// gulp-mocha needs filepaths so you can't have any plugins before it</span>
-        .pipe(mocha({reporter: <span class="string">'nyan'</span>}));
-});
-</code></pre><ul>
-<li><p>编译</p>
-<p>  对于静态型语言来说，编译是一个很重要的步骤。不过，对于动态语言来说也存在这样的工具。</p>
-<p>  动态语言的编译</p>
-<p>  可以说这类型的语言，是以我们常见的 JavaScript 为代表。</p>
-<p>  CoffeeScript 是一套 JavaScript 的转译语言，并且它增强了 JavaScript 的简洁性与可读性。</p>
-<p>  Webpack 是一款模块加载器兼打包工具，它能把各种资源，例如 JS（含JSX）、coffee、样式（含less/sass）、图片等都作为模块来使用和处理。</p>
-<p>  Babel 是一个转换编译器，它能将 ES6 转换成ES5，以便在较低版本的浏览器中正确运行。</p>
-</li>
-<li><p>打包</p>
-<p>  在 GNU/Linux 系统的软件包里通过包含了已压缩的软件文件集以及该软件的内容信息。常见的软件包有</p>
-<p>  DEB。Debian 软件包格式，文件扩展名为 .deb<br>  RPM（原 Red Hat Package Manager，现在是一个递归缩写）。该软件包分为二进制包（Binary）、源代码包（Source）和 Delta 包三种。二进制包可以直接安装在计算机中，而源代码包将会由 RPM 自动编译、安装。源代码包经常以 src.rpm 作为后缀名。<br>  压缩文档 tar.gz。通常是该软件的源码，故而在安装的过程中需要编译、安装，并且在编译时需要自己手动安装所需要依赖的软件。在软件仓库没有最新版本的软件时，tar.gz 往往是最好的选择。<br>  由于这里的打包过程比较繁琐，就不介绍了。有兴趣的读者可以自己了解一下。</p>
-</li>
-<li><p>上传及发布包</p>
-<p>  上传包之前我们需要创建一个相应的文件服务器，又或者是相应的软件源。并且对于我们的产品环境的服务器来说，我们还需要指定好这个软件源才能安装这个包。</p>
-<p>  以 Ubuntu 为例，Ubuntu 里的许多应用程序软件包，是放在网络里的服务器上，这些服务器网站，就称作“源”，从源里可以很方便地获取软件包。</p>
-<p>  因而在这一步中，我们所需要做的事便是将我们打包完的软件上传到相应的服务器上。</p>
-</li>
+<h2 id="为什么要用CSS?">为什么要用CSS?</h2><h4 id="CSS3">CSS3</h4><p>CSS3带来了更多的新特性，使其更好用、更强大：</p>
+<ul>
+<li>圆角-半径（border-radius:8px）</li>
+<li>阴影（box-shadow:10px）</li>
+<li>文字特效（text-shadow、）</li>
+<li>线性渐变（gradient）</li>
+<li>旋转（transform）</li>
+<li>transform:rotate(9deg) scale(0.85,0.90) </li>
+<li>translate(0px,-30px) skew(-9deg,0deg);//旋转,缩放,定位,倾斜</li>
+<li>增加了更多的CSS选择器</li>
+<li>多背景 rgba</li>
+</ul>
+<h4 id="Bootstrap">Bootstrap</h4><p>github上不乏有各种类似Bootstrap提供了强大CSS功能的现成的好用的库</p>
+<p>举个🌰:<br><a href="http://www.jianshu.com/p/31118d83cb5f" target="_blank" rel="external">10个值得前端收藏的CSS3动效库（工具）</a></p>
+<h4 id="SASS_&amp;_LESS">SASS &amp; LESS</h4><p>CSS预处理技术，为CSS（DSL）增加了编程特性</p>
+<h2 id="CSS怎么用？">CSS怎么用？</h2><h4 id="元素类型">元素类型</h4><ul>
+<li>块级元素（block）: div h1 hr p table ul form</li>
+<li>行内元素（inline）: span a img span br </li>
+<li>可变元素（inline-block）: 既在行内显示，又能设置宽高</li>
+</ul>
+<h4 id="盒模型">盒模型</h4><p>页面上的每个元素（包括内联元素）都可以看成一个盒子。<br><img src="http://myblogimage.qiniudn.com/illustration%5Cthree_core_concepts_of_cssD65A4E60-A213-481C-86D6-A3929A0A8D28.png" alt=""><br>显而易见，盒模型有四部分组成：</p>
+<p><strong>content -&gt; padding -&gt; border -&gt; margin</strong></p>
+<p>所以一个元素的宽度</p>
+<ol>
+<li>content + 2 <em> padding + 2 </em> border + 2 * margin</li>
+<li>IE9以下： content + 2 * margin</li>
+</ol>
+<p>W3C为了解决差异，在CSS3中加了box-sizing属性，当设置了box-sizing:border-box;时，就和IE的标准一致。一般加上这个：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*, *<span class="pseudo">:before</span>, *<span class="pseudo">:after</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="position">position</h4><p>定位有五种：<a href="http://www.w3school.com.cn/cssref/pr_class_position.asp" target="_blank" rel="external">参考实例</a></p>
+<ol>
+<li>static </li>
+<li>relative</li>
+<li>absolute</li>
+<li>fixed</li>
+<li>inherit</li>
+</ol>
+<p>注意：位置在absolute和fixed时，会发生三件事：</p>
+<ol>
+<li>元素往Z轴方向上移一层，会覆盖下层元素</li>
+<li>元素变为块级元素，可以设置宽高</li>
+<li>如果本身是块级元素，元素宽度则由100%变为auto</li>
+</ol>
+<h4 id="float">float</h4><p>元素浮动四个属性：</p>
+<ol>
+<li>left</li>
+<li>right</li>
+<li>none</li>
+<li>inherit</li>
+</ol>
+<p>前辈经验分享：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/iyangyuan/archive/2013/03/27/2983813.html" target="_blank" rel="external">经验分享：CSS浮动(float,clear)通俗讲解</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/css-float%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6%E3%80%81%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%8B%93%E5%B1%95%E4%B8%80/" target="_blank" rel="external">CSS float浮动的深入研究、详解及拓展(一)</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/css-float%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6%E3%80%81%E8%AF%A6%E8%A7%A3%E5%8F%8A%E6%8B%93%E5%B1%95%E4%BA%8C/" target="_blank" rel="external">CSS float浮动的深入研究、详解及拓展(二)</a></li>
+<li><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a></li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>只有左右浮动，没有上下浮动</li>
+<li>元素设置float后，会往Z轴上移一层（与position:absolute一致)</li>
+<li>浮动不会影响上一个兄弟元素</li>
+<li>浮动后，下一个兄弟元素会紧贴到该元素之前没有设置float的元素之后（就是下一个元素会补位）</li>
+<li>下一个兄弟元素有内联元素，则会绕该元素显示，类似文字环绕图片效果</li>
+<li>该元素变为块级元素，相当于设置了display:block;</li>
+</ol>
+<h2 id="CSS的实际应用">CSS的实际应用</h2><h4 id="Bootstrap-1">Bootstrap</h4><ul>
+<li>预处理脚本 SASS LESS</li>
+<li>一个框架 多钟设备</li>
+<li>特性齐全</li>
 </ul>
 
             
@@ -375,7 +370,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/22/css/"  data-tooltip="CSS基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/02/react/"  data-tooltip="React基础到进阶">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -383,7 +378,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/22/javascript/" data-tooltip="JavaScript基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/17/web_start/" data-tooltip="Web 应用的构建过程">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -398,17 +393,17 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -446,7 +441,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/22/css/"  data-tooltip="CSS基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/02/react/"  data-tooltip="React基础到进阶">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -454,7 +449,7 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/22/javascript/" data-tooltip="JavaScript基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/17/web_start/" data-tooltip="Web 应用的构建过程">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -469,17 +464,17 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -499,17 +494,17 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/17/web_start/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/17/web_start/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/17/web_start/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/08/22/css/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
