@@ -239,6 +239,120 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/12/30/ios_animation/">
+                            iOS动画基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-12-30T18:15:02+08:00">
+	
+		    Dec 30, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习iOS动画需要会什么？">学习iOS动画需要会什么？</h2><p>所谓动画，也就是一幅一幅图片在短时间内连续播放的效果，动画和电影一般也就<strong>24帧/s</strong>，也就是说每秒播放24张图片，那么肉眼看到的就是连续的画面效果。动画分为两大类：</p>
+<ol>
+<li>逐帧动画：<strong>一帧一帧</strong>显示动画的图像序列</li>
+<li>关键帧动画：只需指定<strong>一些关键帧</strong>，让计算机计算出每一帧图像</li>
+</ol>
+<p>其中视图的状态包括<strong>位置、透明度、旋转角度、形状、颜色</strong>等的变化</p>
+<h2 id="iOS动画是什么？">iOS动画是什么？</h2><p>iOS动画基于CALayer，使用CoreAnimation开发动画的本质就是将CALayer中的内容转化为<strong>位图</strong>而供硬件操作</p>
+<h4 id="工作流">工作流</h4><p><img src="https://www.processon.com/chart_image/58592f63e4b0db9f2e1317d7.png" alt=""></p>
+<h4 id="渲染机制">渲染机制</h4><p><img src="https://www.processon.com/chart_image/58593326e4b0db9f2e1359a4.png" alt=""><br>动画和视图的渲染其实是在另外一个进程BackBoard做的</p>
+<h4 id="渲染优化">渲染优化</h4><p><img src="https://www.processon.com/chart_image/585938fce4b0db9f2e13b5e9.png" alt=""></p>
+<h4 id="实现方式">实现方式</h4><h6 id="UIImageView动画">UIImageView动画</h6><p>逐帧动画，效果取决于animationImages的<strong>图片细度和数量</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#35774;&#32622;&#21160;&#30011;&#24103;&#10;fishAni.animationImages=[NSArray arrayWithObjects:[UIImage imageNamed:@&#34;1.jpg&#34;],[UIImage imageNamed:@&#34;2.jpg&#34;],[UIImage imageNamed:@&#34;3.jpg&#34;],nil];</span><br></pre></td></tr></table></figure>
+<h6 id="UIView动画">UIView动画</h6><p>关键帧动画，实现<strong>View的属性变化</strong>产生的效果</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[UIView animateWithDuration:&#60;#(NSTimeInterval)#&#62; animations:&#60;#^(void)animations#&#62;];</span><br></pre></td></tr></table></figure>
+<h6 id="CoreAnimation">CoreAnimation</h6><p><img src="https://www.processon.com/chart_image/5858db28e4b0db9f2e0ae2ee.png" alt=""></p>
+<p>CoreAnimation分为三大类：</p>
+<ol>
+<li>CAPropertyAnimation(属性动画，<strong>控制动画属性</strong>设置动画)<ul>
+<li>CABasicAnimation : 只有初始状态和结束状态，<strong>两个关键帧</strong></li>
+<li>CAKeyframeAnimation : 通过<strong>多个状态</strong>控制</li>
+</ul>
+</li>
+<li>CAAnimationGroup(动画组)<ul>
+<li>一种组合模式设计，所有效果并发执行</li>
+</ul>
+</li>
+<li>CATransition(转场动画) <ul>
+<li>通过滤镜进行动画效果设置</li>
+</ul>
+</li>
+</ol>
+<h2 id="为什么要用iOS动画？">为什么要用iOS动画？</h2><h4 id="贝塞尔曲线">贝塞尔曲线</h4><p>数学曲线：起始点、终止点、控制点，通过调整控制点，贝塞尔发生变化</p>
+<h4 id="CAShapeLayer">CAShapeLayer</h4><p>继承于CALayer，通过矢量图（非bitmap）绘制图层类，常与UIBezierPath配合使用，它的优点：</p>
+<ol>
+<li>渲染快</li>
+<li>内存消耗少</li>
+<li>不会被图层边界裁剪掉</li>
+<li>不会出现像素化</li>
+</ol>
+<h4 id="CAReplicatorLayer">CAReplicatorLayer</h4><p>可以复制子层的Layer，复制出来的和原来的子layer拥有形同的动效</p>
+<h2 id="iOS动画怎么用？">iOS动画怎么用？</h2><p>举两个常见的🌰</p>
+<h4 id="环形进度条">环形进度条</h4><p>效果：</p>
+<p>构成：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/943491-35bd9029f967d8d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这两个环依赖于：贝塞尔曲线 、 CAShapeLayer</p>
+<ol>
+<li>利用贝塞尔曲线绘制底色环路径</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *path=[UIBezierPath bezierPathWithArcCenter:CGPointMake(50,50) radius:25 startAngle:CATDegreesToRadians(_startAngle) endAngle:CATDegreesToRadians(_endAngle) clockwise:YES];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>把路径赋给CAShapeLayer，并加入self.layer显示</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_trackLayer=[CAShapeLayer layer];&#10;_trackLayer.frame=self.bounds;&#10;_trackLayer.fillColor = [UIColor clearColor].CGColor;&#10;_trackLayer.strokeColor = _curveBgColor.CGColor;&#10;_trackLayer.lineCap = kCALineCapRound;&#10;_trackLayer.path=path.CGPath;&#10;[self.layer addSublayer:_trackLayer];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>进度环的实现和底色环相似，并结合CATransaction实现动画</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[CATransaction begin];&#10;[CATransaction setDisableActions:!animated];&#10;[CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];&#10;[CATransaction setAnimationDuration:1];&#10;_progressLayer.strokeEnd=progress;&#10;[CATransaction commit];</span><br></pre></td></tr></table></figure>
+<p>具体工程参见：<a href="https://github.com/CatchZeng/CATCurveProgressView" target="_blank" rel="external">CATCurveProgressView</a></p>
+<h4 id="雷达图(咻一咻、波纹)">雷达图(咻一咻、波纹)</h4><p>效果：</p>
+<p>实现步骤：</p>
+<ol>
+<li>利用CAShapeLayer创建脉冲层（就是一个圈圈）</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_pulseLayer = [CAShapeLayer layer];&#10;_pulseLayer.frame = self.layer.bounds;&#10;_pulseLayer.path = [UIBezierPath bezierPathWithOvalInRect:_pulseLayer.bounds].CGPath;&#10;_pulseLayer.fillColor = [UIColor blueColor].CGColor;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>利用CAReplicatorLayer复制多个脉冲层</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_replicatorLayer = [CAReplicatorLayer layer];&#10;_replicatorLayer.frame = self.bounds;&#10;_replicatorLayer.instanceCount = 6;&#10;_replicatorLayer.instanceDelay = 1.5;&#10;[_replicatorLayer addSublayer:self.pulseLayer];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>加上透明度与大小的动画</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CABasicAnimation *scaleAnima = [CABasicAnimation animationWithKeyPath:@&#34;transform&#34;];&#10;scaleAnima.fromValue = [NSValue valueWithCATransform3D:CATransform3DScale(CATransform3DIdentity, 0.0, 0.0, 0.0)];&#10;scaleAnima.toValue = [NSValue valueWithCATransform3D:CATransform3DScale(CATransform3DIdentity, 1.0, 1.0, 0.0)];&#10;&#10;_opacityAnima = [CABasicAnimation animationWithKeyPath:@&#34;opacity&#34;];&#10;_opacityAnima.fromValue = @(0.3);&#10;_opacityAnima.toValue = @(0.0);&#10;&#10;_animaGroup = [CAAnimationGroup animation];&#10;_animaGroup.animations = @[self.opacityAnima, scaleAnima];&#10;_animaGroup.duration = 9;&#10;_animaGroup.autoreverses = NO;&#10;_animaGroup.repeatCount = HUGE;&#10;&#10;[self.pulseLayer addAnimation:self.animaGroup forKey:@&#34;groupAnimation&#34;];</span><br></pre></td></tr></table></figure>
+<p>具体工程参见：<a href="https://github.com/CatchZeng/CATRadarView" target="_blank" rel="external">CATRadarView</a></p>
+<h2 id="iOS动画的实际应用">iOS动画的实际应用</h2><h4 id="XX公益，脉冲动画">XX公益，脉冲动画</h4><h4 id="XX芯，爱心动画">XX芯，爱心动画</h4>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/12/30/ios_animation/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/12/22/ios_optimize/">
                             iOS性能优化基础到进阶
                         </a>
@@ -257,7 +371,7 @@
             
                 <div class="postShorten-content" itemprop="articleBody">
                     <h2 id="iOS性能优化需要会什么？">iOS性能优化需要会什么？</h2><p>搞好iOS性能优化有时候是一件很难的事情，在开发过程中要时刻考虑到性能影响，不然开发出来的产品只会遭到用户的摒弃</p>
-<h2 id="iOS性能优化是什么？">iOS性能优化是什么？</h2><p>建议将iOS的性能优化分为三个级别，慢慢补充：</p>
+<h2 id="iOS性能优化是什么？">iOS性能优化是什么？</h2><p>建议将iOS的性能优化分为两个级别，慢慢补充：</p>
 <h4 id="基础级">基础级</h4><ol>
 <li>用ARC管理内存</li>
 <li>在正确的地方使用reuseIdentifier</li>
