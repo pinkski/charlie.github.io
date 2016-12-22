@@ -6,41 +6,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>从Web看Native的MVVM - yolynn</title>
+    <title>iOS直播基础到进阶 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
         <link rel="icon" href="http://yolynn.com/assets/images/head.png">
     
     
-    <meta name="description" content="背景
-  随着前端技术的在开发工作中的角色越来越重要，需求量也越来越大，那么高效率的框架也应运而生，过去script方式已进化为MVC，现在我们是否应该顺应潮流推动MVC进化到MVVM呢？（MVP）
+    <meta name="description" content="学习iOS直播需要会什么？直播很火，直播中的基础功能：
 
-介绍
-web与native的组成对比
-web : html + css + js
-android : 四大组件(activity、service、broadcase receiver、content">
+推流（支持业界标准、软编及硬编）
+播放（直播支持FLV/RTMP、点播支持FLV/HLS/MP4）
+互动消息(海量文本、弹幕、点赞、送礼等)
+动效表情(人脸识别、人脸跟踪、特效表情渲染)
+混音伴奏（麦克风+伴奏）
+智能选路（选择最优推流服务器）
+延迟修正（帧维度的声画同步校准）
+带宽自适应（流畅度、清晰度、延迟三维度平衡）
+运营监控（视频监">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="从Web看Native的MVVM">
-<meta property="og:url" content="http://yolynn.com/2015/09/22/mvvm_profile/index.html">
+<meta property="og:title" content="iOS直播基础到进阶">
+<meta property="og:url" content="http://yolynn.com/2015/11/30/ios_live/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="背景
-  随着前端技术的在开发工作中的角色越来越重要，需求量也越来越大，那么高效率的框架也应运而生，过去script方式已进化为MVC，现在我们是否应该顺应潮流推动MVC进化到MVVM呢？（MVP）
+<meta property="og:description" content="学习iOS直播需要会什么？直播很火，直播中的基础功能：
 
-介绍
-web与native的组成对比
-web : html + css + js
-android : 四大组件(activity、service、broadcase receiver、content">
-<meta property="og:updated_time" content="2016-01-16T10:56:31.000Z">
+推流（支持业界标准、软编及硬编）
+播放（直播支持FLV/RTMP、点播支持FLV/HLS/MP4）
+互动消息(海量文本、弹幕、点赞、送礼等)
+动效表情(人脸识别、人脸跟踪、特效表情渲染)
+混音伴奏（麦克风+伴奏）
+智能选路（选择最优推流服务器）
+延迟修正（帧维度的声画同步校准）
+带宽自适应（流畅度、清晰度、延迟三维度平衡）
+运营监控（视频监">
+<meta property="og:image" content="https://www.processon.com/chart_image/585a3d3ee4b03a03b17fe2b1.png">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79gw1faypg480rlj31kw0ogjyo.jpg">
+<meta property="og:image" content="https://www.processon.com/chart_image/585a3188e4b03a03b17e1b95.png">
+<meta property="og:updated_time" content="2016-12-22T05:44:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从Web看Native的MVVM">
-<meta name="twitter:description" content="背景
-  随着前端技术的在开发工作中的角色越来越重要，需求量也越来越大，那么高效率的框架也应运而生，过去script方式已进化为MVC，现在我们是否应该顺应潮流推动MVC进化到MVVM呢？（MVP）
+<meta name="twitter:title" content="iOS直播基础到进阶">
+<meta name="twitter:description" content="学习iOS直播需要会什么？直播很火，直播中的基础功能：
 
-介绍
-web与native的组成对比
-web : html + css + js
-android : 四大组件(activity、service、broadcase receiver、content">
+推流（支持业界标准、软编及硬编）
+播放（直播支持FLV/RTMP、点播支持FLV/HLS/MP4）
+互动消息(海量文本、弹幕、点赞、送礼等)
+动效表情(人脸识别、人脸跟踪、特效表情渲染)
+混音伴奏（麦克风+伴奏）
+智能选路（选择最优推流服务器）
+延迟修正（帧维度的声画同步校准）
+带宽自适应（流畅度、清晰度、延迟三维度平衡）
+运营监控（视频监">
     
     
         
@@ -253,13 +268,13 @@ android : 四大组件(activity、service、broadcase receiver、content">
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            从Web看Native的MVVM
+            iOS直播基础到进阶
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2015-09-22T23:14:02+08:00">
+    <time itemprop="datePublished" datetime="2015-11-30T18:15:02+08:00">
 	
-		    Sep 22, 2015
+		    Nov 30, 2015
     	
     </time>
     
@@ -269,60 +284,80 @@ android : 四大组件(activity、service、broadcase receiver、content">
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h2 id="背景">背景</h2><blockquote>
-<p>  随着前端技术的在开发工作中的角色越来越重要，需求量也越来越大，那么高效率的框架也应运而生，过去script方式已进化为MVC，现在我们是否应该顺应潮流推动MVC进化到MVVM呢？（MVP）</p>
-</blockquote>
-<h2 id="介绍">介绍</h2><ol>
-<li>web与native的组成对比<ul>
-<li>web : html + css + js</li>
-<li>android : 四大组件(activity、service、broadcase receiver、content provider)和五大布局(LinearLayout、FrameLayout、RelativeLayout、AbsoluteLayout、TableLayout) 还有 java (data binding library)</li>
-<li>iOS : xib/storyboard + oc/swift   </li>
-<li>react(react.js、react canvas、react native)  </li>
+            <h2 id="学习iOS直播需要会什么？">学习iOS直播需要会什么？</h2><p>直播很火，直播中的基础功能：</p>
+<ol>
+<li>推流（支持业界标准、软编及硬编）</li>
+<li>播放（直播支持FLV/RTMP、点播支持FLV/HLS/MP4）</li>
+<li>互动消息(海量文本、弹幕、点赞、送礼等)</li>
+<li>动效表情(人脸识别、人脸跟踪、特效表情渲染)</li>
+<li>混音伴奏（麦克风+伴奏）</li>
+<li>智能选路（选择最优推流服务器）</li>
+<li>延迟修正（帧维度的声画同步校准）</li>
+<li>带宽自适应（流畅度、清晰度、延迟三维度平衡）</li>
+<li>运营监控（视频监控、禁播、数据分析）</li>
+<li>手机录屏</li>
+</ol>
+<p>除此之外可能还有：</p>
+<ol>
+<li>实时录制</li>
+<li>实时水印</li>
+<li>实时截图</li>
+<li>实时转码</li>
+<li>实时鉴黄</li>
+<li>连麦互动</li>
+<li>秒级禁播</li>
+<li>延时直播</li>
+<li>美颜滤镜</li>
+</ol>
+<h2 id="iOS直播是什么？">iOS直播是什么？</h2><h4 id="工作流">工作流</h4><p><img src="https://www.processon.com/chart_image/585a3d3ee4b03a03b17fe2b1.png" alt=""></p>
+<h4 id="核心知识点">核心知识点</h4><p><img src="http://ww2.sinaimg.cn/large/006tNc79gw1faypg480rlj31kw0ogjyo.jpg" alt=""></p>
+<h2 id="为什么要用iOS直播?">为什么要用iOS直播?</h2><p>音视频技术处理有很多API，具体的功能点的实现可以参见：<a href="http://www.jianshu.com/p/d99e83cab39a?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note" target="_blank" rel="external">研发直播APP的收获-iOS</a></p>
+<ol>
+<li><a href="http://www.jianshu.com/p/bb9c41496f8e" target="_blank" rel="external">直播APP的性能优化-礼物篇</a></li>
+<li><a href="http://www.jianshu.com/p/37784e363b8a" target="_blank" rel="external">使用VideoToolbox硬编码H.264</a></li>
+<li><a href="http://www.jianshu.com/p/da18b979aeec" target="_blank" rel="external">使用VideoToolbox硬解码H.264</a></li>
+<li><a href="http://www.jianshu.com/p/a671f5b17fc1" target="_blank" rel="external">使用AudioToolbox编码AAC</a></li>
+<li><a href="http://www.jianshu.com/p/279a9e5b36b5" target="_blank" rel="external">使用AudioToolbox播放AAC</a></li>
+<li><a href="http://www.jianshu.com/p/39a1a8e78675" target="_blank" rel="external">使用AudioToolbox播放AAC</a></li>
+<li><a href="http://www.jianshu.com/p/ba5045da282c" target="_blank" rel="external">HLS推流的实现（iOS和OS X系统）</a></li>
+</ol>
+<h2 id="iOS直播怎么用？">iOS直播怎么用？</h2><h4 id="腾讯云_RTMPSDK_工作流">腾讯云 RTMPSDK 工作流</h4><p><img src="https://www.processon.com/chart_image/585a3188e4b03a03b17e1b95.png" alt=""></p>
+<h4 id="腾讯云_IMSDK">腾讯云 IMSDK</h4><h2 id="iOS直播的实际应用">iOS直播的实际应用</h2><h4 id="XX会_直播">XX会 直播</h4><ol>
+<li>边看边买，推荐直播中使用的商品<ul>
+<li>CAAnimationGroup showInView</li>
 </ul>
 </li>
-<li>web前端常用的MVVM主流框架<ul>
-<li>handlebars.js、knockout.js、ember.js、avalon.js、angular.js </li>
-<li>backbone.js?, react.js?</li>
+<li>点赞动画，累积到一定数量push商品详情<ul>
+<li>点赞数累积到20次以上上传</li>
+<li>桃心动画: CAShapeLayer  CAAnimationGroup </li>
 </ul>
 </li>
-<li>angularJS的核心功能<ul>
-<li>自动化双向数据绑定、模块化/组件化、依赖注入、语义化标签等</li>
+<li>弹幕<ul>
+<li>自己的IM实现</li>
 </ul>
 </li>
-<li>angularJS的原理<ul>
-<li>首先，浏览器会一直处于监听状态，一旦有事件被触发，就会被加到一个event queue中，event queue中的事件会一个一个的执行。</li>
-<li>event queue中的事件如果是被$apply()包起来的话，就会进入到AngularJS的context中，假设的fn()是我们希望在AngularJS的context中执行的函数。</li>
-<li>AngularJS将执行fn()函数，通常情况下，这个函数会改变应用的某些状态。</li>
-<li>然后AngularJS会进入到由两个小循环组成的digest循环中，一个循环是用来处理evalAsync队列（用来schedule一些需要在渲染视图之前处理的操作，通常通过setTimeout(0)实现，速度会比较慢，可能会出现视图抖动的问题）的，一个循环是处理watch列表（是一些表达式的集合，一旦有改变发生，那么watch函数就会被调用）的。digest循环会一直迭代知道evalAsync队列为空并且$watch列表也为空的时候，即model不再有任何变化。</li>
-<li>一旦AngularJS的$digest循环结束，整个执行就会离开AngularJS和Javascript的context，紧接着浏览器就会把数据改变后的视图重新渲染出来。</li>
-</ul>
-</li>
-<li>iOS常用的MVVM框架<ul>
-<li>KVO  reactiveCocoa</li>
-</ul>
-</li>
-<li>reactiveCocoa的核心功能<ul>
-<li>自动化双向数据绑定、模块化/组件化(?)、依赖注入(无)、语义化标签(?)等</li>
-<li>像KVO,但它用blocks代替了重写-observeValueForKeyPath:ofObject:change:context:</li>
-<li>提供了一个单一的，统一的方法去处理异步的行为,包括delegate方法,blocks回调,target-action机制,notifications和KVO.</li>
-</ul>
-</li>
-<li>reactiveCocoa的原理<ul>
-<li>RACSignal发送事件流给它的subscriber。目前总共有三种类型的事件：next、error、completed。</li>
-<li>RACSignal有很多方法可以来订阅不同的事件类型。每个方法都需要至少一个block，当事件发生时就会执行block中的逻辑。</li>
-<li>使用category来为很多基本UIKit控件添加signal。这样你就能给控件添加订阅了，text field的rac_textSignal就是这么来的。</li>
-</ul>
-</li>
-<li>angularJS与reactiveCocoa的对比<ul>
-<li>核心功能对比</li>
-<li>实现原理对比</li>
-<li>实际运用对比</li>
+<li>视频渲染层 <ul>
+<li>TXLivePlayer   </li>
+<li>可以研究下ijkplayer</li>
 </ul>
 </li>
 </ol>
-<h2 id="总结">总结</h2><blockquote>
-<p>MVVM是未来</p>
-</blockquote>
+<h4 id="XX蜂_直播">XX蜂 直播</h4><h6 id="海量弹幕的处理？">海量弹幕的处理？</h6><p>不能说用户发一次弹幕就上传一次，这样特别耗费CPU和流量，应该提供本地累积存储机制，比如在累积过100条后再触发上传</p>
+<h6 id="礼物的定时器？">礼物的定时器？</h6><p>可以使用CADisplayLink和NSTimer，一般mode选择NSRunLoopCommonModes</p>
+<h6 id="序列帧">序列帧</h6><p>加载很多次图片时，可以把所有图片放在一张图上，使用CGImageCreateWithImageInRect切割</p>
+<h6 id="内存优化">内存优化</h6><ol>
+<li>注意送豪华礼物时，内存会猛增20M左右，因为图片和动画效果</li>
+<li>图片本很小，加到内存猛增，查看imageName:（会缓存，但是使用完不释放） 和 imageWithContentsOfFile:（不缓存，使用完会回收）的使用是否恰当</li>
+<li>聊天UITableView性能消耗<ul>
+<li>cell高度计算，图片加载，layout优化</li>
+<li>缓存cell高度</li>
+<li>图片加载用cache实现</li>
+<li>尽量避免autolayout</li>
+<li>控制每帧刷新数量</li>
+<li>删除过多的历史消息</li>
+</ul>
+</li>
+</ol>
 
             
         </div>
@@ -334,7 +369,7 @@ android : 四大组件(activity、service、broadcase receiver、content">
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/11/30/ios_live/"  data-tooltip="iOS直播基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/22/ios_optimize/"  data-tooltip="iOS性能优化基础到进阶">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -342,7 +377,7 @@ android : 四大组件(activity、service、broadcase receiver、content">
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/22/mvvm_profile/" data-tooltip="从Web看Native的MVVM">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -357,17 +392,17 @@ android : 四大组件(activity、service、broadcase receiver、content">
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -405,7 +440,7 @@ android : 四大组件(activity、service、broadcase receiver、content">
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/11/30/ios_live/"  data-tooltip="iOS直播基础到进阶">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/22/ios_optimize/"  data-tooltip="iOS性能优化基础到进阶">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -413,7 +448,7 @@ android : 四大组件(activity、service、broadcase receiver、content">
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/22/mvvm_profile/" data-tooltip="从Web看Native的MVVM">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -428,17 +463,17 @@ android : 四大组件(activity、service、broadcase receiver、content">
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -458,17 +493,17 @@ android : 四大组件(activity、service、broadcase receiver、content">
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/09/22/mvvm_profile/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/11/30/ios_live/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>

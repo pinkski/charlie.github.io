@@ -524,6 +524,121 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/11/30/ios_live/">
+                            iOS直播基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-11-30T18:15:02+08:00">
+	
+		    Nov 30, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习iOS直播需要会什么？">学习iOS直播需要会什么？</h2><p>直播很火，直播中的基础功能：</p>
+<ol>
+<li>推流（支持业界标准、软编及硬编）</li>
+<li>播放（直播支持FLV/RTMP、点播支持FLV/HLS/MP4）</li>
+<li>互动消息(海量文本、弹幕、点赞、送礼等)</li>
+<li>动效表情(人脸识别、人脸跟踪、特效表情渲染)</li>
+<li>混音伴奏（麦克风+伴奏）</li>
+<li>智能选路（选择最优推流服务器）</li>
+<li>延迟修正（帧维度的声画同步校准）</li>
+<li>带宽自适应（流畅度、清晰度、延迟三维度平衡）</li>
+<li>运营监控（视频监控、禁播、数据分析）</li>
+<li>手机录屏</li>
+</ol>
+<p>除此之外可能还有：</p>
+<ol>
+<li>实时录制</li>
+<li>实时水印</li>
+<li>实时截图</li>
+<li>实时转码</li>
+<li>实时鉴黄</li>
+<li>连麦互动</li>
+<li>秒级禁播</li>
+<li>延时直播</li>
+<li>美颜滤镜</li>
+</ol>
+<h2 id="iOS直播是什么？">iOS直播是什么？</h2><h4 id="工作流">工作流</h4><p><img src="https://www.processon.com/chart_image/585a3d3ee4b03a03b17fe2b1.png" alt=""></p>
+<h4 id="核心知识点">核心知识点</h4><p><img src="http://ww2.sinaimg.cn/large/006tNc79gw1faypg480rlj31kw0ogjyo.jpg" alt=""></p>
+<h2 id="为什么要用iOS直播?">为什么要用iOS直播?</h2><p>音视频技术处理有很多API，具体的功能点的实现可以参见：<a href="http://www.jianshu.com/p/d99e83cab39a?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note" target="_blank" rel="external">研发直播APP的收获-iOS</a></p>
+<ol>
+<li><a href="http://www.jianshu.com/p/bb9c41496f8e" target="_blank" rel="external">直播APP的性能优化-礼物篇</a></li>
+<li><a href="http://www.jianshu.com/p/37784e363b8a" target="_blank" rel="external">使用VideoToolbox硬编码H.264</a></li>
+<li><a href="http://www.jianshu.com/p/da18b979aeec" target="_blank" rel="external">使用VideoToolbox硬解码H.264</a></li>
+<li><a href="http://www.jianshu.com/p/a671f5b17fc1" target="_blank" rel="external">使用AudioToolbox编码AAC</a></li>
+<li><a href="http://www.jianshu.com/p/279a9e5b36b5" target="_blank" rel="external">使用AudioToolbox播放AAC</a></li>
+<li><a href="http://www.jianshu.com/p/39a1a8e78675" target="_blank" rel="external">使用AudioToolbox播放AAC</a></li>
+<li><a href="http://www.jianshu.com/p/ba5045da282c" target="_blank" rel="external">HLS推流的实现（iOS和OS X系统）</a></li>
+</ol>
+<h2 id="iOS直播怎么用？">iOS直播怎么用？</h2><h4 id="腾讯云_RTMPSDK_工作流">腾讯云 RTMPSDK 工作流</h4><p><img src="https://www.processon.com/chart_image/585a3188e4b03a03b17e1b95.png" alt=""></p>
+<h4 id="腾讯云_IMSDK">腾讯云 IMSDK</h4><h2 id="iOS直播的实际应用">iOS直播的实际应用</h2><h4 id="XX会_直播">XX会 直播</h4><ol>
+<li>边看边买，推荐直播中使用的商品<ul>
+<li>CAAnimationGroup showInView</li>
+</ul>
+</li>
+<li>点赞动画，累积到一定数量push商品详情<ul>
+<li>点赞数累积到20次以上上传</li>
+<li>桃心动画: CAShapeLayer  CAAnimationGroup </li>
+</ul>
+</li>
+<li>弹幕<ul>
+<li>自己的IM实现</li>
+</ul>
+</li>
+<li>视频渲染层 <ul>
+<li>TXLivePlayer   </li>
+<li>可以研究下ijkplayer</li>
+</ul>
+</li>
+</ol>
+<h4 id="XX蜂_直播">XX蜂 直播</h4><h6 id="海量弹幕的处理？">海量弹幕的处理？</h6><p>不能说用户发一次弹幕就上传一次，这样特别耗费CPU和流量，应该提供本地累积存储机制，比如在累积过100条后再触发上传</p>
+<h6 id="礼物的定时器？">礼物的定时器？</h6><p>可以使用CADisplayLink和NSTimer，一般mode选择NSRunLoopCommonModes</p>
+<h6 id="序列帧">序列帧</h6><p>加载很多次图片时，可以把所有图片放在一张图上，使用CGImageCreateWithImageInRect切割</p>
+<h6 id="内存优化">内存优化</h6><ol>
+<li>注意送豪华礼物时，内存会猛增20M左右，因为图片和动画效果</li>
+<li>图片本很小，加到内存猛增，查看imageName:（会缓存，但是使用完不释放） 和 imageWithContentsOfFile:（不缓存，使用完会回收）的使用是否恰当</li>
+<li>聊天UITableView性能消耗<ul>
+<li>cell高度计算，图片加载，layout优化</li>
+<li>缓存cell高度</li>
+<li>图片加载用cache实现</li>
+<li>尽量避免autolayout</li>
+<li>控制每帧刷新数量</li>
+<li>删除过多的历史消息</li>
+</ul>
+</li>
+</ol>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/11/30/ios_live/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/09/22/mvvm_profile/">
                             从Web看Native的MVVM
                         </a>
