@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="yolynn">
+    <title>iOS多线程基础到进阶 - yolynn</title>
+    <meta name="author" content="yolynn">
+    
+    
+        <link rel="icon" href="http://yolynn.com/assets/images/head.png">
+    
+    
+    <meta name="description" content="学习iOS多线程需要会什么？进程是系统中并发执行的基本单位，线程是进程中执行运算的最小单位。
+iOS多线程是什么？Pthreads基于C语言，移植性强
+1#import &amp;#60;pthread.h&amp;#62;&amp;#10;pthread_t thread;&amp;#10;pthread_create(&amp;#38;thread, NULL, start, NULL);
+NSThread1NSThread *th">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="iOS多线程基础到进阶">
+<meta property="og:url" content="http://yolynn.com/2015/08/10/ios_thread/index.html">
+<meta property="og:site_name" content="yolynn">
+<meta property="og:description" content="学习iOS多线程需要会什么？进程是系统中并发执行的基本单位，线程是进程中执行运算的最小单位。
+iOS多线程是什么？Pthreads基于C语言，移植性强
+1#import &amp;#60;pthread.h&amp;#62;&amp;#10;pthread_t thread;&amp;#10;pthread_create(&amp;#38;thread, NULL, start, NULL);
+NSThread1NSThread *th">
+<meta property="og:updated_time" content="2016-12-26T04:57:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS多线程基础到进阶">
+<meta name="twitter:description" content="学习iOS多线程需要会什么？进程是系统中并发执行的基本单位，线程是进程中执行运算的最小单位。
+iOS多线程是什么？Pthreads基于C语言，移植性强
+1#import &amp;#60;pthread.h&amp;#62;&amp;#10;pthread_t thread;&amp;#10;pthread_create(&amp;#38;thread, NULL, start, NULL);
+NSThread1NSThread *th">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://yolynn.com/assets/images/head.png"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox-thumbs.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/tranquilpeak.css" type="text/css">
+    <!--STYLES END-->
+    
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">yolynn</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon "
+                href="/#about">
+        
+        
+            <i class="fa fa-lg fa-head.png"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/head.png"/>
+            </a>
+            <span class="sidebar-profile-name">yolynn</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/yolynn-bird" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="http://weibo.com/zxl20zxl" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-weibo"></i>
+                    <span class="sidebar-button-desc">global.weibo</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://stackoverflow.com/users/2662962/yolynn" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+                    <span class="sidebar-button-desc">Stack Overflow</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/zxl20zxl" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://www.instagram.com/yolynn.zxl" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-instagram"></i>
+                    <span class="sidebar-button-desc">global.instagram</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://dribbble.com/yolynn" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-dribbble"></i>
+                    <span class="sidebar-button-desc">global.dribbble</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="http://yolynn.com/2010/04/22/weixin/"
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-weixin"></i>
+                    <span class="sidebar-button-desc">global.weixin</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://www.zhihu.com/people/yolynn" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-flickr"></i>
+                    <span class="sidebar-button-desc">global.zhihu</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto://zxl20zxl@gmail.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            iOS多线程基础到进阶
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2015-08-10T18:15:02+08:00">
+	
+		    Aug 10, 2015
+    	
+    </time>
+    
+</div>
+
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h2 id="学习iOS多线程需要会什么？">学习iOS多线程需要会什么？</h2><p>进程是系统中并发执行的基本单位，线程是进程中执行运算的最小单位。</p>
+<h2 id="iOS多线程是什么？">iOS多线程是什么？</h2><h4 id="Pthreads">Pthreads</h4><p>基于C语言，移植性强</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &#60;pthread.h&#62;&#10;pthread_t thread;&#10;pthread_create(&#38;thread, NULL, start, NULL);</span><br></pre></td></tr></table></figure>
+<h4 id="NSThread">NSThread</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(run:) object:nil];&#10;[thread start];</span><br></pre></td></tr></table></figure>
+<h4 id="GCD">GCD</h4><h6 id="异步">异步</h6><p>异步和同步最大的区别在于异步不会<strong>阻塞当前线程</strong>，是否等待block完成后返回</p>
+<h6 id="队列">队列</h6><ol>
+<li>串行队列<ul>
+<li>主队列                 dispatch_get_main_queue()</li>
+<li>自定义队列            dispatch_queue_create(“私有串行”, DISPATCH_QUEUE_SERIAL)</li>
+</ul>
+</li>
+<li>并行队列<ul>
+<li>全局并发队列            dispatch_get_global_queue()</li>
+<li>自定义队列            dispatch_queue_create(“私有并行”, DISPATCH_QUEUE_CONCURRENT)</li>
+</ul>
+</li>
+</ol>
+<h6 id="任务">任务</h6><ol>
+<li>dispatch_sync(queue, block)</li>
+<li>dispatch_async(queue, block)</li>
+<li>dispatch_barrier_sync(queue, block)<ul>
+<li>传入的queue是自定义DISPATCH_QUEUE_CONCURRENT queue</li>
+<li>阻塞queue </li>
+<li>执行block前的任务后，执行block，解除阻塞</li>
+</ul>
+</li>
+<li>dispatch_barrier_async(queue, block)<ul>
+<li>传入的queue是自定义DISPATCH_QUEUE_CONCURRENT queue</li>
+<li>阻塞queue </li>
+<li>阻塞当前线程</li>
+</ul>
+</li>
+</ol>
+<h6 id="队列_+_任务">队列 + 任务</h6><ol>
+<li>队列组<ul>
+<li>dispatch_group_create()</li>
+<li>dispatch_group_async(group, queue, block)</li>
+<li>dispatch_group_notify(group, queue, block)</li>
+</ul>
+</li>
+</ol>
+<p><a href="http://tutuge.me/2015/04/03/something-about-gcd/index.html" target="_blank" rel="external">查看更多关于GCD的坑</a></p>
+<h4 id="NSOperation_&amp;_NSOperationQueue">NSOperation &amp; NSOperationQueue</h4><p>是对GCD更高一层的封装</p>
+<h6 id="NSOperation">NSOperation</h6><ol>
+<li>NSInvocationOperation </li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(run) object:nil];&#10;[operation start];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>NSBlockOperation</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^&#123;&#10;      NSLog(@&#34;%@&#34;, [NSThread currentThread]);&#10;  &#125;];&#10;  &#10;//&#28155;&#21152;&#22810;&#20010;Block&#65292;&#25903;&#25345;&#22810;&#32447;&#31243;&#10;for (NSInteger i = 0; i &#60; 5; i++) &#123;&#10;&#9;[operation addExecutionBlock:^&#123;&#10;&#9;NSLog(@&#34;&#31532;%ld&#27425;&#65306;%@&#34;, i, [NSThread currentThread]);&#10;&#9;&#125;];&#10;&#125;&#10;&#10;[operation start];</span><br></pre></td></tr></table></figure>
+<h6 id="NSOperationQueue">NSOperationQueue</h6><ol>
+<li>主队列<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSOperationQueue *queue = [NSOperationQueue mainQueue];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>其它队列</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//1.&#21019;&#24314;&#19968;&#20010;&#20854;&#20182;&#38431;&#21015;    &#10;NSOperationQueue *queue = [[NSOperationQueue alloc] init];&#10;&#10;//2.&#21019;&#24314;NSBlockOperation&#23545;&#35937;&#10;NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^&#123;&#10;    NSLog(@&#34;%@&#34;, [NSThread currentThread]);&#10;&#125;];&#10;&#10;//3.&#28155;&#21152;&#22810;&#20010;Block&#10;for (NSInteger i = 0; i &#60; 5; i++) &#123;&#10;    [operation addExecutionBlock:^&#123;&#10;        NSLog(@&#34;&#31532;%ld&#27425;&#65306;%@&#34;, i, [NSThread currentThread]);&#10;    &#125;];&#10;&#125;&#10;&#10;//4.&#38431;&#21015;&#28155;&#21152;&#20219;&#21153;&#10;[queue addOperation:operation];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>maxConcurrentOperationCount 最大并发数</li>
+<li>任务依赖</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//1.&#20219;&#21153;&#19968;&#65306;&#19979;&#36733;&#22270;&#29255;&#10;NSBlockOperation *operation1 = [NSBlockOperation blockOperationWithBlock:^&#123;&#10;    NSLog(@&#34;&#19979;&#36733;&#22270;&#29255; - %@&#34;, [NSThread currentThread]);&#10;    [NSThread sleepForTimeInterval:1.0];&#10;&#125;];&#10;&#10;//2.&#20219;&#21153;&#20108;&#65306;&#25171;&#27700;&#21360;&#10;NSBlockOperation *operation2 = [NSBlockOperation blockOperationWithBlock:^&#123;&#10;    NSLog(@&#34;&#25171;&#27700;&#21360;   - %@&#34;, [NSThread currentThread]);&#10;    [NSThread sleepForTimeInterval:1.0];&#10;&#125;];&#10;&#10;//3.&#20219;&#21153;&#19977;&#65306;&#19978;&#20256;&#22270;&#29255;&#10;NSBlockOperation *operation3 = [NSBlockOperation blockOperationWithBlock:^&#123;&#10;    NSLog(@&#34;&#19978;&#20256;&#22270;&#29255; - %@&#34;, [NSThread currentThread]);&#10;    [NSThread sleepForTimeInterval:1.0];&#10;&#125;];&#10;&#10;//4.&#35774;&#32622;&#20381;&#36182;&#10;[operation2 addDependency:operation1];      //&#20219;&#21153;&#20108;&#20381;&#36182;&#20219;&#21153;&#19968;&#10;[operation3 addDependency:operation2];      //&#20219;&#21153;&#19977;&#20381;&#36182;&#20219;&#21153;&#20108;&#10;&#10;//5.&#21019;&#24314;&#38431;&#21015;&#24182;&#21152;&#20837;&#20219;&#21153;&#10;NSOperationQueue *queue = [[NSOperationQueue alloc] init];&#10;[queue addOperations:@[operation3, operation2, operation1] waitUntilFinished:NO];</span><br></pre></td></tr></table></figure>
+<h2 id="为什么要用iOS多线程？">为什么要用iOS多线程？</h2><ol>
+<li>易于调度、提高并发、充分发挥硬件多核优势</li>
+</ol>
+<h2 id="iOS多线程怎么用？">iOS多线程怎么用？</h2><h4 id="死锁">死锁</h4><h6 id="为什么死锁">为什么死锁</h6><p>使用同步函数添加任务阻塞当前线程，则当前线程任务需等待添加的任务，被添加到队列的任务具有FIFO性质，它也在等待当前线程任务执行，进入相互等待造成死锁。</p>
+<h6 id="怎么避免死锁">怎么避免死锁</h6><ol>
+<li>同步转异步，释放阻塞</li>
+<li>任务添加到并发队列或其它队列</li>
+</ol>
+<h4 id="线程安全">线程安全</h4><p>多个线程抢占同一资源进行操作，如何避免？</p>
+<ol>
+<li>@synchronized(self)</li>
+<li>dispatch_semaphore<ul>
+<li>dispatch_semaphore_create(1)<ul>
+<li>dispatch_semaphore_signal </li>
+<li>dispatch_semaphore_wait</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NSLock</li>
+<li>pthread_mutex </li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)runSemaphore &#123;&#10;    &#10;    // 2, dispatch_semaphore&#10;    dispatch_semaphore_t signal = dispatch_semaphore_create(1);&#10;    dispatch_time_t overtime = dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC);&#10;    &#10;    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;&#10;        &#10;        dispatch_semaphore_wait(signal, overtime);  //signal value - 1&#10;        NSLog(@&#34;&#25805;&#20316;1&#65292;&#24320;&#22987;&#34;);&#10;        sleep(2);&#10;        NSLog(@&#34;&#25805;&#20316;1&#65292;&#32467;&#26463;&#34;);&#10;        dispatch_semaphore_signal(signal); //signal value + 1&#10;    &#125;);&#10;    &#10;    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;&#10;        &#10;        sleep(1);&#10;        dispatch_semaphore_wait(signal, overtime);  //signal value = 0  to  1&#10;        NSLog(@&#34;&#25805;&#20316;2&#65292;&#24320;&#22987;&#34;);&#10;        dispatch_semaphore_signal(signal);  //signal value = 2&#10;    &#125;);&#10;    &#10;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="延迟执行">延迟执行</h4><h6 id="perform">perform</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self performSelector:@selector(run:) withObject:@&#34;abc&#34; afterDelay:3];</span><br></pre></td></tr></table></figure>
+<h6 id="GCD-1">GCD</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#21019;&#24314;&#38431;&#21015;&#10;dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);&#10;// &#35774;&#32622;&#24310;&#26102;&#65292;&#21333;&#20301;&#31186;&#10;double delay = 3; &#10;&#10;dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), queue, ^&#123;&#10;    // 3&#31186;&#21518;&#38656;&#35201;&#25191;&#34892;&#30340;&#20219;&#21153;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<h6 id="NSTimer">NSTimer</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(run:) userInfo:@&#34;abc&#34; repeats:NO];</span><br></pre></td></tr></table></figure>
+<h4 id="单例_dispatch_once">单例 dispatch_once</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@interface Tool : NSObject &#60;NSCopying&#62;&#10;&#10;+ (instancetype)sharedTool;&#10;&#10;@end&#10;&#10;@implementation Tool&#10;&#10;static id _instance;&#10;&#10;+ (instancetype)sharedTool &#123;&#10;    static dispatch_once_t onceToken;&#10;    dispatch_once(&#38;onceToken, ^&#123;&#10;        _instance = [[Tool alloc] init];&#10;    &#125;);&#10;&#10;    return _instance;&#10;&#125;&#10;&#10;@end</span><br></pre></td></tr></table></figure>
+<h4 id="其它线程回主线程">其它线程回主线程</h4><ul>
+<li>NSThread</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self performSelectorOnMainThread:@selector(run) withObject:nil waitUntilDone:NO];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>GCD</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;&#10;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>NSOperation</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[NSOperationQueue mainQueue] addOperationWithBlock:^&#123;&#10;&#10;&#125;];</span><br></pre></td></tr></table></figure>
+<h2 id="iOS多线程的实际应用">iOS多线程的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="X蜂">X蜂</h4>
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/22/mvvm_profile/"  data-tooltip="从Web看Native的MVVM">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 yolynn. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/22/mvvm_profile/"  data-tooltip="从Web看Native的MVVM">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/08/10/ios_thread/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/head.png"/>
+        
+            <h4 id="about-card-name">yolynn</h4>
+        
+            <h5 id="about-card-bio"><p>云在青天水在瓶 - 幽灵鸟</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>vip.com</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                China
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/jquery.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox-thumbs.js" type="text/javascript"></script>
+<script src="/assets/js/tranquilpeak.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
