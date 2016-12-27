@@ -239,6 +239,117 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/08/20/ios_thirdparty/">
+                            iOS三方库源码基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-08-20T18:15:02+08:00">
+	
+		    Aug 20, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习iOS三方库源码需要会什么？">学习iOS三方库源码需要会什么？</h2><p>Github开源库何其多？第三方SDK何其多？要做到识别好的，吸收精华，取其思想，再结合实际形成自己的思想或方案</p>
+<h2 id="iOS三方库源码是什么？">iOS三方库源码是什么？</h2><p>列一些经典三方库，并阐述其中心思想</p>
+<h4 id="小工具">小工具</h4><h6 id="MLeaksFinder">MLeaksFinder</h6><ol>
+<li>给UIApplication添加Category <strong>UIApplication+MemoryLeak</strong></li>
+<li>hook系统函数<strong>sendAction:to:from:forEvent:</strong>使用<strong>objc_setAssociatedObject</strong>存储当前类的sender</li>
+<li>给NSObject添加Category <strong>NSObject+MemoryLeak</strong></li>
+<li><strong>objc_getAssociatedObject</strong>获取当前类的sender</li>
+<li>如果当前类的sender不是自己，则可能是有内存泄露发生，打印堆栈信息到控制台</li>
+<li><a href="https://github.com/Zepo/MLeaksFinder" target="_blank" rel="external">MLeaksFinder</a> 内嵌 <a href="https://github.com/facebook/FBRetainCycleDetector/tree/master/FBRetainCycleDetector" target="_blank" rel="external">FBRetainCycleDetector</a></li>
+</ol>
+<h6 id="FPSLabel">FPSLabel</h6><p>CADisplayLink在屏幕刷新时调用，刷新率通常<strong>60次/秒</strong></p>
+<ol>
+<li>创建displayLink </li>
+<li>添加到RunLoop</li>
+<li>tick中用count记录<strong>每秒</strong>调用次数</li>
+<li>fps = count / (link.timestamp - lastTime)</li>
+<li><a href="https://github.com/yolynn-bird/YLFPSLabel" target="_blank" rel="external">YLFPSLabel</a></li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_link = [CADisplayLink displayLinkWithTarget:[YYWeakProxy proxyWithTarget:self] selector:@selector(tick:)];&#10;[_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];</span><br></pre></td></tr></table></figure>
+<h6 id="野指针检测">野指针检测</h6><ol>
+<li>使用fishhook替换系统C库的free函数</li>
+<li>将free掉的内存块全部填入0x55，确保源对象被擦除</li>
+<li>自行管理free掉的内存块，不立即释放，防止系统分配给其它对象，仅在内存过大时逐步释放</li>
+<li>在free掉的内存块首部，填入一个自定义对象Checker，记录原对象类型，接管原对象的所有调用，一旦发现调用，则说明存在野指针</li>
+<li><a href="https://github.com/yolynn-bird/YLWildPointerChecker" target="_blank" rel="external">YLWildPointerChecker</a></li>
+</ol>
+<h4 id="AFNetWorking">AFNetWorking</h4><h6 id="AFNetWorking如何管理线程？">AFNetWorking如何管理线程？</h6><ol>
+<li>基于NSURLConnection<ul>
+<li>只创建一条线程发起所有请求并阻塞以等待响应</li>
+<li>网络请求继承自NSOperation，再加入NSOperationQueue</li>
+</ul>
+</li>
+<li>基于NSURLSession<br> <img src="https://www.processon.com/chart_image/5861da7ce4b02e6c0aee8e68.png" alt=""></li>
+</ol>
+<h6 id="NSURLSession_VS_NSURLConnection">NSURLSession VS NSURLConnection</h6><ol>
+<li>NSURLConnection<ul>
+<li>没有提供接口解决多个网络请求对多个线程管理</li>
+<li>不是基于HTTP/2，每个请求都要发起三次握手，四次挥手</li>
+</ul>
+</li>
+<li>NSURLSession<ul>
+<li>基于HTTP/2</li>
+<li>借鉴AFNetworking内部维护两个队列：一个处理session回调，一个处理响应回调</li>
+</ul>
+</li>
+</ol>
+<h4 id="SDWebImage">SDWebImage</h4><p><img src="https://www.processon.com/chart_image/5861dce9e4b078015c9fedae.png" alt=""></p>
+<h4 id="ReactiveCocoa">ReactiveCocoa</h4><h6 id="思想">思想</h6><p>利用hook(钩子)，hook是一种用于改变API执行结果的技术，每次调用API返回结果之前，先执行你自己的方法，改变结果的输出</p>
+<h6 id="核心方法bind">核心方法bind</h6><p>bind属于RAC底层方法，以前的开发方式是<strong>赋值</strong>，而RAC开发方式重心在于<strong>绑定</strong></p>
+<h4 id="Mantle">Mantle</h4><h6 id="原理">原理</h6><ol>
+<li>runtime动态获取属性类型和名字<ul>
+<li>class_copyPropertyList返回一个数组</li>
+<li>property_getAttributes</li>
+<li>__attribute__机制给方法、变量、类型增加额外的属性</li>
+</ul>
+</li>
+<li>创建对应的对象实例</li>
+<li>根据KVC(NSKeyValueCoding协议)来为属性设置值</li>
+<li><a href="http://blog.csdn.net/Hello_Hwc/article/details/51548128" target="_blank" rel="external">更多Mantle</a></li>
+</ol>
+<h4 id="JSPatch">JSPatch</h4><h6 id="原理-1">原理</h6><p>JS传递字符串给OC，OC通过runtime接口调用和替换OC方法</p>
+<ol>
+<li>runtime通过类名/方法名反射获取相应的类和方法</li>
+<li>替换某个类的方法为新的实现</li>
+<li>新注册一个类，为类添加方法</li>
+<li><a href="http://blog.cnbang.net/tech/2808/" target="_blank" rel="external">更多JSPatch</a></li>
+</ol>
+<h4 id="Alamofire">Alamofire</h4><p>基于NSURLSession，也有场景不适用，举个🌰：下载10个文件，支持最大并发2个，NSURLSession的timeoutIntervalForRequest和timeoutIntervalForResource不能满足，需用NSOperationQueque实现</p>
+<h6 id="工作流">工作流</h6><p><img src="http://cc.cocimg.com/api/uploads/20151117/1447728266491926.jpg" alt=""></p>
+<p><a href="http://www.cocoachina.com/ios/20151117/14240.html" target="_blank" rel="external">更多Alamofire</a></p>
+<h2 id="为什么用iOS三方库？">为什么用iOS三方库？</h2><h4 id="组件化，代码复用">组件化，代码复用</h4><h4 id="特殊复杂功能">特殊复杂功能</h4><h2 id="iOS三方库怎么用？">iOS三方库怎么用？</h2><h4 id="SDK">SDK</h4><h6 id="静态库_-a">静态库 .a</h6><h6 id="类库_-framework">类库 .framework</h6><h6 id="资源文件_-bundle">资源文件 .bundle</h6><h4 id="pod">pod</h4><h2 id="iOS三方库的实际应用">iOS三方库的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="XX蜂">XX蜂</h4>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/08/20/ios_thirdparty/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/08/10/ios_thread/">
                             iOS多线程基础到进阶
                         </a>
