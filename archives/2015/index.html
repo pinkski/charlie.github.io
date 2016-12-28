@@ -1221,6 +1221,79 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/07/20/ios_arc_mrc/">
+                            MRC&amp;ARC基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-07-20T18:15:02+08:00">
+	
+		    Jul 20, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习MRC&amp;ARC需要会什么？">学习MRC&amp;ARC需要会什么？</h2><p>苹果为什么有了MRC又设计ARC？</p>
+<ol>
+<li>引用计数原则，最终归0</li>
+<li>更好的利用内存</li>
+<li>方便开发者不用考虑retain和release  </li>
+</ol>
+<h2 id="MRC&amp;ARC是什么？">MRC&amp;ARC是什么？</h2><h4 id="MRC">MRC</h4><p>-fno-objc-arc</p>
+<h6 id="delegate_和_block的MRC管理">delegate 和 block的MRC管理</h6><p>循环引用，释放其中一处的强持有</p>
+<h4 id="Autorelease_Pool">Autorelease Pool</h4><p>延迟release</p>
+<h6 id="原理">原理</h6><ol>
+<li>声明__autoreleasepool时，构造函数<strong>__AtAutoreleasePool()</strong>执行，即<strong>atautoreleasepoolobj = objc_autoreleasePoolPush()</strong></li>
+<li>出了当前作用域时，析构函数<strong>~__AtAutoreleasePool()</strong>执行，即<strong>objc_autoreleasePoolPop(atautoreleasepoolobj)</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> __declspec(dllimport) <span class="function"><span class="keyword">void</span> * <span class="title">objc_autoreleasePoolPush</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> __declspec(dllimport) <span class="function"><span class="keyword">void</span> <span class="title">objc_autoreleasePoolPop</span><span class="params">(<span class="keyword">void</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> __AtAutoreleasePool &#123;</span><br><span class="line">  __AtAutoreleasePool() &#123;atautoreleasepoolobj = objc_autoreleasePoolPush();&#125;</span><br><span class="line">  ~__AtAutoreleasePool() &#123;objc_autoreleasePoolPop(atautoreleasepoolobj);&#125;</span><br><span class="line">  <span class="keyword">void</span> * atautoreleasepoolobj;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* @autoreleasepool */</span> &#123; __AtAutoreleasePool __autoreleasepool;&#125;</span><br></pre></td></tr></table></figure>
+<p>简化代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* @autoreleasepool */</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> *atautoreleasepoolobj = objc_autoreleasePoolPush();</span><br><span class="line">    <span class="comment">// 用户代码，所有接收到 autorelease 消息的对象会被添加到这个 autoreleasepool 中</span></span><br><span class="line">    objc_autoreleasePoolPop(atautoreleasepoolobj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="PUSH操作">PUSH操作</h6><p>每调用一次 push 操作就会创建一个新的 autoreleasepool ，即往 AutoreleasePoolPage 中插入一个 POOL_SENTINEL ，并且返回插入的 POOL_SENTINEL 的内存地址。</p>
+<h6 id="Autorelease操作">Autorelease操作</h6><p>它跟 push 操作的实现非常相似。只不过 push 操作插入的是一个 POOL_SENTINEL ，而 autorelease 操作插入的是一个具体的 autoreleased 对象</p>
+<h6 id="POP操作">POP操作</h6><p>pop 函数的入参就是 push 函数的返回值，也就是 POOL_SENTINEL 的内存地址，即 pool token 。当执行 pop 操作时，内存地址在 pool token 之后的所有 autoreleased 对象都会被 release </p>
+<h2 id="为什么用MRC&amp;ARC?">为什么用MRC&amp;ARC?</h2><h4 id="NSThread_&amp;_NSRunLoop_&amp;_NSAutoreleasePool">NSThread &amp; NSRunLoop &amp; NSAutoreleasePool</h4><ol>
+<li>每个线程（包括主线程）都拥有一个专属的NSRunLoop，并在需要时自动创建</li>
+<li>主线程的NSRunLoop对象（包括系统级别的其它线程）的每个event loop开始前，自动创建一个autoreleasepool，并在event loop结束时drain</li>
+<li>每个autoreleasepool对应且只对应一个线程</li>
+</ol>
+<h2 id="MRC&amp;ARC怎么用？">MRC&amp;ARC怎么用？</h2><p>这些情况需要手动添加autoreleasepool：</p>
+<ol>
+<li>编写的程序不是基于UI框架的，比如命令行工具</li>
+<li>编写的循环中创建了大量的临时对象  </li>
+<li>创建了一个辅助线程</li>
+</ol>
+<h2 id="MRC&amp;ARC实际应用">MRC&amp;ARC实际应用</h2><h4 id="YYKit">YYKit</h4><p>解决循环中创建的大量临时对象</p>
+<h4 id="AFNetworking">AFNetworking</h4><p>创建了辅助线程</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/07/20/ios_arc_mrc/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/06/17/c3p0/">
                             C3P0的两种用法
                         </a>
