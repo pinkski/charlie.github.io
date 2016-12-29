@@ -1332,7 +1332,12 @@
 <li>尽量避免对大内存使用autorelease</li>
 <li>不要把for循环放在@autoreleasepool之间，会造成内存峰值上升</li>
 </ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#20869;&#23384;&#26292;&#28072;&#10;@autoreleasepool &#123;&#10;    for (int i = 0; i &#60; 99999; ++i) &#123;&#10;        Person *p = [[[Person alloc] init] autorelease];&#10;    &#125;&#10;&#125;&#10;&#10;// &#20869;&#23384;&#19981;&#20250;&#26292;&#28072;&#10;for (int i = 0; i &#60; 99999; ++i) &#123;&#10;    @autoreleasepool &#123;&#10;        Person *p = [[[Person alloc] init] autorelease];&#10;    &#125;&#10;&#125;&#10;``` &#10;###### autoreleasepool &#38169;&#35823;&#29992;&#27861;&#10;1. &#19981;&#33021;&#36830;&#32493;&#35843;&#29992;autorelease&#10;2. &#35843;&#29992;autorelease&#21518;&#21448;&#35843;&#29992;release&#10;&#10;```objective-c&#10;@autoreleasepool &#123;&#10; // &#38169;&#35823;&#20889;&#27861;, &#36807;&#24230;&#37322;&#25918;&#10;    Person *p = [[[[Person alloc] init] autorelease] autorelease];&#10; &#125;&#10; &#10; @autoreleasepool &#123;&#10;    Person *p = [[[Person alloc] init] autorelease];&#10;    [p release]; // &#38169;&#35823;&#20889;&#27861;, &#36807;&#24230;&#37322;&#25918;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#20869;&#23384;&#26292;&#28072;&#10;@autoreleasepool &#123;&#10;    for (int i = 0; i &#60; 99999; ++i) &#123;&#10;        Person *p = [[[Person alloc] init] autorelease];&#10;    &#125;&#10;&#125;&#10;&#10;// &#20869;&#23384;&#19981;&#20250;&#26292;&#28072;&#10;for (int i = 0; i &#60; 99999; ++i) &#123;&#10;    @autoreleasepool &#123;&#10;        Person *p = [[[Person alloc] init] autorelease];&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="autoreleasepool_错误用法">autoreleasepool 错误用法</h6><ol>
+<li>不能连续调用autorelease</li>
+<li>调用autorelease后又调用release</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10; // &#38169;&#35823;&#20889;&#27861;, &#36807;&#24230;&#37322;&#25918;&#10;    Person *p = [[[[Person alloc] init] autorelease] autorelease];&#10; &#125;&#10; &#10; @autoreleasepool &#123;&#10;    Person *p = [[[Person alloc] init] autorelease];&#10;    [p release]; // &#38169;&#35823;&#20889;&#27861;, &#36807;&#24230;&#37322;&#25918;&#10;&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="ARC">ARC</h3><ol>
 <li>Automatic Reference Counting，自动引用计数，自iOS5 LLVM3.0引入</li>
 <li>解决了广大iOS开发者所憎恨的手动内存管理的麻烦</li>
