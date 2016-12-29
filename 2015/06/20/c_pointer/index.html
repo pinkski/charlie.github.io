@@ -6,22 +6,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>Archives: 2015/6 - yolynn</title>
+    <title>指针基础到进阶 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
         <link rel="icon" href="http://yolynn.com/assets/images/head.png">
     
     
-    <meta name="description" content="云在青天水在瓶 - 幽灵鸟">
+    <meta name="description" content="学习指针需要会什么？如何完全理解一个复杂类型，记住一条原则：
+
+从变量名处起，根据运算符优先级结合，一步一步分析
+
+举几个🌰：
+
+int p;    
+从p开始，先与int结合，说明p是整型变量
+
+
+int *p;    
+从p开始，先与*结合，说明p是指针，
+再与int结合，说明指针指向int型，
+所以p是返回int型数据的指针
+
+
+int p[3];
+从p开始，先与[]结合，说明p是数组，">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="yolynn">
-<meta property="og:url" content="http://yolynn.com/archives/2015/06/index.html">
+<meta property="og:title" content="指针基础到进阶">
+<meta property="og:url" content="http://yolynn.com/2015/06/20/c_pointer/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="云在青天水在瓶 - 幽灵鸟">
+<meta property="og:description" content="学习指针需要会什么？如何完全理解一个复杂类型，记住一条原则：
+
+从变量名处起，根据运算符优先级结合，一步一步分析
+
+举几个🌰：
+
+int p;    
+从p开始，先与int结合，说明p是整型变量
+
+
+int *p;    
+从p开始，先与*结合，说明p是指针，
+再与int结合，说明指针指向int型，
+所以p是返回int型数据的指针
+
+
+int p[3];
+从p开始，先与[]结合，说明p是数组，">
+<meta property="og:updated_time" content="2016-12-29T08:13:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yolynn">
-<meta name="twitter:description" content="云在青天水在瓶 - 幽灵鸟">
+<meta name="twitter:title" content="指针基础到进阶">
+<meta name="twitter:description" content="学习指针需要会什么？如何完全理解一个复杂类型，记住一条原则：
+
+从变量名处起，根据运算符优先级结合，一步一步分析
+
+举几个🌰：
+
+int p;    
+从p开始，先与int结合，说明p是整型变量
+
+
+int *p;    
+从p开始，先与*结合，说明p是指针，
+再与int结合，说明指针指向int型，
+所以p是返回int型数据的指针
+
+
+int p[3];
+从p开始，先与[]结合，说明p是数组，">
     
     
         
@@ -47,7 +99,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">yolynn</a>
@@ -71,7 +123,7 @@
         
     
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="4">
     
         <div class="sidebar-profile">
             <a href="/#about">
@@ -223,28 +275,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    
-
-<section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/06/20/c_pointer/">
-                            指针基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            指针基础到进阶
+        </h1>
+    
+    <div class="post-meta">
     <time itemprop="datePublished" datetime="2015-06-20T18:15:02+08:00">
 	
 		    Jun 20, 2015
@@ -253,10 +298,11 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="学习指针需要会什么？">学习指针需要会什么？</h2><p>如何完全理解一个复杂类型，记住一条原则：</p>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h2 id="学习指针需要会什么？">学习指针需要会什么？</h2><p>如何完全理解一个复杂类型，记住一条原则：</p>
 <ul>
 <li>从<strong>变量名</strong>处起，根据<strong>运算符优先级</strong>结合，一步一步分析</li>
 </ul>
@@ -385,84 +431,70 @@
 <li>强制类型转换ptr1 = (TYPE *)ptr2中，如果sizeof(prt2的类型)大于sizeof(ptr1的类型)，那么使用指针ptr1访问ptr2所指向的存储区域是安全的</li>
 </ol>
 <h2 id="指针的实际应用">指针的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="XX仓">XX仓</h4>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/06/20/c_pointer/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/07/20/ios_arc_mrc/"  data-tooltip="iOS内存管理基础到进阶">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/06/17/c3p0/">
-                            C3P0的两种用法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2015-06-17T18:15:02+08:00">
-	
-		    Jun 17, 2015
-    	
-    </time>
-    
-</div>
-
-            </div>
+                <a class="post-action-btn btn btn--default" href="#">
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h6 id="background">background</h6><blockquote>
-<p>这篇文章摘抄自我的新浪博客，<a href="http://blog.sina.com.cn/s/blog_6c5f4d3c01012gtq.html" target="_blank" rel="external">详情链接</a> 因为它一度为我的新浪博客积累超过7万的人气，新浪博客已经远不如曾经，所以我想把这篇文章保留下来，以下是原文</p>
-</blockquote>
-<h6 id="方法一：">方法一：</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">package   C3P0; </span><br><span class="line">import   java.sql.Connection; </span><br><span class="line">import   java.sql.SQLException; </span><br><span class="line">import   java.beans.PropertyVetoException; </span><br><span class="line">import   com.mchange.v2.c3p0.ComboPooledDataSource; </span><br><span class="line">public   class   DBPool&#123;       </span><br><span class="line">   private   static   DBPool   dbPool;       </span><br><span class="line">   private   ComboPooledDataSource   dataSource;     </span><br><span class="line">	</span><br><span class="line">   static   &#123;       </span><br><span class="line">           dbPool=new   DBPool();       </span><br><span class="line">   &#125;       </span><br><span class="line">   </span><br><span class="line">   public   DBPool()&#123;       </span><br><span class="line">           try   &#123;       </span><br><span class="line">                   dataSource=new   ComboPooledDataSource();       </span><br><span class="line">                   dataSource.setUser( "id ");       </span><br><span class="line">                   dataSource.setPassword( "pw ");       </span><br><span class="line">                   dataSource.setJdbcUrl( "jdbc:mysql://127.0.0.1:3306/test? </span><br><span class="line">	</span><br><span class="line">autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=GB2312 "); </span><br><span class="line">                   dataSource.setDriverClass( "com.mysql.jdbc.Driver "); </span><br><span class="line">                   dataSource.setInitialPoolSize(2); </span><br><span class="line">                   dataSource.setMinPoolSize(1); </span><br><span class="line">                   dataSource.setMaxPoolSize(10); </span><br><span class="line">                   dataSource.setMaxStatements(50); </span><br><span class="line">                   dataSource.setMaxIdleTime(60);       </span><br><span class="line">           &#125;   catch   (PropertyVetoException   e)   &#123;       </span><br><span class="line">               throw   new   RuntimeException(e);       </span><br><span class="line">           &#125;       </span><br><span class="line">   &#125;       </span><br><span class="line">	</span><br><span class="line">   public   final   static   DBPool   getInstance()&#123;       </span><br><span class="line">           return   dbPool;       </span><br><span class="line">   &#125;       </span><br><span class="line">	</span><br><span class="line">   public   final   Connection   getConnection()   &#123;       </span><br><span class="line">           try   &#123;       </span><br><span class="line">                   return   dataSource.getConnection();       </span><br><span class="line">           &#125;   catch   (SQLException   e)   &#123;       </span><br><span class="line">                   throw   new   RuntimeException( "无法从数据源获取连接 ",e);       </span><br><span class="line">           &#125;       </span><br><span class="line">   &#125;     </span><br><span class="line">   </span><br><span class="line">   public   static   void   main(String[]   args)   throws   SQLException   &#123; </span><br><span class="line">Connection   con   =   null; </span><br><span class="line">try   &#123; </span><br><span class="line">con   =   DBPool.getInstance().getConnection(); </span><br><span class="line">&#125;   catch   (Exception   e)&#123; </span><br><span class="line">&#125;   finally   &#123; </span><br><span class="line">if   (con   !=   null) </span><br><span class="line">con.close(); </span><br><span class="line">&#125; </span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="方法二：">方法二：</h6><pre><code>原来不知道使用c3p0 是如此的简单，我一直使用<span class="keyword">properties</span> 文件去配置c3p0，但总是连接不上数据库，后来调试才发现ComboPooledDataSource 这个对象的属性没有被设置成功，我是先获取了<span class="keyword">properties</span>文件的内容，封装在一个 Properties对象里面，然后直接调用 ComboPooledDataSource 的 setProperties（Properties  p） 方法来配置c3p0，程序是没有报错，但连不上数据库，调试发现属性都没有设置成功，只是<span class="keyword">properties</span>这个属性被设置了而已，结果我对每个属性调用set方法后就连接上了。。。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionManager</span> </span>&#123;</span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> ConnectionManager instance;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> ComboPooledDataSource ds;</span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> String c3p0Properties = <span class="string">"c3p0.properties"</span>;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="title">ConnectionManager</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  Properties p = <span class="keyword">new</span> Properties();</span><br><span class="line">  p.load(<span class="keyword">this</span>.getClass().getResourceAsStream(c3p0Properties));</span><br><span class="line">  ds = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">  ds.setUser(p.getProperty(<span class="string">"user"</span>));</span><br><span class="line">  ds.setPassword(p.getProperty(<span class="string">"user"</span>));</span><br><span class="line">  ds.setJdbcUrl(p.getProperty(<span class="string">"user"</span>));</span><br><span class="line">  ds.setDriverClass(p.getProperty(<span class="string">"user"</span>));</span><br><span class="line">  ds.setInitialPoolSize(Integer.parseInt(p.getProperty(<span class="string">"initialPoolSize"</span>)));</span><br><span class="line">  ds.setMinPoolSize(Integer.parseInt(p.getProperty(<span class="string">"minPoolSize"</span>)));</span><br><span class="line">  ds.setMaxPoolSize(Integer.parseInt(p.getProperty(<span class="string">"maxPoolSize"</span>)));</span><br><span class="line">  ds.setMaxStatements(Integer.parseInt(p.getProperty(<span class="string">"maxStatements"</span>)));</span><br><span class="line">  ds.setMaxIdleTime(Integer.parseInt(p.getProperty(<span class="string">"maxIdleTime"</span>)));</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ConnectionManager <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">    instance = <span class="keyword">new</span> ConnectionManager();</span><br><span class="line">   &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> instance;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">final</span> Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   <span class="keyword">return</span> ds.getConnection();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">  DataSources.destroy(ds); <span class="comment">// 关闭datasource</span></span><br><span class="line">  <span class="keyword">super</span>.finalize();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>如此就可以获取connection来做jdbc操作了：
-Connection         
-conn=ConnectionManager.getInstance().getConnection()<span class="comment">;</span>
-记得使用完后调用close方法：
-conn.close()<span class="comment">;</span>
-c3p0 的某些参数的配置以及意义见另外一篇文章http://kangzye.blog.163.com/blog/static/<span class="number">3681922320104</span><span class="number">42162576</span>/
-</code></pre>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/06/17/c3p0/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">page 1 of 1</li>
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -473,6 +505,83 @@ c3p0 的某些参数的配置以及意义见另外一篇文章http://kangzye.blo
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/07/20/ios_arc_mrc/"  data-tooltip="iOS内存管理基础到进阶">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2015/06/20/c_pointer/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
         
@@ -522,6 +631,8 @@ c3p0 的某些参数的配置以及意义见另外一篇文章http://kangzye.blo
 <script src="/assets/js/jquery.fancybox-thumbs.js" type="text/javascript"></script>
 <script src="/assets/js/tranquilpeak.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
+
+    
 
 
 

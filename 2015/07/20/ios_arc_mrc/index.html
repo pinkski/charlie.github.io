@@ -48,7 +48,7 @@ iOS内存管理模型
 retain +1
 rel">
 <meta property="og:image" content="https://www.processon.com/chart_image/5864740be4b0e069269f1e34.png">
-<meta property="og:updated_time" content="2016-12-29T05:08:21.000Z">
+<meta property="og:updated_time" content="2016-12-29T05:11:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS内存管理基础到进阶">
 <meta name="twitter:description" content="学习内存管理需要会什么？思考下，苹果为什么有了MRC又设计ARC？
@@ -346,11 +346,11 @@ rel">
 <li><strong>[p autorelease]</strong> 给p发送一条autorelease消息，将p放到autoreleasepool，在autoreleasepool释放时做一次release操作</li>
 <li>autorelease方法返回对象本身，引用计数不会变化</li>
 </ol>
-<h6 id="autoreleasepool好处">autoreleasepool好处</h6><ol>
+<h6 id="autoreleasepool_好处">autoreleasepool 好处</h6><ol>
 <li>不用关心释放时间</li>
 <li>不用关心什么时候调用release</li>
 </ol>
-<h6 id="autoreleasepool原理">autoreleasepool原理</h6><p>autoreleasepool实际上只是把对release的调用延迟了</p>
+<h6 id="autoreleasepool_原理">autoreleasepool 原理</h6><p>autoreleasepool实际上只是把对release的调用延迟了</p>
 <ol>
 <li>声明__autoreleasepool时，构造函数<strong>__AtAutoreleasePool()</strong>执行，即<strong>atautoreleasepoolobj = objc_autoreleasePoolPush()</strong></li>
 <li>出了当前作用域时，析构函数<strong>~__AtAutoreleasePool()</strong>执行，即<strong>objc_autoreleasePoolPop(atautoreleasepoolobj)</strong></li>
@@ -470,7 +470,7 @@ rel">
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/20/c_pointer/" data-tooltip="指针基础到进阶">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -541,7 +541,7 @@ rel">
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/17/c3p0/" data-tooltip="C3P0的两种用法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/20/c_pointer/" data-tooltip="指针基础到进阶">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>

@@ -308,11 +308,11 @@
 <li><strong>[p autorelease]</strong> 给p发送一条autorelease消息，将p放到autoreleasepool，在autoreleasepool释放时做一次release操作</li>
 <li>autorelease方法返回对象本身，引用计数不会变化</li>
 </ol>
-<h6 id="autoreleasepool好处">autoreleasepool好处</h6><ol>
+<h6 id="autoreleasepool_好处">autoreleasepool 好处</h6><ol>
 <li>不用关心释放时间</li>
 <li>不用关心什么时候调用release</li>
 </ol>
-<h6 id="autoreleasepool原理">autoreleasepool原理</h6><p>autoreleasepool实际上只是把对release的调用延迟了</p>
+<h6 id="autoreleasepool_原理">autoreleasepool 原理</h6><p>autoreleasepool实际上只是把对release的调用延迟了</p>
 <ol>
 <li>声明__autoreleasepool时，构造函数<strong>__AtAutoreleasePool()</strong>执行，即<strong>atautoreleasepoolobj = objc_autoreleasePoolPush()</strong></li>
 <li>出了当前作用域时，析构函数<strong>~__AtAutoreleasePool()</strong>执行，即<strong>objc_autoreleasePoolPop(atautoreleasepoolobj)</strong></li>
