@@ -1031,6 +1031,204 @@ make <span class="built_in">test</span>
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2014/01/03/weapp/">
+                            微信小程序探究
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2014-01-03T18:15:02+08:00">
+	
+		    Jan 03, 2014
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="Background">Background</h2><h4 id="时间轴">时间轴</h4><ol>
+<li>2016年1月9日&nbsp;&nbsp;&nbsp;&nbsp;微信小程序启动日</li>
+<li>2016年1月11日&nbsp;&nbsp;&nbsp;&nbsp;张小龙首次公开演讲透露正在探究新的公众号形态，即微信小程序</li>
+<li>2016年11月3日夜&nbsp;&nbsp;&nbsp;&nbsp;微信小程序正式公测</li>
+<li>2016年11月28日&nbsp;&nbsp;&nbsp;&nbsp;张小龙公开演讲公开微信小程序产品形态</li>
+<li>2017年1月9日&nbsp;&nbsp;&nbsp;&nbsp;微信小程序正式推出时间</li>
+</ol>
+<h4 id="产品形态">产品形态</h4><ol>
+<li>无消息推送</li>
+<li>无微信入口、无应用商店<ul>
+<li>扫码使用</li>
+<li>LBS提示附近小程序</li>
+</ul>
+</li>
+<li>不能分享到朋友圈<ul>
+<li>能分享到聊天或群聊</li>
+<li>分享的内容是<strong>活的</strong>，直接能与消息产生交互</li>
+</ul>
+</li>
+<li>不能做游戏</li>
+<li>提供有限的搜索能力<ul>
+<li>用户触到才出现，不主动推荐</li>
+</ul>
+</li>
+<li>和公众号相互独立</li>
+</ol>
+<h2 id="Native_or_Web?">Native or Web?</h2><p>初一看，觉得微信小程序是Native的，但到底是Native还是Web不好直接下定义，因为微信在这一块是保密的，下面将一层一层的摸索分析，并搜集证据证明自己的猜想。</p>
+<h4 id="架构">架构</h4><p>首先看看大概的架构，包括了WXML、WXSS、MINA框架，前两者分别对应了HTML、CSS，而MINA作为一个MVVM框架无论是作用还是表现都跟Vue很像。<br><img src="https://www.processon.com/chart_image/586b45fae4b0dc8df7a47c9e.png" alt=""></p>
+<h4 id="IDE">IDE</h4><p>微信小程序提供了用NW.js编写的IDE（微信开发者工具），从IDE着手，打开IDE，在Console中输入openVendor()，如下</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1fbdmjj8sfcj30n206gq3h.jpg" alt=""></p>
+<p>打开得到以下目录</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1fbdmkr07lbj312i0aatb1.jpg" alt=""></p>
+<p>注意到两个比较大的js文件：</p>
+<ol>
+<li>WAService.js  <ul>
+<li>MINA框架代码，提供一些基础功能</li>
+</ul>
+</li>
+<li>WAWebView.js <ul>
+<li>View基于它来运行</li>
+</ul>
+</li>
+</ol>
+<p>基于对这两个文件大概的分析，是不是可以猜想它依然还是运行在Webview中的，由此得到如下一个简单的架构图</p>
+<ul>
+<li>微信开发者工具中运行了两个页面，一个是View对应的WXML页面，另一个是Service对应的MINA框架</li>
+<li>两个页面并不互通，Service无法操作到View中的DOM和BOM，因此外部无法使用jQuery等框架</li>
+<li>开发者工具中运行：基于Chrome</li>
+<li>移动设备上的运行：Service应该是运行在X5内核(Android)和JavaScriptCore(iOS)独立的沙箱里；View还是基于Webview运行，但是为了增强体验，通过微信的平台提供一些原生的标签比如Map、Video等</li>
+</ul>
+<p><img src="https://www.processon.com/chart_image/586b67d5e4b067ce85304983.png" alt=""></p>
+<h4 id="试验">试验</h4><p>为了进一步证明猜想，做一个进一步的试验，在WXML中写一些不被支持的标签，它依然能够被展示，进一步说明还是基于Webview运行的<br><img src="http://ww2.sinaimg.cn/large/006y8lVagw1fbdozoiczaj30mw068gnf.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/large/006y8lVagw1fbdp05rxc7j30js0ai76y.jpg" alt=""></p>
+<h4 id="小结">小结</h4><p>通过以上从IDE到代码运行的分析，可以得出一些结论</p>
+<ul>
+<li>目前还是Webview渲染</li>
+<li>对于开发者都是黑盒，具体的运行机制还没公开</li>
+<li>以后可能会切换成Native渲染</li>
+<li>需按照官方规定的规范开发</li>
+</ul>
+<h2 id="框架">框架</h2><h3 id="目录结构">目录结构</h3><ol>
+<li>小程序包含一个描述整体程序的 app 和多个描述各自页面的 page</li>
+<li>app由app.js 、 app.json 、app.wxss组成，放在根目录下</li>
+<li>page由js 、 wxml 、wxss 、json组成<br><img src="https://www.processon.com/chart_image/586b966fe4b0f7a9c36147c9.png" alt=""></li>
+</ol>
+<h3 id="Service（逻辑层）">Service（逻辑层）</h3><p>由JavaScript编写</p>
+<ol>
+<li>增加了程序和页面的生命周期方法</li>
+<li>每个页面有独立作用域和模块化能力</li>
+<li>丰富的API，调起微信特有功能，如扫一扫、支付、微信用户数据等</li>
+<li>脱离DOM，数据驱动，非浏览器环境，不能BOM操作，比如document、window等 </li>
+<li>代码被打包成一份JavaScript，启动时运行，结束时销毁</li>
+</ol>
+<h4 id="程序生命周期">程序生命周期</h4><p><img src="https://www.processon.com/chart_image/586b567fe4b067ce852dd284.png" alt=""></p>
+<h4 id="页面生命周期">页面生命周期</h4><p><img src="https://www.processon.com/chart_image/586b5637e4b0f7a9c35b1095.png" alt=""></p>
+<h4 id="作用域_&amp;_模块化">作用域 &amp; 模块化</h4><ul>
+<li>在JavaScript文件中声明的变量和函数只在该文件中有效，不同的文件可声明相同名字的变量和函数</li>
+<li>公共代码抽离为一个单独的js文件，作为一个模块，可用module.exports 或exports对外暴露</li>
+</ul>
+<h4 id="API">API</h4><p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1fbdx0k511kj31kw1t11kx.jpg" alt=""></p>
+<h3 id="View（视图层）">View（视图层）</h3><p>由WXML和WXSS编写，由Component展示</p>
+<ol>
+<li>Service的数据转成View，View的事件发送给Service</li>
+<li>WXML描述页面结构</li>
+<li>WXSS描述页面样式</li>
+<li>Component是View的基本单元</li>
+</ol>
+<h4 id="WXML">WXML</h4><p><img src="https://www.processon.com/chart_image/586b9795e4b0f7a9c3615a90.png" alt=""></p>
+<h4 id="WXSS">WXSS</h4><p>与CSS类比扩展了两个特性：</p>
+<ol>
+<li>尺寸单位<ul>
+<li>rpx（responsive pixel）: 可以根据屏幕宽度进行自适应</li>
+</ul>
+</li>
+<li>样式导入 <ul>
+<li>使用@import语句可以导入外联样式表</li>
+</ul>
+</li>
+</ol>
+<h4 id="组件">组件</h4><p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1fbdwasv58wj31kw0nl48p.jpg" alt=""></p>
+<h2 id="工作流">工作流</h2><p>一个Page实例完整的工作流如下<br><img src="https://www.processon.com/chart_image/586b6558e4b0dc8df7a8ef42.png" alt=""></p>
+<h2 id="小程序_VS_Weex_VS_ReactNative">小程序 VS Weex VS ReactNative</h2><p>因为Weex和ReactNative的核心理念没什么差异，而Weex解决了大部分ReactNative的痛点，并且Weex引入的Vue和小程序的MINA框架类似，性能和开发成本上都占据优势，如果想要详细了解Weex和ReactNative之间对比的可以翻看我的<a href="http://yolynn.com/2016/11/11/RN&amp;Weex/">这篇文章</a>，下面将主要为小程序和Weex之间的对比</p>
+<h4 id="产品形态的异同">产品形态的异同</h4><ol>
+<li>小程序旨在实现公众号的另一种形态，而Weex旨在实现Native生态的所有功能</li>
+<li>小程序定位受限于微信平台，而Weex定位不受限制</li>
+<li>小程序目前无法取代真正的Native应用，而Weex更有可能</li>
+<li>小程序的运行依赖于微信平台，则如果给Weex提供相应的平台同样可以实现</li>
+</ol>
+<h4 id="技术实现的异同">技术实现的异同</h4><ol>
+<li>小程序目前基于Webview渲染和部分微信平台提供的Native组件，而Weex基于JavaScriptCore解析jsbundle结合Framework生成对应的Native组件渲染</li>
+<li>小程序提供了微信开发者工具，而Weex的开发不受IDE限制</li>
+<li>小程序代码开发基于MINA框架受各种规范限制，而Weex基于Vue组件不受限制</li>
+<li>小程序和Weex都能基于Chrome调试</li>
+<li>小程序提供Native端运行的解决方案，而Weex除了Native还能在浏览器运行</li>
+</ol>
+<h4 id="性能对比">性能对比</h4><p> H5 &lt;= Hybrid &lt;= 微信小程序 &lt;= ReactNative &lt;= Weex &lt;= Native</p>
+<h2 id="小程序_VS_Google_PWA">小程序 VS Google PWA</h2><h4 id="产品形态的异同-1">产品形态的异同</h4><ol>
+<li>允许用户把觉得有用的应用保留下来，而不用去商店安装</li>
+<li>零阻力、零安装、易于共享传播</li>
+<li>不依赖网络，可离线使用</li>
+<li>像本地应用一样交互 </li>
+<li>得益于微信平台Native的支持，小程序性能更占优势</li>
+<li>小程序的发布有大小限制</li>
+<li>对于一个简单的应用，开发成本上小程序更占优势；而相对复杂的比如邮箱，PWA则更有优势</li>
+</ol>
+<h4 id="技术实现的异同-1">技术实现的异同</h4><ol>
+<li>小程序在移动端的表现力基于webview和部分native标签(微信平台支持)</li>
+<li>PWA离线缓存技术用到了Service Worker,它是一个更强大的AppCache</li>
+<li>PWA支持H5最新推送通知的标准</li>
+<li>小程序对于开发者保持黑盒，PWA对于开发者是开源，所以资源和经验更占优势</li>
+</ol>
+<h2 id="坑">坑</h2><h4 id="大坑">大坑</h4><p>受限于小程序的运行环境并非一个标准的浏览器环境，微信封装工作并不完善，导致以往的大量开发经验在小程序里并不适用，几个主要的问题在于</p>
+<ol>
+<li>无法调用NPM包<ul>
+<li>原因：微信开发者工具不支持CommonJS标准</li>
+</ul>
+</li>
+<li>无法使用Babel转码<ul>
+<li>结果：无法使用ES6/7的特性，callback是件麻烦事儿</li>
+</ul>
+</li>
+<li>无法重用组件<ul>
+<li>仅支持视图模块的重用，无法抽取公共逻辑</li>
+</ul>
+</li>
+</ol>
+<p>其实，上面的坑也不是无解，通过 npm install -g labrador-cli 安装Labrador工具解决。</p>
+<h4 id="小坑">小坑</h4><ol>
+<li>功能存在不少的局限性，比如导航栏颜色、map组件问题</li>
+<li>开发者工具不支持方向键、修改样式无只能提醒、不支持全局搜索</li>
+</ol>
+<h2 id="总结">总结</h2><p>个人认为ReactNative的思想是非常适合应用到微信小程序里的，至于微信小程序为什么选择没有使用，我想应该有两方面的原因：</p>
+<ol>
+<li>从技术角度考虑，和ReactNative自身的一些瓶颈有关，比如版本不稳定、listView性能问题、真机调试繁琐等</li>
+<li>从产品形态定位考虑，小程序出发点就是微信公众号的另一种形态，结合微信平台提供的Native组件和越来越成熟的SPA技术就能带给用户比较好的体验</li>
+</ol>
+<p>由此可以预见，如果上述原因中技术问题得以解决，那么产品形态的定位便可以大大扩展，而Weex做的事情中解决了大部分ReactNative的瓶颈问题，那么使用Weex结合微信小程序的思想所得到的产品形态势必可以大大的扩展。</p>
+<h2 id="Demo">Demo</h2><p><a href="https://github.com/yolynn-bird/yo-weapp-demo" target="_blank" rel="external">https://github.com/yolynn-bird/yo-weapp-demo</a></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2014/01/03/weapp/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2013/07/17/tree/">
                             数据结构之各种树是如何让你纠结的？
                         </a>
@@ -1696,48 +1894,6 @@ AVL树的调整分为四种情况，分别为左单旋、右单旋、左右双�
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2010/04/22/weixin/">
-                            我的微信公众号
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2010-04-22T18:15:02+08:00">
-	
-		    Apr 22, 2010
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="如果你对本人感兴趣，欢迎扫描以下微信二维码关注公众号幽灵狗，还有意想不到的惊喜哦~">如果你对本人感兴趣，欢迎扫描以下微信二维码关注公众号幽灵狗，还有意想不到的惊喜哦~</h1><p><img src="http://ww3.sinaimg.cn/mw690/6c5f4d3cgw1fac9xb2hdtj20by0byjs2.jpg" alt=""></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2010/04/22/weixin/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1768,7 +1924,7 @@ AVL树的调整分为四种情况，分别为左单旋、右单旋、左右双�
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2016 yolynn. All Rights Reserved.
+        Copyrights &copy; 2017 yolynn. All Rights Reserved.
     </span>
 </footer>
 
