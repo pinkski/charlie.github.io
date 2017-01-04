@@ -668,6 +668,13 @@
 <h2 id="内存管理实际应用">内存管理实际应用</h2><h4 id="YYKit">YYKit</h4><p>解决循环中创建的大量临时对象</p>
 <h4 id="AFNetworking">AFNetworking</h4><p>创建了辅助线程</p>
 <h4 id="XX会">XX会</h4><p>混编时， 标注MRC文件：-fno-objc-arc</p>
+<h4 id="MRC_实例">MRC 实例</h4><ol>
+<li>下面这种情况会报错吗？（注意计算retainCount）</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YLObject *obj = [YLObject new];                +<span class="number">1</span></span><br><span class="line">[obj performSelector:<span class="keyword">@selector</span>(test) ...]      +<span class="number">1</span></span><br><span class="line">[obj release];                                 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>ARC想要主动释放，最好是提前置为nil</li>
+</ol>
 
                     
                         
