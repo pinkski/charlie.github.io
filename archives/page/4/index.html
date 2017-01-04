@@ -1099,7 +1099,9 @@ make <span class="built_in">test</span>
 <li>移动设备上的运行：Service应该是运行在X5内核(Android)和JavaScriptCore(iOS)独立的沙箱里；View还是基于Webview运行，但是为了增强体验，通过微信的平台提供一些原生的标签比如Map、Video等</li>
 </ul>
 <p><img src="https://www.processon.com/chart_image/586b67d5e4b067ce85304983.png" alt=""></p>
-<h4 id="试验">试验</h4><p>为了进一步证明猜想，做一个进一步的试验，在WXML中写一些不被支持的标签，它依然能够被展示，进一步说明还是基于Webview运行的<br><img src="http://ww2.sinaimg.cn/large/006y8lVagw1fbdozoiczaj30mw068gnf.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/large/006y8lVagw1fbdp05rxc7j30js0ai76y.jpg" alt=""></p>
+<h4 id="试验">试验</h4><p>为了进一步证明猜想，做一个进一步的试验，在WXML中写一些不被支持的标签，它依然能够被展示，进一步说明还是基于Webview运行的<br><img src="http://ww2.sinaimg.cn/large/006y8lVagw1fbdozoiczaj30mw068gnf.jpg" alt=""></p>
+<p>设备中显示如下：</p>
+<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1fbdp05rxc7j30js0ai76y.jpg" alt=""></p>
 <h4 id="小结">小结</h4><p>通过以上从IDE到代码运行的分析，可以得出一些结论</p>
 <ul>
 <li>目前还是Webview渲染</li>
@@ -1197,6 +1199,31 @@ make <span class="built_in">test</span>
 <h4 id="小坑">小坑</h4><ol>
 <li>功能存在不少的局限性，比如导航栏颜色、map组件问题</li>
 <li>开发者工具不支持方向键、修改样式无只能提醒、不支持全局搜索</li>
+<li>wx.request中method:”POST”模式下，后台收到请求但是data:{}数据消失，会发送一个空请求，解决方案是”Content-Type”要修改为”content-type”</li>
+</ol>
+<h2 id="Q_&amp;_A">Q &amp; A</h2><ol>
+<li><p>小程序为什么没有应用商店？</p>
+<ul>
+<li>从竞争角度，苹果的APPStore作为直接竞争对手，这是一大阻力</li>
+<li>从产品角度，小程序定位便是公众号的另一种形态</li>
+<li>从开发角度，保留用户原始习惯的基础上，节省了大部分的开发成本</li>
+</ul>
+</li>
+<li><p>小程序为什么要去中心化？<br><img src="https://www.processon.com/chart_image/586c59eae4b0f7a9c36632e0.png" alt=""></p>
+</li>
+<li><p>小程序能带来什么变化？</p>
+<ul>
+<li>让公司降低开发成本，便于商业模式试错</li>
+<li>让开发者更加注重服务的价值</li>
+<li>让用户使用更加便捷</li>
+</ul>
+</li>
+<li><p>小程序在微信里的展现模式？</p>
+<ul>
+<li>分享的消息可以互动，比如：分享到群聊的投票消息，其他用户不用打开消息，而是直接在消息上进行互动投票</li>
+<li>小程序可以挂起到聊天页顶部，如下图<br><img src="http://ww3.sinaimg.cn/large/006y8lVagw1fbedqngmymj30nk0j2gn1.jpg" alt=""></li>
+</ul>
+</li>
 </ol>
 <h2 id="总结">总结</h2><p>个人认为ReactNative的思想是非常适合应用到微信小程序里的，至于微信小程序为什么选择没有使用，我想应该有两方面的原因：</p>
 <ol>
