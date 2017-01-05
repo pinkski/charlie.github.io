@@ -22,12 +22,12 @@ iOS内存管理模型
 
 内存管理是什么？MRC引用计数器
 对象被引用的次数，也可说有多少人正在用这个对象
-初始化时为1（alloc new copy）
-计数为0时，对象占用的内存被系统回收
+初始化时为1
+创建并持有对象：alloc new copy mutableCopy
+持有对象：retain
 
-引用计数器操作
-retain +1
-rel">
+
+计数为0时，对象">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="iOS内存管理基础到进阶">
 <meta property="og:url" content="http://yolynn.com/2015/07/20/ios_arc_mrc/index.html">
@@ -41,14 +41,14 @@ iOS内存管理模型
 
 内存管理是什么？MRC引用计数器
 对象被引用的次数，也可说有多少人正在用这个对象
-初始化时为1（alloc new copy）
-计数为0时，对象占用的内存被系统回收
+初始化时为1
+创建并持有对象：alloc new copy mutableCopy
+持有对象：retain
 
-引用计数器操作
-retain +1
-rel">
+
+计数为0时，对象">
 <meta property="og:image" content="https://www.processon.com/chart_image/5864740be4b0e069269f1e34.png">
-<meta property="og:updated_time" content="2017-01-04T09:21:09.000Z">
+<meta property="og:updated_time" content="2017-01-05T07:15:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS内存管理基础到进阶">
 <meta name="twitter:description" content="学习内存管理需要会什么？思考下，苹果为什么有了MRC又设计ARC？
@@ -60,12 +60,12 @@ iOS内存管理模型
 
 内存管理是什么？MRC引用计数器
 对象被引用的次数，也可说有多少人正在用这个对象
-初始化时为1（alloc new copy）
-计数为0时，对象占用的内存被系统回收
+初始化时为1
+创建并持有对象：alloc new copy mutableCopy
+持有对象：retain
 
-引用计数器操作
-retain +1
-rel">
+
+计数为0时，对象">
     
     
         
@@ -303,7 +303,11 @@ rel">
 </ol>
 <h2 id="内存管理是什么？">内存管理是什么？</h2><h3 id="MRC">MRC</h3><h4 id="引用计数器">引用计数器</h4><ol>
 <li>对象被引用的次数，也可说有多少人正在用这个对象</li>
-<li>初始化时为1（alloc new copy）</li>
+<li>初始化时为1<ul>
+<li>创建并持有对象：alloc new copy mutableCopy</li>
+<li>持有对象：retain</li>
+</ul>
+</li>
 <li>计数为0时，对象占用的内存被系统回收</li>
 </ol>
 <h4 id="引用计数器操作">引用计数器操作</h4><ol>
@@ -448,15 +452,65 @@ rel">
 <li>编写的循环中创建了大量的临时对象  </li>
 <li>创建了一个辅助线程</li>
 </ol>
-<h2 id="内存管理实际应用">内存管理实际应用</h2><h4 id="YYKit">YYKit</h4><p>解决循环中创建的大量临时对象</p>
-<h4 id="AFNetworking">AFNetworking</h4><p>创建了辅助线程</p>
-<h4 id="XX会">XX会</h4><p>混编时， 标注MRC文件：-fno-objc-arc</p>
+<h2 id="内存管理实际应用">内存管理实际应用</h2><h4 id="项目">项目</h4><ol>
+<li>YYKit ：解决循环中创建的大量临时对象</li>
+<li>AFNetworking： 创建了辅助线程</li>
+<li>XX会 混编时， 标注MRC文件：-fno-objc-arc</li>
+</ol>
+<h4 id="ARC_实例">ARC 实例</h4><ol>
+<li>ARC想要主动释放，最好是提前置为nil</li>
+<li>ARC下获取引用计数<ul>
+<li>KVC  [obj valueForKey:@”retainCount”] </li>
+<li>私有API _objc_rootRetainCount(obj)</li>
+<li>CFGetRetainCount((__bridge CFTypeRef)(obj))</li>
+</ul>
+</li>
+</ol>
 <h4 id="MRC_实例">MRC 实例</h4><ol>
 <li>下面这种情况会报错吗？（注意计算retainCount）</li>
 </ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YLObject *obj = [YLObject new];                +<span class="number">1</span></span><br><span class="line">[obj performSelector:<span class="keyword">@selector</span>(test) ...]      +<span class="number">1</span></span><br><span class="line">[obj release];                                 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">	YLAutorelease *obj = [[YLAutorelease alloc] init];      <span class="comment">//1</span></span><br><span class="line">    _tableView = [[<span class="built_in">UITableView</span> alloc] init];                <span class="comment">//1</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"obj retainCount:%ld"</span>, [obj retainCount]);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"tableView retainCount:%ld"</span>, [_tableView retainCount]);</span><br><span class="line">    </span><br><span class="line">    [obj performSelector:<span class="keyword">@selector</span>(test) withObject:_tableView afterDelay:<span class="number">1</span>];   <span class="comment">//obj 2 , tableView 2</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"obj retainCount:%ld"</span>, [obj retainCount]);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"tableView retainCount:%ld"</span>, [_tableView retainCount]);</span><br><span class="line">    </span><br><span class="line"><span class="comment">//    [obj release];</span></span><br><span class="line"><span class="comment">//    [_tableView release];</span></span><br><span class="line">    </span><br><span class="line">    [<span class="built_in">NSObject</span> cancelPreviousPerformRequestsWithTarget:obj selector:<span class="keyword">@selector</span>(test) object:_tableView];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"obj retainCount:%ld"</span>, [obj retainCount]);       <span class="comment">//1</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"tableView retainCount:%ld"</span>, [_tableView retainCount]);  <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
 <ol>
-<li>ARC想要主动释放，最好是提前置为nil</li>
+<li><p>NSString的引用计数是随机值，NSMutableString的引用计数是正常值</p>
+<ul>
+<li>NSString的class是__NSCFConstantString，字符串常量</li>
+<li>NSMutableString的class是__NSCFString，有引用计数</li>
+</ul>
+</li>
+<li><p>对于字符串常量、NSNumber做常量时？</p>
+<ul>
+<li>retain 和 release都不会有影响，因为系统不会回收，也不会对其做引用计数</li>
+</ul>
+</li>
+<li><p>stringWithFormat创建的string？</p>
+<ul>
+<li>为变量，所以会有引用计数</li>
+<li>现在返回的已经是常量，见后面的例子</li>
+</ul>
+</li>
+<li><p>stringWithString创建的string?</p>
+<ul>
+<li>取决于它后面的string对象，如果是常量则不做计数，如果是变量则做计数</li>
+</ul>
+</li>
+<li><p>除了alloc new copy mutableCopy retain显示增加retainCount以外还有哪些看不到的能够增加引用计数的操作？</p>
+<ul>
+<li>容器类array、dic addObject；release时，里面的成员都会release一次，和autorelease pool一致</li>
+<li>addsubview, 因为view有栈(subviews)，加入栈中retainCount+1</li>
+<li>navcontroller的push, 因为nav有栈(viewcontrollers)，加入栈中retainCount+1</li>
+<li>performSelector 调用时target和info都会加1，结束时减1</li>
+</ul>
+</li>
+<li><p>苹果不推荐使用retainCount方法，因为他对程序本身没有作用，retainCount可能永远不会反回0，有时候系统会优化对象的释放行为，在保留计数还是1的时候就释放了。</p>
+</li>
+<li><p>几个copy, mutableCopy的例子</p>
+</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line">   <span class="built_in">NSMutableString</span> *str = [[<span class="built_in">NSMutableString</span> alloc] init];</span><br><span class="line">   <span class="built_in">NSMutableString</span> *str2 = [[<span class="built_in">NSMutableString</span> alloc] init];</span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//1,1</span></span><br><span class="line">   </span><br><span class="line">   str2 = [str <span class="keyword">copy</span>];         <span class="comment">//copy返回一个不可变对象属于常量</span></span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//1,-1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="built_in">NSString</span> *str = [[<span class="built_in">NSString</span> alloc] init];</span><br><span class="line"><span class="built_in">NSString</span> *str2 = [[<span class="built_in">NSString</span> alloc] init];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]); <span class="comment">//-1,-1</span></span><br><span class="line"></span><br><span class="line">str2 = [str <span class="keyword">copy</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//-1,-1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="built_in">NSString</span> *str = [[<span class="built_in">NSString</span> alloc] initWithFormat:<span class="string">@"abc%@"</span>, <span class="string">@"hehe"</span>];</span><br><span class="line"><span class="built_in">NSString</span> *str2 = [[<span class="built_in">NSString</span> alloc] initWithFormat:<span class="string">@"bbc%@"</span>, <span class="string">@"hehe"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]); <span class="comment">//-1,-1</span></span><br><span class="line"></span><br><span class="line">str2 = [str mutableCopy];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//-1,1</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>block内存管理，详见后续文章</li>
 </ol>
 
             
