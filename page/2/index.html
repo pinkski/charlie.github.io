@@ -238,6 +238,130 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/07/22/javascript/">
+                            JavaScript基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-07-22T18:15:02+08:00">
+	
+		    Jul 22, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习JavaScript需要会什么？">学习JavaScript需要会什么？</h2><p>现在的用户无论是用电脑还是手机都免不了要和网页多多少少打交道，网页技术随着互联网出现而出现，随着互联网爆发而爆发，在互联网不断往前发展的同是JavaScript起到了无法替代的作用，而最新的版本ES6（ES2015）在2015年发布，给JavaScript带来了全新的语法糖，也让JavaScript的编写更容易，更可观。</p>
+<h2 id="JavaScript是什么">JavaScript是什么</h2><h4 id="工作流">工作流</h4><p>JavaScript是一种动态、弱类型、基于原型的语言，通过浏览器可以直接执行。当浏览器遇到\<script\>标记的时候，浏览器会执行之间的JavaScript代码，嵌入的JavaScript代码是按顺序执行的，JavaScript里面都是对象，有一种原型机制，将所有的对象联系起来。</script\></p>
+<h4 id="原型和原型链">原型和原型链</h4><p><img src="https://www.processon.com/chart_image/5865217ce4b049e79ee3878a.png" alt=""></p>
+<h4 id="作用域和上下文">作用域和上下文</h4><p>JavaScript作用域分两种:</p>
+<ol>
+<li>全局作用域</li>
+<li>局部作用域</li>
+</ol>
+<p>在JavaScript，函数是对象，一切皆对象，那么函数也和其它对象一样，拥有可以通过代码访问的属性和一系列供JavaScript引擎访问的内部属性。其中有个内部属性[[Scope]]，该属性包含了函数被创建的作用域中对象的集合，此集合被称为函数的作用域链，它决定了哪些数据能被函数访问。</p>
+<p>举个🌰</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num1,num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = num1 + num2;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当add创建时，它的作用域会填入一个全局对象，该全局对象包含了所有的全局变量，如下图（图中只列举部分）：<br><img src="https://www.processon.com/chart_image/58524894e4b05a0284734630.png" alt=""></p>
+<p>函数add的作用域将在执行时用到，例如执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> total = add(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>执行此代码是会创建一个称为“运行期上下文（execution context）”的内部对象，运行期上下文定义了函数执行时的环境，每个运行期上下文都有自己的作用域链，用于标识符解析，当运行期上下文被创建时，它的作用域链初始化为当前运行函数的[[Scope]]所包含的对象。</p>
+<p>这些值按照他们出现在函数中的顺序被复制到运行期上下文的作用域链中。它们共同组成了一个新的对象，叫“活动对象(activation object)”，该对象包含了函数的所有局部变量、命名参数、参数集合以及this，然后此对象会被推入作用域链的前端，当运行期上下文被销毁，活动对象随之被销毁。新的作用域链如下图：<br><img src="https://www.processon.com/chart_image/58524b1de4b07ab5f2c9f38e.png" alt=""></p>
+<p>在函数执行时，每遇到一个变量，都会经历一次标识符解析过程以决定从哪里获取和存储数据，该过程从作用域链头部，也就是activation object开始搜索，查找同名的标识符，如果找到了就用对应的变量，如果没找到继续搜索作用域链中的下一对象，如果搜索完毕未找到，则认为未定义。</p>
+<h4 id="单线程和异步">单线程和异步</h4><p>从一诞生，JavaScript就是单线程，这已经成了这门语言的核心特征，将来也不会改变。为了利用多核CPU的计算能力，HTML5提出Web Worker标准，允许JavaScript脚本创建多个线程，但是子线程完全受主线程控制，且不得操作DOM。</p>
+<h6 id="任务队列">任务队列</h6><ol>
+<li>同步任务：在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务</li>
+<li>异步任务：不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行</li>
+</ol>
+<p>他们的运行机制：</p>
+<p><img src="http://image.beekka.com/blog/2014/bg2014100801.jpg" alt=""></p>
+<ol>
+<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。</li>
+<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
+<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
+<li>主线程不断重复上面的第三步。</li>
+</ol>
+<h4 id="数据类型">数据类型</h4><p>String、Number、Boolean、null、undefined、Object(Array、Date …)</p>
+<h4 id="闭包">闭包</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">start</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pos = start;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Move to '</span> + (pos += <span class="number">2</span>) + <span class="string">'.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> move_next = move(<span class="number">6</span>); </span><br><span class="line">move_next();  <span class="comment">// Move to 8. </span></span><br><span class="line">move_next();  <span class="comment">// Move to 10.</span></span><br></pre></td></tr></table></figure>
+<p>move函数的内部匿名函数持有了move的属性pos，导致pos属性不会随着move的生命周期结束而结束。</p>
+<h2 id="为什么要用JavaScript?">为什么要用JavaScript?</h2><h4 id="基础">基础</h4><p>JavaScript可以把基础很好的总结为三座大山</p>
+<h4 id="关于新技术">关于新技术</h4><p>基础很重要，新技术很危险，学习的同时带着“质疑精神”</p>
+<h2 id="JavaScript怎么用？">JavaScript怎么用？</h2><h4 id="CSS预处理器">CSS预处理器</h4><p>SASS的变量方案也会带来一些问题：学习成本；调试工作量；代码整合不方便</p>
+<h4 id="跨界、CoffeeScript、TypeScript和ES6">跨界、CoffeeScript、TypeScript和ES6</h4><p>CoffeeScript和TypeScript分别是Ruby和C#社区的产物，它们都觉得JavaScript语法不够好，想改善它。只是它们俩分别代表了豪放派和严谨派，是两个极端，让它们俩先打一架好了</p>
+<p>ES6带来了很多好用的语法糖</p>
+<ol>
+<li>let const </li>
+<li>Promise</li>
+<li>Class extends</li>
+<li>Module import export</li>
+<li>字符串、正则、数值、函数、对象都有扩展</li>
+<li>详细教程参见:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6 入门</a></li>
+</ol>
+<h4 id="Node">Node</h4><p>Node当前的用途：</p>
+<ul>
+<li>服务端开发</li>
+<li>脚本工具</li>
+</ul>
+<p>随着前端的网络性能优化技巧逐渐完善，前端要做的事情变得越来越麻烦：图片合并、图片压缩、代码合并、代码压缩、动态加载、CDN。如果再加上jsLint之类的代码检查，就更加麻烦了。之前流行的加载是线上动态加载，requirejs那种方式，而现在流行在打包阶段按需加载，这就使得打包变得更加复杂。Node能为前端带来专业的开源的工具，这是打包脚本最好的结果，比自己折腾些质量一般的脚本好太多了！</p>
+<h4 id="Angular">Angular</h4><p>整套代码组织的思路和服务端的MVC框架如出一辙：URL路由 + Controller + 数据抽象 + 模板引擎。虽然服务端出身的同学会倍感亲切，但这真的不是前端代码最好的组织方式。</p>
+<h4 id="React">React</h4><p>React总的来说，不像Angular走错了路，但因为全家桶的原因门槛越来越高，这不是个好现象，未来有待观察，那么在它之前关于抽象和面向对象，你真的掌握了吗？封装、继承、多态、设计模式、解耦、API设计这些真的都熟练了吗？</p>
+<h4 id="SPA(单页应用程序single_page_web_application)">SPA(单页应用程序single page web application)</h4><p>SPA真正的威力不是把多个网页变成单个网页，而是在产品形态上就彻底跳出网页般的排版布局。比如说做游戏、做网络IDE、做网页版PhotoShop之类。而这，需要的不仅是技术能力，而进一步需要产品设计能力，能不能技术驱动产品创新，不要再折腾什么技术工程化，发点力在技术产品化上。</p>
+<h4 id="ReactNative_和_phoneGap">ReactNative 和 phoneGap</h4><ul>
+<li>ReactNative阉割的CSS导致前端技能受限，对Native底层的黑盒导致调试和扩展的困难，学习性价比不一定高</li>
+<li>PhoneGap把jsBridge写好，团队合作很方便，但是webview性能问题是瓶颈</li>
+</ul>
+<h4 id="微信小程序">微信小程序</h4><p>看过SDK的同学觉得跟HTML5没有半毛钱关系，这是一个伪HTML5的技术，开发的同学又多了一个平台要侍候。</p>
+<h4 id="全栈">全栈</h4><p>全栈这个口号其实很毁人——别误解我的意思，我不是反对个人往全栈方向发展，而是想说，全栈并不容易，不是说前端开发的同学学了Node就全栈了，也不是说后端同学有了Angular和Bootstrap就全栈了，更不是说前端或者后端玩玩React Native，就能让iOS和Android下岗了。我发现一个可怕的事情是，全栈的口号让一些同学忽略了其他领域的知识深度，然后靠自我安慰甚至是自欺欺人地贬低其他领域的知识，以安慰自己已然全栈。</p>
+<h4 id="前端核心竞争力">前端核心竞争力</h4><p>什么是核心呢？HTML、CSS和JavaScript。我指的是原生的这些东西，不用上来就跟我说React的JavaScriptx语法重定义了HTML，Sass改良了CSS，TypeScript给JavaScript带来了静态语言的语法，这些都是外围，今天是React，明天可以换成Angular，今天是Sass明天可以换成Less，今天是TypeScript明天可以是CoffeeScript，这些不重要。就像jQuery鼎盛时期，很多同学不学原生JavaScript，上来直接就上手jQuery一样，走不远。要理解jQuery为什么这么封装，其实在底层发生了什么，用原生会遇到什么问题，直接用原生能解决吗？把原生的技巧学熟了，这些外围的东西上手很快，而且什么情况下用什么，心里会非常有底。团队合作需要考虑的事情很多，要有责任感，别只顾着做自己的Geek。</p>
+<p>强力推荐这些你不该错过的书：</p>
+<ul>
+<li>《CSS网站布局实录》——国产CSS2入门书，有些技巧已经淘汰，但仍不失为最好的CSS入门教程。</li>
+<li>《无懈可击的Web设计》——讲CSS应用技巧的书，国内外粉丝别多，说是开创了CSS技巧流派也不为过。</li>
+<li>《DOM JavaScript编程艺术》——JavaScript最好的入门书，没有之一，这本书是帮助你了解如何将DOM、CSS和JavaScript连接起来的一本书。严格来说，后端Node根本不算JavaScript，JavaScript是基于ES语法的一门脱水语言，如何实现的胶水？这本书将带你入门。</li>
+<li>《JavaScript高级程序设计》 ——JavaScript必读的一本精典，读完之后对JavaScript的理解和实 践会上升非常大的一个台阶。</li>
+<li>《编写高质量代码——Web前端开发修炼之道》 —— 这本书重点讲团队合作的注意事项。虽然一些具体的技巧，在今天已然过时，比如IE6的hack，但在团队合作方面的思考，直到今天我也没看到其他书在讲，这些思想没有其他书可替代。</li>
+<li>《HTML5和CSS3权威指南》——目前为止，我读过的HTML5方面最好的一本原创书。配合实例进行API讲解，非常详细具体。连HTML5都提供了哪些底层的东西都不知道，又该如何去用好它呢？在我看来，是学习HTML5的必读书。</li>
+<li>《响应式Web设计：HTML5和CSS3实战》——作者是《无懈可击的Web设计》忠实粉丝，所以很自然地，这也是本CSS技巧流派的书，侧重点在CSS3的实践技巧上，让人大开眼界。</li>
+<li>《JavaScript设计模式》——JavaScript在实战时的高级技巧。</li>
+</ul>
+<h2 id="JavaScript的实际应用">JavaScript的实际应用</h2><ol>
+<li>PC端浏览器</li>
+<li>移动端浏览器</li>
+<li>超级App的Hybrid</li>
+<li>微信公众号这种App开放平台</li>
+<li>微信朋友圈微博的营销页面</li>
+<li>百度轻应用（很小众）</li>
+<li>后台（部分公司）</li>
+<li>微信小程序（姑且也算）</li>
+</ol>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/07/22/javascript/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/07/17/my_git/">
                             我的git之旅
                         </a>
@@ -1740,91 +1864,6 @@ para.style.color="blue";
                     
                         <p>
                             <a href="/2016/02/23/multi_compiler/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/02/22/multi_lang/">
-                            多编程语言学习
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-02-22T16:15:02+08:00">
-	
-		    Feb 22, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="background">background</h2><blockquote>
-<p>我相信，很多同学在未入行或者刚入行时都会觉得学习一门编程语言是多么难，多么神奇的事情，可能经历几年甚至更久这种境遇，这是为什么呢？</p>
-</blockquote>
-<h3 id="基础的重要">基础的重要</h3><p>刚工作的时候你或许会纳闷面试官为什么要问我一些工作中根本用不上的东西，现在的你回过头去想这个问题，或许已经明白是为什么，而且假如你也是面试官的话，你依然会拿出这些问题来考面试者，这其中的缘由无非两个字：基础，那什么是基础?</p>
-<blockquote>
-<p>直接上干货，计算机编程基础在大学课程里基本已经囊括，或许你已经完全忘记了，我这里晒晒，还有些课程外补充：</p>
-<blockquote>
-<ul>
-<li>三大浪漫：编译原理、组成原理、图形学 </li>
-<li>数据结构和算法</li>
-<li>编程范式</li>
-<li>设计模式</li>
-<li>C语言（或其它一门语言）<br>有了好的基础就像有了好的地基，越牢固，修为越高。</li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="经验的广度">经验的广度</h3><p>如果你不是做编译器的同学，我相信在大多数工作经历里，评级一个人最重要的标准就是经验，这也是业内的潜规则，经验当然也很重要，但是在这里我只想强调经验的广度，这也是为什么全栈越来越重要的原因，互联网软件产业的蓬勃发展为所有人打开了N个风口，借用雷军的话：”只要你站在风口上，就是一头猪也能飞“。那么我就要问了，怎么拓展经验的广度？</p>
-<blockquote>
-<p>同样，做到以下三点就可以：</p>
-<blockquote>
-<ul>
-<li>方向：编程语言层出不穷，今年流行OC或许明年就被Swift取代了，今年流行Java或许明年就被Go取代了，所以选择标杆公司已经开始用的语言来学习。</li>
-<li>耐性：有了方向如果还是三天打鱼两天晒网或者丢了西瓜捡芝麻这种心态是学不好的，强调耐性固然是老生常谈，不可置否有它老生常谈的理由。</li>
-<li>平台：最好选择一个能够发挥出自己所学的平台，即我们常说的练手，当然即使没有这样的平台，应该退而求其次选择拥有更充分的自由时间让自己所学能够落到实处。</li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="语言的实战">语言的实战</h3><p>结合我自己在多种编程语言里的摸爬滚打来说说这些语言给我带来的乐趣和升级</p>
-<blockquote>
-<p>下面是按时间顺序来说的</p>
-<blockquote>
-<ul>
-<li>C:大学的时候总觉得C语言作为一门入门的语言搞得太复杂，为什么不把Java当做入门语言，后来明白C语言作为入门语言跟它所处的语言层级位置有很大的关系，从计算机的底层算起：硬件设备-&gt;二进制-&gt;汇编语言-&gt;C语言-&gt;C++、OC、Java…，发现C语言处于一个衔接低级语言和高级语言的桥梁，而C语言又是一门高级语言，通用性强，于是把C语言定位基础入门语言是很有优势的，而且C语言的数据类型、指针、结构体也是很多其它高级语言的基础。</li>
-<li>Java:刚出来工作的时候就是用的Java+SQL Server做企业管理系统后台，当然跟很多同学一样，最常用的是J2EE里的Struts+Spring+Hibernate框架，以前很喜欢缩写成SSH框架，后面跟一个香港汇丰的同学聊天说我们的系统主要用SSH框架，他表示很疑惑，花了一番功夫给他解释清楚（因为是英文聊天），后来我再也不简写了。Java里的设计模式可谓是五花八门，如果你想拓展设计模式的运用，请用Java.</li>
-<li>JavaScript:js在大学就开始用了，做毕业设计的时候派上了大的用场，做了一个很大型的下载上传网站，利用js做了很多交互效果，以致于答辩的时候老师根本没有看完我的展示就让我过了，现在想想确实做得太大了点。更令人想不到的是，以前只能用jQuery做做交互的js现在已经衍生到前端、客户端、后端，这么伟大的语言，岂能放过？</li>
-<li>PHP:这门语言的使用有点晚，工作中总会有自己的时间需要折腾，朋友帮我推荐了几个项目，我很懒的使用了ThinkPhP来做的，客户还挺满意的，后来真正在工作中用到是网站大改版的时候，这时候才对PHP的基础语法做了个全面的了解，到现在也只是把它当做一个工具来看待。</li>
-<li>Cocos2d-x:真正要说Cocos2d-x其实是C++和Lua的组合，当时做过一个小格斗过关小游戏，强烈推荐《捕鱼达人制作》这本书籍，很好上手。</li>
-<li>Objective-C:OC和C++是兄弟，却远比C++容易上手，而且OC最大的应用也在Mac和iOS上，苹果提供的Api足够强大到你只需要调来调去就能做出一个应用来，用了OC之后给我的感觉就是为苹果打工，还是外包的合同工。</li>
-<li>Swift:Swift的出现打开了iOS开发者的窗户，语法更加高级，让程序猿可以更懒，毕竟是站在居然肩膀上的语言。</li>
-<li>Golang:刚开始接触Go的时候，觉得Google的仅仅是开放了一份内部使用的语言工具，但是现在看Golang在各种主流云端玩的风生水起，也有大型游戏后端使用，现在你可以看到Google的野心了吧。</li>
-</ul>
-</blockquote>
-</blockquote>
-<p>Etc.</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/02/22/multi_lang/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

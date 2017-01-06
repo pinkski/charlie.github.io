@@ -485,6 +485,193 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/11/01/block/">
+                            Block基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-11-01T18:15:02+08:00">
+	
+		    Nov 01, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习Block需要会什么？">学习Block需要会什么？</h2><h4 id="栈与堆">栈与堆</h4><p>先来看下C/C++/OBJC编译的程序的内存是怎么分布的吧，下面有个架构图：<br><img src="https://www.processon.com/chart_image/586f3b1fe4b067ce8566dc70.png" alt=""></p>
+<ol>
+<li><strong>栈(stack)</strong><ul>
+<li>编译器自动创建和释放</li>
+<li>栈式管理 后进先出</li>
+<li>一般存放参数值，局部变量值</li>
+</ul>
+</li>
+<li><strong>堆(heap)</strong><ul>
+<li>程序员创建和释放，如果未释放，程序结束后系统释放</li>
+<li>链表式管理</li>
+<li>操作系统有个记录空闲内存地址的链表，收到内存申请时，遍历链表，遍历到一个内存地址大于申请内存的链表节点，删除该节点并把内存地址分配给程序</li>
+</ul>
+</li>
+<li><strong>全局区 / 静态区</strong><ul>
+<li>存储全局变量和静态变量，程序结束后由系统释放</li>
+<li>初始化区 非初始化区分开存放</li>
+</ul>
+</li>
+<li><strong>文字常量区</strong><ul>
+<li>存储字符串常量，程序结束后由系统释放</li>
+</ul>
+</li>
+<li><strong>程序代码区</strong><ul>
+<li>存储函数体的二进制代码</li>
+</ul>
+</li>
+</ol>
+<p>举个🌰</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.cpp</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>; <span class="comment">// 全局初始化区</span></span><br><span class="line"><span class="keyword">char</span> *p1; <span class="comment">// 全局未初始化区</span></span><br><span class="line">main &#123;</span><br><span class="line">    <span class="keyword">int</span> b; <span class="comment">// 栈</span></span><br><span class="line">    <span class="keyword">char</span> s[] = <span class="string">"abc"</span>; <span class="comment">// 栈</span></span><br><span class="line">    <span class="keyword">char</span> *p2; <span class="comment">// 栈</span></span><br><span class="line">    <span class="keyword">char</span> *p3 = <span class="string">"123456"</span>; <span class="comment">// 123456\0在常量区，p3在栈上</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c =<span class="number">0</span>； <span class="comment">// 全局静态初始化区</span></span><br><span class="line">    p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>);</span><br><span class="line">    p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>); <span class="comment">// 分配得来的10和20字节的区域就在堆区</span></span><br><span class="line">    <span class="built_in">strcpy</span>(p1, <span class="string">"123456"</span>); <span class="comment">// 123456\0在常量区，这个函数的作用是将"123456" 这串字符串复制一份放在p1申请的10个字节的堆区域中。</span></span><br><span class="line">    <span class="comment">// p3指向的"123456"与这里的"123456"可能会被编译器优化成一个地址。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="结构体(Struct)">结构体(Struct)</h4><ol>
+<li>定义<ul>
+<li>struct tag { member-list } variable-list;</li>
+</ul>
+</li>
+<li>成员访问<ul>
+<li>直接访问： 变量名.成员名</li>
+<li>间接访问： 结构体指针名-&gt;成员名</li>
+</ul>
+</li>
+<li>成员存储<ul>
+<li>获得EXAMPLE类型结构体所占内存大小: int size_example = sizeof( struct EXAMPLE );</li>
+<li>获得成员b相对于EXAMPLE储存地址的偏移量: int offset_b = offsetof( struct EXAMPLE, b ); </li>
+</ul>
+</li>
+</ol>
+<h4 id="闭包(Closure)">闭包(Closure)</h4><ul>
+<li>定义<ul>
+<li>允许一个函数访问声明该函数运行上下文中的变量，甚至可以访问不同运行上下文中的变量</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funA</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">    alert(callback());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funB</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> str = <span class="string">"Hello World"</span>; <span class="comment">// 函数funB的局部变量，函数funA的非局部变量</span></span><br><span class="line">    funA（</span><br><span class="line">        <span class="function"><span class="keyword">function</span>（）</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> str;</span><br><span class="line">        &#125;</span><br><span class="line">    ；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上详细阐述了与block相关基础知识，内存、结构体、闭包，那么具体的block到底为何物？</p>
+<h2 id="Block是什么？">Block是什么？</h2><h4 id="Block的基础">Block的基础</h4><p>Block是Objective-C语言对闭包的实现</p>
+<h6 id="原型">原型</h6><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * (^ myBlock)( <span class="keyword">int</span> );</span><br></pre></td></tr></table></figure>
+<h6 id="定义">定义</h6><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myBlock = ^(<span class="keyword">int</span> paramA) &#123;</span><br><span class="line">	<span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"abc:%i"</span>, paramA];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h6 id="使用">使用</h6><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myBlock(<span class="number">7</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="结构">结构</h6><p><img src="http://cc.cocimg.com/api/uploads/20150109/1420794587351042.png" alt=""></p>
+<h6 id="Block作为参数">Block作为参数</h6><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)testBlock:(<span class="built_in">NSString</span> * (^)(<span class="keyword">int</span>))myBlock &#123;</span><br><span class="line">	<span class="built_in">NSLog</span>(<span class="string">@"block returned: %@"</span>, myBlock(<span class="number">7</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="Block的闭包性">Block的闭包性</h6><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import void logBlock(int (^theBlock)(void)) &#123;</span></span><br><span class="line">	<span class="built_in">NSLog</span>(<span class="string">@"Clourse var X: %i"</span>, theBlock());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">void</span>) &#123;</span><br><span class="line">	<span class="built_in">NSAutoreleasePool</span> *pool;</span><br><span class="line">	<span class="keyword">int</span> (^myBlock)(<span class="keyword">void</span>);</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	pool = [[<span class="built_in">NSAutoreleasePool</span> alloc] init];</span><br><span class="line">	x = <span class="number">42</span>;</span><br><span class="line">	myBlock = ^(<span class="keyword">void</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;;</span><br><span class="line">	logBlock(myBlock);</span><br><span class="line">	[pool release];</span><br><span class="line">	<span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>block能够访问到x变量，同样可以访问全局变量即static</p>
+<h6 id="Block中变量的赋值和修改">Block中变量的赋值和修改</h6><ol>
+<li>block外的变量引用，block默认将其复制到其数据结构中实现访问<ul>
+<li>只读</li>
+<li>copy</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://www.processon.com/chart_image/586f625fe4b032a565f0a633.png" alt=""></p>
+<ol>
+<li>block中处理外部变量，需添加__block关键字<ul>
+<li>读写</li>
+<li>复制其引用地址</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://www.processon.com/chart_image/586f6292e4b032a565f0ab14.png" alt=""></p>
+<h4 id="Block在编译器中">Block在编译器中</h4><h6 id="数据结构定义">数据结构定义</h6><p><img src="https://www.processon.com/chart_image/586f6673e4b067ce856bfa2c.png" alt=""></p>
+<ul>
+<li>isa: 指向block的类型</li>
+<li>flags: 附加信息</li>
+<li>reserved: block内部的变量数</li>
+<li>invoke: 函数指针，指向block具体的函数调用地址</li>
+<li>descriptor: 附加描述信息，比如变量数、大小、copy和dispose辅助操作函数指针</li>
+<li>variables: 复制到结构体中的外部局部变量或变量地址</li>
+</ul>
+<h6 id="Block类型">Block类型</h6><p>isa指向的类，有三种：</p>
+<ol>
+<li>_NSConcreteGlobalBlock：全局静态block，不访问任何外部变量，不涉及任何拷贝，比如空block;</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#inclue int main() &#123;</span></span><br><span class="line">	^&#123; printf(<span class="string">"Hello, world!"</span>); &#125;();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>_NSConcreteStackBlock：栈block，函数返回时被销毁；<ul>
+<li>有闭包行为，只有一次执行</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#include int main()&#123;</span></span><br><span class="line">	<span class="keyword">char</span> a = <span class="string">'A'</span>;</span><br><span class="line">	^&#123; printf(<span class="string">"%c"</span>, a); &#125;();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>_NSConcreteMallocBlock：堆block，引用计数为0时被销毁，它是由_NSConcreteStackBlock从栈中复制到堆中形成的。<ul>
+<li>有闭包行为，多次执行，需要多次执行时，会从栈中复制到堆中</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> exampleB_addBlockToArray(<span class="built_in">NSMutableArray</span> *array) &#123;</span><br><span class="line">	<span class="keyword">char</span> b = <span class="string">'B'</span>;</span><br><span class="line">	[array addObject:^&#123;</span><br><span class="line">		printf(<span class="string">"%c"</span>, b);</span><br><span class="line">	&#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> exampleB() &#123;</span><br><span class="line">	<span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">	exampleB_addBlockToArray(array);</span><br><span class="line">	<span class="keyword">void</span>(^block)() = [array objectAtIndex:<span class="number">0</span>];</span><br><span class="line">	block();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="编译器如何编译">编译器如何编译</h6><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import typedef void(^BlockA)(void);</span></span><br><span class="line">\_\_attribute__((noinline))</span><br><span class="line"><span class="keyword">void</span> runBlockA(BlockA block) &#123;</span><br><span class="line">	block();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> doBlockA() &#123;</span><br><span class="line">	BlockA block = ^&#123;</span><br><span class="line">		<span class="comment">// Empty block</span></span><br><span class="line">	&#125;;</span><br><span class="line">	runBlockA(block);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译器具体怎么做的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import __attribute__((noinline))</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">runBlockA</span><span class="params">(<span class="keyword">struct</span> Block_layout *block)</span> </span>&#123;</span><br><span class="line">    block-&gt;invoke();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">block_invoke</span><span class="params">(<span class="keyword">struct</span> Block_layout *block)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Empty block function</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">doBlockA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> Block_descriptor descriptor;</span><br><span class="line">    descriptor-&gt;reserved = <span class="number">0</span>;</span><br><span class="line">    descriptor-&gt;size = <span class="number">20</span>;</span><br><span class="line">    descriptor-&gt;copy = <span class="literal">NULL</span>;</span><br><span class="line">    descriptor-&gt;dispose = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">struct</span> Block_layout block;</span><br><span class="line">    block-&gt;isa = _NSConcreteGlobalBlock;</span><br><span class="line">    block-&gt;flags = <span class="number">1342177280</span>;</span><br><span class="line">    block-&gt;reserved = <span class="number">0</span>;</span><br><span class="line">    block-&gt;invoke = block_invoke;</span><br><span class="line">    block-&gt;descriptor = descriptor;</span><br><span class="line">    runBlockA(&amp;block);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="copy()和dispose()">copy()和dispose()</h6><ol>
+<li>栈复制到堆，调用Block_copy()函数<ul>
+<li>descriptor-&gt;copy 在里面实行   </li>
+</ul>
+</li>
+<li>释放Block，调用Block_release()函数<ul>
+<li>descriptor-&gt;dispose 在里面执行</li>
+</ul>
+</li>
+</ol>
+<h2 id="为什么用Block？">为什么用Block？</h2><p>Block相对于Delegate，看起来更加直观</p>
+<h2 id="Block怎么用？">Block怎么用？</h2><h4 id="经典🌰">经典🌰</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__<span class="keyword">weak</span> __<span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</span><br><span class="line"></span><br><span class="line">__<span class="keyword">strong</span> __<span class="keyword">typeof</span>(weakSelf) strongSelf = weakSelf;</span><br></pre></td></tr></table></figure>
+<h6 id="block里什么时候不需要weakSelf?">block里什么时候不需要weakSelf?</h6><p>当block本身不被self持有时，比如:UIView animateWithDuration:animations </p>
+<ul>
+<li>UIView的某个负责动画的对象持有block</li>
+<li>block持有self </li>
+</ul>
+<p>还有字典、数组的枚举</p>
+<h6 id="weakSelf为什么需要配合strongSelf使用？">weakSelf为什么需要配合strongSelf使用？</h6><p>避免block执行过程中，self突然被释放，出现奇怪的逻辑或闪退</p>
+<h6 id="block里strong_self后，block不是也会持有self吗，而self又持有block，岂不是又循环引用了？">block里strong self后，block不是也会持有self吗，而self又持有block，岂不是又循环引用了？</h6><p>在block里用strong引用，保证了持有引用的周期只在block被执行时，闭包函数返回后就释放了。而直接强引用，持有引用的周期则是block的生命周期，就会循环引用了。 </p>
+<h6 id="block什么时候需要构造循环引用？">block什么时候需要构造循环引用？</h6><p>比如block是post请求，被self持有，回调后必须调用self的一个方法，这个时候需要保证block调用前self不被释放，就不能weak化self，就有循环引用，解决办法是在block回调里调用完方法后执行self.block=nil打破循环链</p>
+<p>如何解决循环引用，两个办法：</p>
+<ol>
+<li>产生循环引用的地方使用weak弱引用</li>
+<li>在合理位置主动断开环中的一个引用，使对象得以回收</li>
+</ol>
+<h6 id="weak的实现原理">weak的实现原理</h6><p>weak变量在引用计数为0时，会被自动设置为nil</p>
+<ol>
+<li>系统有个全局CFMutableDictionary实例，保存每个对象的weak指针列表</li>
+<li>在引用计数为0时，去这个字典里找到所有的weak指针，将其置为nil</li>
+<li>KVO </li>
+</ol>
+<h6 id="自己写的view，应该用weak还是strong?">自己写的view，应该用weak还是strong?</h6><p>最好用strong</p>
+<ol>
+<li>懒加载需要，用weak，过了懒加载就被释放了没有强引用</li>
+<li>用weak需要调用addSubview加上，不然可能刚创建就被释放了</li>
+</ol>
+<h2 id="Block的实际应用">Block的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="X蜂">X蜂</h4>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/11/01/block/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/10/17/my_fullstack/">
                             我所理解的全栈工程师
                         </a>
@@ -1283,130 +1470,6 @@ gulp.task(<span class="string">'default'</span>, <span class="function"><span cl
                     
                         <p>
                             <a href="/2016/08/17/web_start/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/07/22/javascript/">
-                            JavaScript基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-07-22T18:15:02+08:00">
-	
-		    Jul 22, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="学习JavaScript需要会什么？">学习JavaScript需要会什么？</h2><p>现在的用户无论是用电脑还是手机都免不了要和网页多多少少打交道，网页技术随着互联网出现而出现，随着互联网爆发而爆发，在互联网不断往前发展的同是JavaScript起到了无法替代的作用，而最新的版本ES6（ES2015）在2015年发布，给JavaScript带来了全新的语法糖，也让JavaScript的编写更容易，更可观。</p>
-<h2 id="JavaScript是什么">JavaScript是什么</h2><h4 id="工作流">工作流</h4><p>JavaScript是一种动态、弱类型、基于原型的语言，通过浏览器可以直接执行。当浏览器遇到\<script\>标记的时候，浏览器会执行之间的JavaScript代码，嵌入的JavaScript代码是按顺序执行的，JavaScript里面都是对象，有一种原型机制，将所有的对象联系起来。</script\></p>
-<h4 id="原型和原型链">原型和原型链</h4><p><img src="https://www.processon.com/chart_image/5865217ce4b049e79ee3878a.png" alt=""></p>
-<h4 id="作用域和上下文">作用域和上下文</h4><p>JavaScript作用域分两种:</p>
-<ol>
-<li>全局作用域</li>
-<li>局部作用域</li>
-</ol>
-<p>在JavaScript，函数是对象，一切皆对象，那么函数也和其它对象一样，拥有可以通过代码访问的属性和一系列供JavaScript引擎访问的内部属性。其中有个内部属性[[Scope]]，该属性包含了函数被创建的作用域中对象的集合，此集合被称为函数的作用域链，它决定了哪些数据能被函数访问。</p>
-<p>举个🌰</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num1,num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = num1 + num2;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当add创建时，它的作用域会填入一个全局对象，该全局对象包含了所有的全局变量，如下图（图中只列举部分）：<br><img src="https://www.processon.com/chart_image/58524894e4b05a0284734630.png" alt=""></p>
-<p>函数add的作用域将在执行时用到，例如执行：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> total = add(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<p>执行此代码是会创建一个称为“运行期上下文（execution context）”的内部对象，运行期上下文定义了函数执行时的环境，每个运行期上下文都有自己的作用域链，用于标识符解析，当运行期上下文被创建时，它的作用域链初始化为当前运行函数的[[Scope]]所包含的对象。</p>
-<p>这些值按照他们出现在函数中的顺序被复制到运行期上下文的作用域链中。它们共同组成了一个新的对象，叫“活动对象(activation object)”，该对象包含了函数的所有局部变量、命名参数、参数集合以及this，然后此对象会被推入作用域链的前端，当运行期上下文被销毁，活动对象随之被销毁。新的作用域链如下图：<br><img src="https://www.processon.com/chart_image/58524b1de4b07ab5f2c9f38e.png" alt=""></p>
-<p>在函数执行时，每遇到一个变量，都会经历一次标识符解析过程以决定从哪里获取和存储数据，该过程从作用域链头部，也就是activation object开始搜索，查找同名的标识符，如果找到了就用对应的变量，如果没找到继续搜索作用域链中的下一对象，如果搜索完毕未找到，则认为未定义。</p>
-<h4 id="单线程和异步">单线程和异步</h4><p>从一诞生，JavaScript就是单线程，这已经成了这门语言的核心特征，将来也不会改变。为了利用多核CPU的计算能力，HTML5提出Web Worker标准，允许JavaScript脚本创建多个线程，但是子线程完全受主线程控制，且不得操作DOM。</p>
-<h6 id="任务队列">任务队列</h6><ol>
-<li>同步任务：在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务</li>
-<li>异步任务：不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行</li>
-</ol>
-<p>他们的运行机制：</p>
-<p><img src="http://image.beekka.com/blog/2014/bg2014100801.jpg" alt=""></p>
-<ol>
-<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。</li>
-<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
-<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
-<li>主线程不断重复上面的第三步。</li>
-</ol>
-<h4 id="数据类型">数据类型</h4><p>String、Number、Boolean、null、undefined、Object(Array、Date …)</p>
-<h4 id="闭包">闭包</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">start</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pos = start;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Move to '</span> + (pos += <span class="number">2</span>) + <span class="string">'.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> move_next = move(<span class="number">6</span>); </span><br><span class="line">move_next();  <span class="comment">// Move to 8. </span></span><br><span class="line">move_next();  <span class="comment">// Move to 10.</span></span><br></pre></td></tr></table></figure>
-<p>move函数的内部匿名函数持有了move的属性pos，导致pos属性不会随着move的生命周期结束而结束。</p>
-<h2 id="为什么要用JavaScript?">为什么要用JavaScript?</h2><h4 id="基础">基础</h4><p>JavaScript可以把基础很好的总结为三座大山</p>
-<h4 id="关于新技术">关于新技术</h4><p>基础很重要，新技术很危险，学习的同时带着“质疑精神”</p>
-<h2 id="JavaScript怎么用？">JavaScript怎么用？</h2><h4 id="CSS预处理器">CSS预处理器</h4><p>SASS的变量方案也会带来一些问题：学习成本；调试工作量；代码整合不方便</p>
-<h4 id="跨界、CoffeeScript、TypeScript和ES6">跨界、CoffeeScript、TypeScript和ES6</h4><p>CoffeeScript和TypeScript分别是Ruby和C#社区的产物，它们都觉得JavaScript语法不够好，想改善它。只是它们俩分别代表了豪放派和严谨派，是两个极端，让它们俩先打一架好了</p>
-<p>ES6带来了很多好用的语法糖</p>
-<ol>
-<li>let const </li>
-<li>Promise</li>
-<li>Class extends</li>
-<li>Module import export</li>
-<li>字符串、正则、数值、函数、对象都有扩展</li>
-<li>详细教程参见:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6 入门</a></li>
-</ol>
-<h4 id="Node">Node</h4><p>Node当前的用途：</p>
-<ul>
-<li>服务端开发</li>
-<li>脚本工具</li>
-</ul>
-<p>随着前端的网络性能优化技巧逐渐完善，前端要做的事情变得越来越麻烦：图片合并、图片压缩、代码合并、代码压缩、动态加载、CDN。如果再加上jsLint之类的代码检查，就更加麻烦了。之前流行的加载是线上动态加载，requirejs那种方式，而现在流行在打包阶段按需加载，这就使得打包变得更加复杂。Node能为前端带来专业的开源的工具，这是打包脚本最好的结果，比自己折腾些质量一般的脚本好太多了！</p>
-<h4 id="Angular">Angular</h4><p>整套代码组织的思路和服务端的MVC框架如出一辙：URL路由 + Controller + 数据抽象 + 模板引擎。虽然服务端出身的同学会倍感亲切，但这真的不是前端代码最好的组织方式。</p>
-<h4 id="React">React</h4><p>React总的来说，不像Angular走错了路，但因为全家桶的原因门槛越来越高，这不是个好现象，未来有待观察，那么在它之前关于抽象和面向对象，你真的掌握了吗？封装、继承、多态、设计模式、解耦、API设计这些真的都熟练了吗？</p>
-<h4 id="SPA(单页应用程序single_page_web_application)">SPA(单页应用程序single page web application)</h4><p>SPA真正的威力不是把多个网页变成单个网页，而是在产品形态上就彻底跳出网页般的排版布局。比如说做游戏、做网络IDE、做网页版PhotoShop之类。而这，需要的不仅是技术能力，而进一步需要产品设计能力，能不能技术驱动产品创新，不要再折腾什么技术工程化，发点力在技术产品化上。</p>
-<h4 id="ReactNative_和_phoneGap">ReactNative 和 phoneGap</h4><ul>
-<li>ReactNative阉割的CSS导致前端技能受限，对Native底层的黑盒导致调试和扩展的困难，学习性价比不一定高</li>
-<li>PhoneGap把jsBridge写好，团队合作很方便，但是webview性能问题是瓶颈</li>
-</ul>
-<h4 id="微信小程序">微信小程序</h4><p>看过SDK的同学觉得跟HTML5没有半毛钱关系，这是一个伪HTML5的技术，开发的同学又多了一个平台要侍候。</p>
-<h4 id="全栈">全栈</h4><p>全栈这个口号其实很毁人——别误解我的意思，我不是反对个人往全栈方向发展，而是想说，全栈并不容易，不是说前端开发的同学学了Node就全栈了，也不是说后端同学有了Angular和Bootstrap就全栈了，更不是说前端或者后端玩玩React Native，就能让iOS和Android下岗了。我发现一个可怕的事情是，全栈的口号让一些同学忽略了其他领域的知识深度，然后靠自我安慰甚至是自欺欺人地贬低其他领域的知识，以安慰自己已然全栈。</p>
-<h4 id="前端核心竞争力">前端核心竞争力</h4><p>什么是核心呢？HTML、CSS和JavaScript。我指的是原生的这些东西，不用上来就跟我说React的JavaScriptx语法重定义了HTML，Sass改良了CSS，TypeScript给JavaScript带来了静态语言的语法，这些都是外围，今天是React，明天可以换成Angular，今天是Sass明天可以换成Less，今天是TypeScript明天可以是CoffeeScript，这些不重要。就像jQuery鼎盛时期，很多同学不学原生JavaScript，上来直接就上手jQuery一样，走不远。要理解jQuery为什么这么封装，其实在底层发生了什么，用原生会遇到什么问题，直接用原生能解决吗？把原生的技巧学熟了，这些外围的东西上手很快，而且什么情况下用什么，心里会非常有底。团队合作需要考虑的事情很多，要有责任感，别只顾着做自己的Geek。</p>
-<p>强力推荐这些你不该错过的书：</p>
-<ul>
-<li>《CSS网站布局实录》——国产CSS2入门书，有些技巧已经淘汰，但仍不失为最好的CSS入门教程。</li>
-<li>《无懈可击的Web设计》——讲CSS应用技巧的书，国内外粉丝别多，说是开创了CSS技巧流派也不为过。</li>
-<li>《DOM JavaScript编程艺术》——JavaScript最好的入门书，没有之一，这本书是帮助你了解如何将DOM、CSS和JavaScript连接起来的一本书。严格来说，后端Node根本不算JavaScript，JavaScript是基于ES语法的一门脱水语言，如何实现的胶水？这本书将带你入门。</li>
-<li>《JavaScript高级程序设计》 ——JavaScript必读的一本精典，读完之后对JavaScript的理解和实 践会上升非常大的一个台阶。</li>
-<li>《编写高质量代码——Web前端开发修炼之道》 —— 这本书重点讲团队合作的注意事项。虽然一些具体的技巧，在今天已然过时，比如IE6的hack，但在团队合作方面的思考，直到今天我也没看到其他书在讲，这些思想没有其他书可替代。</li>
-<li>《HTML5和CSS3权威指南》——目前为止，我读过的HTML5方面最好的一本原创书。配合实例进行API讲解，非常详细具体。连HTML5都提供了哪些底层的东西都不知道，又该如何去用好它呢？在我看来，是学习HTML5的必读书。</li>
-<li>《响应式Web设计：HTML5和CSS3实战》——作者是《无懈可击的Web设计》忠实粉丝，所以很自然地，这也是本CSS技巧流派的书，侧重点在CSS3的实践技巧上，让人大开眼界。</li>
-<li>《JavaScript设计模式》——JavaScript在实战时的高级技巧。</li>
-</ul>
-<h2 id="JavaScript的实际应用">JavaScript的实际应用</h2><ol>
-<li>PC端浏览器</li>
-<li>移动端浏览器</li>
-<li>超级App的Hybrid</li>
-<li>微信公众号这种App开放平台</li>
-<li>微信朋友圈微博的营销页面</li>
-<li>百度轻应用（很小众）</li>
-<li>后台（部分公司）</li>
-<li>微信小程序（姑且也算）</li>
-</ol>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/07/22/javascript/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

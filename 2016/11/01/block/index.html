@@ -6,22 +6,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="yolynn">
-    <title>Archives: 2016/11 - yolynn</title>
+    <title>Block基础到进阶 - yolynn</title>
     <meta name="author" content="yolynn">
     
     
         <link rel="icon" href="http://yolynn.com/assets/images/head.png">
     
     
-    <meta name="description" content="云在青天水在瓶 - 幽灵鸟">
+    <meta name="description" content="学习Block需要会什么？栈与堆先来看下C/C++/OBJC编译的程序的内存是怎么分布的吧，下面有个架构图：
+
+栈(stack)
+编译器自动创建和释放
+栈式管理 后进先出
+一般存放参数值，局部变量值
+
+
+堆(heap)
+程序员创建和释放，如果未释放，程序结束后系统释放
+链表式管理
+操作系统有个记录空闲内存地址的链表，收到内存申请时，遍历链表，遍历到一个内存地址大于申请内存的链表节点，删除该节点并把">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="yolynn">
-<meta property="og:url" content="http://yolynn.com/archives/2016/11/index.html">
+<meta property="og:title" content="Block基础到进阶">
+<meta property="og:url" content="http://yolynn.com/2016/11/01/block/index.html">
 <meta property="og:site_name" content="yolynn">
-<meta property="og:description" content="云在青天水在瓶 - 幽灵鸟">
+<meta property="og:description" content="学习Block需要会什么？栈与堆先来看下C/C++/OBJC编译的程序的内存是怎么分布的吧，下面有个架构图：
+
+栈(stack)
+编译器自动创建和释放
+栈式管理 后进先出
+一般存放参数值，局部变量值
+
+
+堆(heap)
+程序员创建和释放，如果未释放，程序结束后系统释放
+链表式管理
+操作系统有个记录空闲内存地址的链表，收到内存申请时，遍历链表，遍历到一个内存地址大于申请内存的链表节点，删除该节点并把">
+<meta property="og:image" content="https://www.processon.com/chart_image/586f3b1fe4b067ce8566dc70.png">
+<meta property="og:image" content="http://cc.cocimg.com/api/uploads/20150109/1420794587351042.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/586f625fe4b032a565f0a633.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/586f6292e4b032a565f0ab14.png">
+<meta property="og:image" content="https://www.processon.com/chart_image/586f6673e4b067ce856bfa2c.png">
+<meta property="og:updated_time" content="2017-01-06T10:57:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yolynn">
-<meta name="twitter:description" content="云在青天水在瓶 - 幽灵鸟">
+<meta name="twitter:title" content="Block基础到进阶">
+<meta name="twitter:description" content="学习Block需要会什么？栈与堆先来看下C/C++/OBJC编译的程序的内存是怎么分布的吧，下面有个架构图：
+
+栈(stack)
+编译器自动创建和释放
+栈式管理 后进先出
+一般存放参数值，局部变量值
+
+
+堆(heap)
+程序员创建和释放，如果未释放，程序结束后系统释放
+链表式管理
+操作系统有个记录空闲内存地址的链表，收到内存申请时，遍历链表，遍历到一个内存地址大于申请内存的链表节点，删除该节点并把">
     
     
         
@@ -47,7 +86,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">yolynn</a>
@@ -71,7 +110,7 @@
         
     
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="4">
     
         <div class="sidebar-profile">
             <a href="/#about">
@@ -223,274 +262,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    
-
-<section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/11/11/RN&Weex/">
-                            如何一网打尽React、Redux、ReactNative、Vue、Weex、微信小程序？
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-11-11T18:15:02+08:00">
-	
-		    Nov 11, 2016
-    	
-    </time>
+        <div class="post-header main-content-wrap text-left">
     
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>最近两年，是移动互联翻天覆地的两年，也是前端javascript大放异彩的两年，这跟刚出生那会儿取名还需要借着java的名声已经有着天壤之别，nodejs一出山便带着一统前后端的野心，Reactjs被FB推出后在前端掀起组件化热潮、并且把前端的性能提升一个档次，ReactNative则基于React的基础被赋予了另外一层使命，那就是占领移动端的山头，可以说现在javascript能做的事情不可谓不多，FB推出这两款重量级产品足以在程序界掀起轩然大波，作为github活跃度最高的语言，作为github领头羊级别的产品，当然少不了以其为核心的周边产品或衍生品，比如React Redux 、Weex 以及微信小程序，你得承认它们的确是站在了巨人肩膀上做出来的更好的产品。</p>
-<h2 id="React">React</h2><p>初识Reactjs会很容易有一些误解，比如有人拿它和Angular、ember做比较,其实这完全是不对的，这里是要特别指出易误解和建议：</p>
-<ol>
-<li>Reactjs只是一个单纯的视图库，并非MVC框架，好吧，它事实上框架也不是，仅仅只是一个渲染视图的库</li>
-<li>组件要尽可能的小，较小的类，较小的模块更易于维护</li>
-<li><p>写函数式组件，定义React组件的方式有多种方式，推荐第三种方式</p>
-<ul>
-<li><p>使用React.creatClass()</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myComponent = React.createClass(&#123;</span><br><span class="line">	render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">&#123;this.props.className&#125;</span>/&gt;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用ES6 extends语法糖</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mycomponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">   render() &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">&#123;this.props.className&#125;</span>/&gt;</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>React 0.14引入的语法，使用属性作为参数的函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myComponent = props =&gt; (</span><br><span class="line">   <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">&#123;props.className&#125;</span>/&gt;</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li>写无状态组件，很多项目由于状态多变得混乱而难于管理</li>
-<li>使用Redux.js，React每个组件都可以拥有自己的状态管理，但是上面说了无状态的组件更容易维护，那么这时候最好是借助第三方状态管理库Redux.js，尤其是在全局状态管理中redux的优势会让你的项目整个流程非常清晰</li>
-<li>使用JSX、ES6、Babel、Webpack、npm</li>
-</ol>
-<h6 id="小结">小结</h6><p>正是由于React的Vitual DOM、轻Component、组件状态state等独特性造就了它在渲染页面时的高性能，从根本上分析，当用户在浏览器输入URL地址后会发生这些事情：</p>
-<ol>
-<li>webview执行loadURL</li>
-<li>通过DNS获取对应的IP</li>
-<li>从webserver获取处理过的文件html+css+js+img等</li>
-<li>浏览器分析这些文件后要建立DOM树</li>
-<li>渲染页面</li>
-</ol>
-<p>DOM树的每一次建立和刷新都是在内存中完成，React通过创建与DOM一致的Vitual DOM结合state的变化比对出DOM树真正需要修改的地方，再通过Component render()不同的地方而不需要每次都在内存中刷新整个DOM树，大大提升了渲染性能。</p>
-<h2 id="Redux">Redux</h2><p>既然在上文介绍React时提到了Redux，Redux到底是什么、做什么用的？为啥要用？</p>
-<ol>
-<li><p>Redux是什么、做什么用的？</p>
-<p> redux是应用状态管理的库，帮你编写易于测试和管理的代码</p>
-</li>
-<li><p>为什么要用Redux？</p>
-<p> 随着单页面变得越来越复杂，前端代码需要管理各种各样的状态，比如可能是服务器的响应，可能是前端界面的状态，当这个状态变得任意可变，那么你可能在某个时间点失去对整个应用状态的控制。Redux为整个应用创建并管理一颗状态树，并通过限制更新发生的时间和方式，使整个应用的状态变得可以预测。</p>
-</li>
-</ol>
-<h6 id="小结-1">小结</h6><p>Redux遵循了三大原则：</p>
-<ol>
-<li>全局单一数据源</li>
-<li>state不可变</li>
-<li>reducer纯函数</li>
-</ol>
-<p>形成以action reducer store components组成的回路、state则从components传导至action，再通过reducer和旧的state通过计算生成新的state并保存至新的state，redux通过connect函数绑定state和UI，那么UI则会根据state的变化而发生更新</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1234637-4c60ce39ecad2a42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>虽然Redux和React并没有必然关系，但是Redux用于管理state，确特别适合那些 state=&gt;UI 的库，当然了你也可以在ReactNative中引入Redux，具体操作可以参见：<a href="http://www.jianshu.com/p/2c43860b0532?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note" target="_blank" rel="external">点这里</a></p>
-<h2 id="React_Native">React Native</h2><p>ReactNative无论在前端界还是客户端可谓是无人不知、无人不晓，你可以诟病它的各种痛点，但是你却不能忽视它的成长，我估计大家多多少少都有动手用过用过RN了，那么RN到底是怎么一步一步从JSX转换为原生的视图呢？它究竟还存在哪些痛点呢？为何还不能大面积覆盖使用到APP项目中呢？</p>
-<ol>
-<li><p>原理</p>
-<p> RN的整个工作流下来大概是这样：</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">React(JSX) =&gt; bundle.js =&gt; JavaScriptCore(iOS) =&gt; Visual DOM =&gt; ReactSDK =&gt; Native控件</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><p>痛点</p>
-<ul>
-<li>RN虽然各方表现都很优秀，但是目前RN依旧还没有一个稳定的版本，基本保持在两周就要更新一个新版本，对于版本升级需要趟坑在所难免，讲不好一个新版发出来一言不合某个API就不能用了。</li>
-<li>RN的listView性能问题，官方至今也没有完美的解决方案，RN的自带listView并没有回收机制，这样在加载较多数据时，APP内存会非常吃紧，不过github上也有大牛开发了RN的tableview可以试试：<a href="https://github.com/aksonov/react-native-tableview" target="_blank" rel="external">点这里</a></li>
-<li>业务高速发展，view层级过多会导致内存消耗，页面卡顿，这种情况需要尽可能的减少层级嵌套，尽可能的抽取能够复用的组件</li>
-<li>逻辑越来越复杂，导致state设置过多，维护困难，这种情况我想你也知道怎么解决了吧？引入Redux</li>
-<li>单个页面代码超过千行，重复造轮子</li>
-<li>就开发来说：依赖工具太多、真机调试繁琐、文档过于臃肿、JSX学习成本等</li>
-</ul>
-</li>
-<li><p>为何开发了却不上线？</p>
-<p> 据我所知的现状是：XX会 X蜂都多少为自己的APP开发RN模块并完成测试，却一直没有上线，虽然它们在代码中使用了webview降级方案以规避风险，个人认为几点的原因，欢迎补充</p>
-<ul>
-<li>广告档期使用了listview，并且有大量的数据需要展示，这里会有性能问题上面提过</li>
-<li>广告档期页面属于长时间存在于APP的模块且业务逻辑复杂属于经常变动类型导致开发的代码大量堆积，考虑维护成本</li>
-<li>开发的页面属于用户量非常大，运营不够有信心对新技术冒险</li>
-<li>RN开发人员缺乏</li>
-</ul>
-</li>
-</ol>
-<h6 id="小结-2">小结</h6><p>RN基于jsbrige和ocbrige实现js和OC的互调: OC能通过JSContext知道js的上下文因此很简单的就能调用js，而反过来调用js需要知道OC的上下文，其实RN实现的方式是在两端分别提供了一份配置表，这样jsbrige发送消息给ocbrige时会在配置表中验证一次，保证OC runtime执行函数存在。</p>
-<p>思考下这与传统的js和OC互调有什么原理上的区别？（比如Cordova、UrlProtocal、UIWebView、WKWebview等）    </p>
-<h2 id="Vue">Vue</h2><p>前端的两大杀器FB的React和google的Angular，既然他们不是作为正面对手而出现，那么有没有一款吸收了两者精华的产品出现呢？答案是肯定的，其实最擅长取其精华，去其糟粕的事情非中国人莫属，Vue框架就是中国人开发的并且在前端界有着要三分天下的雄心，目前Vue已经出到2.0：</p>
-<blockquote>
-<p>Vue.js的目标是通过尽可能简单的API实现<strong>响应的数据绑定</strong>和<strong>组合的视图组件</strong>。</p>
-</blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/854231-22ac84c532a7be20.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>Vue通过标签template、script、style标签区分html js css脚本，所有的内容归并到.vue文件，这样一个功能或者模块就是一个.vue组件，对于后期的组件重用和维护也变得非常敏捷</p>
-<p>可能你会担心浏览器是如何解析.vue文件，事实上当你开发了.vue的组建后还需要通过webpack打包工具在打包时拆分为浏览器需要的脚本即可，当然也很简单，对于webpack还不够了解的同学可以:<a href="http://www.jianshu.com/p/4cc1d29309b6" target="_blank" rel="external">点这里</a></p>
-<h6 id="小结-3">小结</h6><p>Vue作者称其性能是好过React的，而且又与React如此的相似，同样在数据绑定上吸收了Angular的特点，并且解决了很多Angular的痛点，还提供了如此简单的API，你应该没有理由拒绝它。</p>
-<h2 id="Weex">Weex</h2><p>听到不少用ReactNative开发的各种抱怨：“环境搭了一整天，真机调试又花去了大半天，一个错误定位了两个钟” 等等，可能真的在你尝试了两天RN开发后选择了放弃或者硬着头皮解决各种和代码无关的痛点，Weex推出来后，我想你会对RN这种模式的开发更有兴趣，它确实很好的解决了这些痛点，同样无愧于一款站在巨人肩膀上的好产品</p>
-<ol>
-<li><p>工作流<br> <img src="http://gtms02.alicdn.com/tps/i2/TB1ootBMpXXXXXrXXXXwi60UVXX-596-397.png" alt=""></p>
-<p> 通过nodejs实现的transformer将组件.we文件转换为jsbunndle并发布到服务器上，客户端从服务器端获取jsbundle通过内置的js framework(iOS:javascriptcore android:v8)解析成Vitual DOM树，接着使用内嵌的week framework解析对应的DOM树为native控件并添加与css和js对应的样式排版和事件。</p>
-</li>
-<li><p>对比ReactNative</p>
-<ul>
-<li>核心理念并没有差异</li>
-<li>.we基于Vue基础，使其拥有了Vue的所有优点，又摆脱了React JSX学习成本。</li>
-<li>weex打的js bundle只有js代码，体积小很多，基础js库包含在weex sdk中</li>
-<li>调试时weex支持在chrome中预览DOM结点</li>
-<li>weex提供了weexplayground（可在appstore下载），方便预览调试</li>
-<li>性能上weex listview稍好，对长view渲染有优化</li>
-</ul>
-</li>
-<li><p>痛点</p>
-<ul>
-<li>weex文档，看过的人知道的痛，我都有要给它写文档的冲动</li>
-<li>当然，社区还是比不上RN</li>
-</ul>
-</li>
-</ol>
-<h6 id="小结-4">小结</h6><p>Weex让我们对于类RN模式的开发更加容易接受，之前有人在Weex编程大赛中一天时间做了一个APP（<a href="https://github.com/dodola/WeexOne" target="_blank" rel="external">One一个</a>），这让我很惶恐，Winter is coming! 你备好你的粮草了吗？</p>
-<h2 id="微信小程序">微信小程序</h2><p>与其它框架有所不同的是，因为微信小程序并非开源的，因此有些原理上或工作流上的描述有部分带猜测的成分，如果有错误望指正</p>
-<ol>
-<li><p>工作流<br> 微信小程序应该是主动绕过了浏览器而是直接调用浏览器内核，本质上是运行在浏览器模式中的，而微信作为它的承载，可以管理它的生命周期，对于多个小程序的生命周期应该是利用了栈来管理。</p>
-</li>
-<li><p>微信的开发生态圈</p>
-<ul>
-<li>框架：组件开发形式包括视图文件WXML和WXSS，以及基于javascript的逻辑层框架</li>
-<li>响应的数据绑定：当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新</li>
-<li>页面管理：框架 管理了整个小程序的页面路由，可以做到页面间的无缝切换，并给以页面完整的生命周期</li>
-<li>基础组件：框架 提供了一套基础的组件，这些组件自带微信风格的样式</li>
-<li>丰富的 API：框架 提供丰富的微信原生 API，可以方便的调起微信提供的能力，如获取用户信息，本地存储，支付功能等</li>
-<li><p>eg:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- This is our View --&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">view</span>&gt;</span> Hello &#123;&#123;name&#125;&#125;! <span class="tag">&lt;/<span class="title">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">bindtap</span>=<span class="value">"changeName"</span>&gt;</span> Click me! <span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line">// This is our App Service.</span><br><span class="line">// This is our data.</span><br><span class="line">var helloData = &#123;</span><br><span class="line"> 	name: 'WeChat'</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Register a Page.</span><br><span class="line">Page(&#123;</span><br><span class="line">  data: helloData,</span><br><span class="line">  changeName: function(e) &#123;</span><br><span class="line">    // sent data change to view</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      name: 'MINA'</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-<h6 id="小结-5">小结</h6><p>相比于Native APP，微信小程序的开发成本有所降低，但也有限，当然微信小程序提供的功能也有限，通过小程序可能会帮你留住一些轻度用户，比如订机票酒店等这之类</p>
-<h2 id="总结">总结</h2><p>前端界千变万化，要如何翻越这一座又一座的大山？打好基础，打持久战，分解小目标，比如javascript的基础我把它分为：原型和原型链，上下文环境和作用域，单线程和异步三个小山头，在征服这些小山头后，想要征服大山就很容易了。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/11/11/RN&Weex/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
+        <h1 class="post-title" itemprop="headline">
+            Block基础到进阶
+        </h1>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/11/02/runtime/">
-                            Runtime基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-11-02T18:15:02+08:00">
-	
-		    Nov 02, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="学习runtime需要会什么？">学习runtime需要会什么？</h2><p>学习runtime的前提最好要有C语言的基础，通过阅读runtime中一些个重要以objc<em> class</em> object_开头的struct结构体，帮助理解runtime里的各个struct是如何关联的、strunct和method ivar是如何关联的，从而上升到Objective-C层，完全理解Object之间的关联关系，Selector的调用原理等。 </p>
-<h2 id="runtime是什么?">runtime是什么?</h2><h4 id="原理">原理</h4><p><img src="https://www.processon.com/chart_image/5847cfcae4b0d594ec4aaefd.png" alt=""></p>
-<p>从上图可以看出instance -&gt; class -&gt; superclass -&gt; rootclass之间的关系，首先抛开instance不谈，他们遵循了由下而上的继承关系，而class的实例对象instance则通过isa指针指向了objc_class，那么可想而知，instance在做属性获取或者消息转发时都会通过isa指针查找objc_class中的属性和方法</p>
-<p>再来看一张图:<br><img src="https://www.processon.com/chart_image/5847d87ae4b005d48b553c53.png" alt=""></p>
-<p>上图更加清晰的反映了各种instance和class、metaclass之间的关系，其实记住一条线性关系：所有的instance都是通过isa指向了objc_class结构,objc_class则会指向自己的meta_class，而meta_class会最终指向root meta_class, root meta_class会指向自己, root meta_class继承于root class, 而root class的isa指向nil。</p>
-<p>额外要补充内存存储问题，在instance中声明的<em>-函数</em>和<em>普通成员</em>会存储在isa指向的objc_class中而<em>+函数</em>和<em>static成员</em>则会存储到object_class指向的meta_class中。</p>
-<h4 id="消息转发机制">消息转发机制</h4><p>消息传递，objc_msgSend()是重点函数，我们回过去看第一张图的箭头，其实runtime的消息传递也是走的箭头路径，一层一层传递</p>
-<p>消息转发，发送消息给一个不处理该消息的对象时会发生错误，而在宣布错误之前，runtime为接收消息的对象为消息处理提供了二次机会。当某个对象不能处理消息时，可以通过重写-forwardInvocation:方法提供一个默认的消息响应避免出错，看本文的第二张图，在对象无法找到消息对应的方法实现时，会按照图中的继承关系一层层往上找。</p>
-<p><img src="https://www.processon.com/chart_image/5847db5ce4b0d594ec4c0e73.png" alt=""></p>
-<p>上图是一个消息的处理工作流，在消息发给对象后，消息得不到对象处理，则会启动<strong>消息转发</strong>机制，大概有几个阶段：</p>
-<ol>
-<li>询问reciever能否动态的添加方法，以处理当前消息，也叫<em>动态方法解析</em>，runtime会通过resolveInstanceMethod:判断能否处理</li>
-<li>询问之后，如果还是无法响应则询问reciever是否有其它reciever能够处理这条消息</li>
-<li>若无备用reciever返回，runtime会把全部细节封装到NSInvocation中，再给reciever一次机会解决这条消息</li>
-</ol>
-<h2 id="为什么用runtime?">为什么用runtime?</h2><p>搞清楚了runtime的原理和消息转发机制，在为什么要用runtime的问题上，也可以通过围绕原理和消息转发分析：</p>
-<blockquote>
-<p>Objective-C的面向对象、消息派发、动态绑定和内存管理都与runtime息息相关</p>
-</blockquote>
-<h2 id="runtime的使用方式">runtime的使用方式</h2><p>Objective-C中有三种与runtime系统交互级别，由浅到深：</p>
-<ol>
-<li>通过OC的源代码，比如调用某个函数</li>
-<li>通过Foundation库中定义的NSObject提供的方法，比如performSelector:</li>
-<li>通过引进runtime头文件，直接使用runtime方法</li>
-</ol>
-<h2 id="runtime的实际应用">runtime的实际应用</h2><p>runtime的实际应用有很多：</p>
-<ol>
-<li>给category添加属性</li>
-<li>Method Sizzling hook 系统函数，在系统函数之前做一些特殊处理</li>
-<li>dic 转 model</li>
-<li>生命周期log 埋点</li>
-<li>jspatch aspect 等第三方框架</li>
-</ol>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/11/02/runtime/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/11/01/block/">
-                            Block基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+    <div class="post-meta">
     <time itemprop="datePublished" datetime="2016-11-01T18:15:02+08:00">
 	
 		    Nov 01, 2016
@@ -499,10 +285,11 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="学习Block需要会什么？">学习Block需要会什么？</h2><h4 id="栈与堆">栈与堆</h4><p>先来看下C/C++/OBJC编译的程序的内存是怎么分布的吧，下面有个架构图：<br><img src="https://www.processon.com/chart_image/586f3b1fe4b067ce8566dc70.png" alt=""></p>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h2 id="学习Block需要会什么？">学习Block需要会什么？</h2><h4 id="栈与堆">栈与堆</h4><p>先来看下C/C++/OBJC编译的程序的内存是怎么分布的吧，下面有个架构图：<br><img src="https://www.processon.com/chart_image/586f3b1fe4b067ce8566dc70.png" alt=""></p>
 <ol>
 <li><strong>栈(stack)</strong><ul>
 <li>编译器自动创建和释放</li>
@@ -649,31 +436,70 @@
 <li>用weak需要调用addSubview加上，不然可能刚创建就被释放了</li>
 </ol>
 <h2 id="Block的实际应用">Block的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="X蜂">X蜂</h4>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/11/01/block/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/runtime/"  data-tooltip="Runtime基础到进阶">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/17/my_fullstack/" data-tooltip="我所理解的全栈工程师">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
         
-        
-        <li class="pagination-number">page 1 of 1</li>
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -684,6 +510,83 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/runtime/"  data-tooltip="Runtime基础到进阶">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/17/my_fullstack/" data-tooltip="我所理解的全栈工程师">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yolynn.com/2016/11/01/block/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
         
@@ -733,6 +636,8 @@
 <script src="/assets/js/jquery.fancybox-thumbs.js" type="text/javascript"></script>
 <script src="/assets/js/tranquilpeak.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
+
+    
 
 
 
