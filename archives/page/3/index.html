@@ -239,6 +239,82 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/02/23/multi_compiler/">
+                            多编译器的认识
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-02-23T16:15:02+08:00">
+	
+		    Feb 23, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/基础/">基础</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="background">background</h2><blockquote>
+<p>现代世界，编程语言层出不穷，每多一门语言的出现，可能就会多一个编译器的出现，那么如此多的编译器，我需要一个一个去弄清它们的实现吗？</p>
+</blockquote>
+<p>答案是，显然不用，我将列出一些语言使用的编译器进行剖析，先来看看编译原理顺序：</p>
+<blockquote>
+<ol>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>生成中间代码</li>
+<li>优化</li>
+<li>汇编、链接</li>
+<li>生成目标代码</li>
+</ol>
+<p>常见编译器</p>
+<blockquote>
+<ul>
+<li>JVM: java编译器只需面向JVM，生成JVM能理解的代码或字节码文件。Java源文件经编译器，编译成字节码程序，通过JVM将每一条指令翻译成不同平台机器码，通过特定平台运行。</li>
+<li>LLVM(clang):LLVM是构架编译器(compiler)的框架系统，以C++编写而成，用于优化以任意程序语言编写的程序的编译时间(compile-time)、链接时间(link-time)、运行时间(run-time)以及空闲时间(idle-time)，对开发者保持开放，并兼容已有脚本;Clang 对源程序进行词法分析和语义分析，并将分析结果转换为 Abstract Syntax Tree ( 抽象语法树 ) ，最后使用 LLVM 作为后端代码的生成器。</li>
+<li>GNU(gcc):通常所说的GCC是GUN Compiler Collection的简称，除了编译程序之外，它还含其他相关工具，所以它能把易于人类使用的高级语言编写的源代码构建成计算机能够直接执行的二进制代码。</li>
+<li>V8引擎:采用C++编写,V8在执行之前将JavaScript编译成了机器码，而非位元组码或是直译它，以此提升效能。更进一步，使用了如内联缓存（inline caching）等方法来提高性能。V8性能的3个关键方面：<ul>
+<li>快速属性访问</li>
+<li>动态生成机器码 </li>
+<li>高效的垃圾回收</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>Etc.</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/02/23/multi_compiler/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/02/22/multi_lang/">
                             多编程语言学习
                         </a>
@@ -1228,104 +1304,6 @@
                     
                         <p>
                             <a href="/2015/10/30/algorithm_02/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/10/20/algorithm_01/">
-                            数据结构基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2015-10-20T18:15:02+08:00">
-	
-		    Oct 20, 2015
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h4 id="学习数据结构需要会什么？">学习数据结构需要会什么？</h4><p>数据结构是以某种形式将数据组织在一起的集合，还包括数据的增删改查，你需要了解的专业术语有：</p>
-<ul>
-<li>树相关称呼，举个🌰：父节点、叶子节点、深度[根节点到底层]、度[子节点的个数]</li>
-<li>链表相关称呼，举个🌰：首结点、尾结点、头指针、尾指针</li>
-</ul>
-<h4 id="数据结构是什么？">数据结构是什么？</h4><p>我把数据结构狭义的分为两大类：</p>
-<h6 id="线性结构(所有结点用一根线串起来)">线性结构(所有结点用一根线串起来)</h6><ol>
-<li>连续存储[数组]<ul>
-<li>空间复杂度大，时间复杂度O(1)，寻址容易，增删难</li>
-</ul>
-</li>
-<li>离散存储[链表]<ul>
-<li>空间复杂度小，时间复杂度O(N)，寻址困难，增删易</li>
-</ul>
-</li>
-<li>数组 VS 链表<br><img src="https://www.processon.com/chart_image/585ba403e4b02e6c0ab4964b.png" alt=""></li>
-<li>哈希表[key-value]<ul>
-<li>依赖哈希算法存储，拥有<strong>数组查询快</strong>和<strong>链表增删改快</strong>的优势</li>
-<li>散列函数 -&gt; 散列地址</li>
-<li>散列冲突：不同的key计算后获得了相同的散列地址<br><img src="https://www.processon.com/chart_image/585ba265e4b03a03b1957008.png" alt=""><br>“拉链法”实现哈希表：左边是数组，数组中的指针指向一个链表的头。</li>
-</ul>
-</li>
-</ol>
-<h6 id="非线性结构">非线性结构</h6><ol>
-<li>树<ul>
-<li>一般树</li>
-<li>二叉树<ul>
-<li>前中后序遍历(根节点位置)</li>
-<li>满二叉树：达到<strong>节点最大值</strong> </li>
-<li>完全二叉树：除了<strong>深度h层</strong>，其它层都达到<strong>节点最大值</strong></li>
-<li>二叉查找(排序)树：空树 或 左子树节点小于等于根节点值，右子树节点大于等于根节点值 </li>
-<li>平衡二叉树：左右子树<strong>高度差绝对值不超过1</strong></li>
-</ul>
-</li>
-<li>森林</li>
-</ul>
-</li>
-<li>图</li>
-</ol>
-<h4 id="为什么要用数据结构？">为什么要用数据结构？</h4><p><img src="https://www.processon.com/chart_image/585bae3fe4b03a03b1965777.png" alt=""></p>
-<h4 id="数据结构怎么用？">数据结构怎么用？</h4><p>基于数组和链表实现的常用数据结构：</p>
-<ol>
-<li>栈[先进后出] </li>
-<li>队列[先进先出]</li>
-<li>ArrayList(数组)   LinkedList(双向链表)</li>
-</ol>
-<p>基于哈希表实现的常用数据结构：</p>
-<ol>
-<li>NSDictionary</li>
-<li>HashMap HashSet</li>
-<li>哈希的应用<ul>
-<li>安全领域的加密算法</li>
-<li>哈希表</li>
-<li>海量数据处理</li>
-</ul>
-</li>
-</ol>
-<h4 id="数据结构的实际应用">数据结构的实际应用</h4><h6 id="XX会">XX会</h6><h6 id="XX蜂">XX蜂</h6>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/10/20/algorithm_01/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

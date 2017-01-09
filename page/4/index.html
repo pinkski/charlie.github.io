@@ -238,6 +238,104 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/10/20/algorithm_01/">
+                            数据结构基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-10-20T18:15:02+08:00">
+	
+		    Oct 20, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h4 id="学习数据结构需要会什么？">学习数据结构需要会什么？</h4><p>数据结构是以某种形式将数据组织在一起的集合，还包括数据的增删改查，你需要了解的专业术语有：</p>
+<ul>
+<li>树相关称呼，举个🌰：父节点、叶子节点、深度[根节点到底层]、度[子节点的个数]</li>
+<li>链表相关称呼，举个🌰：首结点、尾结点、头指针、尾指针</li>
+</ul>
+<h4 id="数据结构是什么？">数据结构是什么？</h4><p>我把数据结构狭义的分为两大类：</p>
+<h6 id="线性结构(所有结点用一根线串起来)">线性结构(所有结点用一根线串起来)</h6><ol>
+<li>连续存储[数组]<ul>
+<li>空间复杂度大，时间复杂度O(1)，寻址容易，增删难</li>
+</ul>
+</li>
+<li>离散存储[链表]<ul>
+<li>空间复杂度小，时间复杂度O(N)，寻址困难，增删易</li>
+</ul>
+</li>
+<li>数组 VS 链表<br><img src="https://www.processon.com/chart_image/585ba403e4b02e6c0ab4964b.png" alt=""></li>
+<li>哈希表[key-value]<ul>
+<li>依赖哈希算法存储，拥有<strong>数组查询快</strong>和<strong>链表增删改快</strong>的优势</li>
+<li>散列函数 -&gt; 散列地址</li>
+<li>散列冲突：不同的key计算后获得了相同的散列地址<br><img src="https://www.processon.com/chart_image/585ba265e4b03a03b1957008.png" alt=""><br>“拉链法”实现哈希表：左边是数组，数组中的指针指向一个链表的头。</li>
+</ul>
+</li>
+</ol>
+<h6 id="非线性结构">非线性结构</h6><ol>
+<li>树<ul>
+<li>一般树</li>
+<li>二叉树<ul>
+<li>前中后序遍历(根节点位置)</li>
+<li>满二叉树：达到<strong>节点最大值</strong> </li>
+<li>完全二叉树：除了<strong>深度h层</strong>，其它层都达到<strong>节点最大值</strong></li>
+<li>二叉查找(排序)树：空树 或 左子树节点小于等于根节点值，右子树节点大于等于根节点值 </li>
+<li>平衡二叉树：左右子树<strong>高度差绝对值不超过1</strong></li>
+</ul>
+</li>
+<li>森林</li>
+</ul>
+</li>
+<li>图</li>
+</ol>
+<h4 id="为什么要用数据结构？">为什么要用数据结构？</h4><p><img src="https://www.processon.com/chart_image/585bae3fe4b03a03b1965777.png" alt=""></p>
+<h4 id="数据结构怎么用？">数据结构怎么用？</h4><p>基于数组和链表实现的常用数据结构：</p>
+<ol>
+<li>栈[先进后出] </li>
+<li>队列[先进先出]</li>
+<li>ArrayList(数组)   LinkedList(双向链表)</li>
+</ol>
+<p>基于哈希表实现的常用数据结构：</p>
+<ol>
+<li>NSDictionary</li>
+<li>HashMap HashSet</li>
+<li>哈希的应用<ul>
+<li>安全领域的加密算法</li>
+<li>哈希表</li>
+<li>海量数据处理</li>
+</ul>
+</li>
+</ol>
+<h4 id="数据结构的实际应用">数据结构的实际应用</h4><h6 id="XX会">XX会</h6><h6 id="XX蜂">XX蜂</h6>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/10/20/algorithm_01/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/09/22/mvvm_profile/">
                             从Web看Native的MVVM
                         </a>
@@ -1844,69 +1942,6 @@ AVL树的调整分为四种情况，分别为左单旋、右单旋、左右双�
                     
                         <p>
                             <a href="/2013/07/17/tree/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2013/04/12/web_profile/">
-                            浅析Web程序性能优化
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2013-04-12T00:00:00+08:00">
-	
-		    Apr 12, 2013
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>这篇写的比较早</p>
-<blockquote>
-<p>  “90%做维护，10%做开发，这正常吗？”这是网站Stack Exchange上一位程序员发出的提问，这个提问在众多开发者中产生了共鸣，事实上，在日常的工作中，作为程序员的我们，需要不断地修复Bug.，不停的重构代码以提高性能，为用户提供完美的产品，那么开发者是不是应该反问自己，这种情况就不能得到改善吗？</p>
-</blockquote>
-<h2 id="假如在编程的过程中每一次都能使用到最优方法，那么就会少走许多弯路，下面将对一个完整的Java_Web程序的性能提升方法做些简单介绍：">假如在编程的过程中每一次都能使用到最优方法，那么就会少走许多弯路，下面将对一个完整的Java Web程序的性能提升方法做些简单介绍：</h2><ol>
-<li>使用连接池优化<ul>
-<li>连接池是创建和管理一个连接的缓冲池的技术，它的好处是：减少连接创建时间，简化编程模式，让资源使用可控，Java中常用的连接池有：C3P0，BoneCP，DBCP，Proxool。</li>
-</ul>
-</li>
-<li>对数据操作优化<ul>
-<li>频繁的对数据库增、删、改会大大降低性能，因此在设计和编程的过程中应该尽可能的减少甚至避免大量增、删、改的出现；另外，对海量数据的查询要做到：合理使用索引、临时表，避免重复排序、相关子查询等。</li>
-</ul>
-</li>
-<li>核心代码的优化<ul>
-<li>有很多代码写的过于随意化，想当然的使用框架，导致程序的性能跟不上，核心代码的编写要注意：在合适的场合使用单例，避免随意使用静态变量，尽量使用局部变量，避免过多创建对象并尽快释放无用对象的引用，慎用synchronized和异常，单线程尽量使用HashMap、ArrayList，尽量使用final，尽量在finally中释放资源和避免finalize等。<br>当然还有更重要的一点是尽量缓存经常使用的对象，缓存方式有两种：文件缓存和内存缓存。常用的Java缓存框架有：OSCache，EHCache，JCache，ShiftOne，SwarmCache，TreeCache，WhirlyCache。</li>
-</ul>
-</li>
-<li>Web前端优化<ul>
-<li>之于Web前端的优化，最重要的便是打开网页的速度问题和浏览器内存占用问题，打开网页的速度和数据库的操作紧密相关</li>
-</ul>
-</li>
-</ol>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2013/04/12/web_profile/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

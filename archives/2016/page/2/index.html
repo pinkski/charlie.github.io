@@ -570,6 +570,119 @@ $ git <span class="keyword">push
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/06/30/ios_memory_analysis/">
+                            iOS内存管理探究
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-06-30T18:15:02+08:00">
+	
+		    Jun 30, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="Background">Background</h2><h4 id="时间轴">时间轴</h4><ol>
+<li>2010年，国内iOS开发刚兴起，手动管理内存（MRC）是一个必经的阶段</li>
+<li>2011年，WWDC提出了自动引用计数（ARC），依赖编译器的静态分析能力，通过在编译时找出合理的插入引用计数管理代码，从而彻底解放程序员</li>
+<li>2013年，苹果人为ARC足够成熟，废弃macOS上的垃圾回收机制，ARC迅速被接受</li>
+<li>2014年，WWDC推出Swift语言，继续使用ARC</li>
+</ol>
+<h4 id="基础">基础</h4><p><a href="http://yolynn.com/2015/07/20/ios_arc_mrc/">iOS内存管理基础到进阶</a></p>
+<h2 id="什么是引用计数">什么是引用计数</h2><p>引用计数是一个简单有效的管理对象生命周期的方式，除了Objective-C和Swift还有COM、C++11等语言使用。<br><img src="https://www.processon.com/chart_image/587345e5e4b09f680a3a3881.png" alt=""></p>
+<h2 id="为什么用引用计数">为什么用引用计数</h2><ul>
+<li><p>对象A生成一个对象M,调用对象B的某一方法，对象M作为参数传递，在没有引用计数情况下，内存原则是“谁申请谁释放”，那么对象A应在对象B不需要对象M时销毁M，但是对象B可能只是临时用一下M，也可能觉得M很重要，把M作为自己的成员变量，这种情况下什么时候去销毁M就成了一个难题<br><img src="https://www.processon.com/chart_image/58735027e4b087b19d4d7f55.png" alt=""></p>
+</li>
+<li><p>暴力的方式，是对象A调用B之后，马上销毁M，然后B需要将M复制一份，作为另一个对象M2，这意味着更多的内存申请、复制、释放工作，太影响性能<br><img src="https://www.processon.com/chart_image/587350bde4b032a566118f0b.png" alt=""> </p>
+</li>
+<li><p>引用计数方式，在参数M的传递过程中，哪些对象需要长时间使用这个对象，就把它的引用计数加1，使用完之后再把引用计数减1。</p>
+</li>
+</ul>
+<h2 id="Q_&amp;_A">Q &amp; A</h2><h4 id="不要向已经释放的对象发送消息">不要向已经释放的对象发送消息</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSObject</span> *object = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"Reference Count = %u"</span>, [object retainCount]);<span class="comment">//1</span></span><br><span class="line">   [object release];</span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"Reference Count = %u"</span>, [object retainCount]);<span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+<p>最后一行，引用计数没有变为0，为什么？因为对象已经回收，而我们向已回收的对象发送了retainCount消息，所以它输出的结果应该是不确定的，如果对象所占的内存被复用了，可能会crash。</p>
+<p>不确定值为什么是1不是0？因为最后一次执行release时，系统知道马上要回收内存了，没必要将retainCount减1了，对象回收后retainCount变得没有意义，不将1变为0，可以减少一次内存的写操作，加速对象的回收，这是编译器的优化操作。</p>
+<h4 id="ARC下的内存管理问题">ARC下的内存管理问题</h4><p>ARC能够解决90%的内存管理，另外10%的内存管理需要开发者自己处理，盲目的依赖ARC，可能引起的问题主要集中在：</p>
+<ol>
+<li>过度使用block，无法解决循环引用问题</li>
+<li>遇到底层CoreFoundation对象，需要手动管理它们的引用计数</li>
+</ol>
+<h6 id="循环引用问题">循环引用问题</h6><p>两个对象相互持有对方<br><img src="https://www.processon.com/chart_image/587343dae4b032a5660fe9fd.png" alt=""></p>
+<p>多个对象依次持有对方，形成一个环状<br><img src="https://www.processon.com/chart_image/58734393e4b087b19d4be3a0.png" alt=""></p>
+<h6 id="主动断开循环引用">主动断开循环引用</h6><p><img src="https://www.processon.com/chart_image/587345e5e4b09f680a3a3881.png" alt=""></p>
+<p>常见于各种与block相关的代码逻辑中，比如:</p>
+<ul>
+<li>Controller持有网络请求对象</li>
+<li>网络请求对像持有回调的block</li>
+<li>回调的block里使用了self,持有了Controller</li>
+</ul>
+<p>解决办法：网络请求对象执行完block之后，主动释放对block的持有，打破循环引用，比如 self.successCompletionBlock = nil，但是更常用的方式是使用弱引用</p>
+<h6 id="弱引用">弱引用</h6><p><img src="https://www.processon.com/chart_image/58734744e4b09f680a3a64f5.png" alt=""></p>
+<p>系统对于每一个有若引用的对象，都维护一个表来记录它所有的弱引用的指针地址，当一个对象的引用计数为0时，系统通过这张表找到所有的弱引用指针，继而把它们都置为nil</p>
+<p>弱引用的使用有额外的开销，避免盲目使用弱引用，在写界面元素时都用weak不太合适：</p>
+<ol>
+<li>创建对象时，可能因为weak不持有，造成刚创建就被释放</li>
+<li>大部分ViewController的视图对象的生命周期与ViewController本身是一致的，没有必要</li>
+</ol>
+<h6 id="使用Xcode检测循环引用">使用Xcode检测循环引用</h6><ul>
+<li>一段循环引用的代码</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="built_in">NSMutableArray</span> *firstArray = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    <span class="built_in">NSMutableArray</span> *secondArray = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">    [firstArray addObject:secondArray];</span><br><span class="line">    [secondArray addObject:firstArray];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Instuments =&gt; Leaks</li>
+</ul>
+<p><img src="http://blog.devtang.com/images/memory-instruments-1.jpg" alt=""></p>
+<ul>
+<li>Console</li>
+</ul>
+<p><img src="http://blog.devtang.com/images/memory-instruments-2.jpg" alt=""></p>
+<ul>
+<li>Cycle &amp; Roots</li>
+</ul>
+<p><img src="http://blog.devtang.com/images/memory-instruments-3.png" alt=""></p>
+<h6 id="CoreFoundation对象的内存管理">CoreFoundation对象的内存管理</h6><p>CoreFoundation对象，大多以 XxxCreateWithXxx 方式创建：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 CTFontRef 对象</span></span><br><span class="line">CTFontRef fontRef = CTFontCreateWithName((<span class="built_in">CFStringRef</span>)<span class="string">@"ArialMT"</span>, fontSize, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用计数加 1， 等价retain</span></span><br><span class="line"><span class="built_in">CFRetain</span>(fontRef);</span><br><span class="line"><span class="comment">// 引用计数减 1，等价release</span></span><br><span class="line"><span class="built_in">CFRelease</span>(fontRef);</span><br></pre></td></tr></table></figure>
+<p>ARC下有时需要将CoreFoundation对象转换成Objective-C对象，需要告诉编译器，转换过程中引用计数需要如何调整。引入<strong>bridge</strong>关键字：</p>
+<ul>
+<li>__bridge: 只做类型转换，不修改引用计数，原来的CoreFoundation对象在不用时，需要调用CFRelease方法</li>
+<li>__bridge_retained:类型转换后，引用计数加1，不用时需要调用CFRelease方法</li>
+<li>__bridge_transfer:类型转换后，引用计数交给ARC管理，不用时需要调用CFRelease方法</li>
+</ul>
+<h2 id="Summary">Summary</h2><p>有了ARC，内存管理工作大大减轻，但是依然需要理解引用计数的原理，以及ARC的优点和常见问题，综上几个核心点：</p>
+<ol>
+<li>引用计数</li>
+<li>循环引用</li>
+<li>CoreFoundation内存管理</li>
+</ol>
+<p>在实践中多做一些内存管理相关的探究，加深对内存管理的理解以及增长更多避免内存泄露的经验。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/06/30/ios_memory_analysis/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/06/17/my_tasking/">
                             我的任务清单是怎么安排的？
                         </a>
@@ -1789,82 +1902,6 @@ para.style.color="blue";
                     
                         <p>
                             <a href="/2016/04/07/common_soft/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/02/23/multi_compiler/">
-                            多编译器的认识
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-02-23T16:15:02+08:00">
-	
-		    Feb 23, 2016
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/基础/">基础</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="background">background</h2><blockquote>
-<p>现代世界，编程语言层出不穷，每多一门语言的出现，可能就会多一个编译器的出现，那么如此多的编译器，我需要一个一个去弄清它们的实现吗？</p>
-</blockquote>
-<p>答案是，显然不用，我将列出一些语言使用的编译器进行剖析，先来看看编译原理顺序：</p>
-<blockquote>
-<ol>
-<li>词法分析</li>
-<li>语法分析</li>
-<li>生成中间代码</li>
-<li>优化</li>
-<li>汇编、链接</li>
-<li>生成目标代码</li>
-</ol>
-<p>常见编译器</p>
-<blockquote>
-<ul>
-<li>JVM: java编译器只需面向JVM，生成JVM能理解的代码或字节码文件。Java源文件经编译器，编译成字节码程序，通过JVM将每一条指令翻译成不同平台机器码，通过特定平台运行。</li>
-<li>LLVM(clang):LLVM是构架编译器(compiler)的框架系统，以C++编写而成，用于优化以任意程序语言编写的程序的编译时间(compile-time)、链接时间(link-time)、运行时间(run-time)以及空闲时间(idle-time)，对开发者保持开放，并兼容已有脚本;Clang 对源程序进行词法分析和语义分析，并将分析结果转换为 Abstract Syntax Tree ( 抽象语法树 ) ，最后使用 LLVM 作为后端代码的生成器。</li>
-<li>GNU(gcc):通常所说的GCC是GUN Compiler Collection的简称，除了编译程序之外，它还含其他相关工具，所以它能把易于人类使用的高级语言编写的源代码构建成计算机能够直接执行的二进制代码。</li>
-<li>V8引擎:采用C++编写,V8在执行之前将JavaScript编译成了机器码，而非位元组码或是直译它，以此提升效能。更进一步，使用了如内联缓存（inline caching）等方法来提高性能。V8性能的3个关键方面：<ul>
-<li>快速属性访问</li>
-<li>动态生成机器码 </li>
-<li>高效的垃圾回收</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-</blockquote>
-<p>Etc.</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/02/23/multi_compiler/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>
