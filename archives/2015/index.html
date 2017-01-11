@@ -664,13 +664,16 @@
 <li>端口：内部通道或地址，它在TCP/IP传输层和应用程序之间提供了一个接口</li>
 <li>域名：与IP地址相关联的名字</li>
 <li>路由器：通过逻辑地址转发数据的网络设备</li>
-<li>局域网(LAN)：小型网络</li>
+<li>局域网：LAN，小型网络</li>
 <li><p>网关：连接LAN到大型网络的路由器</p>
 </li>
 <li><p>TCP：传输层中可靠的、面向连接的协议</p>
 </li>
 <li>UDP：传输层中不可靠、非面向连接协议</li>
 <li>Socket：套接字</li>
+<li>IPv4：TCP/IP协议簇中网络层协议IP的版本4（IP version 4），32位</li>
+<li>IPv6：IPv4的下一个版本，号称可以为全世界的每一粒沙子编上一个网址，解决IPv4的网络资源地址有限问题，128位</li>
+<li>IPv6-Only网络：运营商逐渐部署IPv6 DNS64/NAT64网络之后，设备被分配的地址变成IPv6的地址，依然可以通过此网络获取IPv4地址提供的内容。</li>
 </ul>
 <h2 id="网络是什么？">网络是什么？</h2><h4 id="OSI模型">OSI模型</h4><p><img src="https://www.processon.com/chart_image/5874486ce4b09f680a444685.png" alt=""></p>
 <h4 id="TCP/IP模型">TCP/IP模型</h4><p><img src="https://www.processon.com/chart_image/58744d35e4b09f680a44d98b.png" alt=""></p>
@@ -690,6 +693,7 @@
 <li>目标主机发回确认数据段，同步标志位SYN=1，确认标志位ACK=1</li>
 <li>源主机再发送数据段，带有递增的发送序号和确认序号，确认标志位ACK=1</li>
 </ol>
+<h4 id="IPv6-Only">IPv6-Only</h4><p><img src="https://www.processon.com/chart_image/5875f3b0e4b03fea115b49ff.png" alt=""></p>
 <h2 id="为什么用网络？">为什么用网络？</h2><p>在程序员的世界难免要和网络打交道</p>
 <ol>
 <li>HTTP &amp; HTTPS</li>
