@@ -637,6 +637,79 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/09/01/ios_arch/">
+                            iOS架构基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-09-01T18:15:02+08:00">
+	
+		    Sep 01, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习iOS架构需要会什么？">学习iOS架构需要会什么？</h2><p>所谓一千个架构师就有一千种“最好的架构”，那么“架构”的意义到底是什么？是为了解决什么问题而存在？</p>
+<ul>
+<li>架构就像建房子，建造大楼和小屋所需要的团队规模不同，每个人心中的标准也不同，需要制定统一的规范做限制，权衡各方得失后获得“最合理决策”，有助于控制复杂度、提高团队协作、降低成本等</li>
+</ul>
+<p>要知道的是：</p>
+<ol>
+<li>架构并不是一步到位的过程，它是由<strong>整体 ==&gt; 部分</strong>的过程</li>
+<li>给每个部分划分<strong>解决方案</strong></li>
+<li>给每个解决方案画出<strong>核心功能和支撑功能</strong></li>
+<li>分久必合，合久必分，结合实际资源<strong>抽取可重用功能、功能组合、拆分粒度更细的功能</strong>，不能盲目跟从微服务之风！</li>
+<li>确保每个模块之间的<strong>协作方式</strong>，比如通讯方式、协议、依赖关系</li>
+<li>形成最终的架构总览图</li>
+</ol>
+<h2 id="iOS架构是什么？">iOS架构是什么？</h2><p><img src="https://www.processon.com/chart_image/587de0cce4b087b116012f51.png" alt=""></p>
+<h2 id="为什么用iOS架构?">为什么用iOS架构?</h2><p>一个好的架构有一下特点：</p>
+<ol>
+<li>文档化：整体和部分的生命周期中都必须做好文档化，比如BUG，需求</li>
+<li>高可用：提高可用性，黑盒白盒测试、单元测试、自动化测试、故障注入测试、提高测试覆盖率</li>
+<li>安全：加密、HTTPS</li>
+<li>可扩展：秉承低耦合的理念，在合理的地方抽象</li>
+<li>快速迭代：拥抱变化、占领先机</li>
+<li>高度自治：每个功能能够高度自治可以更好支撑4、5点</li>
+<li>高复用：避免重复劳动、降低成本</li>
+<li>可验证：考虑各种特殊情况，进行专项验证</li>
+</ol>
+<h2 id="iOS架构怎么用？">iOS架构怎么用？</h2><p>架构师要有”怀疑精神，自我迭代“的心，架构有几个原则，优先次序高低排列：</p>
+<ol>
+<li>对于大中型，层次越多，每一次越单纯，更容易维护</li>
+<li>团队成员只需了解一小部分业务，就能顺利进行开发</li>
+<li>相对底层的模块，可以更好的重用</li>
+<li>层次分的越多，对抽象的理解就更深入</li>
+</ol>
+<h2 id="iOS架构的实际应用">iOS架构的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="X蜂">X蜂</h4>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/09/01/ios_arch/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/08/20/ios_thirdparty/">
                             iOS三方库源码基础到进阶
                         </a>
@@ -1356,123 +1429,6 @@ c3p0 的某些参数的配置以及意义见另外一篇文章http://kangzye.blo
                     
                         <p>
                             <a href="/2015/06/17/c3p0/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2014/05/17/easy_compiler/">
-                            一个简单的编译器
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2014-05-17T18:15:02+08:00">
-	
-		    May 17, 2014
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <pre><code>简单的说 编译器 就是语言翻译器，它一般将高级语言翻译成更低级的语言，如 GCC 可将 <span class="keyword">C</span>/<span class="keyword">C</span>++ 语言翻译成可执行机器语言，Java 编译器可以将 Java 源代码翻译成 Java 虚拟机可以执行的字节码。
-
-编译器如此神奇，那么它到底是如何工作的呢？本文将简单介绍编译器的原理，并实现一个简单的编译器，使它能编译我们自定义语法格式的源代码。（文中使用的源码都已上传至 GitHub 以方便查看）。
-</code></pre><h6 id="自定义语法">自定义语法</h6><pre><code>为了简洁易懂，我们的编译器将只支持以下简单功能：
-</code></pre><ul>
-<li>数据类型只支持整型，这样不需要数据类型符；</li>
-<li>支持 加（+），减（-），乘（*）， 除（/） 运算</li>
-<li>支持函数调用</li>
-<li>支持 extern（为了调用 printf 打印计算结果）</li>
-</ul>
-<p>以下是我们要支持的源码实例 demo.xy：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">extern</span> <span class="title">printi</span><span class="params">(val)</span></span><br><span class="line"></span><br><span class="line"><span class="title">sum</span><span class="params">(a, b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mult(a, b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a * b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printi(mult(<span class="number">4</span>, <span class="number">5</span>) - sum(<span class="number">4</span>, <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
-<h6 id="编译原理简介">编译原理简介</h6><pre><code>一般编译器有以下工作步骤：
-</code></pre><ul>
-<li>词法分析（Lexical analysis）： 此阶段的任务是从左到右一个字符一个字符地读入源程序，对构成源程序的字符流进行扫描然后根据构词规则识别 单词（Token），完成这个任务的组件是 词法分析器（Lexical analyzer，简称Lexer），也叫 扫描器（Scanner）；</li>
-<li>语法分析（Syntactic analysis，也叫 Parsing）： 此阶段的主要任务是由 词法分析器 生成的单词构建 抽象语法树（Abstract Syntax Tree ，AST），完成此任务的组件是 语法分析器（Parser）；</li>
-<li>目标码生成： 此阶段编译器会遍历上一步生成的抽象语法树，然后为每个节点生成 机器 / 字节码。<br>编译器完成编译后，由 链接器（Linker） 将生成的目标文件链接成可执行文件，这一步并不是必须的，一些依赖于虚拟机运行的语言（如 Java，Erlang）就不需要链接。</li>
-</ul>
-<h6 id="工具简介">工具简介</h6><pre><code>对应编译器工作步骤我们将使用以下工具，括号里标明了所使用的版本号：
-</code></pre><ul>
-<li>Flex（2.6.0）: Flex 是 Lex 开源替代品，他们都是 词法分析器 制作工具，它可以根据我们定义的规则生成 词法分析器 的代码；</li>
-<li>Bison（3.0.4）： Bison 是 语法分析器 的制作工具，同样它可以根据我们定义的规则生成 语法分析器 的代码；</li>
-<li><p>LLVM（3.8.0）： LLVM 是构架编译器的框架系统，我们会利用他来完成从 抽象语法树 生成目标码的过程。</p>
-<p>  在 ubuntu 上可以通过以下命令安装这些工具：</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install flex</span><br><span class="line">sudo apt-get install bison</span><br><span class="line">sudo apt-get install llvm-<span class="number">3.8</span>*</span><br></pre></td></tr></table></figure>
-<pre><code>介绍完工具，现在我们可以开始实现我们的编译器了。
-</code></pre><h6 id="词法分析器">词法分析器</h6><pre><code>前面提到 词法分析器 要将源程序分解成 单词，我们的语法格式很简单，只包括：标识符，数字，数学运算符，括号和大括号等，我们将通过 <span class="attribute">Flex</span> 来生成 词法分析器 的源码，给 <span class="attribute">Flex</span> 使用的规则文件 lexical<span class="class">.l</span> 如下：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">%&#123;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"ast.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"syntactic.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> SAVE_TOKEN  yylval.string = new std::string(yytext, yyleng)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> TOKEN(t)    (yylval.token = t)</span></span><br><span class="line">%&#125;</span><br><span class="line"></span><br><span class="line">%option noyywrap</span><br><span class="line"></span><br><span class="line">%%</span><br><span class="line"></span><br><span class="line">[ \t\n]                 ;</span><br><span class="line"><span class="string">"extern"</span>                <span class="keyword">return</span> TOKEN(TEXTERN);</span><br><span class="line"><span class="string">"return"</span>                <span class="keyword">return</span> TOKEN(TRETURN);</span><br><span class="line">[a-zA-Z_][a-zA-Z0-<span class="number">9</span>_]*  SAVE_TOKEN; <span class="keyword">return</span> TIDENTIFIER;</span><br><span class="line">[<span class="number">0</span>-<span class="number">9</span>]+                  SAVE_TOKEN; <span class="keyword">return</span> TINTEGER;</span><br><span class="line"></span><br><span class="line"><span class="string">"="</span>                     <span class="keyword">return</span> TOKEN(TEQUAL);</span><br><span class="line"><span class="string">"=="</span>                    <span class="keyword">return</span> TOKEN(TCEQ);</span><br><span class="line"><span class="string">"!="</span>                    <span class="keyword">return</span> TOKEN(TCNE);</span><br><span class="line"><span class="string">"("</span>                     <span class="keyword">return</span> TOKEN(TLPAREN);</span><br><span class="line"><span class="string">")"</span>                     <span class="keyword">return</span> TOKEN(TRPAREN);</span><br><span class="line"><span class="string">"&#123;"</span>                     <span class="keyword">return</span> TOKEN(TLBRACE);</span><br><span class="line"><span class="string">"&#125;"</span>                     <span class="keyword">return</span> TOKEN(TRBRACE);</span><br><span class="line"><span class="string">","</span>                     <span class="keyword">return</span> TOKEN(TCOMMA);</span><br><span class="line"><span class="string">"+"</span>                     <span class="keyword">return</span> TOKEN(TPLUS);</span><br><span class="line"><span class="string">"-"</span>                     <span class="keyword">return</span> TOKEN(TMINUS);</span><br><span class="line"><span class="string">"*"</span>                     <span class="keyword">return</span> TOKEN(TMUL);</span><br><span class="line"><span class="string">"/"</span>                     <span class="keyword">return</span> TOKEN(TDIV);</span><br><span class="line"></span><br><span class="line">.                       <span class="built_in">printf</span>(<span class="string">"Unknown token!\n"</span>); yyterminate();</span><br><span class="line">%%</span><br></pre></td></tr></table></figure>
-<pre><code>我们来解释一下，这个文件被 <span class="number">2</span> 个 %% 分成 <span class="number">3</span> 部分，第 <span class="number">1</span> 部分用 %{ 与 %} 包括的是一些 C++ 代码，会被原样复制到 Flex 生成的源码文件中，还可以在指定一些选项，如我们使用了 %option noyywrap，也可以在这定义宏供后面使用；第 <span class="number">2</span> 部分用来定义构成单词的规则，可以看到每条规都是一个 正则表达式 和 动作，很直白，就是 词法分析器 发现了匹配的 单词 后执行相应的 动作 代码，大部分只要返回 单词 给调用者就可以了；第 <span class="number">3</span> 部分可以定义一些函数，也会原样复制到生成的源码中去，这里我们留空没有使用。
-
-现在我们可以通过调用 Flex 生成 词法分析器 的源码：
-
-flex -o lexical.cpp lexical.l
-
-生成的　lexical.cpp　里会有一个 yylex() 函数供　语法分析器　调用；你可能发现了，有些宏和变量并没有被定义（如TEXTERN，yylval，yytext 等），其实有些是 Flex 会自动定义的内置变量（如 yytext），有些是后面 语法分析器 生成工具里定义的变量（如 yylval），我们后面会看到。
-</code></pre><h6 id="语法分析器">语法分析器</h6><pre><code>语法分析器 的作用是构建 抽象语法树，通俗的说 抽象语法树 就是将源码用树状结构来表示，每个节点都代表源码中的一种结构；对于我们要实现的语法，其语法树是很简单的，如下：
-
-
-
-现在我们使用 <span class="keyword">Bison </span>生成 语法分析器 代码，同样 <span class="keyword">Bison </span>需要一个规则文件，我们的规则文件 syntactic.y 如下，限于篇幅，省略了某些部分，可以通过链接查看完整内容：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">%&#123;</span><br><span class="line">    <span class="preprocessor">#<span class="keyword">include</span> <span class="string">"ast.h"</span></span></span><br><span class="line">    <span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">yylex</span><span class="params">()</span></span>;    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">yyerror</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">printf</span>(<span class="string">"Error: %s\n"</span>, s);<span class="built_in">std</span>::<span class="built_in">exit</span>(<span class="number">1</span>); &#125;</span><br><span class="line">%&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">%token &lt;token&gt; TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">%%</span><br><span class="line"></span><br><span class="line">program:</span><br><span class="line">  stmts &#123; programBlock = $<span class="number">1</span>; &#125;</span><br><span class="line">        ;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">func_decl:</span><br><span class="line">  ident TLPAREN func_decl_args TRPAREN block &#123; $$ = <span class="keyword">new</span> NFunctionDeclaration(*$<span class="number">1</span>, *$<span class="number">3</span>, *$<span class="number">5</span>); <span class="keyword">delete</span> $<span class="number">3</span>; &#125;</span><br><span class="line">;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">%%</span><br></pre></td></tr></table></figure>
-<pre><code>是不是发现和 <span class="attribute">Flex</span> 的规则文件很像呢？确实是这样，它也是分 3 个部分组成，同样，第一部分的 C++ 代码会被复制到生成的源文件中，还可以看到这里通过以下这样的语法定义前面了 <span class="attribute">Flex</span> 使用的宏：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%token &lt;token&gt; TLPAREN TRPAREN TLBRACE TRBRACE TCOMMA</span><br></pre></td></tr></table></figure>
-<pre><code>比较不同的是第 <span class="number">2</span> 部分，不像 Flex 通过 正则表达式 通过定义规则，这里使用的是 巴科斯范式（<span class="keyword">BNF: </span><span class="keyword">Backus-Naur </span>Form） 的形式定义了我们识别的语法结构。如下的语法表示函数：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func_decl:</span><br><span class="line">  ident TLPAREN func_decl_args TRPAREN block &#123; $$ = <span class="keyword">new</span> NFunctionDeclaration(*$<span class="number">1</span>, *$<span class="number">3</span>, *$<span class="number">5</span>); <span class="keyword">delete</span> $<span class="number">3</span>; &#125;</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
-<pre><code>可以看到后面大括号中间的也是 动作 代码，上例的动作是在 抽象语法树 中生成一个函数的节点，其实这部分的其他规则也是生成相应类型的节点到语法树中。像 NFunctionDeclaration 这是一个我们自己定义的节点类，我们在 ast<span class="class">.h</span> 中定义了我们所要用到的节点，同样的，我们摘取一段代码如下：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">class</span> NFunctionDeclaration : <span class="keyword">public</span> NStatement &#123;</span><br><span class="line"><span class="keyword">public</span>:    </span><br><span class="line">    <span class="keyword">const</span> NIdentifier&amp; id;</span><br><span class="line">    VariableList arguments;</span><br><span class="line">    NBlock&amp; block;</span><br><span class="line">    NFunctionDeclaration(<span class="keyword">const</span> NIdentifier&amp; id,            </span><br><span class="line">            <span class="keyword">const</span> VariableList&amp; arguments, NBlock&amp; block) :</span><br><span class="line">        id(id), arguments(arguments), block(block) &#123; &#125;    </span><br><span class="line">    <span class="keyword">virtual</span> llvm::<span class="function">Value* <span class="title">codeGen</span><span class="params">(CodeGenContext&amp; context)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<pre><code>可以看到，它有 标识符（id），参数列表（arguments），函数体（block） 这些成员，在语法分析阶段会设置好这些成员的内容供后面的 目标码生成 阶段使用。还可以看到有一个 <span class="function"><span class="title">codeGen</span><span class="params">()</span></span> 虚函数，你可能猜到了，后面就是通过调用它来生成相应的目标代码。
-
-我们可以通过以下命令调用 Bison 生成 语法分析器 的源码文件，这里我们使用 -d 使头文件和源文件分开，因为前面 词法分析器 的源码使用了这里定义的一些宏，所以需要使用这个头文件，这里将会生成 syntactic<span class="class">.cpp</span> 和 syntactic.hpp：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bison -d -o syntactic.cpp syntactic.y</span><br></pre></td></tr></table></figure>
-<h6 id="目标码生成">目标码生成</h6><pre><code>这是最后一步了，这一步的主角是前面提到 LLVM，LLVM 是一个构建编译器的框架系统，我们使用他遍历 语法分析 阶段生成的 抽象语法树，然后为每个节点生成相应的 目标码。当然，无法避免的是我们需要使用 LLVM 提供的函数来编写生成目标码的源码，就是实现前面提到的虚函数 <span class="function"><span class="title">codeGen</span><span class="params">()</span></span>，是不是有点拗口？不过确实是这样。我们在 gen<span class="class">.cpp</span> 中编写了不同节点的生成代码，我们摘取一段看一下：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">Value *NMethodCall::codeGen(CodeGenContext &amp;context) &#123;</span><br><span class="line">    Function *function = context.module-&gt;getFunction(id.name.c_str());    <span class="keyword">if</span> (function == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"no such function "</span> &lt;&lt; id.name &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Value *&gt; args;</span><br><span class="line">    ExpressionList::const_iterator it;    </span><br><span class="line">    <span class="keyword">for</span> (it = arguments.begin(); it != arguments.end(); it++) &#123;</span><br><span class="line">        args.push_back((**it).codeGen(context));</span><br><span class="line">    &#125;</span><br><span class="line">    CallInst *call = CallInst::Create(function, makeArrayRef(args), <span class="string">""</span>, context.currentBlock());</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Creating method call: "</span> &lt;&lt; id.name &lt;&lt; endl;   </span><br><span class="line">    <span class="keyword">return</span> call;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<pre><code>看起来有点复杂，简单来说就是通过 LLVM 提供的接口来生成 目标码，需要了解更多的话可以去 LLVM 的官网学习一下。
-
-至此，我们所有的工作基本都做完了。简单回顾一下：我们先通过 Flex 生成 词法分析器 源码文件 lexical.cpp，然后通过 Bison 生成 语法分析器 源码文件 syntactic<span class="class">.cpp</span> 和头文件 syntactic.hpp，我们自己编写了 抽象语法树 节点定义文件 ast<span class="class">.h</span> 和 目标码 生成文件 ast.cpp，还有一个 gen<span class="class">.h</span> 包含一点 LLVM 环境相关的代码，为了输出我们程序的结果，还在 printi<span class="class">.cpp</span> 里简单的通过调用 C 语言库函数实现了输出一个整数。
-
-对了，我们还需要一个 main 函数作为编译器的入口函数，它在 main<span class="class">.cpp</span> 里：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">    yyparse();</span><br><span class="line">    InitializeNativeTarget();</span><br><span class="line">    InitializeNativeTargetAsmPrinter();</span><br><span class="line">    InitializeNativeTargetAsmParser();</span><br><span class="line">    CodeGenContext context;</span><br><span class="line">    context.generateCode(*programBlock);</span><br><span class="line">    context.runCode();    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>我们可以看到其调用了 <span class="function"><span class="title">yyparse</span><span class="params">()</span></span> 做 语法分析，（<span class="function"><span class="title">yyparse</span><span class="params">()</span></span> 内部会先调用 <span class="function"><span class="title">yylex</span><span class="params">()</span></span> 做 词法分析）；然后是一系列的 LLVM 初始化代码，context.<span class="function"><span class="title">generateCode</span><span class="params">(*programBlock)</span></span> 是开始生成 目标码；最后是 context.<span class="function"><span class="title">runCode</span><span class="params">()</span></span> 来运行代码，这里使用了 LLVM 的 JIT（Just In Time） 来直接运行代码，没有链接的过程。
-
-现在我们可以用这些文件生成我们的编译器了，需要说明一下，因为 词法分析器 的源码使用了一些 语法分析器 头文件中的宏，所以正确的生成顺序是这样的：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bison -d -o syntactic.cpp syntactic.y</span><br><span class="line">flex -o lexical.cpp lexical.l syntactic.hpp</span><br><span class="line">g++ -c `llvm-config --cppflags` -<span class="built_in">std</span>=c++<span class="number">11</span> syntactic.cpp gen.cpp lexical.cpp printi.cpp main.cpp</span><br><span class="line">g++ -o xy-complier syntactic.o gen.o main.o lexical.o printi.o `llvm-config --libs` `llvm-config --ldflags` -lpthread -ldl -lz -lncurses -rdynamic</span><br></pre></td></tr></table></figure>
-<pre><code>如果你下载了 GitHub 的源码，那么直接：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-<pre><code>就可以完成以上过程了，正常会生成一个二进制文件 xy-complier，它就是我们的编译器了。
-</code></pre><h6 id="编译测试">编译测试</h6><pre><code>我们使用之前提到实例 demo<span class="class">.xy</span> 来测试，将其内容传给 xy-complier 的标准输入就可以看到运行结果了：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat demo.xy | ./xy-complier</span><br></pre></td></tr></table></figure>
-<pre><code>也可以直接通过
-
-make <span class="built_in">test</span>
-来测试，输出如下：
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">define internal i64 @mult(i64 %a1, i64 %b2) &#123;</span><br><span class="line">entry:</span><br><span class="line">  %a = alloca i64</span><br><span class="line">  %<span class="number">0</span> = load i64, i64* %a</span><br><span class="line">  store i64 %a1, i64* %a</span><br><span class="line">  %b = alloca i64</span><br><span class="line">  %<span class="number">1</span> = load i64, i64* %b</span><br><span class="line">  store i64 %b2, i64* %b</span><br><span class="line">  %<span class="number">2</span> = load i64, i64* %b</span><br><span class="line">  %<span class="number">3</span> = load i64, i64* %a</span><br><span class="line">  %<span class="number">4</span> = mul i64 %<span class="number">3</span>, %<span class="number">2</span></span><br><span class="line">  ret i64 %<span class="number">4</span>&#125;</span><br><span class="line">Running code:<span class="number">11</span>Exiting...</span><br></pre></td></tr></table></figure>
-<pre><code>可以看到最后正确输出了期望的结果，至此我们简单的编译器就完成了。
-</code></pre>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2014/05/17/easy_compiler/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>
