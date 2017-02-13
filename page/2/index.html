@@ -238,6 +238,148 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/08/17/web_start/">
+                            Web 应用的构建过程
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-08-17T18:15:02+08:00">
+	
+		    Aug 17, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h6 id="Web_应用的构建过程">Web 应用的构建过程</h6><p>在刚创建项目的时候，我们都会有一个完整的构建思路。</p>
+<ul>
+<li><p>Compile。对于那些不是用浏览器的前端项目来说，如 ES6、CoffeeScript，他们还需要将代码编译成浏览器使用的 JavaScript 版本。对于 Java 语言来说，他需要一个编译的过程，在这个编译的过程中，会检查一些语法问题。</p>
+</li>
+<li><p>Check Style。通常我们会在我们的项目里定义一些代码规范，如 JavaScript 中的使用两个空格的缩进，Java 的 Checkstyle 中一个函数不能超过30行的限制。</p>
+</li>
+<li><p>单元测试。作为测试中最基础也是最快的测试，这个测试将集中于测试单个函数的是不是正确的。</p>
+</li>
+<li><p>功能测试。功能测试的意义在于，保证一个功能依赖的几个函数组合在一起也是可以工作的。</p>
+</li>
+<li><p>Mock Server。当我们的代码依赖于第三方服务的时候，我们就需要一个 Mock Server 来保证我们的功能代码可以独立地测试。</p>
+</li>
+<li><p>集成测试。这一步将集成前台、后台，并且运行起最后将上线的应用。接着依据于用户所需要的功能来编写相应的测试，来保证一个个的功能是可以工作的。</p>
+</li>
+<li><p>打包。对于部署来说，直接安装一个 RPM 包，或者 DEB 包是最方便的事。在这个包里会包含应用程序所需的所有二进制文件、数据和配置文件等等。</p>
+</li>
+<li><p>上传包。在完成打包后，我们就可以上传这个软件包了。</p>
+</li>
+<li><p>部署。最后，我们就可以在我们的线上环境中安装这个软件包。</p>
+</li>
+</ul>
+<h6 id="Web_应用的构建实战">Web 应用的构建实战</h6><pre><code>下面就让我们来构建一个简单的 Web 应用，来实践一下这个过程。在这里，我们要使用到的一个工具是 Gulp，当然对于 Grunt 也是类似的。
+
+Gulp 入门指南
+
+Gulp.js 是一个自动化构建工具，开发者可以使用它在项目开发过程中自动执行常见任务。Gulp.js 是基于 Node.js 构建的，利用 Node.js 流的威力，你可以快速构建项目并减少频繁的 IO 操作。Gulp.js 源文件和你用来定义任务的 Gulp 文件都是通过 JavaScript（或者 CoffeeScript ）源码来实现的。
+全局安装 gulp：
+$ npm install --<span class="keyword">global</span> gulp
+作为项目的开发依赖（devDependencies）安装：
+$ npm install --save-dev gulp
+在项目根目录下创建一个名为 gulpfile.js 的文件：
+<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
+
+gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+  <span class="comment">// 将你的默认的任务代码放在这</span>
+});
+运行 gulp：
+$ gulp
+默认的名为 <span class="keyword">default</span> 的任务（task）将会被运行，在这里，这个任务并未做任何事情。接下来，我们就可以打造我们的应用的构建系统了。
+
+代码质量检测工具
+
+当 C 还是一门新型的编程语言时，还存在一些未被原始编译器捕获的常见错误，所以程序员们开发了一个被称作 lint 的配套项目用来扫描源文件，查找问题。
+
+对应于不同的语言都会有不同的 lint 工具，在 JavaScript 中就有 JSLint。JavaScript 是一门年轻、语法灵活多变且对格式要求相对松散的语言，因此这样的工具对于这门语言来说比较重要。
+
+<span class="number">2011</span>年，一个叫 Anton Kovalyov 的前端程序员借助开源社区的力量弄出来了 JSHint，其思想基本上和 JSLint 是一致的，但是其有一下几项优势：
+
+可配置规则，每个团队可以自己定义自己想要的代码规范。
+对社区非常友好，社区支持度高。
+可定制的结果报表。
+下面就让我们来安装这个软件吧：
+
+安装及使用
+
+npm install jshint gulp-jshint --save-dev
+示例代码:
+
+<span class="keyword">var</span> jshint = <span class="keyword">require</span>(<span class="string">'gulp-jshint'</span>);
+<span class="keyword">var</span> gulp   = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
+
+gulp.task(<span class="string">'lint'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+  <span class="keyword">return</span> gulp.src(<span class="string">'./lib/*.js'</span>)
+    .pipe(jshint())
+    .pipe(jshint.reporter(<span class="string">'YOUR_REPORTER_HERE'</span>));
+});
+自动化测试工具
+
+一般来说，自动测试应该从两部分考虑：
+
+单元测试
+功能测试
+Mocha 是一个可以运行在 Node.js 和浏览器环境里的测试框架，
+
+<span class="keyword">var</span> gulp = <span class="keyword">require</span>(<span class="string">'gulp'</span>);
+<span class="keyword">var</span> mocha = <span class="keyword">require</span>(<span class="string">'gulp-mocha'</span>);
+
+gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+    <span class="keyword">return</span> gulp.src(<span class="string">'test.js'</span>, {read: <span class="keyword">false</span>})
+        <span class="comment">// gulp-mocha needs filepaths so you can't have any plugins before it</span>
+        .pipe(mocha({reporter: <span class="string">'nyan'</span>}));
+});
+</code></pre><ul>
+<li><p>编译</p>
+<p>  对于静态型语言来说，编译是一个很重要的步骤。不过，对于动态语言来说也存在这样的工具。</p>
+<p>  动态语言的编译</p>
+<p>  可以说这类型的语言，是以我们常见的 JavaScript 为代表。</p>
+<p>  CoffeeScript 是一套 JavaScript 的转译语言，并且它增强了 JavaScript 的简洁性与可读性。</p>
+<p>  Webpack 是一款模块加载器兼打包工具，它能把各种资源，例如 JS（含JSX）、coffee、样式（含less/sass）、图片等都作为模块来使用和处理。</p>
+<p>  Babel 是一个转换编译器，它能将 ES6 转换成ES5，以便在较低版本的浏览器中正确运行。</p>
+</li>
+<li><p>打包</p>
+<p>  在 GNU/Linux 系统的软件包里通过包含了已压缩的软件文件集以及该软件的内容信息。常见的软件包有</p>
+<p>  DEB。Debian 软件包格式，文件扩展名为 .deb<br>  RPM（原 Red Hat Package Manager，现在是一个递归缩写）。该软件包分为二进制包（Binary）、源代码包（Source）和 Delta 包三种。二进制包可以直接安装在计算机中，而源代码包将会由 RPM 自动编译、安装。源代码包经常以 src.rpm 作为后缀名。<br>  压缩文档 tar.gz。通常是该软件的源码，故而在安装的过程中需要编译、安装，并且在编译时需要自己手动安装所需要依赖的软件。在软件仓库没有最新版本的软件时，tar.gz 往往是最好的选择。<br>  由于这里的打包过程比较繁琐，就不介绍了。有兴趣的读者可以自己了解一下。</p>
+</li>
+<li><p>上传及发布包</p>
+<p>  上传包之前我们需要创建一个相应的文件服务器，又或者是相应的软件源。并且对于我们的产品环境的服务器来说，我们还需要指定好这个软件源才能安装这个包。</p>
+<p>  以 Ubuntu 为例，Ubuntu 里的许多应用程序软件包，是放在网络里的服务器上，这些服务器网站，就称作“源”，从源里可以很方便地获取软件包。</p>
+<p>  因而在这一步中，我们所需要做的事便是将我们打包完的软件上传到相应的服务器上。</p>
+</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/08/17/web_start/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/07/22/javascript/">
                             JavaScript基础到进阶
                         </a>
@@ -1804,103 +1946,6 @@ para.style.color="blue";
                     
                         <p>
                             <a href="/2016/04/08/paradigm/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/04/07/common_soft/">
-                            常用工具汇总
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-04-07T16:15:02+08:00">
-	
-		    Apr 07, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="background">background</h2><blockquote>
-<p>工欲善其事必先利其器</p>
-</blockquote>
-<ul>
-<li><p>接口测试软件：<br>POSTMAN(chrome扩展程序)、SOAPUI</p>
-</li>
-<li><p>JSON格式化：<br>JsonView 、HiJson、VisualJson(mac)</p>
-</li>
-<li><p>文本编辑器：<br>sublime、editplus 可连ftp、uedit、atom、markdown(macdown)</p>
-</li>
-<li><p>FTP工具<br>SecureCRT、SSH Secure File Transfer Client、SSH Secure Shell Client、FlashFxp、putty</p>
-</li>
-<li><p>远程<br>TeamViewer</p>
-</li>
-<li><p>PHP<br>Zend Studio  phpStorm  apache2</p>
-</li>
-<li><p>Python<br>Pycharm</p>
-</li>
-<li><p>DB<br>pl sql  SQLyogEnterprise(mysql)   mysql workbench</p>
-</li>
-<li><p>中间件<br>tomcat  glassfish weblogic websphere(WAS)  JBoss Jetty/apache IIS</p>
-</li>
-<li><p>版本控制<br>SVN:  Versions  CornnerStone<br>git: github sourcetree gitlab</p>
-</li>
-<li><p>反编译<br>jd gui</p>
-</li>
-<li><p>JAVA android<br>eclipse  IDEA(js)  android studio</p>
-</li>
-<li><p>Lua<br>IDEA for Lua</p>
-</li>
-<li><p>cocos2d-x<br>xcode , visual studio，粒子设计ParticleDesigner  瓦片地图TieldMap    纹理打包TexturePacker</p>
-</li>
-<li><p>攻击工具<br>burpsuite fidder</p>
-</li>
-<li><p>firefox 扩展<br>firefox  json-handle rainbow</p>
-</li>
-<li><p>chrome 扩展<br>postman     红杏</p>
-</li>
-<li><p>mac os<br>Movist      cleanMyMac2      RARExtractor     MacHider     IDEA    Evernote    SQLiteManager AdwareMedic(杀毒)<br>iterm</p>
-</li>
-<li><p>xcode插件<br>VVDocumenter  XToDo KSImageNamed  XAlign</p>
-</li>
-<li><p>原型图<br>xAsure</p>
-</li>
-<li><p>github 搜索技巧<br>language:Objective-C stars:&gt;900</p>
-</li>
-<li><p>markdown editor<br>mou macdown</p>
-</li>
-</ul>
-<p>justwritting   Ghost Blog 、 hexo blog</p>
-<ul>
-<li><p>画思维导图<br>MindNode  freeMind XMind</p>
-</li>
-<li><p>mac 必备<br>oh my zsh,  iTerm, homebrew cask</p>
-</li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/04/07/common_soft/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>
