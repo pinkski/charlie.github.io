@@ -22,7 +22,7 @@ ReactN">
 <meta property="og:description" content="学习ReactNative需要会什么？从名字可知它就是以React和Native的结合，所以在学习ReactNative之前，最好学习React相关知识，可以参见React基础到进阶，这是关于React的，那么还有Native端的知识自然也是少不了需要了解的，比如iOS端的js引擎JavaScriptCore和Android端js引擎V8，当然你还需要了解iOS的开发的工作流及方式。
 ReactN">
 <meta property="og:image" content="https://www.processon.com/chart_image/585147f6e4b0c74cb9fb28c5.png">
-<meta property="og:updated_time" content="2016-12-15T02:22:15.000Z">
+<meta property="og:updated_time" content="2017-02-15T06:49:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReactNative基础到进阶">
 <meta name="twitter:description" content="学习ReactNative需要会什么？从名字可知它就是以React和Native的结合，所以在学习ReactNative之前，最好学习React相关知识，可以参见React基础到进阶，这是关于React的，那么还有Native端的知识自然也是少不了需要了解的，比如iOS端的js引擎JavaScriptCore和Android端js引擎V8，当然你还需要了解iOS的开发的工作流及方式。
@@ -260,10 +260,10 @@ ReactN">
 <h4 id="通信机制">通信机制</h4><h6 id="模块配置表">模块配置表</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "remoteModuleConfig": &#123;</span><br><span class="line">        "RCTSQLManager": &#123;</span><br><span class="line">            "methods": &#123;</span><br><span class="line">                "query": &#123;</span><br><span class="line">                    "type": "remote",</span><br><span class="line">                    "methodID": 0</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            "moduleID": 4</span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">     &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>OC会生成一份模块配置表传给JS，配置表里包括了模块以及模块暴露的方法</p>
 <h6 id="取所有的模块类">取所有的模块类</h6><p>每个模块都实现RCTBridgeModule接口，可以通过runtime接口的objc_getClassList和objc_copyClassList取出项目里所有的类，判断是否实现了RCTBridgeModule接口，就可以找到所有的模块类，实现在RCTBridgeModuleClassesByModuleID()方法里。</p>
-<h6 id="取模块里暴露给JS的方法">取模块里暴露给JS的方法</h6><p>怎么做到部分暴露，部分不暴露呢？常见的思路是给需要暴露的函数添加统一的前缀，然后用runtime方法class_getInstanceMethod取出所有方法名字，提取统一前缀的方法，这样做是否有点太累赘，需要每个函数添加统一的前缀。ReactNative用了另外一种黑魔法解决这个问题：编译属性 <strong> attribute </strong>。</p>
+<h6 id="取模块里暴露给JS的方法">取模块里暴露给JS的方法</h6><p>怎么做到部分暴露，部分不暴露呢？常见的思路是给需要暴露的函数添加统一的前缀，然后用runtime方法class<em>getInstanceMethod取出所有方法名字，提取统一前缀的方法，这样做是否有点太累赘，需要每个函数添加统一的前缀。ReactNative用了另外一种黑魔法解决这个问题：编译属性 \</em>_attribute__。</p>
 <p>对于宏RCT_EXPORT()</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define RCT_EXPORT(JS_name) __attribute__((used, section(&#34;__DATA,RCTExport&#34; \&#10;))) static const char *__rct_export_entry__[] = &#123; __func__, #JS_name &#125;</span><br></pre></td></tr></table></figure>
-<p>这个宏的作用是用编译属性 <strong> attribute</strong> 给二进制文件新建一个section，属于 <strong>DATA数据段，名字为RCTExport，并在这个段里加入当前方法名。编译器在编译时会找到 </strong> <strong>attribute</strong> __ 进行处理，为生成的可执行文件加入相应的内容。</p>
+<p>这个宏的作用是用编译属性 __attribute__ 给二进制文件新建一个section，属于 __DATA数据段，名字为RCTExport，并在这个段里加入当前方法名。编译器在编译时会找到 __attribute__进行处理，为生成的可执行文件加入相应的内容。</p>
 <p>整体的模块类/方法提取实现在RCTRemoteModulesConfig()方法里</p>
 <h2 id="为什么用ReactNative?">为什么用ReactNative?</h2><h4 id="ReactNative带来了什么？">ReactNative带来了什么？</h4><p>ReactNative为移动开发带来了新思路，learn once, write anywhere</p>
 <h2 id="怎么用ReactNative?">怎么用ReactNative?</h2><p>Facebook为ReactNative提供了强大的官方文档和社区，当然在github上也很轻松就能找到各种问题的解决方式</p>
