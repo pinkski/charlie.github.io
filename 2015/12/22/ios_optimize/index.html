@@ -42,7 +42,7 @@ apaque = YES
 不要阻塞主线程
 异步处理存储或网络">
 <meta property="og:image" content="https://www.processon.com/chart_image/58577e2be4b0c1fa6c5ab71f.png">
-<meta property="og:updated_time" content="2016-12-19T06:43:15.000Z">
+<meta property="og:updated_time" content="2017-02-16T03:11:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS性能优化基础到进阶">
 <meta name="twitter:description" content="iOS性能优化需要会什么？搞好iOS性能优化有时候是一件很难的事情，在开发过程中要时刻考虑到性能影响，不然开发出来的产品只会遭到用户的摒弃
@@ -312,7 +312,10 @@ apaque = YES
 <li><strong>imageNamed imageWithContentsOfFile</strong></li>
 </ul>
 </li>
-<li>尽量避免日期格式转换</li>
+<li>尽量避免日期格式转换<ul>
+<li>重大开销对象NSDateFormatter NSCalendar</li>
+</ul>
+</li>
 </ol>
 <h4 id="进阶级">进阶级</h4><ol>
 <li>重用和延迟加载Views<ul>
@@ -323,10 +326,6 @@ apaque = YES
 <li>权衡渲染方法</li>
 <li>处理内存警告<ul>
 <li><strong>receiveMemoryWarning</strong></li>
-</ul>
-</li>
-<li>重用大开销的对象<ul>
-<li><strong>NSDateFormatter NSCalendar</strong></li>
 </ul>
 </li>
 <li>使用Sprite Sheets</li>
@@ -345,7 +344,6 @@ apaque = YES
 </ul>
 </li>
 <li>优化你的Table View </li>
-<li>选择正确的数据存储选项</li>
 <li>加速启动时间<ul>
 <li><strong>尽可能做更多的异步任务，避免庞大的xib</strong></li>
 </ul>
