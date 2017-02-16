@@ -603,6 +603,11 @@ $ git <span class="keyword">push
 <li><p>引用计数方式，在参数M的传递过程中，哪些对象需要长时间使用这个对象，就把它的引用计数加1，使用完之后再把引用计数减1。</p>
 </li>
 </ul>
+<h2 id="ARC原理">ARC原理</h2><p>编译源码时，编译器主动分析源码里每个对象的生命周期，基于这些对象的生命周期添加相应的引用计数代码，这么做的好处：</p>
+<ol>
+<li>编译后，编译后ARC和非ARC代码没有差异，所以二者在源码里能共存</li>
+<li>对比垃圾回收机制，ARC不会带来运行时的额外开销（除开weak变量在计数0时自动置为nil），多以对于应用效率不会有影响，相反ARC能够深度分析每个对象生命周期，可以做到比人工管理引用计数更加高效。比如一个对象开始引用计数+1，接着-1，编译器可以把这两个操作优化掉。</li>
+</ol>
 <h2 id="Q_&amp;_A">Q &amp; A</h2><h4 id="不要向已经释放的对象发送消息">不要向已经释放的对象发送消息</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSObject</span> *object = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"Reference Count = %u"</span>, [object retainCount]);<span class="comment">//1</span></span><br><span class="line">   [object release];</span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"Reference Count = %u"</span>, [object retainCount]);<span class="comment">//1</span></span><br></pre></td></tr></table></figure>
 <p>最后一行，引用计数没有变为0，为什么？因为对象已经回收，而我们向已回收的对象发送了retainCount消息，所以它输出的结果应该是不确定的，如果对象所占的内存被复用了，可能会crash。</p>
 <p>不确定值为什么是1不是0？因为最后一次执行release时，系统知道马上要回收内存了，没必要将retainCount减1了，对象回收后retainCount变得没有意义，不将1变为0，可以减少一次内存的写操作，加速对象的回收，这是编译器的优化操作。</p>
