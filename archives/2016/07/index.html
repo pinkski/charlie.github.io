@@ -289,6 +289,36 @@
 <h4 id="数据类型">数据类型</h4><p>String、Number、Boolean、null、undefined、Object(Array、Date …)</p>
 <h4 id="闭包">闭包</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">start</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pos = start;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Move to '</span> + (pos += <span class="number">2</span>) + <span class="string">'.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> move_next = move(<span class="number">6</span>); </span><br><span class="line">move_next();  <span class="comment">// Move to 8. </span></span><br><span class="line">move_next();  <span class="comment">// Move to 10.</span></span><br></pre></td></tr></table></figure>
 <p>move函数的内部匿名函数持有了move的属性pos，导致pos属性不会随着move的生命周期结束而结束。</p>
+<h6 id="闭包的作用">闭包的作用</h6><ol>
+<li>可以读取函数内部的变量</li>
+<li>相当于划出一块私有作用域，避免污染</li>
+<li>让变量始终保存在内存中</li>
+</ol>
+<h6 id="闭包的缺点">闭包的缺点</h6><p>使用全局变量容易造成错误并且维护成本高，所以js可以采用闭包方式读取函数内部变量，但是如果大量使用闭包会造成过多变量保存在内存中，造成内存泄露。</p>
+<h4 id="this">this</h4><ul>
+<li>全局范围内：指向全局对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>函数调用：指向全局对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法调用：指向test对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test.foo();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>调用构造函数：指向新创建的对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> foo();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>显示的设置this：使用call或apply方法时，this指向第一个参数</li>
+</ul>
+<pre><code class="js"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a, b, c</span>) </span>{}
+<span class="keyword">var</span> bar = {}
+foo.apply(bar, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])  <span class="comment">//数组将会被扩展</span>
+foo.call(bar, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)        <span class="comment">//传递到foo的参数是：a=1, b=2, c=3</span>
+</code></pre>
 <h2 id="为什么要用JavaScript?">为什么要用JavaScript?</h2><h4 id="基础">基础</h4><p>JavaScript可以把基础很好的总结为三座大山</p>
 <h4 id="关于新技术">关于新技术</h4><p>基础很重要，新技术很危险，学习的同时带着“质疑精神”</p>
 <h2 id="JavaScript怎么用？">JavaScript怎么用？</h2><h4 id="CSS预处理器">CSS预处理器</h4><p>SASS的变量方案也会带来一些问题：学习成本；调试工作量；代码整合不方便</p>
