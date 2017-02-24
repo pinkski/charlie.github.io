@@ -239,6 +239,121 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/11/30/ios_live/">
+                            iOS直播基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-11-30T18:15:02+08:00">
+	
+		    Nov 30, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习iOS直播需要会什么？">学习iOS直播需要会什么？</h2><p>直播很火，直播中的基础功能：</p>
+<ol>
+<li>推流（支持业界标准、软编及硬编）</li>
+<li>播放（直播支持FLV/RTMP、点播支持FLV/HLS/MP4）</li>
+<li>互动消息(海量文本、弹幕、点赞、送礼等)</li>
+<li>动效表情(人脸识别、人脸跟踪、特效表情渲染)</li>
+<li>混音伴奏（麦克风+伴奏）</li>
+<li>智能选路（选择最优推流服务器）</li>
+<li>延迟修正（帧维度的声画同步校准）</li>
+<li>带宽自适应（流畅度、清晰度、延迟三维度平衡）</li>
+<li>运营监控（视频监控、禁播、数据分析）</li>
+<li>手机录屏</li>
+</ol>
+<p>除此之外可能还有：</p>
+<ol>
+<li>实时录制</li>
+<li>实时水印</li>
+<li>实时截图</li>
+<li>实时转码</li>
+<li>实时鉴黄</li>
+<li>连麦互动</li>
+<li>秒级禁播</li>
+<li>延时直播</li>
+<li>美颜滤镜</li>
+</ol>
+<h2 id="iOS直播是什么？">iOS直播是什么？</h2><h4 id="工作流">工作流</h4><p><img src="https://www.processon.com/chart_image/585a3d3ee4b03a03b17fe2b1.png" alt=""></p>
+<h4 id="核心知识点">核心知识点</h4><p><img src="http://ww2.sinaimg.cn/large/006tNc79gw1faypg480rlj31kw0ogjyo.jpg" alt=""></p>
+<h2 id="为什么要用iOS直播?">为什么要用iOS直播?</h2><p>音视频技术处理有很多API，具体的功能点的实现可以参见：<a href="http://www.jianshu.com/p/d99e83cab39a?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note" target="_blank" rel="external">研发直播APP的收获-iOS</a></p>
+<ol>
+<li><a href="http://www.jianshu.com/p/bb9c41496f8e" target="_blank" rel="external">直播APP的性能优化-礼物篇</a></li>
+<li><a href="http://www.jianshu.com/p/37784e363b8a" target="_blank" rel="external">使用VideoToolbox硬编码H.264</a></li>
+<li><a href="http://www.jianshu.com/p/da18b979aeec" target="_blank" rel="external">使用VideoToolbox硬解码H.264</a></li>
+<li><a href="http://www.jianshu.com/p/a671f5b17fc1" target="_blank" rel="external">使用AudioToolbox编码AAC</a></li>
+<li><a href="http://www.jianshu.com/p/279a9e5b36b5" target="_blank" rel="external">使用AudioToolbox播放AAC</a></li>
+<li><a href="http://www.jianshu.com/p/39a1a8e78675" target="_blank" rel="external">使用AudioToolbox播放AAC</a></li>
+<li><a href="http://www.jianshu.com/p/ba5045da282c" target="_blank" rel="external">HLS推流的实现（iOS和OS X系统）</a></li>
+</ol>
+<h2 id="iOS直播怎么用？">iOS直播怎么用？</h2><h4 id="腾讯云_RTMPSDK_工作流">腾讯云 RTMPSDK 工作流</h4><p><img src="https://www.processon.com/chart_image/585a3188e4b03a03b17e1b95.png" alt=""></p>
+<h4 id="腾讯云_IMSDK">腾讯云 IMSDK</h4><h2 id="iOS直播的实际应用">iOS直播的实际应用</h2><h4 id="XX会_直播">XX会 直播</h4><ol>
+<li>边看边买，推荐直播中使用的商品<ul>
+<li>CAAnimationGroup showInView</li>
+</ul>
+</li>
+<li>点赞动画，累积到一定数量push商品详情<ul>
+<li>点赞数累积到20次以上上传</li>
+<li>桃心动画: CAShapeLayer  CAAnimationGroup </li>
+</ul>
+</li>
+<li>弹幕<ul>
+<li>自己的IM实现</li>
+</ul>
+</li>
+<li>视频渲染层 <ul>
+<li>TXLivePlayer   </li>
+<li>可以研究下ijkplayer</li>
+</ul>
+</li>
+</ol>
+<h4 id="XX蜂_直播">XX蜂 直播</h4><h6 id="海量弹幕的处理？">海量弹幕的处理？</h6><p>不能说用户发一次弹幕就上传一次，这样特别耗费CPU和流量，应该提供本地累积存储机制，比如在累积过100条后再触发上传</p>
+<h6 id="礼物的定时器？">礼物的定时器？</h6><p>可以使用CADisplayLink和NSTimer，一般mode选择NSRunLoopCommonModes</p>
+<h6 id="序列帧">序列帧</h6><p>加载很多次图片时，可以把所有图片放在一张图上，使用CGImageCreateWithImageInRect切割</p>
+<h6 id="内存优化">内存优化</h6><ol>
+<li>注意送豪华礼物时，内存会猛增20M左右，因为图片和动画效果</li>
+<li>图片本很小，加到内存猛增，查看imageName:（会缓存，但是使用完不释放） 和 imageWithContentsOfFile:（不缓存，使用完会回收）的使用是否恰当</li>
+<li>聊天UITableView性能消耗<ul>
+<li>cell高度计算，图片加载，layout优化</li>
+<li>缓存cell高度</li>
+<li>图片加载用cache实现</li>
+<li>尽量避免autolayout</li>
+<li>控制每帧刷新数量</li>
+<li>删除过多的历史消息</li>
+</ul>
+</li>
+</ol>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/11/30/ios_live/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/11/01/network/">
                             网络基础到进阶
                         </a>
@@ -1310,175 +1425,6 @@
                     
                         <p>
                             <a href="/2015/07/20/ios_arc_mrc/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/06/20/c_pointer/">
-                            指针基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2015-06-20T18:15:02+08:00">
-	
-		    Jun 20, 2015
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="学习指针需要会什么？">学习指针需要会什么？</h2><p>如何完全理解一个复杂类型，记住一条原则：</p>
-<ul>
-<li>从<strong>变量名</strong>处起，根据<strong>运算符优先级</strong>结合，一步一步分析</li>
-</ul>
-<p>举几个🌰：</p>
-<ol>
-<li>int p;    <ul>
-<li>从p开始，先与int结合，说明p是<strong>整型变量</strong></li>
-</ul>
-</li>
-<li>int *p;    <ul>
-<li>从p开始，先与*结合，说明p是<strong>指针</strong>，</li>
-<li>再与int结合，说明<strong>指针指向int型</strong>，</li>
-<li>所以p是返回int型数据的指针</li>
-</ul>
-</li>
-<li>int p[3];<ul>
-<li>从p开始，先与[]结合，说明p是<strong>数组</strong>，</li>
-<li>再与int结合，说明<strong>[]里面是int型</strong>,</li>
-<li>所以p是返回int型数据的数组</li>
-</ul>
-</li>
-<li>int *p[3];<ul>
-<li>从p开始，先与[]结合，说明p是<strong>数组</strong>，</li>
-<li>再与*结合，说明<strong>[]里面是指针型</strong>，</li>
-<li>再与int结合，说明<strong>指针指向内容是int型</strong>，</li>
-<li>所以p是由返回int型数据的指针组成的数组</li>
-</ul>
-</li>
-<li>int (*p)[3];<ul>
-<li>从p开始，先与*结合，说明p是<strong>指针</strong>，</li>
-<li>再与[]结合，说明<strong>指针指向[]型</strong>，</li>
-<li>再与int结合，说明<strong>[]里是int型</strong>，</li>
-<li>所以p是指向由int型数据组成的数组的指针</li>
-</ul>
-</li>
-<li>int **p;<ul>
-<li>从p开始，先与*结合，说明p是<strong>指针</strong>，</li>
-<li>再与*结合，说明<strong>指针指向指针型</strong>，</li>
-<li>再与int结合，说明<strong>二级指针指向int型</strong>,</li>
-<li>所以p是二级指针</li>
-</ul>
-</li>
-<li>int p(int);<ul>
-<li>从p开始，先与()结合，说明p是<strong>函数</strong>，</li>
-<li>分析()里面，函数有一个<strong>int型参数</strong>,</li>
-<li>再与int结合，函数<strong>返回类型是int</strong></li>
-</ul>
-</li>
-<li>int (*p)(int);<ul>
-<li>从p开始，先与*结合，说明p是<strong>指针</strong>,</li>
-<li>再与()结合，说明<strong>指针指向函数</strong>，</li>
-<li>分析()里面，函数有一个<strong>int型参数</strong>,</li>
-<li>再与int结合，函数<strong>返回类型是int</strong>,</li>
-<li>所以p是指向有一个整型参数且返回类型为整数的函数的指针</li>
-</ul>
-</li>
-<li>int *(*p(int))[3];<ul>
-<li>从p开始，先与()结合，说明p是一个<strong>函数</strong>,</li>
-<li>分析()里面，函数有一个<strong>int型参数</strong>，</li>
-<li>再与*结合，函数<strong>返回类型是指针</strong>，</li>
-<li>再与[]结合，说明返回的<strong>指针指向[]</strong>,</li>
-<li>再与*结合，说明<strong>[]里是指针</strong>，</li>
-<li>再与int结合，说明指针<strong>指向的是int型</strong>，</li>
-<li>所以p是一个参数为一个int型且返回一个指向整型指针变量组成的数组的指针变量的函数</li>
-</ul>
-</li>
-</ol>
-<h2 id="指针是什么？">指针是什么？</h2><p>指针是一个特殊的变量，它存储的数值被解释成内存里的一个地址</p>
-<p>先声明几个指针🌰：</p>
-<ol>
-<li>int *ptr;</li>
-<li>char *ptr;</li>
-<li>int **ptr;</li>
-<li>int (*ptr)[3];</li>
-<li>int *(*ptr)[4] </li>
-</ol>
-<h4 id="指针的类型">指针的类型</h4><p>把指针名字去掉，剩下部分就是指针类型</p>
-<h4 id="指向的类型">指向的类型</h4><p>把指针名和名字左边的*去掉，剩下部分就是指针指向的类型</p>
-<ul>
-<li>指针的类型（指针本身的类型）和指针指向的类型是<strong>两个概念</strong></li>
-</ul>
-<h4 id="指针的值_—_或叫指针指向的内存区">指针的值 — 或叫指针指向的内存区</h4><p>在32位操作系统里，指针都是一个32位整数，指针指向的内存区就是从指针的值代表的那个<strong>内存地址开始</strong>，长度为<strong>sizeof(指针指向的类型)</strong>的一片内存区</p>
-<ul>
-<li>我们说一个指针的值是XX，相当于说指针指向了以XX为首地址的一片内存区域</li>
-<li>我们说一个指针指向了某块内存区域，相当于说指针的值是这块内存区域的首地址</li>
-</ul>
-<h4 id="指针本身占据的内存区域">指针本身占据的内存区域</h4><p><strong>sizeof(指针的类型)</strong>，32位系统里，指针占据4个字节</p>
-<h2 id="为什么用指针？">为什么用指针？</h2><p>C语言的精华和唯一的难点就是指针，搞定指针等于搞定了C语言</p>
-<p>指针 -&gt; C语言 -&gt; C++ -&gt; 数据结构 -&gt; 算法 -&gt; 范型编程与STL和STL源码剖析</p>
-<h2 id="指针怎么用？">指针怎么用？</h2><h4 id="指针的算术运算">指针的算术运算</h4><p>指针可以加上或减去一个整数</p>
-<ul>
-<li>和数值的加减运算不一样，以单元为单位</li>
-<li>两个指针不能进行加法运算，得到的结果不知道指向何处</li>
-<li>两个指针可以进行减法运算，但是类型必须相同，一般用于数组</li>
-</ul>
-<p>🌰1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> *ptr = (<span class="keyword">int</span> *)a;  <span class="comment">//强制类型转换不会改变a的类型</span></span><br><span class="line">ptr++;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">指针ptr加了<span class="number">1</span>，编译器处理：ptr的值加上了<span class="keyword">sizeof</span>(<span class="keyword">int</span>)，在<span class="number">32</span>位程序里，是加了<span class="number">4</span>，因为<span class="keyword">int</span>占据<span class="number">4</span>个字节。</span><br><span class="line"></span><br><span class="line">🌰<span class="number">2</span>：</span><br><span class="line"></span><br><span class="line">```c</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">20</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *ptr = <span class="built_in">array</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">	(*ptr)++;</span><br><span class="line">	ptr++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>各个单元的值加1，每次循环都将指针ptr加1个单元，所以每次循环都能访问到下一个单元。</p>
-<h4 id="运算符_&amp;_和_*">运算符 &amp; 和 *</h4><p>&amp;是取地址运算符，*是间接运算符</p>
-<ul>
-<li>&amp;a的运算结果是一个指针，指针的类型是a的类型加个*，指针指向的类型是a的类型，指针指向的地址是a的地址</li>
-<li><em>p的结果五花八门，\</em>p的结果是p所指向的东西，这个东西的特点：它的类型是p指向的类型，它占用的地址是p指向的地址</li>
-</ul>
-<p>🌰1： </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a=<span class="number">12</span>; <span class="keyword">int</span> b; <span class="keyword">int</span> *p; <span class="keyword">int</span> **ptr;</span><br><span class="line"></span><br><span class="line">p = &amp;a; <span class="comment">//&amp;a的结果是一个指针，类型是int *, 指向的类型是int, 指向的地址是a的地址</span></span><br><span class="line"></span><br><span class="line">*p = <span class="number">24</span>; <span class="comment">//*p的结果，它的类型是int，它占用的地址是p指向的地址，*p就是变量a</span></span><br><span class="line"></span><br><span class="line">ptr = &amp;p; <span class="comment">//&amp;p的结果是指针，类型是p的类型加个*，这里是int **，该指针指向的类型是p的类型，这里是int *，该指针所指向的地址就是指针 p 自己的地址</span></span><br><span class="line"></span><br><span class="line">*ptr = &amp;b; <span class="comment">//*ptr 是个指针,&amp;b 的结果也是个指针,且这两个指针的类型和所指向的类型是一样的,所以用&amp;b 来给*ptr 赋值就是毫无问题的了</span></span><br><span class="line"></span><br><span class="line">**ptr = <span class="number">34</span>; <span class="comment">//*ptr 的结果是 ptr 所指向的东西,在这里是一个指针, 对这个指针再做一次*运算,结果是一个 int 类型的变量。</span></span><br></pre></td></tr></table></figure>
-<h4 id="指针表达式">指针表达式</h4><p>一个表达式的结果是指针，即指针表达式</p>
-<p>🌰1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a,b;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> *pa;</span><br><span class="line">pa = &amp;a;				<span class="comment">//&amp;a</span></span><br><span class="line"><span class="keyword">int</span> **ptr = &amp;pa;    <span class="comment">//&amp;pa</span></span><br><span class="line">*ptr = &amp;b;          <span class="comment">//*ptr 和 &amp;b </span></span><br><span class="line">pa = <span class="built_in">array</span>;</span><br><span class="line">pa++;					<span class="comment">//pa</span></span><br></pre></td></tr></table></figure>
-<p>当一个指针表达式的结果指针已经明确地具有了指针自身占 据的内存的话,这个指针表达式就是一个左值,否则就不是一个左值</p>
-<h4 id="指针和数组">指针和数组</h4><p>数组名可以看作一个指针</p>
-<p>🌰1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intarray[<span class="number">10</span>]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;,value;value=<span class="built_in">array</span>[<span class="number">0</span>];		<span class="comment">//可写成： value = *array;</span>value=<span class="built_in">array</span>[<span class="number">3</span>];		<span class="comment">//可写成：	value = *(array+3);</span>value=<span class="built_in">array</span>[<span class="number">4</span>];		<span class="comment">//可写成： value = *(array+4);</span></span><br></pre></td></tr></table></figure>
-<p>数组名array代表数组本身，类型是int[10]，如果把array看作指针，它指向数组的第0个单元，类型是int <em>， 所指向的类型是是数组单元的类型即int，因此\</em>array 等于 0 就一点也不 奇怪了。同理,array+3 是一个指向数组第 3 个单元的指针,所以 *(array+3)等于 3。其它依此类推</p>
-<h4 id="指针和结构类型">指针和结构类型</h4><p>可以声明一个指向结构类对象的指针</p>
-<p>🌰1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> MyStruct &#123;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> b;</span><br><span class="line">	<span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> MyStruct ss = &#123;<span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> MyStruct *ptr = &amp;ss;  <span class="comment">//声明一个指向结构对象ss的指针，它的类型是MyStruct *，它指向的类型是MyStruct</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *pstr = (<span class="keyword">int</span> *)&amp;ss; <span class="comment">//声明一个指向结构对象ss的指针，但是pstr和它被指向的类型ptr是不同的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  ptr 来访问 ss 的三个成员变量</span></span><br><span class="line">ptr-&gt;a;  <span class="comment">//指向运算符</span></span><br><span class="line">ptr-&gt;b;</span><br><span class="line">ptr-&gt;c;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  pstr 来访问 ss 的三个成员变量</span></span><br><span class="line">*pstr;</span><br><span class="line">*(pstr + <span class="number">1</span>);</span><br><span class="line">*(pstr + <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="指针和函数">指针和函数</h4><p>可以声明一个指向函数的指针</p>
-<p>🌰1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun1</span><span class="params">(<span class="keyword">char</span> *, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> (*pfun1)(<span class="keyword">char</span> *, <span class="keyword">int</span>);</span><br><span class="line"></span><br><span class="line">pfun1 = fun1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a = (*pfun1)(<span class="string">"abcdefg"</span>, <span class="number">7</span>);  <span class="comment">//通过函数指针调用函数</span></span><br></pre></td></tr></table></figure>
-<p>指针作为函数的形参，函数调用中，用指针表达式来作为实参</p>
-<h4 id="指针类型转换">指针类型转换</h4><p>🌰1：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f = <span class="number">12.3</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">float</span> *fptr = &amp;f;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p;</span><br><span class="line"></span><br><span class="line"><span class="comment">//想让指针 p 指向实数 f</span></span><br><span class="line">p=&amp;f; <span class="comment">//不对。因为指针 p 的类型是 int *,它指向的类型是 int</span></span><br><span class="line"></span><br><span class="line">p=(<span class="keyword">int</span>*)&amp;f; <span class="comment">// 如果有一个指针 p,我们需要把它的类型和所指向的类型改为</span>TYEP *TYPE, 那么语法格式是: (TYPE *)p;</span><br></pre></td></tr></table></figure>
-<p>强制类型转换的结果是一个新指针,该新指针的类型是TYPE *,它指向的类型是 TYPE,它指向的地址就是原指针指向的地址。 <strong>而原来的指针 p 的一切属性都没有被修改。(切记)</strong></p>
-<h4 id="指针的安全问题">指针的安全问题</h4><ol>
-<li>指针访问数组时，不要超过数组低端和高端的界限</li>
-<li>强制类型转换ptr1 = (TYPE *)ptr2中，如果sizeof(prt2的类型)大于sizeof(ptr1的类型)，那么使用指针ptr1访问ptr2所指向的存储区域是安全的</li>
-</ol>
-<h2 id="指针的实际应用">指针的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="XX仓">XX仓</h4>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/06/20/c_pointer/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

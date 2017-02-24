@@ -457,6 +457,109 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/01/01/h5_optimize/">
+                            前端性能优化基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-01-01T18:15:02+08:00">
+	
+		    Jan 01, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="学习前端性能优化需要会什么？">学习前端性能优化需要会什么？</h2><p>说道前端性能优化，可能你第一个想到的是yahoo35条军规这种通用方案，因为它的确已经总结得非常全面，但在实际项目场景下yahoo35条军规是否适用?除了yahoo35条军规还有哪些可以达到性能优化的手段？这些都是需要结合实际的项目去实践而并非生搬硬套的使用yahoo35条军规</p>
+<p>当然，想要灵活运行技术手段进行前端性能优化必须要知道一些基础知识，比如在浏览器地址栏输入一个URL，到浏览器为我们展示出页面，这其中的过程发生了什么？</p>
+<p><img src="https://www.processon.com/chart_image/58ae967fe4b07158585527d3.png" alt=""></p>
+<h2 id="前端性能优化是什么？">前端性能优化是什么？</h2><h4 id="yahoo35条军规">yahoo35条军规</h4><p><img src="https://www.processon.com/chart_image/58ae9bbee4b0e0061fe7c766.png" alt=""></p>
+<p><a href="https://csspod.com/frontend-performance-best-practices/" target="_blank" rel="external">yahoo35条军规详细阐述</a></p>
+<p>当然，yahoo35条军规只是通用的优化方案，它也有不适合的场景，比如一个网页游戏页面，优先加载的肯定是图片和背景音乐</p>
+<h4 id="网络优化">网络优化</h4><h6 id="IP优化策略">IP优化策略</h6><p>如果网络大多基于TCP连接，为了将DNS时间降至最低，可以采用动态IP优化策略算法，即内置Server IP列表，该列表可以在App启动服务中下发更新。App启动后首次网络服务从Server IP列表中取一个IP地址进行TCP连接，同时DNS解析会并行进行，DNS成功后，会返回最适合用户网络的Server IP，这个Server IP会被加入到Server IP列表中被优先使用。</p>
+<h6 id="通信数据格式优化">通信数据格式优化</h6><p>数据传送格式转换到Protocol Buffer，并对数据进行Gzip压缩，使用 PB+Gzip 数据大小下降约80%，另外FlatBuffer(Protocol Buffer的一种进化方案与实现)在性能上可能获取更大的优势。</p>
+<h6 id="弱网和网络抖动优化">弱网和网络抖动优化</h6><p>根据不同的网络质量改变网络服务策略：</p>
+<ol>
+<li>调整长连接池个数：例如在2G/2.5G Egde网络下，会减少长连接池个数为1；Wi-Fi网络下可以增长长连接池个数等机制。</li>
+<li>动态调整TCP Connection、Write、Read的超时时间。</li>
+<li>不同网络类型状态切换连接机制</li>
+</ol>
+<h6 id="其它网络优化">其它网络优化</h6><ol>
+<li>在应用层面引入重试机制提高网络服务成功率</li>
+<li>网络服务优先级机制，高优先级服务优先使用长连接，低优先级服务默认使用短连接</li>
+<li>网络服务依赖机制，根据依赖关系自动发起或取消网络服务，例如主机服务失败时，子服务自动取消 </li>
+</ol>
+<h2 id="为什么要用前端性能优化？">为什么要用前端性能优化？</h2><h4 id="复用（维护性、开发成本）">复用（维护性、开发成本）</h4><p><img src="http://p1.bqimg.com/567571/8ab771c5493675cd.png" alt=""></p>
+<h4 id="加载方式（提升用户体验）">加载方式（提升用户体验）</h4><p><img src="http://i1.piimg.com/567571/f7596f09fe60b757.png" alt=""></p>
+<h2 id="前端性能优化怎么用？">前端性能优化怎么用？</h2><h4 id="Hybrid框架优化">Hybrid框架优化</h4><ol>
+<li><p>离线组件包</p>
+<p> <img src="https://www.processon.com/chart_image/58aff68fe4b0a15d03401f60.png" alt=""></p>
+<p> 不同于HTML5，组件化Hybrid方案引入了组件包的概念，将业务需要的所有静态资源打包成一个组件包文件，并进行离线化版本管理，而且关于离线包的更新是采取增量差分升级更新的方式</p>
+<p> 用户访问组件页面之前，组件默默将新业务组件包下载至客户端，用户访问组件页面时，WebView加载的实际上均是本地页面和资源，大幅提升页面加载性能。不仅如此，关键业务组件在APP发布时会预置到App中，减少首次下载安装的时间。</p>
+</li>
+<li><p>WebView 预加载</p>
+<p> <img src="https://www.processon.com/chart_image/58aff84ee4b0a15d03404035.png" alt=""></p>
+<p> 影响页面加载速度的因素非常多，我们在对 WebView 加载一个网页的过程进行调试发现，每次加载的过程中都会有较多的网络请求。除了 Web 页面自身的 URL 请求，还会有 Web 页面外部引用的 JS、CSS、字体、图片等都是个独立的 HTTP 请求。这些请求都是串行的，加上浏览器的解析、渲染时间就会导致 WebView 整体加载时间变长，消耗的流量也对应地增多。所以为了加快 WebView 的整体加载时间，我们使用了预加载策略，将 JS、CSS、字体、图片等资源提前加载出来。</p>
+<p> Android 通过 WebView 自带的 API 即 setWebViewClient 中的回调接口 ShouldInterceptRequest 去实现资源的预加载。</p>
+<p> iOS 通过 setNeedsLayout 机制提前初始化下一个 UIwebView，将 HTML 文件初始化，然后捕获点击事件去动态刷新数据。</p>
+</li>
+</ol>
+<h4 id="图片优化">图片优化</h4><p><img src="https://www.processon.com/chart_image/58afee7ee4b020892b43ce61.png" alt=""></p>
+<h4 id="地图优化">地图优化</h4><ol>
+<li>数据分段加载</li>
+<li>数据缓存机制</li>
+<li>WebView单独WebCore的优化</li>
+<li>提前预加载数据和JS资源等优化</li>
+</ol>
+<h4 id="启动内存优化">启动内存优化</h4><ol>
+<li>图片占用内存</li>
+<li>轻量级数据结构</li>
+<li>内存泄露</li>
+</ol>
+<h4 id="ReactNative优化">ReactNative优化</h4><ol>
+<li><p>ListView没有实现cell重用，导致数据量大的时候卡顿</p>
+<ul>
+<li>借鉴ReactNativeTableView的实现，开发可重用cell的ListView，接口和官方原生保持一致</li>
+<li>Android借鉴iOS方案，采用RecyclerView实现</li>
+<li>常用的下拉刷新，载入更多，右侧字母栏索引加入</li>
+</ul>
+</li>
+<li><p>RN加载最大的瓶颈 JS Init + Require，也就是jsbundle执行时间</p>
+<ul>
+<li>将框架代码拆分，让所有业务使用一份框架代码，拆分为Common.js 和 Business.js</li>
+<li>ReactNative的框架部分文件(Common.js)大小比较大，占用了绝大部分的JS执行时间，把这部分的执行加载时间放到后台预先做完，进入业务只需要执行页面页面的几个JS</li>
+<li>设计一个空白页面的Fake App，用来监听要显示的真实业务JS模块，收到监听后，渲染业务模块最终显示页面</li>
+</ul>
+</li>
+</ol>
+<h2 id="前端性能优化的实际应用">前端性能优化的实际应用</h2><h4 id="XX会">XX会</h4><h4 id="X蜂">X蜂</h4>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/01/01/h5_optimize/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
