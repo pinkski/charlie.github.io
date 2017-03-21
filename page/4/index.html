@@ -238,6 +238,175 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2015/12/22/ios_optimize/">
+                            iOS性能优化基础到进阶
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2015-12-22T18:15:02+08:00">
+	
+		    Dec 22, 2015
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="iOS性能优化需要会什么？">iOS性能优化需要会什么？</h2><p>搞好iOS性能优化有时候是一件很难的事情，在开发过程中要时刻考虑到性能影响，不然开发出来的产品只会遭到用户的摒弃</p>
+<h2 id="iOS性能优化是什么？">iOS性能优化是什么？</h2><p>建议将iOS的性能优化分为两个级别，慢慢补充：</p>
+<h4 id="基础级">基础级</h4><ol>
+<li>用ARC管理内存</li>
+<li>在正确的地方使用reuseIdentifier</li>
+<li>尽量把Views设置为完全不透明<ul>
+<li><strong>apaque = YES</strong></li>
+</ul>
+</li>
+<li>避免庞大的XIB</li>
+<li>不要阻塞主线程<ul>
+<li><strong>异步处理存储或网络</strong></li>
+</ul>
+</li>
+<li>在Image Views中调整图片大小</li>
+<li>选择正确的Collection<ul>
+<li><strong>Array索引块；Dic键值查块；Set值查块，插入删除快</strong></li>
+</ul>
+</li>
+<li>打开gzip压缩<ul>
+<li><strong>服务端和app打开gzip</strong></li>
+</ul>
+</li>
+<li>选择是否缓存图片<ul>
+<li><strong>imageNamed imageWithContentsOfFile</strong></li>
+</ul>
+</li>
+<li>尽量避免日期格式转换<ul>
+<li>重大开销对象NSDateFormatter NSCalendar</li>
+</ul>
+</li>
+</ol>
+<h4 id="进阶级">进阶级</h4><ol>
+<li>重用和延迟加载Views<ul>
+<li><strong>一次性创建和懒加载都要缺点：耗内存；第一次加载时稍显卡顿</strong> </li>
+</ul>
+</li>
+<li>Cache, Cache, 还是Cache！</li>
+<li>权衡渲染方法</li>
+<li>处理内存警告<ul>
+<li><strong>receiveMemoryWarning</strong></li>
+</ul>
+</li>
+<li>使用Sprite Sheets</li>
+<li>避免反复处理数据</li>
+<li>选择正确的数据格式</li>
+<li>正确地设定背景图片<ul>
+<li><strong>colorWithPatternImage UIImageView</strong></li>
+</ul>
+</li>
+<li>减少使用Web特性<ul>
+<li><strong>避免过重的html5页面</strong></li>
+</ul>
+</li>
+<li>设定Shadow Path<ul>
+<li><strong>避免每次计算渲染路径</strong></li>
+</ul>
+</li>
+<li>优化你的Table View </li>
+<li>加速启动时间<ul>
+<li><strong>尽可能做更多的异步任务，避免庞大的xib</strong></li>
+</ul>
+</li>
+<li>使用Autorelease Pool</li>
+</ol>
+<h2 id="为什么做iOS性能优化？">为什么做iOS性能优化？</h2><p>随着代码累积，性能问题在所难免，苹果提供了各种Instruments工具帮助程序员定位一些常见的性能问题</p>
+<h2 id="怎么做iOS性能优化？">怎么做iOS性能优化？</h2><h4 id="发现问题">发现问题</h4><ol>
+<li>用户反馈（包括测试人员）</li>
+<li>在线监控：<ul>
+<li>业务性能监控，主要测试关键的操作路径，比如业务时间线：启动、打开档期、打开详情、加入购物车、下单、支付等</li>
+<li>卡顿监控：Bugly工具跟踪</li>
+</ul>
+</li>
+</ol>
+<h4 id="解决问题">解决问题</h4><p>主要做到几点核心：</p>
+<ol>
+<li>优化业务流程<ul>
+<li>在满足业务需求的同时，提出更高效优雅的解决方案</li>
+</ul>
+</li>
+<li>合理的线程分配（尽量避免多线程）<ul>
+<li>UI和DataSource操作一定在主线程</li>
+<li>DB操作、日志记录、网络回调都在各自的固定线程</li>
+<li>不同业务，通过创建队列保证数据一致性</li>
+</ul>
+</li>
+<li>预处理和延时加载<ul>
+<li>预处理：耗费大量线程时间的操作放到后台线程进行计算</li>
+<li>延时加载：先加载当前必须得可视内容，在稍后时间或事件时再触发加载其它内容</li>
+<li>总结：这两种方法都是针对自然比较紧张的情况，比如微信读书中阅读的排版优先级是最高的，在阅读过程中会预处理下一页、下一章的排版，同时延时加载阅读相关的其它数据（加想法、划线、书签等）</li>
+</ul>
+</li>
+<li>缓存<ul>
+<li>并发访问cache，数据一致性问题</li>
+<li>cache线程安全，防止一边修改一边遍历的crash</li>
+<li>cache查找时性能问题</li>
+<li>cache的释放和重建，避免占用空间无限扩大</li>
+</ul>
+</li>
+<li>使用正确的API<ul>
+<li>选择合适的容器</li>
+<li>imageNamed  imageWithContentsFile</li>
+<li>NSDateFormatter</li>
+<li>不要随意使用NSLog()</li>
+</ul>
+</li>
+</ol>
+<h4 id="预防问题">预防问题</h4><p>使用小工具尽早的在开发阶段暴露问题：</p>
+<ul>
+<li>内存泄露检测工具  <a href="https://github.com/Zepo/MLeaksFinder" target="_blank" rel="external">MLeaksFinder</a></li>
+<li>FPS/SQL性能监测工具条</li>
+<li>UI/DataSource主线程检测工具</li>
+<li>排版引擎自动化监测工具</li>
+<li>数据源检测工具 </li>
+</ul>
+<h2 id="iOS性能优化的实际应用">iOS性能优化的实际应用</h2><h4 id="XX会公益SDK">XX会公益SDK</h4><ol>
+<li>内存泄露检测工具</li>
+<li>Instruments</li>
+<li>动画绘制</li>
+<li>合并网络请求并开启gzip</li>
+<li>批量日志上报</li>
+<li>本地缓存设计<br><img src="https://www.processon.com/chart_image/58577e2be4b0c1fa6c5ab71f.png" alt=""></li>
+</ol>
+<h4 id="XX会档期列表">XX会档期列表</h4><ol>
+<li>ReactNative listView性能问题</li>
+<li>图片资源延时加载</li>
+</ol>
+<h4 id="微信读书">微信读书</h4><p>微信工程师分享过微信读书的分享可以参看：<a href="http://dev.qq.com/topic/578c93ca9644bd524bfcabe8" target="_blank" rel="external">微信读书 iOS 性能优化</a></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2015/12/22/ios_optimize/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2015/11/30/ios_live/">
                             iOS直播基础到进阶
                         </a>
@@ -1165,265 +1334,6 @@
                     
                         <p>
                             <a href="/2015/08/10/ios_thread/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/07/20/ios_arc_mrc/">
-                            iOS内存管理基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2015-07-20T18:15:02+08:00">
-	
-		    Jul 20, 2015
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="学习内存管理需要会什么？">学习内存管理需要会什么？</h2><p>思考下，苹果为什么有了MRC又设计ARC？</p>
-<p>iOS内存管理模型</p>
-<ol>
-<li>自动垃圾收集（iOS环境不支持）</li>
-<li>手动引用计数和自动释放池（MRC）</li>
-<li>自动引用计数（ARC）  </li>
-</ol>
-<h2 id="内存管理是什么？">内存管理是什么？</h2><h3 id="MRC">MRC</h3><h4 id="引用计数器">引用计数器</h4><ol>
-<li>对象被引用的次数，也可说有多少人正在用这个对象</li>
-<li>初始化时为1<ul>
-<li>创建并持有对象：alloc new copy mutableCopy</li>
-<li>持有对象：retain</li>
-</ul>
-</li>
-<li>计数为0时，对象占用的内存被系统回收</li>
-</ol>
-<h4 id="引用计数器操作">引用计数器操作</h4><ol>
-<li>retain +1</li>
-<li>release -1</li>
-<li>retainCount 显示计数</li>
-</ol>
-<h4 id="dealloc方法">dealloc方法</h4><ol>
-<li>[super dealloc];一定在最后一行</li>
-<li>不能直接调用</li>
-<li>一旦对象被回收，继续使用会野指针</li>
-</ol>
-<h4 id="野指针_&amp;_空指针">野指针 &amp; 空指针</h4><ol>
-<li>野指针即一个指针指向了“<strong>僵尸对象</strong>（不能再使用的对象）”</li>
-<li>给野指针发消息报错：EXC_BAD_ACCESS</li>
-<li>避免野指针发消息报错，对象释放后，将指针置为空指针<ul>
-<li>空指针即没有指向任何存储空间（存的nil）</li>
-<li>向空指针发送消息没有任何反应</li>
-</ul>
-</li>
-</ol>
-<h4 id="MRC_单个对象管理">MRC 单个对象管理</h4><ol>
-<li>谁创建(alloc copy)，谁release</li>
-<li>谁retain, 谁release</li>
-</ol>
-<h4 id="MRC_多个对象管理">MRC 多个对象管理</h4><p><img src="https://www.processon.com/chart_image/5864740be4b0e069269f1e34.png" alt=""></p>
-<ol>
-<li>setter方法</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)setRoom:(Room *)room &#123;&#10;&#9;// &#21482;&#26377;&#25151;&#38388;&#19981;&#21516;&#26102;&#25165;&#38656;&#35201;release &#21644; retain&#10;&#9;if (_room != room) &#123;&#10;&#9;&#9;// &#23558;&#20197;&#21069;&#30340;&#25151;&#38388;release -1&#10;&#9;&#9;[_room release];&#10;&#9;&#9;&#10;&#9;&#9;_room = [room retain];&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="MRC_@property参数">MRC @property参数</h4><ol>
-<li>成员变量前加上<strong>@property</strong>，自动生成<strong>基本</strong>的setter/getter</li>
-<li>property加上<strong>retain</strong>，自动生成<strong>有内存管理</strong>的setter/getter</li>
-<li>property加上<strong>assign</strong>，自动生成基本的setter/getter，<strong>默认</strong>什么都不加就是assign</li>
-</ol>
-<h4 id="MRC_循环引用">MRC 循环引用</h4><ul>
-<li>当两端互相引用时，应该一端用retain，一端用assign</li>
-</ul>
-<h4 id="autoreleasepool">autoreleasepool</h4><ol>
-<li><strong>[p autorelease]</strong> 给p发送一条autorelease消息，将p放到autoreleasepool，在autoreleasepool释放时做一次release操作</li>
-<li>autorelease方法返回对象本身，引用计数不会变化</li>
-</ol>
-<h6 id="autoreleasepool_好处">autoreleasepool 好处</h6><ol>
-<li>不用关心释放时间</li>
-<li>不用关心什么时候调用release</li>
-</ol>
-<h6 id="autoreleasepool_原理">autoreleasepool 原理</h6><p>autoreleasepool实际上只是把对release的调用延迟了</p>
-<ol>
-<li>声明__autoreleasepool时，构造函数<strong>__AtAutoreleasePool()</strong>执行，即<strong>atautoreleasepoolobj = objc_autoreleasePoolPush()</strong></li>
-<li>出了当前作用域时，析构函数<strong>~__AtAutoreleasePool()</strong>执行，即<strong>objc_autoreleasePoolPop(atautoreleasepoolobj)</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> __declspec(dllimport) <span class="function"><span class="keyword">void</span> * <span class="title">objc_autoreleasePoolPush</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> __declspec(dllimport) <span class="function"><span class="keyword">void</span> <span class="title">objc_autoreleasePoolPop</span><span class="params">(<span class="keyword">void</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> __AtAutoreleasePool &#123;</span><br><span class="line">  __AtAutoreleasePool() &#123;atautoreleasepoolobj = objc_autoreleasePoolPush();&#125;</span><br><span class="line">  ~__AtAutoreleasePool() &#123;objc_autoreleasePoolPop(atautoreleasepoolobj);&#125;</span><br><span class="line">  <span class="keyword">void</span> * atautoreleasepoolobj;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* @autoreleasepool */</span> &#123; __AtAutoreleasePool __autoreleasepool;&#125;</span><br></pre></td></tr></table></figure>
-<p>简化代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* @autoreleasepool */</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> *atautoreleasepoolobj = objc_autoreleasePoolPush();</span><br><span class="line">    <span class="comment">// 用户代码，所有接收到 autorelease 消息的对象会被添加到这个 autoreleasepool 中</span></span><br><span class="line">    objc_autoreleasePoolPop(atautoreleasepoolobj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>PUSH操作</li>
-</ul>
-<p>每调用一次 push 操作就会创建一个新的 autoreleasepool ，即往 AutoreleasePoolPage 中插入一个 POOL_SENTINEL ，并且返回插入的 POOL_SENTINEL 的内存地址。</p>
-<ul>
-<li>Autorelease操作</li>
-</ul>
-<p>它跟 push 操作的实现非常相似。只不过 push 操作插入的是一个 POOL_SENTINEL ，而 autorelease 操作插入的是一个具体的 autoreleased 对象</p>
-<ul>
-<li>POP操作</li>
-</ul>
-<p>pop 函数的入参就是 push 函数的返回值，也就是 POOL_SENTINEL 的内存地址，即 pool token 。当执行 pop 操作时，内存地址在 pool token 之后的所有 autoreleased 对象都会被 release</p>
-<h6 id="autoreleasepool_创建和使用">autoreleasepool 创建和使用</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#26041;&#24335;1&#10;NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];&#10;Person *p = [[[Person alloc] init] autorelease];&#10;[autoreleasePool drain];&#10;&#10;// &#26041;&#24335;2&#10;@autoreleasepool&#10;&#123; // &#21019;&#24314;&#19968;&#20010;&#33258;&#21160;&#37322;&#25918;&#27744;&#10;        Person *p = [[Person new] autorelease];&#10;        // &#23558;&#20195;&#30721;&#20889;&#21040;&#36825;&#37324;&#23601;&#25918;&#20837;&#20102;&#33258;&#21160;&#37322;&#25918;&#27744;&#10;&#125; // &#38144;&#27585;&#33258;&#21160;&#37322;&#25918;&#27744;(&#20250;&#32473;&#27744;&#23376;&#20013;&#25152;&#26377;&#23545;&#35937;&#21457;&#36865;&#19968;&#26465;release&#28040;&#24687;)</span><br></pre></td></tr></table></figure>
-<h6 id="autoreleasepool_注意">autoreleasepool 注意</h6><ul>
-<li>并不是放到autoreleasepool代码中,都会自动加入到自动释放池</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10;    // &#22240;&#20026;&#27809;&#26377;&#35843;&#29992; autorelease &#26041;&#27861;,&#25152;&#20197;&#23545;&#35937;&#27809;&#26377;&#21152;&#20837;&#21040;&#33258;&#21160;&#37322;&#25918;&#27744;&#10;    Person *p = [[Person alloc] init];&#10;    [p run];&#10;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>autorelease是一个方法, 只有在autoreleasepool中调用才有效</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10;&#125;&#10;// &#27809;&#26377;&#19982;&#20043;&#23545;&#24212;&#30340;&#33258;&#21160;&#37322;&#25918;&#27744;, &#21482;&#26377;&#22312;&#33258;&#21160;&#37322;&#25918;&#27744;&#20013;&#35843;&#29992;autorelease&#25165;&#20250;&#25918;&#21040;&#37322;&#25918;&#27744;&#10;Person *p = [[[Person alloc] init] autorelease];&#10;[p run];&#10;&#10;// &#27491;&#30830;&#20889;&#27861;&#10;@autoreleasepool &#123;&#10;    Person *p = [[[Person alloc] init] autorelease];&#10; &#125;&#10;&#10;// &#27491;&#30830;&#20889;&#27861;&#10;Person *p = [[Person alloc] init];&#10;@autoreleasepool &#123;&#10;    [p autorelease];&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="autoreleasepool_嵌套">autoreleasepool 嵌套</h6><ol>
-<li>AutoreleasePool 以 <strong>栈</strong>形式存在</li>
-<li>栈只有一个入口，调用autorelease会将对象放到<strong>栈顶的自动释放池</strong></li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123; // &#26632;&#24213;&#33258;&#21160;&#37322;&#25918;&#27744;&#10;    @autoreleasepool &#123;&#10;        @autoreleasepool &#123; // &#26632;&#39030;&#33258;&#21160;&#37322;&#25918;&#27744;&#10;            Person *p = [[[Person alloc] init] autorelease];&#10;        &#125;&#10;        Person *p = [[[Person alloc] init] autorelease];&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="autoreleasepool_for循环">autoreleasepool for循环</h6><ol>
-<li>尽量避免对大内存使用autorelease</li>
-<li>不要把for循环放在@autoreleasepool之间，会造成内存峰值上升</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#20869;&#23384;&#26292;&#28072;&#10;@autoreleasepool &#123;&#10;    for (int i = 0; i &#60; 99999; ++i) &#123;&#10;        Person *p = [[[Person alloc] init] autorelease];&#10;    &#125;&#10;&#125;&#10;&#10;// &#20869;&#23384;&#19981;&#20250;&#26292;&#28072;&#10;for (int i = 0; i &#60; 99999; ++i) &#123;&#10;    @autoreleasepool &#123;&#10;        Person *p = [[[Person alloc] init] autorelease];&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="autoreleasepool_错误用法">autoreleasepool 错误用法</h6><ol>
-<li>不能连续调用autorelease</li>
-<li>调用autorelease后又调用release</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10; // &#38169;&#35823;&#20889;&#27861;, &#36807;&#24230;&#37322;&#25918;&#10;    Person *p = [[[[Person alloc] init] autorelease] autorelease];&#10; &#125;&#10; &#10; @autoreleasepool &#123;&#10;    Person *p = [[[Person alloc] init] autorelease];&#10;    [p release]; // &#38169;&#35823;&#20889;&#27861;, &#36807;&#24230;&#37322;&#25918;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="ARC">ARC</h3><ol>
-<li>Automatic Reference Counting，自动引用计数，自iOS5 LLVM3.0引入</li>
-<li>解决了广大iOS开发者所憎恨的手动内存管理的麻烦</li>
-<li>通过生成正确的代码去自动释放或者保持对象，我们完全不用担心编译器会出错</li>
-</ol>
-<h4 id="ARC_判断是否需要释放">ARC 判断是否需要释放</h4><p>只要还有一个强指针指向对象，对象就会保存在内存中</p>
-<ol>
-<li>强指针  被__strong修饰</li>
-<li>弱指针  被__weak修饰</li>
-</ol>
-<h4 id="ARC_注意">ARC 注意</h4><ol>
-<li>不能调用release</li>
-<li>不能调用autorelease</li>
-<li>不能调用[super dealloc]</li>
-</ol>
-<h4 id="ARC_单个对象管理">ARC 单个对象管理</h4><ul>
-<li>局部变量释放，对象随之释放</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, const char * argv[]) &#123;&#10;   @autoreleasepool &#123;&#10;        Person *p = [[Person alloc] init];&#10;    &#125; // &#25191;&#34892;&#21040;&#36825;&#19968;&#34892;&#23616;&#37096;&#21464;&#37327;p&#37322;&#25918;&#10;    // &#30001;&#20110;&#27809;&#26377;&#24378;&#25351;&#38024;&#25351;&#21521;&#23545;&#35937;, &#25152;&#20197;&#23545;&#35937;&#20063;&#37322;&#25918;&#10;    return 0;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>清空指针，对象随之释放</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, const char * argv[]) &#123;&#10;   @autoreleasepool &#123;&#10;        Person *p = [[Person alloc] init];&#10;        p = nil; // &#25191;&#34892;&#21040;&#36825;&#19968;&#34892;, &#30001;&#20110;&#27809;&#26377;&#24378;&#25351;&#38024;&#25351;&#21521;&#23545;&#35937;, &#25152;&#20197;&#23545;&#35937;&#34987;&#37322;&#25918;&#10;    &#125;&#10;    return 0;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>默认清空所有指针都是强指针</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, const char * argv[]) &#123;&#10;   @autoreleasepool &#123;&#10;        // p1&#21644;p2&#37117;&#26159;&#24378;&#25351;&#38024;&#10;        Person *p1 = [[Person alloc] init];&#10;        __strong Person *p2 = [[Person alloc] init];&#10;    &#125;&#10;    return 0;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>弱指针需要明确说明（<strong>千万不要使用弱指针保存新创建的对象</strong>）</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, const char * argv[]) &#123;&#10;   @autoreleasepool &#123;&#10;        // p&#26159;&#24369;&#25351;&#38024;, &#23545;&#35937;&#20250;&#34987;&#31435;&#21363;&#37322;&#25918;&#10;        __weak Person *p1 = [[Person alloc] init];&#10;    &#125;&#10;    return 0;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="ARC_多个对象管理">ARC 多个对象管理</h4><ul>
-<li>ARC和MRC一样，想拥有某个对象需要用强指针指向，但是不需要调用dealloc中release</li>
-</ul>
-<h4 id="ARC_@property">ARC @property</h4><ul>
-<li>strong : 用于OC对象，相当于MRC中的retain</li>
-<li>weak : 用于OC对象，相当于MRC中的assign</li>
-<li>assign : 用于基本数据类型，跟MRC中的assign一样</li>
-</ul>
-<h4 id="ARC_循环引用">ARC 循环引用</h4><ul>
-<li>A拥有B，B也拥有A，那么必须一方使用弱指针</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@interface Person : NSObject&#10;@property (nonatomic, strong) Dog *dog;&#10;@end&#10;&#10;@interface Dog : NSObject&#10;// &#38169;&#35823;&#20889;&#27861;, &#24490;&#29615;&#24341;&#29992;&#20250;&#23548;&#33268;&#20869;&#23384;&#27844;&#38706;&#10;//@property (nonatomic, strong) Person *owner;&#10;&#10;// &#27491;&#30830;&#20889;&#27861;, &#24403;&#22914;&#26524;&#20445;&#23384;&#23545;&#35937;&#24314;&#35758;&#20351;&#29992;weak&#10;@property (nonatomic, weak) Person *owner;&#10;@end</span><br></pre></td></tr></table></figure>
-<h2 id="为什么用内存管理?">为什么用内存管理?</h2><h4 id="NSThread_&amp;_NSRunLoop_&amp;_NSAutoreleasePool">NSThread &amp; NSRunLoop &amp; NSAutoreleasePool</h4><ol>
-<li>每个线程（包括主线程）都拥有一个专属的NSRunLoop，并在需要时自动创建</li>
-<li>主线程的NSRunLoop对象（包括系统级别的其它线程）的每个event loop开始前，自动创建一个autoreleasepool，并在event loop结束时drain</li>
-<li>每个autoreleasepool对应且只对应一个线程</li>
-</ol>
-<h2 id="内存管理怎么用？">内存管理怎么用？</h2><p>这些情况需要手动添加autoreleasepool：</p>
-<ol>
-<li>编写的程序不是基于UI框架的，比如命令行工具</li>
-<li>编写的循环中创建了大量的临时对象  </li>
-<li>创建了一个辅助线程</li>
-</ol>
-<h2 id="内存管理实际应用">内存管理实际应用</h2><h4 id="项目">项目</h4><ol>
-<li>YYKit ：解决循环中创建的大量临时对象</li>
-<li>AFNetworking： 创建了辅助线程</li>
-<li>XX会 混编时， 标注MRC文件：-fno-objc-arc</li>
-</ol>
-<h4 id="ARC_实例">ARC 实例</h4><ol>
-<li>ARC想要主动释放，最好是提前置为nil</li>
-<li>ARC下获取引用计数<ul>
-<li>KVC  [obj valueForKey:@”retainCount”] </li>
-<li>私有API _objc_rootRetainCount(obj)</li>
-<li>CFGetRetainCount((__bridge CFTypeRef)(obj))</li>
-</ul>
-</li>
-</ol>
-<h4 id="MRC_实例">MRC 实例</h4><ol>
-<li>下面这种情况会报错吗？（注意计算retainCount）</li>
-</ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">	YLAutorelease *obj = [[YLAutorelease alloc] init];      <span class="comment">//1</span></span><br><span class="line">    _tableView = [[<span class="built_in">UITableView</span> alloc] init];                <span class="comment">//1</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"obj retainCount:%ld"</span>, [obj retainCount]);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"tableView retainCount:%ld"</span>, [_tableView retainCount]);</span><br><span class="line">    </span><br><span class="line">    [obj performSelector:<span class="keyword">@selector</span>(test) withObject:_tableView afterDelay:<span class="number">1</span>];   <span class="comment">//obj 2 , tableView 2</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"obj retainCount:%ld"</span>, [obj retainCount]);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"tableView retainCount:%ld"</span>, [_tableView retainCount]);</span><br><span class="line">    </span><br><span class="line"><span class="comment">//    [obj release];</span></span><br><span class="line"><span class="comment">//    [_tableView release];</span></span><br><span class="line">    </span><br><span class="line">    [<span class="built_in">NSObject</span> cancelPreviousPerformRequestsWithTarget:obj selector:<span class="keyword">@selector</span>(test) object:_tableView];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"obj retainCount:%ld"</span>, [obj retainCount]);       <span class="comment">//1</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"tableView retainCount:%ld"</span>, [_tableView retainCount]);  <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>NSString的引用计数是随机值，NSMutableString的引用计数是正常值</p>
-<ul>
-<li>NSString的class是__NSCFConstantString，字符串常量</li>
-<li>NSMutableString的class是__NSCFString，有引用计数</li>
-</ul>
-</li>
-<li><p>对于字符串常量、NSNumber做常量时？</p>
-<ul>
-<li>retain 和 release都不会有影响，因为系统不会回收，也不会对其做引用计数</li>
-</ul>
-</li>
-<li><p>stringWithFormat创建的string？</p>
-<ul>
-<li>为变量，所以会有引用计数</li>
-<li>现在返回的已经是常量，见后面的例子</li>
-</ul>
-</li>
-<li><p>stringWithString创建的string?</p>
-<ul>
-<li>取决于它后面的string对象，如果是常量则不做计数，如果是变量则做计数</li>
-</ul>
-</li>
-<li><p>除了alloc new copy mutableCopy retain显示增加retainCount以外还有哪些看不到的能够增加引用计数的操作？</p>
-<ul>
-<li>容器类array、dic addObject；release时，里面的成员都会release一次，和autorelease pool一致</li>
-<li>addsubview, 因为view有栈(subviews)，加入栈中retainCount+1</li>
-<li>navcontroller的push, 因为nav有栈(viewcontrollers)，加入栈中retainCount+1</li>
-<li>performSelector 调用时target和info都会加1，结束时减1</li>
-</ul>
-</li>
-<li><p>苹果不推荐使用retainCount方法，因为他对程序本身没有作用，retainCount可能永远不会反回0，有时候系统会优化对象的释放行为，在保留计数还是1的时候就释放了。</p>
-</li>
-<li><p>几个copy, mutableCopy的例子</p>
-</li>
-</ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line">   <span class="built_in">NSMutableString</span> *str = [[<span class="built_in">NSMutableString</span> alloc] init];</span><br><span class="line">   <span class="built_in">NSMutableString</span> *str2 = [[<span class="built_in">NSMutableString</span> alloc] init];</span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//1,1</span></span><br><span class="line">   </span><br><span class="line">   str2 = [str <span class="keyword">copy</span>];         <span class="comment">//copy返回一个不可变对象属于常量</span></span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//1,-1</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="built_in">NSString</span> *str = [[<span class="built_in">NSString</span> alloc] init];</span><br><span class="line"><span class="built_in">NSString</span> *str2 = [[<span class="built_in">NSString</span> alloc] init];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]); <span class="comment">//-1,-1</span></span><br><span class="line"></span><br><span class="line">str2 = [str <span class="keyword">copy</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//-1,-1</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="built_in">NSString</span> *str = [[<span class="built_in">NSString</span> alloc] initWithFormat:<span class="string">@"abc%@"</span>, <span class="string">@"hehe"</span>];</span><br><span class="line"><span class="built_in">NSString</span> *str2 = [[<span class="built_in">NSString</span> alloc] initWithFormat:<span class="string">@"bbc%@"</span>, <span class="string">@"hehe"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]); <span class="comment">//-1,-1</span></span><br><span class="line"></span><br><span class="line">str2 = [str mutableCopy];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%ld, %ld"</span>, [str retainCount], [str2 retainCount]);<span class="comment">//-1,1</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>block内存管理，详见后续文章</li>
-</ol>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/07/20/ios_arc_mrc/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>

@@ -416,6 +416,100 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/03/12/ios_remote_debug/">
+                            iOS真机远程调试
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-03-12T18:15:02+08:00">
+	
+		    Mar 12, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="真机远程调试是什么？">真机远程调试是什么？</h2><p>“真机远程调试”（remote inspect web on real device），是指用桌面电脑（PC或MAC）远程连接上移动设备，通过类似Chrome浏览器开发人员工具的界面，来调试移动设备上运行的网页</p>
+<h2 id="真机远程调试怎么用？">真机远程调试怎么用？</h2><h4 id="Chrome模拟器">Chrome模拟器</h4><ol>
+<li>在PC或MAC上打开Chrome浏览器，打开想要调试的页面，然后打开开发人员工具</li>
+<li>点击开发人员工具顶栏上的手机图标，即可开始调试，一般来说需要重新刷新页面</li>
+<li>在页面顶部可以看到设备选择下拉菜单 Device 和 模拟网络环境的下拉菜单 Network ，及左侧的清除选择按钮和打开关闭 media queries 的按钮</li>
+<li>打开设置左边的那个类似 &gt;三 的图标，切换到 Emulation 标签，可以更细粒度地调整，来定制化你的模拟</li>
+</ol>
+<h4 id="weinre">weinre</h4><p>过程稍微繁琐，但是这个方案能调试几乎所有平台的所有浏览器，只要能运行js的就行</p>
+<ol>
+<li>安装nodejs </li>
+<li>安装weinre到global，即在命令行中运行 npm -g install weinre （MAC可能需要在前面加上 sudo ）</li>
+<li>获取本机IP地址（PC：开始→运行→cmd，输入 ipconfig ，查看“IPv4地址”字段； MAC：在网络偏好设置内），假设获取到的IP地址为 4.4.4.4</li>
+<li>在命令行运行weinre： weinre –boundHost 4.4.4.4 ，其中IP地址为上一步所获取的地址，如果弹出防火墙，请允许访问</li>
+<li>在PC或MAC上用浏览器打开 <a href="http://4.4.4.4:8080/client/#anonymous" target="_blank" rel="external">http://4.4.4.4:8080/client/#anonymous</a> ，其中IP地址为第三步所获取的地址</li>
+<li>将移动设备连接到与PC或MAC同一局域网，打开移动设备上的需要调试的浏览器，然后随便打开一个网页。将它保存为书签</li>
+<li>修改上述书签，将地址改成：(其中IP地址为第三步所获取的地址（复制后请去掉代码中的换行，使之成为一行）)</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">javascript:(function(e)&#123;e.setAttribute(<span class="string">"src"</span>,<span class="string">"http://4.4.4.4:8080/target/target-script-min.js#anonymous"</span>);</span><br><span class="line">document.getElementsByTagName(<span class="string">"body"</span>)[</span><br><span class="line"><span class="number">0</span>].appendChild(e);&#125;)(document.createElement(<span class="string">"script"</span>));<span class="keyword">void</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在移动设备浏览器上打开想要调试的页面，然后点击上一步保存的书签，即可在PC或MAC上的页面中的target中找到对应页面，点击可以开始调试</li>
+</ol>
+<p>更多：</p>
+<ol>
+<li>可以考虑在某个机器上搭建一个统一的weinre服务器，供团队成员共用，此方案我尚未尝试</li>
+<li>在上述第7步开始，可以不采用书签的形式，而是考虑在代码中引入它提供的调试js文件，如 </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"http://4.4.4.4:8080/target/target-script-min.js#anonymous"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>（这种情况适用于不能使用书签的场景，如app内的webview、微信中等，但是上线之前要记得移除这个js的引用）</p>
+<p>其他参考链接</p>
+<p><a href="http://people.apache.org/~pmuellr/weinre-docs/latest/Installing.html" target="_blank" rel="external">http://people.apache.org/~pmuellr/weinre-docs/latest/Installing.html</a></p>
+<h4 id="spy-debugger(集成weinre)">spy-debugger(集成weinre)</h4><p>内部集成了weinre，简化了weinre繁琐的配置过程。通过代理的方式拦截所有html自动注入weinre所需的js代码。</p>
+<ol>
+<li><p>安装<br>Windows: npm install spy-debugger -g<br>Mac: sudo npm install spy-debugger -g</p>
+</li>
+<li><p>手机和PC保持在同一网络下（比如同时连到一个Wi-Fi下）</p>
+</li>
+<li><p>命令行输入spy-debugger，按命令行提示用浏览器打开相应地址。</p>
+</li>
+<li><p>设置手机的HTTP代理，代理IP地址设置为PC的IP地址，端口为spy-debugger的启动端口。</p>
+</li>
+<li><p>用手机浏览器访问你要调试的页面即可。</p>
+</li>
+</ol>
+<p>其他参考链接</p>
+<p><a href="https://github.com/wuchangming/spy-debugger" target="_blank" rel="external">https://github.com/wuchangming/spy-debugger</a></p>
+<h4 id="调试iOS上的Safari">调试iOS上的Safari</h4><ol>
+<li>在iOS设备上打开允许调试：设置→Safari→高级→打开”web检查器“</li>
+<li>在MAC上打开Safari的开发菜单：顶部菜单栏“Safari”→偏好设置→高级→打<br>开”在菜单栏中显示“开发”菜单</li>
+<li>在iOS设备上的Safari浏览器中打开要调试的页面，然后切换到MAC的Safari，在顶部菜单栏选择“开发”→找到你的iOS设备名称→右边二级菜单选择需要调试的对应标签页，即可开始远程调试</li>
+<li>如果没有iOS设备，也可以在Xcode中模拟一台，点击顶部“Xcode”→“Open Developer Tool”→“iOS Simulator”即可打开一个iOS设备的模拟器，并且模拟器里面Safari打开的页面，也是能通过上个步骤中MAC上的Safari调试。</li>
+</ol>
+<h2 id="iOS真机远程调试的实际应用">iOS真机远程调试的实际应用</h2><p>综合比较以上各种iOS真机远程调试手段之后，大体可以将iOS真机调试原理归为两大类，一种是基于Weinre通过实时拦截捕获页面DOM结点并预览到当前的浏览器中，这种方式的弊端是调试流畅度体验不好，而且无法debug定位错误，第二种是Safari通过与iOS设备连接配对后获取js上下文从而实现调试(官方)，能够使用safari开发工具中提供的所有调试，但是必须依赖于Mac机上的Safari，平台依赖性强。</p>
+<p>所以，还是需要结合自己的调试需求来决定是使用Weinre方式还是官方方式。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/03/12/ios_remote_debug/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/02/23/multi_compiler/">
                             多编译器的认识
                         </a>
@@ -1061,175 +1155,6 @@
                     
                         <p>
                             <a href="/2015/12/30/ios_animation/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/12/22/ios_optimize/">
-                            iOS性能优化基础到进阶
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2015-12-22T18:15:02+08:00">
-	
-		    Dec 22, 2015
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="iOS性能优化需要会什么？">iOS性能优化需要会什么？</h2><p>搞好iOS性能优化有时候是一件很难的事情，在开发过程中要时刻考虑到性能影响，不然开发出来的产品只会遭到用户的摒弃</p>
-<h2 id="iOS性能优化是什么？">iOS性能优化是什么？</h2><p>建议将iOS的性能优化分为两个级别，慢慢补充：</p>
-<h4 id="基础级">基础级</h4><ol>
-<li>用ARC管理内存</li>
-<li>在正确的地方使用reuseIdentifier</li>
-<li>尽量把Views设置为完全不透明<ul>
-<li><strong>apaque = YES</strong></li>
-</ul>
-</li>
-<li>避免庞大的XIB</li>
-<li>不要阻塞主线程<ul>
-<li><strong>异步处理存储或网络</strong></li>
-</ul>
-</li>
-<li>在Image Views中调整图片大小</li>
-<li>选择正确的Collection<ul>
-<li><strong>Array索引块；Dic键值查块；Set值查块，插入删除快</strong></li>
-</ul>
-</li>
-<li>打开gzip压缩<ul>
-<li><strong>服务端和app打开gzip</strong></li>
-</ul>
-</li>
-<li>选择是否缓存图片<ul>
-<li><strong>imageNamed imageWithContentsOfFile</strong></li>
-</ul>
-</li>
-<li>尽量避免日期格式转换<ul>
-<li>重大开销对象NSDateFormatter NSCalendar</li>
-</ul>
-</li>
-</ol>
-<h4 id="进阶级">进阶级</h4><ol>
-<li>重用和延迟加载Views<ul>
-<li><strong>一次性创建和懒加载都要缺点：耗内存；第一次加载时稍显卡顿</strong> </li>
-</ul>
-</li>
-<li>Cache, Cache, 还是Cache！</li>
-<li>权衡渲染方法</li>
-<li>处理内存警告<ul>
-<li><strong>receiveMemoryWarning</strong></li>
-</ul>
-</li>
-<li>使用Sprite Sheets</li>
-<li>避免反复处理数据</li>
-<li>选择正确的数据格式</li>
-<li>正确地设定背景图片<ul>
-<li><strong>colorWithPatternImage UIImageView</strong></li>
-</ul>
-</li>
-<li>减少使用Web特性<ul>
-<li><strong>避免过重的html5页面</strong></li>
-</ul>
-</li>
-<li>设定Shadow Path<ul>
-<li><strong>避免每次计算渲染路径</strong></li>
-</ul>
-</li>
-<li>优化你的Table View </li>
-<li>加速启动时间<ul>
-<li><strong>尽可能做更多的异步任务，避免庞大的xib</strong></li>
-</ul>
-</li>
-<li>使用Autorelease Pool</li>
-</ol>
-<h2 id="为什么做iOS性能优化？">为什么做iOS性能优化？</h2><p>随着代码累积，性能问题在所难免，苹果提供了各种Instruments工具帮助程序员定位一些常见的性能问题</p>
-<h2 id="怎么做iOS性能优化？">怎么做iOS性能优化？</h2><h4 id="发现问题">发现问题</h4><ol>
-<li>用户反馈（包括测试人员）</li>
-<li>在线监控：<ul>
-<li>业务性能监控，主要测试关键的操作路径，比如业务时间线：启动、打开档期、打开详情、加入购物车、下单、支付等</li>
-<li>卡顿监控：Bugly工具跟踪</li>
-</ul>
-</li>
-</ol>
-<h4 id="解决问题">解决问题</h4><p>主要做到几点核心：</p>
-<ol>
-<li>优化业务流程<ul>
-<li>在满足业务需求的同时，提出更高效优雅的解决方案</li>
-</ul>
-</li>
-<li>合理的线程分配（尽量避免多线程）<ul>
-<li>UI和DataSource操作一定在主线程</li>
-<li>DB操作、日志记录、网络回调都在各自的固定线程</li>
-<li>不同业务，通过创建队列保证数据一致性</li>
-</ul>
-</li>
-<li>预处理和延时加载<ul>
-<li>预处理：耗费大量线程时间的操作放到后台线程进行计算</li>
-<li>延时加载：先加载当前必须得可视内容，在稍后时间或事件时再触发加载其它内容</li>
-<li>总结：这两种方法都是针对自然比较紧张的情况，比如微信读书中阅读的排版优先级是最高的，在阅读过程中会预处理下一页、下一章的排版，同时延时加载阅读相关的其它数据（加想法、划线、书签等）</li>
-</ul>
-</li>
-<li>缓存<ul>
-<li>并发访问cache，数据一致性问题</li>
-<li>cache线程安全，防止一边修改一边遍历的crash</li>
-<li>cache查找时性能问题</li>
-<li>cache的释放和重建，避免占用空间无限扩大</li>
-</ul>
-</li>
-<li>使用正确的API<ul>
-<li>选择合适的容器</li>
-<li>imageNamed  imageWithContentsFile</li>
-<li>NSDateFormatter</li>
-<li>不要随意使用NSLog()</li>
-</ul>
-</li>
-</ol>
-<h4 id="预防问题">预防问题</h4><p>使用小工具尽早的在开发阶段暴露问题：</p>
-<ul>
-<li>内存泄露检测工具  <a href="https://github.com/Zepo/MLeaksFinder" target="_blank" rel="external">MLeaksFinder</a></li>
-<li>FPS/SQL性能监测工具条</li>
-<li>UI/DataSource主线程检测工具</li>
-<li>排版引擎自动化监测工具</li>
-<li>数据源检测工具 </li>
-</ul>
-<h2 id="iOS性能优化的实际应用">iOS性能优化的实际应用</h2><h4 id="XX会公益SDK">XX会公益SDK</h4><ol>
-<li>内存泄露检测工具</li>
-<li>Instruments</li>
-<li>动画绘制</li>
-<li>合并网络请求并开启gzip</li>
-<li>批量日志上报</li>
-<li>本地缓存设计<br><img src="https://www.processon.com/chart_image/58577e2be4b0c1fa6c5ab71f.png" alt=""></li>
-</ol>
-<h4 id="XX会档期列表">XX会档期列表</h4><ol>
-<li>ReactNative listView性能问题</li>
-<li>图片资源延时加载</li>
-</ol>
-<h4 id="微信读书">微信读书</h4><p>微信工程师分享过微信读书的分享可以参看：<a href="http://dev.qq.com/topic/578c93ca9644bd524bfcabe8" target="_blank" rel="external">微信读书 iOS 性能优化</a></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2015/12/22/ios_optimize/#post-footer" class="postShorten-excerpt_link link">
                                 Comment and share
                             </a>
                         </p>
